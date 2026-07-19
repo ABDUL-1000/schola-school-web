@@ -342,11 +342,11 @@ function Toolbar({ editor }: { editor: Editor }) {
       <div className="mx-1 flex items-center h-7 px-1 gap-1">
         <label className="cursor-pointer" title="Text Color">
           <Baseline className="size-4" style={{ color: editor.getAttributes('textStyle').color || 'currentColor' }} />
-          <input type="color" className="sr-only" onInput={handleColorChange} value={editor.getAttributes('textStyle').color || '#000000'} />
+          <input type="color" className="sr-only" onChange={handleColorChange} value={editor.getAttributes('textStyle').color || '#000000'} />
         </label>
         <label className="cursor-pointer" title="Highlight">
           <Highlighter className="size-4" style={{ color: editor.getAttributes('highlight').color || 'currentColor' }} />
-          <input type="color" className="sr-only" onInput={handleHighlightChange} value={editor.getAttributes('highlight').color || '#ffff00'} />
+          <input type="color" className="sr-only" onChange={handleHighlightChange} value={editor.getAttributes('highlight').color || '#ffff00'} />
         </label>
       </div>
 
