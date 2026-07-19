@@ -45,6 +45,7 @@
     "@tiptap/react": "^3.27.2",
     "@tiptap/starter-kit": "^3.27.2",
     "@unpic/react": "^1.0.2",
+    "axios": "^1.18.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "countries-list": "^3.4.0",
@@ -66,7 +67,8 @@
     "tiptap-markdown": "^0.9.0",
     "tw-animate-css": "^1.3.6",
     "vaul": "^1.1.2",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@tanstack/devtools-vite": "^0.3.11",
@@ -87,4 +89,3 @@
     "web-vitals": "^5.1.0"
   }
 }
-
