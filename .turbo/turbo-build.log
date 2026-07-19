@@ -1,0 +1,6 @@
+$ vite build && tsc
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+
+[@tanstack/devtools-vite] Removed devtools code from: /src/routes/__root.tsx
+

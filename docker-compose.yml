@@ -1,0 +1,9 @@
+services:
+  school-web:
+    image: ${IMAGE_NAME:-schola-school-web:latest}
+    container_name: ${DOCKER_NAME:-school-web}
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+    environment:
+      - NODE_ENV=production

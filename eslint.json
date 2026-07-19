@@ -1,0 +1,1539 @@
+[
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\auth\\index.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\app-sidebar.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\auth\\auth-layout.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\auth\\auth-password-field.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\auth\\password-strength-indicator.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\auth\\registration-stepper.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\mode-toggle.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\nav-main.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\nav-projects.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\nav-user.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\not-found.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\patterns\\p-card-1.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\patterns\\p-skeleton-1.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\reui\\frame.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\school-profile-avatar.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\team-switcher.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary conditional, value is always falsy.",
+        "line": 17,
+        "column": 7,
+        "nodeType": "UnaryExpression",
+        "messageId": "alwaysFalsy",
+        "endLine": 17,
+        "endColumn": 18
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import * as React from 'react'\nimport { SidebarMenu, SidebarMenuItem } from '@/components/ui/sidebar'\nimport { Image } from '@unpic/react'\n\nexport function TeamSwitcher({\n  teams,\n}: {\n  teams: Array<{\n    name: string\n    logo: React.ElementType\n    plan: string\n    image?: string\n  }>\n}) {\n  const activeTeam = teams[0]\n\n  if (!activeTeam) {\n    return null\n  }\n\n  return (\n    <SidebarMenu>\n      <SidebarMenuItem>\n        <div className=\"flex items-center gap-3 px-1.5 py-2\">\n          <div className=\"bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden\">\n            {activeTeam.image ? (\n              <Image\n                src={activeTeam.image}\n                alt={activeTeam.name}\n                className=\"size-full object-cover\"\n                width={32}\n                height={32}\n              />\n            ) : (\n              <activeTeam.logo className=\"size-4\" />\n            )}\n          </div>\n          <div className=\"grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden\">\n            <span className=\"truncate font-semibold\">{activeTeam.name}</span>\n            <span className=\"truncate text-xs text-muted-foreground\">\n              {activeTeam.plan}\n            </span>\n          </div>\n        </div>\n      </SidebarMenuItem>\n    </SidebarMenu>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\theme-provider.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary conditional, value is always truthy.",
+        "line": 30,
+        "column": 12,
+        "nodeType": "TSAsExpression",
+        "messageId": "alwaysTruthy",
+        "endLine": 30,
+        "endColumn": 53
+      },
+      {
+        "ruleId": "no-shadow",
+        "severity": 1,
+        "message": "'theme' is already declared in the upper scope on line 29 column 10.",
+        "line": 53,
+        "column": 16,
+        "nodeType": "Identifier",
+        "messageId": "noShadow",
+        "endLine": 53,
+        "endColumn": 28
+      },
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary conditional, the types have no overlap.",
+        "line": 69,
+        "column": 7,
+        "nodeType": "BinaryExpression",
+        "messageId": "noOverlapBooleanExpression",
+        "endLine": 69,
+        "endColumn": 28
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 2,
+    "fatalErrorCount": 0,
+    "warningCount": 1,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { createContext, useContext, useEffect, useState } from 'react'\n\ntype Theme = 'dark' | 'light' | 'system'\n\ntype ThemeProviderProps = {\n  children: React.ReactNode\n  defaultTheme?: Theme\n  storageKey?: string\n}\n\ntype ThemeProviderState = {\n  theme: Theme\n  setTheme: (theme: Theme) => void\n}\n\nconst initialState: ThemeProviderState = {\n  theme: 'system',\n  setTheme: () => null,\n}\n\nconst ThemeProviderContext = createContext<ThemeProviderState>(initialState)\n\nexport function ThemeProvider({\n  children,\n  defaultTheme = 'system',\n  storageKey = 'vite-ui-theme',\n  ...props\n}: ThemeProviderProps) {\n  const [theme, setTheme] = useState<Theme>(\n    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,\n  )\n\n  useEffect(() => {\n    const root = window.document.documentElement\n\n    root.classList.remove('light', 'dark')\n\n    if (theme === 'system') {\n      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')\n        .matches\n        ? 'dark'\n        : 'light'\n\n      root.classList.add(systemTheme)\n      return\n    }\n\n    root.classList.add(theme)\n  }, [theme])\n\n  const value = {\n    theme,\n    setTheme: (theme: Theme) => {\n      localStorage.setItem(storageKey, theme)\n      setTheme(theme)\n    },\n  }\n\n  return (\n    <ThemeProviderContext.Provider {...props} value={value}>\n      {children}\n    </ThemeProviderContext.Provider>\n  )\n}\n\nexport const useTheme = () => {\n  const context = useContext(ThemeProviderContext)\n\n  if (context === undefined)\n    throw new Error('useTheme must be used within a ThemeProvider')\n\n  return context\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\timetable\\period-manager.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\timetable\\timetable-cell-editor.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\timetable\\timetable-grid.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 109,
+        "column": 51,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 109,
+        "endColumn": 53,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [2938, 2940], "text": "" },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { useState } from 'react'\nimport type {\n  WeekDay,\n  TimetableEntry,\n  TimetablePeriod,\n} from '@/hooks/api/timetable.api'\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from '@/components/ui/table'\nimport { TimetableEntryDrawer } from './timetable-cell-editor'\n\nconst DAYS: Array<WeekDay> = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY']\n\nconst DAY_LABELS: Record<string, string> = {\n  MONDAY: 'Mon',\n  TUESDAY: 'Tue',\n  WEDNESDAY: 'Wed',\n  THURSDAY: 'Thu',\n  FRIDAY: 'Fri',\n  SATURDAY: 'Sat',\n  SUNDAY: 'Sun',\n}\n\ninterface TimetableGridProps {\n  periods: Array<TimetablePeriod>\n  timetable: Record<WeekDay, Array<TimetableEntry | null>> | undefined\n  subjects: Array<{ id: string; name: string }>\n  staffs: Array<{ id: string; fullname: string }>\n  classId: string\n  isFetching: boolean\n  onEntrySaved: () => void\n}\n\nexport function TimetableGrid({\n  periods,\n  timetable,\n  subjects,\n  staffs,\n  classId,\n  isFetching,\n  onEntrySaved,\n}: TimetableGridProps) {\n  const [drawerState, setDrawerState] = useState<{\n    open: boolean\n    day: WeekDay\n    periodId: string\n    periodLabel: string\n    entry: TimetableEntry | null\n  }>({\n    open: false,\n    day: 'MONDAY',\n    periodId: '',\n    periodLabel: '',\n    entry: null,\n  })\n\n  const openDrawer = (\n    day: WeekDay,\n    period: TimetablePeriod,\n    entry: TimetableEntry | null,\n  ) => {\n    if (period.isBreak) return\n    setDrawerState({\n      open: true,\n      day,\n      periodId: period.id,\n      periodLabel: period.label,\n      entry,\n    })\n  }\n\n  return (\n    <>\n      <div className=\"rounded-lg border bg-card overflow-hidden\">\n        <div className=\"relative w-full overflow-x-auto\">\n          <Table>\n            <TableHeader>\n              <TableRow>\n                <TableHead className=\"bg-muted/50 sticky left-0 z-10 w-[80px] border-r font-semibold\">\n                  Day\n                </TableHead>\n                {periods.map((period) => (\n                  <TableHead\n                    key={period.id}\n                    className={`min-w-[140px] text-center ${\n                      period.isBreak ? 'bg-amber-50 dark:bg-amber-950/30' : ''\n                    }`}\n                  >\n                    <div className=\"font-semibold\">{period.label}</div>\n                    <div className=\"text-muted-foreground text-[10px] font-normal\">\n                      {period.startTime} – {period.endTime}\n                    </div>\n                  </TableHead>\n                ))}\n              </TableRow>\n            </TableHeader>\n            <TableBody>\n              {DAYS.map((day) => (\n                <TableRow key={day}>\n                  <TableCell className=\"bg-muted/50 sticky left-0 z-10 border-r font-semibold\">\n                    {DAY_LABELS[day]}\n                  </TableCell>\n                  {periods.map((period, periodIdx) => {\n                    const entry = timetable?.[day]?.[periodIdx] || null\n\n                    if (period.isBreak) {\n                      return (\n                        <TableCell\n                          key={period.id}\n                          className=\"bg-amber-50/50 text-center dark:bg-amber-950/20\"\n                        >\n                          <span className=\"text-amber-600/70 text-xs italic\">\n                            Break\n                          </span>\n                        </TableCell>\n                      )\n                    }\n\n                    return (\n                      <TableCell\n                        key={period.id}\n                        className=\"cursor-pointer transition-colors hover:bg-muted/50\"\n                        onClick={() => openDrawer(day, period, entry)}\n                      >\n                        {entry?.subject ? (\n                          <div className=\"space-y-0.5 text-center\">\n                            <div className=\"text-sm font-medium\">\n                              {entry.subject.name}\n                            </div>\n                            {entry.staff && (\n                              <div className=\"text-muted-foreground text-[11px]\">\n                                {entry.staff.fullname}\n                              </div>\n                            )}\n                          </div>\n                        ) : (\n                          <div className=\"text-muted-foreground/40 text-center text-xs\">\n                            —\n                          </div>\n                        )}\n                      </TableCell>\n                    )\n                  })}\n                </TableRow>\n              ))}\n            </TableBody>\n          </Table>\n        </div>\n        {isFetching && (\n          <div className=\"bg-muted/50 border-t px-4 py-2 text-center\">\n            <span className=\"text-muted-foreground text-xs\">Refreshing...</span>\n          </div>\n        )}\n      </div>\n\n      {/* Entry editing drawer */}\n      <TimetableEntryDrawer\n        open={drawerState.open}\n        onOpenChange={(open) => setDrawerState((prev) => ({ ...prev, open }))}\n        classId={classId}\n        periodId={drawerState.periodId}\n        periodLabel={drawerState.periodLabel}\n        day={drawerState.day}\n        existingEntryId={drawerState.entry?.id}\n        existingSubjectId={drawerState.entry?.subject?.id}\n        existingStaffId={drawerState.entry?.staff?.id}\n        subjects={subjects}\n        staffs={staffs}\n        onSaved={onEntrySaved}\n      />\n    </>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\alert-dialog.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\app-drawer.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\avatar.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\badge.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\breadcrumb.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\button.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\card.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\checkbox.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\collapsible.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\custom-select.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\drawer.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\dropdown-menu.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\field.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 205,
+        "column": 21,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 205,
+        "endColumn": 23,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [5450, 5452], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { useMemo } from 'react'\nimport { cva, type VariantProps } from 'class-variance-authority'\n\nimport { cn } from '@/lib/utils'\nimport { Label } from '@/components/ui/label'\nimport { Separator } from '@/components/ui/separator'\n\nfunction FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {\n  return (\n    <fieldset\n      data-slot=\"field-set\"\n      className={cn(\n        'flex flex-col gap-6',\n        'has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction FieldLegend({\n  className,\n  variant = 'legend',\n  ...props\n}: React.ComponentProps<'legend'> & { variant?: 'legend' | 'label' }) {\n  return (\n    <legend\n      data-slot=\"field-legend\"\n      data-variant={variant}\n      className={cn(\n        'mb-3 font-medium',\n        'data-[variant=legend]:text-base',\n        'data-[variant=label]:text-sm',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction FieldGroup({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"field-group\"\n      className={cn(\n        'group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nconst fieldVariants = cva(\n  'group/field flex w-full gap-3 data-[invalid=true]:text-destructive',\n  {\n    variants: {\n      orientation: {\n        vertical: ['flex-col [&>*]:w-full [&>.sr-only]:w-auto'],\n        horizontal: [\n          'flex-row items-center',\n          '[&>[data-slot=field-label]]:flex-auto',\n          'has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',\n        ],\n        responsive: [\n          'flex-col [&>*]:w-full [&>.sr-only]:w-auto @md/field-group:flex-row @md/field-group:items-center @md/field-group:[&>*]:w-auto',\n          '@md/field-group:[&>[data-slot=field-label]]:flex-auto',\n          '@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',\n        ],\n      },\n    },\n    defaultVariants: {\n      orientation: 'vertical',\n    },\n  },\n)\n\nfunction Field({\n  className,\n  orientation = 'vertical',\n  ...props\n}: React.ComponentProps<'div'> & VariantProps<typeof fieldVariants>) {\n  return (\n    <div\n      role=\"group\"\n      data-slot=\"field\"\n      data-orientation={orientation}\n      className={cn(fieldVariants({ orientation }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction FieldContent({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"field-content\"\n      className={cn(\n        'group/field-content flex flex-1 flex-col gap-1.5 leading-snug',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction FieldLabel({\n  className,\n  ...props\n}: React.ComponentProps<typeof Label>) {\n  return (\n    <Label\n      data-slot=\"field-label\"\n      className={cn(\n        'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50',\n        'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4',\n        'has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction FieldTitle({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"field-label\"\n      className={cn(\n        'flex w-fit items-center gap-2 text-sm leading-snug font-medium group-data-[disabled=true]/field:opacity-50',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction FieldDescription({ className, ...props }: React.ComponentProps<'p'>) {\n  return (\n    <p\n      data-slot=\"field-description\"\n      className={cn(\n        'text-muted-foreground text-sm leading-normal font-normal group-has-[[data-orientation=horizontal]]/field:text-balance',\n        'last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5',\n        '[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction FieldSeparator({\n  children,\n  className,\n  ...props\n}: React.ComponentProps<'div'> & {\n  children?: React.ReactNode\n}) {\n  return (\n    <div\n      data-slot=\"field-separator\"\n      data-content={!!children}\n      className={cn(\n        'relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2',\n        className,\n      )}\n      {...props}\n    >\n      <Separator className=\"absolute inset-0 top-1/2\" />\n      {children && (\n        <span\n          className=\"bg-background text-muted-foreground relative mx-auto block w-fit px-2\"\n          data-slot=\"field-separator-content\"\n        >\n          {children}\n        </span>\n      )}\n    </div>\n  )\n}\n\nfunction FieldError({\n  className,\n  children,\n  errors,\n  ...props\n}: React.ComponentProps<'div'> & {\n  errors?: Array<{ message?: string } | undefined>\n}) {\n  const content = useMemo(() => {\n    if (children) {\n      return children\n    }\n\n    if (!errors?.length) {\n      return null\n    }\n\n    const uniqueErrors = [\n      ...new Map(errors.map((error) => [error?.message, error])).values(),\n    ]\n\n    if (uniqueErrors?.length == 1) {\n      return uniqueErrors[0]?.message\n    }\n\n    return (\n      <ul className=\"ml-4 flex list-disc flex-col gap-1\">\n        {uniqueErrors.map(\n          (error, index) =>\n            error?.message && <li key={index}>{error.message}</li>,\n        )}\n      </ul>\n    )\n  }, [children, errors])\n\n  if (!content) {\n    return null\n  }\n\n  return (\n    <div\n      role=\"alert\"\n      data-slot=\"field-error\"\n      className={cn('text-destructive text-sm font-normal', className)}\n      {...props}\n    >\n      {content}\n    </div>\n  )\n}\n\nexport {\n  Field,\n  FieldLabel,\n  FieldDescription,\n  FieldError,\n  FieldGroup,\n  FieldLegend,\n  FieldSeparator,\n  FieldSet,\n  FieldContent,\n  FieldTitle,\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\input-group.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\input-otp.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary conditional, expected left-hand side of `??` operator to be possibly null or undefined.",
+        "line": 47,
+        "column": 44,
+        "nodeType": "ChainExpression",
+        "messageId": "neverNullish",
+        "endLine": 47,
+        "endColumn": 73
+      },
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 47,
+        "column": 59,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 47,
+        "endColumn": 61,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [1042, 1044], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 2,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "'use client'\n\nimport * as React from 'react'\nimport { OTPInput, OTPInputContext } from 'input-otp'\nimport { MinusIcon } from 'lucide-react'\n\nimport { cn } from '@/lib/utils'\n\nfunction InputOTP({\n  className,\n  containerClassName,\n  ...props\n}: React.ComponentProps<typeof OTPInput> & {\n  containerClassName?: string\n}) {\n  return (\n    <OTPInput\n      data-slot=\"input-otp\"\n      containerClassName={cn(\n        'flex items-center gap-2 has-disabled:opacity-50',\n        containerClassName,\n      )}\n      className={cn('disabled:cursor-not-allowed', className)}\n      {...props}\n    />\n  )\n}\n\nfunction InputOTPGroup({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"input-otp-group\"\n      className={cn('flex items-center', className)}\n      {...props}\n    />\n  )\n}\n\nfunction InputOTPSlot({\n  index,\n  className,\n  ...props\n}: React.ComponentProps<'div'> & {\n  index: number\n}) {\n  const inputOTPContext = React.useContext(OTPInputContext)\n  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}\n\n  return (\n    <div\n      data-slot=\"input-otp-slot\"\n      data-active={isActive}\n      className={cn(\n        'data-[active=true]:border-primary aria-invalid:border-destructive data-[active=true]:aria-invalid:border-destructive dark:bg-input/30 border-input relative flex h-9 w-9 items-center justify-center border text-sm shadow-xs transition-all outline-none rounded-md data-[active=true]:z-10',\n        className,\n      )}\n      {...props}\n    >\n      {char}\n      {hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"animate-caret-blink bg-foreground h-4 w-px duration-1000\" />\n        </div>\n      )}\n    </div>\n  )\n}\n\nfunction InputOTPSeparator({ ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div data-slot=\"input-otp-separator\" role=\"separator\" {...props}>\n      <MinusIcon />\n    </div>\n  )\n}\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\input.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\label.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\loader.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\select.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\separator.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\sheet.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\sidebar.tsx",
+    "messages": [
+      {
+        "ruleId": "no-shadow",
+        "severity": 1,
+        "message": "'open' is already declared in the upper scope on line 73 column 9.",
+        "line": 91,
+        "column": 38,
+        "nodeType": "Identifier",
+        "messageId": "noShadow",
+        "endLine": 91,
+        "endColumn": 42
+      },
+      {
+        "ruleId": "no-shadow",
+        "severity": 1,
+        "message": "'open' is already declared in the upper scope on line 73 column 9.",
+        "line": 91,
+        "column": 65,
+        "nodeType": "Identifier",
+        "messageId": "noShadow",
+        "endLine": 91,
+        "endColumn": 69
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 2,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import * as React from 'react'\nimport { cva, type VariantProps } from 'class-variance-authority'\nimport { PanelLeftIcon } from 'lucide-react'\nimport { Slot } from 'radix-ui'\n\nimport { useIsMobile } from '@/hooks/use-mobile'\nimport { cn } from '@/lib/utils'\nimport { Button } from '@/components/ui/button'\nimport { Input } from '@/components/ui/input'\nimport { Separator } from '@/components/ui/separator'\nimport {\n  Sheet,\n  SheetContent,\n  SheetDescription,\n  SheetHeader,\n  SheetTitle,\n} from '@/components/ui/sheet'\nimport { Skeleton } from '@/components/ui/skeleton'\nimport {\n  Tooltip,\n  TooltipContent,\n  TooltipProvider,\n  TooltipTrigger,\n} from '@/components/ui/tooltip'\n\nconst SIDEBAR_COOKIE_NAME = 'sidebar_state'\nconst SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7\nconst SIDEBAR_WIDTH = '16rem'\nconst SIDEBAR_WIDTH_MOBILE = '18rem'\nconst SIDEBAR_WIDTH_ICON = '3rem'\nconst SIDEBAR_KEYBOARD_SHORTCUT = 'b'\n\ntype SidebarContextProps = {\n  state: 'expanded' | 'collapsed'\n  open: boolean\n  setOpen: (open: boolean) => void\n  openMobile: boolean\n  setOpenMobile: (open: boolean) => void\n  isMobile: boolean\n  toggleSidebar: () => void\n}\n\nconst SidebarContext = React.createContext<SidebarContextProps | null>(null)\n\nfunction useSidebar() {\n  const context = React.useContext(SidebarContext)\n  if (!context) {\n    throw new Error('useSidebar must be used within a SidebarProvider.')\n  }\n\n  return context\n}\n\nfunction SidebarProvider({\n  defaultOpen = true,\n  open: openProp,\n  onOpenChange: setOpenProp,\n  className,\n  style,\n  children,\n  ...props\n}: React.ComponentProps<'div'> & {\n  defaultOpen?: boolean\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n}) {\n  const isMobile = useIsMobile()\n  const [openMobile, setOpenMobile] = React.useState(false)\n\n  // This is the internal state of the sidebar.\n  // We use openProp and setOpenProp for control from outside the component.\n  const [_open, _setOpen] = React.useState(defaultOpen)\n  const open = openProp ?? _open\n  const setOpen = React.useCallback(\n    (value: boolean | ((value: boolean) => boolean)) => {\n      const openState = typeof value === 'function' ? value(open) : value\n      if (setOpenProp) {\n        setOpenProp(openState)\n      } else {\n        _setOpen(openState)\n      }\n\n      // This sets the cookie to keep the sidebar state.\n      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`\n    },\n    [setOpenProp, open],\n  )\n\n  // Helper to toggle the sidebar.\n  const toggleSidebar = React.useCallback(() => {\n    return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)\n  }, [isMobile, setOpen, setOpenMobile])\n\n  // Adds a keyboard shortcut to toggle the sidebar.\n  React.useEffect(() => {\n    const handleKeyDown = (event: KeyboardEvent) => {\n      if (\n        event.key === SIDEBAR_KEYBOARD_SHORTCUT &&\n        (event.metaKey || event.ctrlKey)\n      ) {\n        event.preventDefault()\n        toggleSidebar()\n      }\n    }\n\n    window.addEventListener('keydown', handleKeyDown)\n    return () => window.removeEventListener('keydown', handleKeyDown)\n  }, [toggleSidebar])\n\n  // We add a state so that we can do data-state=\"expanded\" or \"collapsed\".\n  // This makes it easier to style the sidebar with Tailwind classes.\n  const state = open ? 'expanded' : 'collapsed'\n\n  const contextValue = React.useMemo<SidebarContextProps>(\n    () => ({\n      state,\n      open,\n      setOpen,\n      isMobile,\n      openMobile,\n      setOpenMobile,\n      toggleSidebar,\n    }),\n    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar],\n  )\n\n  return (\n    <SidebarContext.Provider value={contextValue}>\n      <TooltipProvider delayDuration={0}>\n        <div\n          data-slot=\"sidebar-wrapper\"\n          style={\n            {\n              '--sidebar-width': SIDEBAR_WIDTH,\n              '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,\n              ...style,\n            } as React.CSSProperties\n          }\n          className={cn(\n            'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full',\n            className,\n          )}\n          {...props}\n        >\n          {children}\n        </div>\n      </TooltipProvider>\n    </SidebarContext.Provider>\n  )\n}\n\nfunction Sidebar({\n  side = 'left',\n  variant = 'sidebar',\n  collapsible = 'offcanvas',\n  className,\n  children,\n  ...props\n}: React.ComponentProps<'div'> & {\n  side?: 'left' | 'right'\n  variant?: 'sidebar' | 'floating' | 'inset'\n  collapsible?: 'offcanvas' | 'icon' | 'none'\n}) {\n  const { isMobile, state, openMobile, setOpenMobile } = useSidebar()\n\n  if (collapsible === 'none') {\n    return (\n      <div\n        data-slot=\"sidebar\"\n        className={cn(\n          'bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col',\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    )\n  }\n\n  if (isMobile) {\n    return (\n      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>\n        <SheetContent\n          data-sidebar=\"sidebar\"\n          data-slot=\"sidebar\"\n          data-mobile=\"true\"\n          className=\"bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden\"\n          style={\n            {\n              '--sidebar-width': SIDEBAR_WIDTH_MOBILE,\n            } as React.CSSProperties\n          }\n          side={side}\n        >\n          <SheetHeader className=\"sr-only\">\n            <SheetTitle>Sidebar</SheetTitle>\n            <SheetDescription>Displays the mobile sidebar.</SheetDescription>\n          </SheetHeader>\n          <div className=\"flex h-full w-full flex-col\">{children}</div>\n        </SheetContent>\n      </Sheet>\n    )\n  }\n\n  return (\n    <div\n      className=\"group peer text-sidebar-foreground hidden lg:block\"\n      data-state={state}\n      data-collapsible={state === 'collapsed' ? collapsible : ''}\n      data-variant={variant}\n      data-side={side}\n      data-slot=\"sidebar\"\n    >\n      {/* This is what handles the sidebar gap on desktop */}\n      <div\n        data-slot=\"sidebar-gap\"\n        className={cn(\n          'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',\n          'group-data-[collapsible=offcanvas]:w-0',\n          'group-data-[side=right]:rotate-180',\n          variant === 'floating' || variant === 'inset'\n            ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]'\n            : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon)',\n        )}\n      />\n      <div\n        data-slot=\"sidebar-container\"\n        className={cn(\n          'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex',\n          side === 'left'\n            ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'\n            : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',\n          // Adjust the padding for floating and inset variants.\n          variant === 'floating' || variant === 'inset'\n            ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]'\n            : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l',\n          className,\n        )}\n        {...props}\n      >\n        <div\n          data-sidebar=\"sidebar\"\n          data-slot=\"sidebar-inner\"\n          className=\"bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm\"\n        >\n          {children}\n        </div>\n      </div>\n    </div>\n  )\n}\n\nfunction SidebarTrigger({\n  className,\n  onClick,\n  ...props\n}: React.ComponentProps<typeof Button>) {\n  const { toggleSidebar } = useSidebar()\n\n  return (\n    <Button\n      data-sidebar=\"trigger\"\n      data-slot=\"sidebar-trigger\"\n      variant=\"ghost\"\n      size=\"icon\"\n      className={cn('size-9', className)}\n      onClick={(event) => {\n        onClick?.(event)\n        toggleSidebar()\n      }}\n      {...props}\n    >\n      <PanelLeftIcon />\n      <span className=\"sr-only\">Toggle Sidebar</span>\n    </Button>\n  )\n}\n\nfunction SidebarRail({ className, ...props }: React.ComponentProps<'button'>) {\n  const { toggleSidebar } = useSidebar()\n\n  return (\n    <button\n      data-sidebar=\"rail\"\n      data-slot=\"sidebar-rail\"\n      aria-label=\"Toggle Sidebar\"\n      tabIndex={-1}\n      onClick={toggleSidebar}\n      title=\"Toggle Sidebar\"\n      className={cn(\n        'hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex',\n        'in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize',\n        '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize',\n        'hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full',\n        '[[data-side=left][data-collapsible=offcanvas]_&]:-right-2',\n        '[[data-side=right][data-collapsible=offcanvas]_&]:-left-2',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarInset({ className, ...props }: React.ComponentProps<'main'>) {\n  return (\n    <main\n      data-slot=\"sidebar-inset\"\n      className={cn(\n        'bg-background relative flex w-full flex-1 flex-col',\n        'lg:peer-data-[variant=inset]:m-2 lg:peer-data-[variant=inset]:ml-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarInput({\n  className,\n  ...props\n}: React.ComponentProps<typeof Input>) {\n  return (\n    <Input\n      data-slot=\"sidebar-input\"\n      data-sidebar=\"input\"\n      className={cn('bg-background h-8 w-full shadow-none', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarHeader({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"sidebar-header\"\n      data-sidebar=\"header\"\n      className={cn('flex flex-col gap-2 p-2', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarFooter({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"sidebar-footer\"\n      data-sidebar=\"footer\"\n      className={cn('flex flex-col gap-2 p-2', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarSeparator({\n  className,\n  ...props\n}: React.ComponentProps<typeof Separator>) {\n  return (\n    <Separator\n      data-slot=\"sidebar-separator\"\n      data-sidebar=\"separator\"\n      className={cn('bg-sidebar-border mx-2 w-auto', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarContent({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"sidebar-content\"\n      data-sidebar=\"content\"\n      className={cn(\n        'flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarGroup({ className, ...props }: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"sidebar-group\"\n      data-sidebar=\"group\"\n      className={cn('relative flex w-full min-w-0 flex-col p-2', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarGroupLabel({\n  className,\n  asChild = false,\n  ...props\n}: React.ComponentProps<'div'> & { asChild?: boolean }) {\n  const Comp = asChild ? Slot.Root : 'div'\n\n  return (\n    <Comp\n      data-slot=\"sidebar-group-label\"\n      data-sidebar=\"group-label\"\n      className={cn(\n        'text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',\n        'group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarGroupAction({\n  className,\n  asChild = false,\n  ...props\n}: React.ComponentProps<'button'> & { asChild?: boolean }) {\n  const Comp = asChild ? Slot.Root : 'button'\n\n  return (\n    <Comp\n      data-slot=\"sidebar-group-action\"\n      data-sidebar=\"group-action\"\n      className={cn(\n        'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',\n        // Increases the hit area of the button on mobile.\n        'after:absolute after:-inset-2 md:after:hidden',\n        'group-data-[collapsible=icon]:hidden',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarGroupContent({\n  className,\n  ...props\n}: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"sidebar-group-content\"\n      data-sidebar=\"group-content\"\n      className={cn('w-full text-sm', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarMenu({ className, ...props }: React.ComponentProps<'ul'>) {\n  return (\n    <ul\n      data-slot=\"sidebar-menu\"\n      data-sidebar=\"menu\"\n      className={cn('flex w-full min-w-0 flex-col gap-1', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarMenuItem({ className, ...props }: React.ComponentProps<'li'>) {\n  return (\n    <li\n      data-slot=\"sidebar-menu-item\"\n      data-sidebar=\"menu-item\"\n      className={cn('group/menu-item relative', className)}\n      {...props}\n    />\n  )\n}\n\nconst sidebarMenuButtonVariants = cva(\n  'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',\n  {\n    variants: {\n      variant: {\n        default: 'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',\n        outline:\n          'bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]',\n      },\n      size: {\n        default: 'h-8 text-sm',\n        sm: 'h-7 text-xs',\n        lg: 'h-12 text-sm group-data-[collapsible=icon]:p-0!',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n      size: 'default',\n    },\n  },\n)\n\nfunction SidebarMenuButton({\n  asChild = false,\n  isActive = false,\n  variant = 'default',\n  size = 'default',\n  tooltip,\n  className,\n  onClick,\n  closeOnMobileClick = true,\n  ...props\n}: React.ComponentProps<'button'> & {\n  asChild?: boolean\n  isActive?: boolean\n  tooltip?: string | React.ComponentProps<typeof TooltipContent>\n  closeOnMobileClick?: boolean\n} & VariantProps<typeof sidebarMenuButtonVariants>) {\n  const Comp = asChild ? Slot.Root : 'button'\n  const { isMobile, state, setOpenMobile } = useSidebar()\n\n  const button = (\n    <Comp\n      data-slot=\"sidebar-menu-button\"\n      data-sidebar=\"menu-button\"\n      data-size={size}\n      data-active={isActive}\n      className={cn(sidebarMenuButtonVariants({ variant, size }), className)}\n      onClick={(e) => {\n        if (isMobile && closeOnMobileClick) {\n          setOpenMobile(false)\n        }\n        onClick?.(e)\n      }}\n      {...props}\n    />\n  )\n\n  if (!tooltip) {\n    return button\n  }\n\n  if (typeof tooltip === 'string') {\n    tooltip = {\n      children: tooltip,\n    }\n  }\n\n  return (\n    <Tooltip>\n      <TooltipTrigger asChild>{button}</TooltipTrigger>\n      <TooltipContent\n        side=\"right\"\n        align=\"center\"\n        hidden={state !== 'collapsed' || isMobile}\n        {...tooltip}\n      />\n    </Tooltip>\n  )\n}\n\nfunction SidebarMenuAction({\n  className,\n  asChild = false,\n  showOnHover = false,\n  ...props\n}: React.ComponentProps<'button'> & {\n  asChild?: boolean\n  showOnHover?: boolean\n}) {\n  const Comp = asChild ? Slot.Root : 'button'\n\n  return (\n    <Comp\n      data-slot=\"sidebar-menu-action\"\n      data-sidebar=\"menu-action\"\n      className={cn(\n        'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer-hover/menu-button:text-sidebar-accent-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',\n        // Increases the hit area of the button on mobile.\n        'after:absolute after:-inset-2 md:after:hidden',\n        'peer-data-[size=sm]/menu-button:top-1',\n        'peer-data-[size=default]/menu-button:top-1.5',\n        'peer-data-[size=lg]/menu-button:top-2.5',\n        'group-data-[collapsible=icon]:hidden',\n        showOnHover &&\n          'peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarMenuBadge({\n  className,\n  ...props\n}: React.ComponentProps<'div'>) {\n  return (\n    <div\n      data-slot=\"sidebar-menu-badge\"\n      data-sidebar=\"menu-badge\"\n      className={cn(\n        'text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none',\n        'peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground',\n        'peer-data-[size=sm]/menu-button:top-1',\n        'peer-data-[size=default]/menu-button:top-1.5',\n        'peer-data-[size=lg]/menu-button:top-2.5',\n        'group-data-[collapsible=icon]:hidden',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarMenuSkeleton({\n  className,\n  showIcon = false,\n  ...props\n}: React.ComponentProps<'div'> & {\n  showIcon?: boolean\n}) {\n  // Random width between 50 to 90%.\n  const width = React.useMemo(() => {\n    return `${Math.floor(Math.random() * 40) + 50}%`\n  }, [])\n\n  return (\n    <div\n      data-slot=\"sidebar-menu-skeleton\"\n      data-sidebar=\"menu-skeleton\"\n      className={cn('flex h-8 items-center gap-2 rounded-md px-2', className)}\n      {...props}\n    >\n      {showIcon && (\n        <Skeleton\n          className=\"size-4 rounded-md\"\n          data-sidebar=\"menu-skeleton-icon\"\n        />\n      )}\n      <Skeleton\n        className=\"h-4 max-w-(--skeleton-width) flex-1\"\n        data-sidebar=\"menu-skeleton-text\"\n        style={\n          {\n            '--skeleton-width': width,\n          } as React.CSSProperties\n        }\n      />\n    </div>\n  )\n}\n\nfunction SidebarMenuSub({ className, ...props }: React.ComponentProps<'ul'>) {\n  return (\n    <ul\n      data-slot=\"sidebar-menu-sub\"\n      data-sidebar=\"menu-sub\"\n      className={cn(\n        'border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5',\n        'group-data-[collapsible=icon]:hidden',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarMenuSubItem({\n  className,\n  ...props\n}: React.ComponentProps<'li'>) {\n  return (\n    <li\n      data-slot=\"sidebar-menu-sub-item\"\n      data-sidebar=\"menu-sub-item\"\n      className={cn('group/menu-sub-item relative', className)}\n      {...props}\n    />\n  )\n}\n\nfunction SidebarMenuSubButton({\n  asChild = false,\n  size = 'md',\n  isActive = false,\n  className,\n  onClick,\n  ...props\n}: React.ComponentProps<'a'> & {\n  asChild?: boolean\n  size?: 'sm' | 'md'\n  isActive?: boolean\n}) {\n  const Comp = asChild ? Slot.Root : 'a'\n  const { isMobile, setOpenMobile } = useSidebar()\n\n  return (\n    <Comp\n      data-slot=\"sidebar-menu-sub-button\"\n      data-sidebar=\"menu-sub-button\"\n      data-size={size}\n      data-active={isActive}\n      className={cn(\n        'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',\n        'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',\n        size === 'sm' && 'text-xs',\n        size === 'md' && 'text-sm',\n        'group-data-[collapsible=icon]:hidden',\n        className,\n      )}\n      onClick={(e) => {\n        if (isMobile) {\n          setOpenMobile(false)\n        }\n        onClick?.(e as any)\n      }}\n      {...props}\n    />\n  )\n}\n\nexport {\n  Sidebar,\n  SidebarContent,\n  SidebarFooter,\n  SidebarGroup,\n  SidebarGroupAction,\n  SidebarGroupContent,\n  SidebarGroupLabel,\n  SidebarHeader,\n  SidebarInput,\n  SidebarInset,\n  SidebarMenu,\n  SidebarMenuAction,\n  SidebarMenuBadge,\n  SidebarMenuButton,\n  SidebarMenuItem,\n  SidebarMenuSkeleton,\n  SidebarMenuSub,\n  SidebarMenuSubButton,\n  SidebarMenuSubItem,\n  SidebarProvider,\n  SidebarRail,\n  SidebarSeparator,\n  SidebarTrigger,\n  useSidebar,\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\skeleton.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\sonner.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\table.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\textarea.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\components\\ui\\tooltip.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\auth.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\branch.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\class.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\profile.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\staff.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\student.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\subject.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\timetable.api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\api\\upload.api.ts",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 18,
+        "column": 30,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 18,
+        "endColumn": 32,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [451, 453], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { api } from '../../lib/api'\nimport type { ApiResponse } from '@repo/types'\n\nexport const uploadApi = {\n  uploadFile: async (file: File) => {\n    const formData = new FormData()\n    formData.append('file', file)\n\n    const response = await api.post<ApiResponse<{ url: string }>>(\n      '/upload',\n      formData,\n      {\n        headers: {\n          'Content-Type': 'multipart/form-data',\n        },\n      },\n    )\n    return response.data.data?.url\n  },\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\auth.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\branch.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\class.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\profile.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\staff.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\student.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\subject.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\timetable.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\queries\\upload.queries.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\stores\\forgot-password.store.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\stores\\registration.store.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\stores\\useRegistrationStore.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\hooks\\use-mobile.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\integrations\\tanstack-query\\devtools.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\integrations\\tanstack-query\\root-provider.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\lib\\api.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\lib\\subdomain.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\lib\\toast.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\lib\\utils.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\main.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\reportWebVitals.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\__root.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_auth\\forgot-password.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_auth\\login.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 66,
+        "column": 24,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 66,
+        "endColumn": 26,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [1950, 1952], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { useState } from 'react'\nimport {\n  useNavigate,\n  createFileRoute,\n  Link,\n  isRedirect,\n} from '@tanstack/react-router'\nimport { Button } from '@/components/ui/button'\nimport { Input } from '@/components/ui/input'\nimport { Label } from '@/components/ui/label'\nimport { useLoginMutation } from '@/hooks/queries/auth.queries'\nimport { toast } from '@/lib/toast'\nimport { cn } from '@/lib/utils'\nimport { AuthLayout } from '@/components/auth/auth-layout'\nimport { AuthPasswordField } from '@/components/auth/auth-password-field'\nimport { buildSlugUrl, isLocalDev } from '@/lib/subdomain'\nimport { useAuthStore } from '@repo/api'\n\nexport const Route = createFileRoute('/_auth/login')({\n  component: LoginPage,\n})\n\nfunction LoginPage() {\n  const navigate = useNavigate()\n  const [email, setEmail] = useState('')\n  const [password, setPassword] = useState('')\n  const [errors, setErrors] = useState<Record<string, boolean>>({})\n\n  const { mutateAsync: loginAsync, isPending } = useLoginMutation()\n\n  const validate = () => {\n    const newErrors: Record<string, boolean> = {}\n    if (!email) newErrors.email = true\n    if (!password) newErrors.password = true\n\n    setErrors(newErrors)\n    const isValid = Object.keys(newErrors).length === 0\n\n    if (!isValid) {\n      toast.error('Please fill in all required fields', {\n        description: 'Missing fields are highlighted in red.',\n      })\n    }\n    return isValid\n  }\n\n  const handleLogin = async (e: React.FormEvent) => {\n    e.preventDefault()\n    if (!validate()) return\n\n    try {\n      const promise = loginAsync({\n        email,\n        password,\n      })\n      toast.promise(promise, {\n        loading: 'Logging in...',\n        success: () => `Welcome back!`,\n        error: (error: any) =>\n          error.message || 'Login failed. Please check your credentials.',\n      })\n\n      const data = await promise\n\n      // Redirect to slug subdomain with auth tokens\n      const slug = data?.slug\n      if (slug && !isLocalDev()) {\n        const authPayload = btoa(\n          JSON.stringify({\n            user: { ...data, role: 'SCHOOL' },\n            token: data.tokens.accessToken,\n            refreshToken: data.tokens.refreshToken,\n          }),\n        )\n        window.location.href = buildSlugUrl(\n          slug,\n          `/redirect?auth=${encodeURIComponent(authPayload)}`,\n        )\n        // Clear stale auth state on login portal origin so it doesn't\n        // interfere when the user later logs out and gets redirected back here\n        useAuthStore.getState().logout()\n      } else {\n        navigate({ to: '/redirect' })\n      }\n    } catch (error: any) {\n      if (isRedirect(error)) throw error\n      console.error('Login failed', error)\n    }\n  }\n\n  return (\n    <AuthLayout\n      title=\"Login\"\n      description=\"Enter your credentials to continue\"\n      quote=\"Simplified management for schools that value excellence.\"\n    >\n      <form onSubmit={handleLogin} className=\"space-y-8\" noValidate>\n        <div className=\"space-y-4\">\n          <div className=\"space-y-2\">\n            <Label htmlFor=\"email\">Email Address</Label>\n            <Input\n              id=\"email\"\n              type=\"email\"\n              placeholder=\"name@school.com\"\n              required\n              value={email}\n              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {\n                setEmail(e.target.value)\n                if (errors.email) {\n                  setErrors((prev) => {\n                    const next = { ...prev }\n                    delete next.email\n                    return next\n                  })\n                }\n              }}\n              className={cn(\n                'h-11 md:h-12 text-base',\n                errors.email && 'border-red-500 focus-visible:border-red-500',\n              )}\n            />\n          </div>\n\n          <AuthPasswordField\n            id=\"password\"\n            label=\"Password\"\n            value={password}\n            placeholder=\"••••••••\"\n            error={errors.password}\n            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {\n              setPassword(e.target.value)\n              if (errors.password) {\n                setErrors((prev) => {\n                  const next = { ...prev }\n                  delete next.password\n                  return next\n                })\n              }\n            }}\n            rightElement={\n              <Link\n                to=\"/forgot-password\"\n                className=\"text-sm font-medium text-primary hover:underline\"\n              >\n                Forgot password?\n              </Link>\n            }\n          />\n        </div>\n\n        <Button\n          type=\"submit\"\n          className=\"w-full h-11 md:h-12 text-base font-semibold\"\n          disabled={isPending}\n        >\n          {isPending ? 'Logging in...' : 'Sign In'}\n        </Button>\n\n        <p className=\"text-center text-sm text-muted-foreground pt-4\">\n          Don&apos;t have an account?{' '}\n          <Link\n            to=\"/register\"\n            className=\"text-primary font-bold hover:underline\"\n          >\n            Register your school\n          </Link>\n        </p>\n      </form>\n    </AuthLayout>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_auth\\register.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_auth\\route.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\assignments.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\attendance\\staff.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\attendance\\students.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\branches.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\classes.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\exams.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\index.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\reports.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\results.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\route.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\settings.index.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\settings.profile.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\settings.route.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\settings.security.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\staff.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary conditional, value is always truthy.",
+        "line": 92,
+        "column": 14,
+        "nodeType": "MemberExpression",
+        "messageId": "alwaysTruthy",
+        "endLine": 92,
+        "endColumn": 25
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { useState } from 'react'\nimport { createFileRoute } from '@tanstack/react-router'\nimport {\n  useStaffsQuery,\n  useCreateStaffMutation,\n  useEditStaffMutation,\n  useDeleteStaffsMutation,\n} from '@/hooks/queries/staff.queries'\nimport { useBranchesQuery } from '@/hooks/queries/branch.queries'\nimport type { Staff, CreateStaffDTO, Branch } from '@repo/types'\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from '@/components/ui/table'\nimport { Button } from '@/components/ui/button'\nimport { Input } from '@/components/ui/input'\nimport { Label } from '@/components/ui/label'\nimport { Badge } from '@/components/ui/badge'\nimport { Card, CardContent } from '@/components/ui/card'\nimport { Skeleton } from '@/components/ui/skeleton'\nimport { AppDrawer } from '@/components/ui/app-drawer'\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n} from '@/components/ui/alert-dialog'\nimport { toast } from '@/lib/toast'\nimport { Pencil, Eye } from 'lucide-react'\nimport { CustomSelect } from '@/components/ui/custom-select'\n\nexport const Route = createFileRoute('/_authenticated/dashboard/staff')({\n  component: StaffPage,\n})\n\nconst emptyForm: CreateStaffDTO = {\n  branchId: '',\n  fullname: '',\n  email: '',\n  phone: '',\n  roles: 'TEACHER',\n}\n\nfunction StaffPage() {\n  const [search, setSearch] = useState('')\n  const [filterBranchId, setFilterBranchId] = useState('')\n  const [selectedIds, setSelectedIds] = useState<Array<string>>([])\n  const [drawerOpen, setDrawerOpen] = useState(false)\n  const [editingStaff, setEditingStaff] = useState<Staff | null>(null)\n  const [form, setForm] = useState<CreateStaffDTO>(emptyForm)\n  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)\n\n  const [viewDrawerOpen, setViewDrawerOpen] = useState(false)\n  const [viewingStaff, setViewingStaff] = useState<Staff | null>(null)\n\n  const { data: branches } = useBranchesQuery()\n  const { data: staffs, isLoading } = useStaffsQuery(\n    filterBranchId || undefined,\n  )\n  const createMutation = useCreateStaffMutation()\n  const editMutation = useEditStaffMutation()\n  const deleteMutation = useDeleteStaffsMutation()\n\n  const filteredStaffs = staffs?.filter(\n    (s: Staff) =>\n      s.fullname.toLowerCase().includes(search.toLowerCase()) ||\n      s.email?.toLowerCase().includes(search.toLowerCase()),\n  )\n\n  const openCreate = () => {\n    setEditingStaff(null)\n    setForm({ ...emptyForm, branchId: filterBranchId || '' })\n    setDrawerOpen(true)\n  }\n\n  const openEdit = (staff: Staff) => {\n    setEditingStaff(staff)\n    setForm({\n      branchId: staff.branchId,\n      fullname: staff.fullname,\n      email: staff.email || '',\n      phone: staff.phone,\n      roles: staff.roles || 'TEACHER',\n    })\n    setDrawerOpen(true)\n  }\n\n  const openView = (staff: Staff) => {\n    setViewingStaff(staff)\n    setViewDrawerOpen(true)\n  }\n\n  const handleSave = () => {\n    if (!form.fullname.trim() || !form.branchId) return\n\n    if (editingStaff) {\n      editMutation.mutate(\n        { staffId: editingStaff.id, data: form },\n        {\n          onSuccess: () => {\n            toast.success('Staff updated')\n            setDrawerOpen(false)\n          },\n          onError: (err: any) =>\n            toast.error(err?.message || 'Failed to update'),\n        },\n      )\n    } else {\n      createMutation.mutate(form, {\n        onSuccess: () => {\n          toast.success('Staff created')\n          setDrawerOpen(false)\n        },\n        onError: (err: any) => toast.error(err?.message || 'Failed to create'),\n      })\n    }\n  }\n\n  const handleBatchDelete = () => {\n    if (selectedIds.length === 0) return\n\n    deleteMutation.mutate(selectedIds, {\n      onSuccess: () => {\n        toast.success(`${selectedIds.length} staff member(s) deleted`)\n        setSelectedIds([])\n        setDeleteConfirmOpen(false)\n      },\n      onError: (err: any) => {\n        toast.error(err?.message || 'Failed to delete')\n        setDeleteConfirmOpen(false)\n      },\n    })\n  }\n\n  const toggleSelect = (id: string) => {\n    setSelectedIds((prev) =>\n      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],\n    )\n  }\n\n  const toggleSelectAll = () => {\n    if (!filteredStaffs) return\n    if (selectedIds.length === filteredStaffs.length) {\n      setSelectedIds([])\n    } else {\n      setSelectedIds(filteredStaffs.map((s: Staff) => s.id))\n    }\n  }\n\n  const isPending = createMutation.isPending || editMutation.isPending\n\n  const updateField = (field: keyof CreateStaffDTO, value: string) =>\n    setForm((prev) => ({ ...prev, [field]: value }))\n\n  return (\n    <div className=\"space-y-6\">\n      {/* Header */}\n      <div>\n        <h1 className=\"text-2xl font-bold tracking-tight\">Staff / Teachers</h1>\n        <p className=\"text-muted-foreground text-sm\">\n          Manage staff members across your school branches\n        </p>\n      </div>\n\n      {/* Controls */}\n      <div className=\"flex flex-wrap items-center justify-between gap-4\">\n        <div className=\"flex flex-wrap items-center gap-3\">\n          <CustomSelect\n            fieldClassName=\"w-[260px]\"\n            value={filterBranchId}\n            onValueChange={(value) => {\n              setFilterBranchId(value)\n              setSelectedIds([])\n            }}\n            items={[\n              { label: 'All branches', value: '' },\n              ...(branches || []).map((b: Branch) => ({\n                label: b.name,\n                value: b.id,\n              })),\n            ]}\n          />\n          <Input\n            placeholder=\"Search staff...\"\n            value={search}\n            onChange={(e) => setSearch(e.target.value)}\n            className=\"h-9 w-[220px]\"\n          />\n        </div>\n        <div className=\"flex items-center gap-2\">\n          {selectedIds.length > 0 && (\n            <AlertDialog\n              open={deleteConfirmOpen}\n              onOpenChange={setDeleteConfirmOpen}\n            >\n              <AlertDialogTrigger asChild>\n                <Button\n                  variant=\"destructive\"\n                  size=\"sm\"\n                  disabled={deleteMutation.isPending}\n                >\n                  {deleteMutation.isPending\n                    ? 'Deleting...'\n                    : `Delete (${selectedIds.length})`}\n                </Button>\n              </AlertDialogTrigger>\n              <AlertDialogContent>\n                <AlertDialogHeader>\n                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>\n                  <AlertDialogDescription>\n                    This action cannot be undone. This will permanently delete{' '}\n                    {selectedIds.length} staff member(s) and remove their data\n                    from our servers.\n                  </AlertDialogDescription>\n                </AlertDialogHeader>\n                <AlertDialogFooter>\n                  <AlertDialogCancel>Cancel</AlertDialogCancel>\n                  <AlertDialogAction\n                    onClick={handleBatchDelete}\n                    className=\"bg-destructive text-destructive-foreground hover:bg-destructive/90\"\n                  >\n                    Delete Staff\n                  </AlertDialogAction>\n                </AlertDialogFooter>\n              </AlertDialogContent>\n            </AlertDialog>\n          )}\n          <Button onClick={openCreate}>+ Add Staff</Button>\n        </div>\n      </div>\n\n      {/* Table */}\n      {isLoading ? (\n        <div className=\"space-y-3\">\n          {Array.from({ length: 5 }).map((_, i) => (\n            <Skeleton key={i} className=\"h-14 w-full\" />\n          ))}\n        </div>\n      ) : filteredStaffs && filteredStaffs.length > 0 ? (\n        <div className=\"rounded-lg border bg-card overflow-hidden\">\n          <Table>\n            <TableHeader>\n              <TableRow>\n                <TableHead className=\"w-[40px]\">\n                  <input\n                    type=\"checkbox\"\n                    checked={\n                      filteredStaffs.length > 0 &&\n                      selectedIds.length === filteredStaffs.length\n                    }\n                    onChange={toggleSelectAll}\n                    className=\"size-4\"\n                  />\n                </TableHead>\n                <TableHead>Name</TableHead>\n                <TableHead>Role</TableHead>\n                <TableHead>Branch</TableHead>\n                <TableHead>Status</TableHead>\n                <TableHead className=\"text-right\">Actions</TableHead>\n              </TableRow>\n            </TableHeader>\n            <TableBody>\n              {filteredStaffs.map((staff: Staff) => (\n                <TableRow\n                  key={staff.id}\n                  data-state={\n                    selectedIds.includes(staff.id) ? 'selected' : undefined\n                  }\n                >\n                  <TableCell>\n                    <input\n                      type=\"checkbox\"\n                      checked={selectedIds.includes(staff.id)}\n                      onChange={() => toggleSelect(staff.id)}\n                      className=\"size-4\"\n                    />\n                  </TableCell>\n                  <TableCell className=\"font-medium\">\n                    {staff.fullname}\n                  </TableCell>\n                  <TableCell>\n                    <Badge\n                      variant={\n                        staff.roles === 'ADMIN' ? 'default' : 'secondary'\n                      }\n                    >\n                      {staff.roles}\n                    </Badge>\n                  </TableCell>\n                  <TableCell className=\"text-muted-foreground text-sm\">\n                    {staff.branch?.name || '—'}\n                  </TableCell>\n                  <TableCell>\n                    <Badge\n                      variant={\n                        staff.status === 'ACTIVE' ? 'default' : 'destructive'\n                      }\n                    >\n                      {staff.status}\n                    </Badge>\n                  </TableCell>\n                  <TableCell className=\"text-right\">\n                    <div className=\"flex items-center justify-end gap-1\">\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openView(staff)}\n                        title=\"View details\"\n                      >\n                        <Eye className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openEdit(staff)}\n                        title=\"Edit staff\"\n                      >\n                        <Pencil className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                    </div>\n                  </TableCell>\n                </TableRow>\n              ))}\n            </TableBody>\n          </Table>\n          <div className=\"text-muted-foreground border-t px-4 py-2 text-xs\">\n            {filteredStaffs.length} staff member\n            {filteredStaffs.length !== 1 ? 's' : ''}\n          </div>\n        </div>\n      ) : (\n        <Card>\n          <CardContent className=\"py-12 text-center\">\n            <p className=\"text-muted-foreground mb-4\">\n              {search\n                ? 'No staff members match your search.'\n                : 'No staff members yet. Add your first staff member.'}\n            </p>\n            {!search && (\n              <Button variant=\"outline\" onClick={openCreate}>\n                + Add Staff\n              </Button>\n            )}\n          </CardContent>\n        </Card>\n      )}\n\n      {/* Create/Edit Drawer */}\n      <AppDrawer\n        open={drawerOpen}\n        onOpenChange={setDrawerOpen}\n        title={editingStaff ? 'Edit Staff' : 'New Staff Member'}\n        description={\n          editingStaff\n            ? 'Update staff member details.'\n            : 'Fill in the details to add a new staff member.'\n        }\n        footer={\n          <>\n            <Button\n              onClick={handleSave}\n              disabled={isPending || !form.fullname.trim() || !form.branchId}\n            >\n              {isPending\n                ? 'Saving...'\n                : editingStaff\n                  ? 'Save Changes'\n                  : 'Create Staff'}\n            </Button>\n            <Button variant=\"outline\" onClick={() => setDrawerOpen(false)}>\n              Cancel\n            </Button>\n          </>\n        }\n      >\n        <div className=\"space-y-2\">\n          <CustomSelect\n            label={\n              <>\n                Branch <span className=\"text-destructive\">*</span>\n              </>\n            }\n            value={form.branchId}\n            onValueChange={(value) => updateField('branchId', value)}\n            items={[\n              { label: 'Select branch', value: '' },\n              ...(branches || []).map((b: Branch) => ({\n                label: b.name,\n                value: b.id,\n              })),\n            ]}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>\n            Full Name <span className=\"text-destructive\">*</span>\n          </Label>\n          <Input\n            placeholder=\"e.g. John Doe\"\n            value={form.fullname}\n            onChange={(e) => updateField('fullname', e.target.value)}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>\n            Email <span className=\"text-destructive\">*</span>\n          </Label>\n          <Input\n            type=\"email\"\n            placeholder=\"john@school.com\"\n            value={form.email}\n            onChange={(e) => updateField('email', e.target.value)}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>\n            Phone <span className=\"text-destructive\">*</span>\n          </Label>\n          <Input\n            placeholder=\"080xxxxxxxx\"\n            value={form.phone}\n            onChange={(e) => updateField('phone', e.target.value)}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <CustomSelect\n            label=\"Role\"\n            value={form.roles}\n            onValueChange={(value) => updateField('roles', value)}\n            items={[\n              { label: 'Teacher', value: 'TEACHER' },\n              { label: 'Admin', value: 'ADMIN' },\n            ]}\n          />\n        </div>\n      </AppDrawer>\n\n      {/* View Drawer */}\n      <AppDrawer\n        open={viewDrawerOpen}\n        onOpenChange={setViewDrawerOpen}\n        title=\"Staff Details\"\n        description={`Full information for ${viewingStaff?.fullname}`}\n        footer={\n          <Button variant=\"outline\" onClick={() => setViewDrawerOpen(false)}>\n            Close\n          </Button>\n        }\n      >\n        {viewingStaff && (\n          <div className=\"space-y-6 pb-8\">\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Full Name\n              </p>\n              <p className=\"text-base\">{viewingStaff.fullname}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Email Address\n              </p>\n              <p className=\"text-sm\">{viewingStaff.email || '—'}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Phone Number\n              </p>\n              <p className=\"text-sm\">{viewingStaff.phone || '—'}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">Role</p>\n              <Badge\n                variant={\n                  viewingStaff.roles === 'ADMIN' ? 'default' : 'secondary'\n                }\n              >\n                {viewingStaff.roles}\n              </Badge>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Branch\n              </p>\n              <p className=\"text-sm\">{viewingStaff.branch?.name || '—'}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Status\n              </p>\n              <Badge\n                variant={\n                  viewingStaff.status === 'ACTIVE' ? 'default' : 'destructive'\n                }\n              >\n                {viewingStaff.status}\n              </Badge>\n            </div>\n          </div>\n        )}\n      </AppDrawer>\n    </div>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\students.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 106,
+        "column": 18,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 106,
+        "endColumn": 20,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [3630, 3632], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { useState } from 'react'\nimport { createFileRoute } from '@tanstack/react-router'\nimport {\n  useStudentsQuery,\n  useCreateStudentMutation,\n  useEditStudentMutation,\n  useReassignStudentMutation,\n  useDeleteStudentsMutation,\n} from '@/hooks/queries/student.queries'\nimport { useBranchesQuery } from '@/hooks/queries/branch.queries'\nimport { useClassesQuery } from '@/hooks/queries/class.queries'\nimport type { StudentItem, CreateStudentDTO } from '@/hooks/api/student.api'\nimport type { ClassItem } from '@/hooks/api/class.api'\nimport type { Branch } from '@repo/types'\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from '@/components/ui/table'\nimport { Button } from '@/components/ui/button'\nimport { Input } from '@/components/ui/input'\nimport { Label } from '@/components/ui/label'\nimport { Badge } from '@/components/ui/badge'\nimport { Card, CardContent } from '@/components/ui/card'\nimport { Skeleton } from '@/components/ui/skeleton'\nimport { AppDrawer } from '@/components/ui/app-drawer'\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n} from '@/components/ui/alert-dialog'\nimport { toast } from '@/lib/toast'\nimport { Pencil, Eye, ArrowRightLeft } from 'lucide-react'\nimport { CustomSelect } from '@/components/ui/custom-select'\n\nexport const Route = createFileRoute('/_authenticated/dashboard/students')({\n  component: StudentsPage,\n})\n\nconst emptyForm: CreateStudentDTO = {\n  branchId: '',\n  classId: '',\n  fullname: '',\n  regNumber: '',\n  email: '',\n  phone: '',\n}\n\nfunction StudentsPage() {\n  const [search, setSearch] = useState('')\n  const [filterBranchId, setFilterBranchId] = useState('')\n  const [filterClassId, setFilterClassId] = useState('')\n  const [selectedIds, setSelectedIds] = useState<Array<string>>([])\n\n  // CRUD state\n  const [drawerOpen, setDrawerOpen] = useState(false)\n  const [editingStudent, setEditingStudent] = useState<StudentItem | null>(null)\n  const [form, setForm] = useState<CreateStudentDTO>(emptyForm)\n  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)\n\n  // Reassign state\n  const [reassignDrawerOpen, setReassignDrawerOpen] = useState(false)\n  const [reassignStudentId, setReassignStudentId] = useState('')\n  const [reassignStudentName, setReassignStudentName] = useState('')\n  const [reassignBranchId, setReassignBranchId] = useState('')\n  const [reassignClassId, setReassignClassId] = useState('')\n\n  // View state\n  const [viewDrawerOpen, setViewDrawerOpen] = useState(false)\n  const [viewingStudent, setViewingStudent] = useState<StudentItem | null>(null)\n\n  // Queries\n  const { data: branches } = useBranchesQuery()\n  const { data: students, isLoading } = useStudentsQuery(\n    filterBranchId || undefined,\n    filterClassId || undefined,\n  )\n  const { data: filterClasses } = useClassesQuery(filterBranchId || undefined)\n\n  // Classes for the form drawer (based on form branchId)\n  const { data: formClasses } = useClassesQuery(form.branchId || undefined)\n\n  // Classes for the reassign drawer\n  const { data: reassignClasses } = useClassesQuery(\n    reassignBranchId || undefined,\n  )\n\n  // Mutations\n  const createMutation = useCreateStudentMutation()\n  const editMutation = useEditStudentMutation()\n  const reassignMutation = useReassignStudentMutation()\n  const deleteMutation = useDeleteStudentsMutation()\n\n  const filteredStudents = students?.filter(\n    (s: StudentItem) =>\n      s.fullname.toLowerCase().includes(search.toLowerCase()) ||\n      s.regNumber?.toLowerCase().includes(search.toLowerCase()) ||\n      s.email?.toLowerCase().includes(search.toLowerCase()),\n  )\n\n  const openCreate = () => {\n    setEditingStudent(null)\n    setForm({ ...emptyForm, branchId: filterBranchId || '' })\n    setDrawerOpen(true)\n  }\n\n  const openEdit = (student: StudentItem) => {\n    setEditingStudent(student)\n    setForm({\n      branchId: student.branchId,\n      classId: student.classId,\n      fullname: student.fullname,\n      regNumber: student.regNumber || '',\n      email: student.email || '',\n      phone: student.phone || '',\n    })\n    setDrawerOpen(true)\n  }\n\n  const openReassign = (student: StudentItem) => {\n    setReassignStudentId(student.id)\n    setReassignStudentName(student.fullname)\n    setReassignBranchId(student.branchId)\n    setReassignClassId('')\n    setReassignDrawerOpen(true)\n  }\n\n  const openView = (student: StudentItem) => {\n    setViewingStudent(student)\n    setViewDrawerOpen(true)\n  }\n\n  const handleSave = () => {\n    if (!form.fullname.trim() || !form.branchId || !form.classId) return\n\n    if (editingStudent) {\n      editMutation.mutate(\n        { studentId: editingStudent.id, data: form },\n        {\n          onSuccess: () => {\n            toast.success('Student updated')\n            setDrawerOpen(false)\n          },\n          onError: (err: any) =>\n            toast.error(err?.message || 'Failed to update'),\n        },\n      )\n    } else {\n      createMutation.mutate(form, {\n        onSuccess: () => {\n          toast.success('Student created')\n          setDrawerOpen(false)\n        },\n        onError: (err: any) => toast.error(err?.message || 'Failed to create'),\n      })\n    }\n  }\n\n  const handleReassign = () => {\n    if (!reassignClassId) return\n\n    reassignMutation.mutate(\n      {\n        studentId: reassignStudentId,\n        data: {\n          classId: reassignClassId,\n          branchId:\n            reassignBranchId !== editingStudent?.branchId\n              ? reassignBranchId\n              : undefined,\n        },\n      },\n      {\n        onSuccess: () => {\n          toast.success('Student reassigned')\n          setReassignDrawerOpen(false)\n        },\n        onError: (err: any) =>\n          toast.error(err?.message || 'Failed to reassign'),\n      },\n    )\n  }\n\n  const handleBatchDelete = () => {\n    if (selectedIds.length === 0) return\n\n    deleteMutation.mutate(selectedIds, {\n      onSuccess: () => {\n        toast.success(`${selectedIds.length} student(s) deleted`)\n        setSelectedIds([])\n        setDeleteConfirmOpen(false)\n      },\n      onError: (err: any) => {\n        toast.error(err?.message || 'Failed to delete')\n        setDeleteConfirmOpen(false)\n      },\n    })\n  }\n\n  const toggleSelect = (id: string) => {\n    setSelectedIds((prev) =>\n      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],\n    )\n  }\n\n  const toggleSelectAll = () => {\n    if (!filteredStudents) return\n    if (selectedIds.length === filteredStudents.length) {\n      setSelectedIds([])\n    } else {\n      setSelectedIds(filteredStudents.map((s: StudentItem) => s.id))\n    }\n  }\n\n  const isPending = createMutation.isPending || editMutation.isPending\n\n  const updateField = (field: keyof CreateStudentDTO, value: string) =>\n    setForm((prev) => ({ ...prev, [field]: value }))\n\n  return (\n    <div className=\"space-y-6\">\n      {/* Header */}\n      <div>\n        <h1 className=\"text-2xl font-bold tracking-tight\">Students</h1>\n        <p className=\"text-muted-foreground text-sm\">\n          Manage student enrolment, class assignments, and transfers\n        </p>\n      </div>\n\n      {/* Controls */}\n      <div className=\"flex flex-wrap items-center justify-between gap-4\">\n        <div className=\"flex flex-wrap items-center gap-3\">\n          <CustomSelect\n            fieldClassName=\"w-[260px]\"\n            value={filterBranchId}\n            onValueChange={(value) => {\n              setFilterBranchId(value)\n              setFilterClassId('')\n              setSelectedIds([])\n            }}\n            items={[\n              { label: 'All branches', value: '' },\n              ...(branches || []).map((b: Branch) => ({\n                label: b.name,\n                value: b.id,\n              })),\n            ]}\n          />\n          <CustomSelect\n            fieldClassName=\"w-[220px]\"\n            value={filterClassId}\n            onValueChange={(value) => {\n              setFilterClassId(value)\n              setSelectedIds([])\n            }}\n            disabled={!filterBranchId}\n            items={[\n              { label: 'All classes', value: '' },\n              ...(filterClasses || []).map((c: ClassItem) => ({\n                label: c.name,\n                value: c.id,\n              })),\n            ]}\n          >\n            <option value=\"\">\n              {filterBranchId ? 'All classes' : 'Select branch first'}\n            </option>\n            {filterClasses?.map((c: ClassItem) => (\n              <option key={c.id} value={c.id}>\n                {c.name}\n              </option>\n            ))}\n          </CustomSelect>\n          <Input\n            placeholder=\"Search students...\"\n            value={search}\n            onChange={(e) => setSearch(e.target.value)}\n            className=\"h-9 w-[200px]\"\n          />\n        </div>\n        <div className=\"flex items-center gap-2\">\n          {selectedIds.length > 0 && (\n            <AlertDialog\n              open={deleteConfirmOpen}\n              onOpenChange={setDeleteConfirmOpen}\n            >\n              <AlertDialogTrigger asChild>\n                <Button\n                  variant=\"destructive\"\n                  size=\"sm\"\n                  disabled={deleteMutation.isPending}\n                >\n                  {deleteMutation.isPending\n                    ? 'Deleting...'\n                    : `Delete (${selectedIds.length})`}\n                </Button>\n              </AlertDialogTrigger>\n              <AlertDialogContent>\n                <AlertDialogHeader>\n                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>\n                  <AlertDialogDescription>\n                    This action cannot be undone. This will permanently delete{' '}\n                    {selectedIds.length} student(s) and remove their data from\n                    our servers.\n                  </AlertDialogDescription>\n                </AlertDialogHeader>\n                <AlertDialogFooter>\n                  <AlertDialogCancel>Cancel</AlertDialogCancel>\n                  <AlertDialogAction\n                    onClick={handleBatchDelete}\n                    className=\"bg-destructive text-destructive-foreground hover:bg-destructive/90\"\n                  >\n                    Delete Students\n                  </AlertDialogAction>\n                </AlertDialogFooter>\n              </AlertDialogContent>\n            </AlertDialog>\n          )}\n          <Button onClick={openCreate}>+ Add Student</Button>\n        </div>\n      </div>\n\n      {/* Table */}\n      {isLoading ? (\n        <div className=\"space-y-3\">\n          {Array.from({ length: 6 }).map((_, i) => (\n            <Skeleton key={i} className=\"h-14 w-full\" />\n          ))}\n        </div>\n      ) : filteredStudents && filteredStudents.length > 0 ? (\n        <div className=\"rounded-lg border bg-card overflow-hidden\">\n          <Table className=\"min-w-[1000px]\">\n            <TableHeader>\n              <TableRow>\n                <TableHead className=\"w-[40px]\">\n                  <input\n                    type=\"checkbox\"\n                    checked={\n                      filteredStudents.length > 0 &&\n                      selectedIds.length === filteredStudents.length\n                    }\n                    onChange={toggleSelectAll}\n                    className=\"size-4\"\n                  />\n                </TableHead>\n                <TableHead>Name</TableHead>\n                <TableHead>Reg Number</TableHead>\n                <TableHead>Class</TableHead>\n                <TableHead>Branch</TableHead>\n                <TableHead>Status</TableHead>\n                <TableHead className=\"text-right\">Actions</TableHead>\n              </TableRow>\n            </TableHeader>\n            <TableBody>\n              {filteredStudents.map((student: StudentItem) => (\n                <TableRow\n                  key={student.id}\n                  data-state={\n                    selectedIds.includes(student.id) ? 'selected' : undefined\n                  }\n                >\n                  <TableCell>\n                    <input\n                      type=\"checkbox\"\n                      checked={selectedIds.includes(student.id)}\n                      onChange={() => toggleSelect(student.id)}\n                      className=\"size-4\"\n                    />\n                  </TableCell>\n                  <TableCell className=\"font-medium\">\n                    {student.fullname}\n                  </TableCell>\n                  <TableCell className=\"font-mono text-xs\">\n                    {student.regNumber || '—'}\n                  </TableCell>\n                  <TableCell>\n                    <Badge variant=\"secondary\">\n                      {student.class?.name || '—'}\n                    </Badge>\n                  </TableCell>\n                  <TableCell className=\"text-muted-foreground text-sm\">\n                    {student.branch?.name || '—'}\n                  </TableCell>\n                  <TableCell>\n                    <Badge\n                      variant={\n                        student.status === 'ACTIVE' ? 'default' : 'destructive'\n                      }\n                    >\n                      {student.status}\n                    </Badge>\n                  </TableCell>\n                  <TableCell className=\"text-right\">\n                    <div className=\"flex items-center justify-end gap-1\">\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openView(student)}\n                        title=\"View details\"\n                      >\n                        <Eye className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openEdit(student)}\n                        title=\"Edit student\"\n                      >\n                        <Pencil className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openReassign(student)}\n                        title=\"Reassign student\"\n                      >\n                        <ArrowRightLeft className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                    </div>\n                  </TableCell>\n                </TableRow>\n              ))}\n            </TableBody>\n          </Table>\n          <div className=\"text-muted-foreground border-t px-4 py-2 text-xs\">\n            {filteredStudents.length} student\n            {filteredStudents.length !== 1 ? 's' : ''}\n          </div>\n        </div>\n      ) : (\n        <Card>\n          <CardContent className=\"py-12 text-center\">\n            <p className=\"text-muted-foreground mb-4\">\n              {search\n                ? 'No students match your search.'\n                : 'No students yet. Enrol your first student.'}\n            </p>\n            {!search && (\n              <Button variant=\"outline\" onClick={openCreate}>\n                + Add Student\n              </Button>\n            )}\n          </CardContent>\n        </Card>\n      )}\n\n      {/* Create/Edit Drawer */}\n      <AppDrawer\n        open={drawerOpen}\n        onOpenChange={setDrawerOpen}\n        title={editingStudent ? 'Edit Student' : 'New Student'}\n        description={\n          editingStudent\n            ? 'Update student details.'\n            : 'Fill in the details to enrol a new student.'\n        }\n        footer={\n          <>\n            <Button\n              onClick={handleSave}\n              disabled={\n                isPending ||\n                !form.fullname.trim() ||\n                !form.branchId ||\n                !form.classId\n              }\n            >\n              {isPending\n                ? 'Saving...'\n                : editingStudent\n                  ? 'Save Changes'\n                  : 'Enrol Student'}\n            </Button>\n            <Button variant=\"outline\" onClick={() => setDrawerOpen(false)}>\n              Cancel\n            </Button>\n          </>\n        }\n      >\n        <div className=\"space-y-2\">\n          <CustomSelect\n            label={\n              <>\n                Branch <span className=\"text-destructive\">*</span>\n              </>\n            }\n            value={form.branchId}\n            onValueChange={(value) => {\n              updateField('branchId', value)\n              updateField('classId', '')\n            }}\n            items={[\n              { label: 'Select branch', value: '' },\n              ...(branches || []).map((b: Branch) => ({\n                label: b.name,\n                value: b.id,\n              })),\n            ]}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <CustomSelect\n            label={\n              <>\n                Class <span className=\"text-destructive\">*</span>\n              </>\n            }\n            value={form.classId}\n            onValueChange={(value) => updateField('classId', value)}\n            disabled={!form.branchId}\n            items={[\n              {\n                label: form.branchId ? 'Select class' : 'Select branch first',\n                value: '',\n              },\n              ...(formClasses || []).map((c: ClassItem) => ({\n                label: c.name,\n                value: c.id,\n              })),\n            ]}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>\n            Full Name <span className=\"text-destructive\">*</span>\n          </Label>\n          <Input\n            placeholder=\"Student full name\"\n            value={form.fullname}\n            onChange={(e) => updateField('fullname', e.target.value)}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>Registration Number</Label>\n          <Input\n            placeholder=\"e.g. STD/2026/001\"\n            value={form.regNumber}\n            onChange={(e) => updateField('regNumber', e.target.value)}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>Email</Label>\n          <Input\n            type=\"email\"\n            placeholder=\"Optional\"\n            value={form.email}\n            onChange={(e) => updateField('email', e.target.value)}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>Phone</Label>\n          <Input\n            placeholder=\"Optional\"\n            value={form.phone}\n            onChange={(e) => updateField('phone', e.target.value)}\n          />\n        </div>\n      </AppDrawer>\n\n      {/* View Drawer */}\n      <AppDrawer\n        open={viewDrawerOpen}\n        onOpenChange={setViewDrawerOpen}\n        title=\"Student Details\"\n        description={`Full information for ${viewingStudent?.fullname}`}\n        footer={\n          <Button variant=\"outline\" onClick={() => setViewDrawerOpen(false)}>\n            Close\n          </Button>\n        }\n      >\n        {viewingStudent && (\n          <div className=\"space-y-6 pb-8\">\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Full Name\n              </p>\n              <p className=\"text-base\">{viewingStudent.fullname}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Registration Number\n              </p>\n              <p className=\"font-mono text-sm\">\n                {viewingStudent.regNumber || '—'}\n              </p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Email Address\n              </p>\n              <p className=\"text-sm\">{viewingStudent.email || '—'}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Phone Number\n              </p>\n              <p className=\"text-sm\">{viewingStudent.phone || '—'}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Branch\n              </p>\n              <p className=\"text-sm\">{viewingStudent.branch?.name || '—'}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">Class</p>\n              <Badge variant=\"secondary\">\n                {viewingStudent.class?.name || '—'}\n              </Badge>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Status\n              </p>\n              <Badge\n                variant={\n                  viewingStudent.status === 'ACTIVE' ? 'default' : 'destructive'\n                }\n              >\n                {viewingStudent.status}\n              </Badge>\n            </div>\n          </div>\n        )}\n      </AppDrawer>\n\n      {/* Reassign Drawer */}\n      <AppDrawer\n        open={reassignDrawerOpen}\n        onOpenChange={setReassignDrawerOpen}\n        title=\"Reassign Student\"\n        description={`Move ${reassignStudentName} to a different class`}\n        footer={\n          <>\n            <Button\n              onClick={handleReassign}\n              disabled={reassignMutation.isPending || !reassignClassId}\n            >\n              {reassignMutation.isPending ? 'Reassigning...' : 'Reassign'}\n            </Button>\n            <Button\n              variant=\"outline\"\n              onClick={() => setReassignDrawerOpen(false)}\n            >\n              Cancel\n            </Button>\n          </>\n        }\n      >\n        <div className=\"space-y-2\">\n          <CustomSelect\n            label=\"Target Branch\"\n            value={reassignBranchId}\n            onValueChange={(value) => {\n              setReassignBranchId(value)\n              setReassignClassId('')\n            }}\n            items={[\n              { label: 'Select branch', value: '' },\n              ...(branches || []).map((b: Branch) => ({\n                label: b.name,\n                value: b.id,\n              })),\n            ]}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <CustomSelect\n            label={\n              <>\n                New Class <span className=\"text-destructive\">*</span>\n              </>\n            }\n            value={reassignClassId}\n            onValueChange={setReassignClassId}\n            disabled={!reassignBranchId}\n            items={[\n              {\n                label: reassignBranchId\n                  ? 'Select new class'\n                  : 'Select branch first',\n                value: '',\n              },\n              ...(reassignClasses || []).map((c: ClassItem) => ({\n                label: c.name,\n                value: c.id,\n              })),\n            ]}\n          />\n        </div>\n      </AppDrawer>\n    </div>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\subjects.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 571,
+        "column": 46,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 571,
+        "endColumn": 48,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [19095, 19097], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { useState } from 'react'\nimport { createFileRoute } from '@tanstack/react-router'\nimport {\n  useSubjectsQuery,\n  useSubjectByIdQuery,\n  useCreateSubjectMutation,\n  useEditSubjectMutation,\n  useDeleteSubjectsMutation,\n  useAssignTeacherToSubjectMutation,\n  useRemoveTeacherFromSubjectMutation,\n} from '@/hooks/queries/subject.queries'\nimport { useBranchesQuery } from '@/hooks/queries/branch.queries'\nimport { useStaffsQuery } from '@/hooks/queries/staff.queries'\nimport { useClassesQuery } from '@/hooks/queries/class.queries'\nimport type {\n  SubjectItem,\n  CreateSubjectDTO,\n  SubjectTeacherAssignment,\n} from '@/hooks/api/subject.api'\nimport type { ClassItem } from '@/hooks/api/class.api'\nimport type { Branch, Staff } from '@repo/types'\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from '@/components/ui/table'\nimport { Button } from '@/components/ui/button'\nimport { Input } from '@/components/ui/input'\nimport { Label } from '@/components/ui/label'\nimport { Badge } from '@/components/ui/badge'\nimport { Card, CardContent } from '@/components/ui/card'\nimport { Skeleton } from '@/components/ui/skeleton'\nimport { AppDrawer } from '@/components/ui/app-drawer'\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n} from '@/components/ui/alert-dialog'\nimport { CustomSelect } from '@/components/ui/custom-select'\nimport { toast } from '@/lib/toast'\nimport { Pencil, Eye, BookOpen } from 'lucide-react'\n\nexport const Route = createFileRoute('/_authenticated/dashboard/subjects')({\n  component: SubjectsPage,\n})\n\nconst WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']\n\nconst emptyForm: CreateSubjectDTO = {\n  branchId: '',\n  name: '',\n}\n\nfunction SubjectsPage() {\n  const [search, setSearch] = useState('')\n  const [filterBranchId, setFilterBranchId] = useState('')\n  const [selectedIds, setSelectedIds] = useState<Array<string>>([])\n\n  // CRUD state\n  const [drawerOpen, setDrawerOpen] = useState(false)\n  const [editingSubject, setEditingSubject] = useState<SubjectItem | null>(null)\n  const [form, setForm] = useState<CreateSubjectDTO>(emptyForm)\n\n  const [viewDrawerOpen, setViewDrawerOpen] = useState(false)\n  const [viewingSubject, setViewingSubject] = useState<SubjectItem | null>(null)\n\n  // Assignment state\n  const [assignDrawerOpen, setAssignDrawerOpen] = useState(false)\n  const [managingSubjectId, setManagingSubjectId] = useState('')\n  const [managingSubjectName, setManagingSubjectName] = useState('')\n  const [managingBranchId, setManagingBranchId] = useState('')\n  const [assignStaffId, setAssignStaffId] = useState('')\n  const [assignClassId, setAssignClassId] = useState('')\n  const [assignDays, setAssignDays] = useState<Array<string>>([])\n\n  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)\n\n  // Queries\n  const { data: branches } = useBranchesQuery()\n  const { data: subjects, isLoading } = useSubjectsQuery(\n    filterBranchId || undefined,\n  )\n  const { data: subjectDetail } = useSubjectByIdQuery(\n    managingSubjectId || undefined,\n  )\n  const { data: branchStaffs } = useStaffsQuery(managingBranchId || undefined)\n  const { data: branchClasses } = useClassesQuery(managingBranchId || undefined)\n\n  // Mutations\n  const createMutation = useCreateSubjectMutation()\n  const editMutation = useEditSubjectMutation()\n  const deleteMutation = useDeleteSubjectsMutation()\n  const assignMutation = useAssignTeacherToSubjectMutation()\n  const removeMutation = useRemoveTeacherFromSubjectMutation()\n\n  const filteredSubjects = subjects?.filter((s: SubjectItem) =>\n    s.name.toLowerCase().includes(search.toLowerCase()),\n  )\n\n  const openCreate = () => {\n    setEditingSubject(null)\n    setForm({ ...emptyForm, branchId: filterBranchId || '' })\n    setDrawerOpen(true)\n  }\n\n  const openEdit = (subject: SubjectItem) => {\n    setEditingSubject(subject)\n    setForm({ branchId: subject.branchId, name: subject.name })\n    setDrawerOpen(true)\n  }\n\n  const openAssignments = (subject: SubjectItem) => {\n    setManagingSubjectId(subject.id)\n    setManagingSubjectName(subject.name)\n    setManagingBranchId(subject.branchId)\n    setAssignStaffId('')\n    setAssignClassId('')\n    setAssignDays([])\n    setAssignDrawerOpen(true)\n  }\n\n  const openView = (subject: SubjectItem) => {\n    setViewingSubject(subject)\n    setViewDrawerOpen(true)\n  }\n\n  const handleSave = () => {\n    if (!form.name.trim() || !form.branchId) return\n\n    if (editingSubject) {\n      editMutation.mutate(\n        { subjectId: editingSubject.id, data: form },\n        {\n          onSuccess: () => {\n            toast.success('Subject updated')\n            setDrawerOpen(false)\n          },\n          onError: (err: any) =>\n            toast.error(err?.message || 'Failed to update'),\n        },\n      )\n    } else {\n      createMutation.mutate(form, {\n        onSuccess: () => {\n          toast.success('Subject created')\n          setDrawerOpen(false)\n        },\n        onError: (err: any) => toast.error(err?.message || 'Failed to create'),\n      })\n    }\n  }\n\n  const handleBatchDelete = () => {\n    if (selectedIds.length === 0) return\n\n    deleteMutation.mutate(selectedIds, {\n      onSuccess: () => {\n        toast.success(`${selectedIds.length} subject(s) deleted`)\n        setSelectedIds([])\n        setDeleteConfirmOpen(false)\n      },\n      onError: (err: any) => {\n        toast.error(err?.message || 'Failed to delete')\n        setDeleteConfirmOpen(false)\n      },\n    })\n  }\n\n  const handleAssignTeacher = () => {\n    if (!assignStaffId || !assignClassId || assignDays.length === 0) return\n\n    assignMutation.mutate(\n      {\n        subjectId: managingSubjectId,\n        data: {\n          staffId: assignStaffId,\n          classId: assignClassId,\n          days: assignDays.join(', '),\n        },\n      },\n      {\n        onSuccess: () => {\n          toast.success('Teacher assigned')\n          setAssignStaffId('')\n          setAssignClassId('')\n          setAssignDays([])\n        },\n        onError: (err: any) => toast.error(err?.message || 'Failed to assign'),\n      },\n    )\n  }\n\n  const handleRemoveAssignment = (assignmentId: string) => {\n    removeMutation.mutate(\n      { subjectId: managingSubjectId, assignmentId },\n      {\n        onSuccess: () => toast.success('Assignment removed'),\n        onError: (err: any) => toast.error(err?.message || 'Failed to remove'),\n      },\n    )\n  }\n\n  const toggleDay = (day: string) => {\n    setAssignDays((prev) =>\n      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day],\n    )\n  }\n\n  const toggleSelect = (id: string) => {\n    setSelectedIds((prev) =>\n      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],\n    )\n  }\n\n  const toggleSelectAll = () => {\n    if (!filteredSubjects) return\n    if (selectedIds.length === filteredSubjects.length) {\n      setSelectedIds([])\n    } else {\n      setSelectedIds(filteredSubjects.map((s: SubjectItem) => s.id))\n    }\n  }\n\n  const isPending = createMutation.isPending || editMutation.isPending\n\n  return (\n    <div className=\"space-y-6\">\n      {/* Header */}\n      <div>\n        <h1 className=\"text-2xl font-bold tracking-tight\">Subjects</h1>\n        <p className=\"text-muted-foreground text-sm\">\n          Manage subjects and assign teachers to classes\n        </p>\n      </div>\n\n      {/* Controls */}\n      <div className=\"flex flex-wrap items-center justify-between gap-4\">\n        <div className=\"flex flex-wrap items-center gap-3\">\n          <CustomSelect\n            fieldClassName=\"w-[260px]\"\n            value={filterBranchId}\n            onValueChange={(value) => {\n              setFilterBranchId(value)\n              setSelectedIds([])\n            }}\n            items={[\n              { label: 'All branches', value: '' },\n              ...(branches || []).map((b: Branch) => ({\n                label: b.name,\n                value: b.id,\n              })),\n            ]}\n          />\n          <Input\n            placeholder=\"Search subjects...\"\n            value={search}\n            onChange={(e) => setSearch(e.target.value)}\n            className=\"h-9 w-[220px]\"\n          />\n        </div>\n        <div className=\"flex items-center gap-2\">\n          {selectedIds.length > 0 && (\n            <AlertDialog\n              open={deleteConfirmOpen}\n              onOpenChange={setDeleteConfirmOpen}\n            >\n              <AlertDialogTrigger asChild>\n                <Button\n                  variant=\"destructive\"\n                  size=\"sm\"\n                  disabled={deleteMutation.isPending}\n                >\n                  {deleteMutation.isPending\n                    ? 'Deleting...'\n                    : `Delete (${selectedIds.length})`}\n                </Button>\n              </AlertDialogTrigger>\n              <AlertDialogContent>\n                <AlertDialogHeader>\n                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>\n                  <AlertDialogDescription>\n                    This will permanently delete {selectedIds.length} subject(s)\n                    and remove associated data from our servers.\n                  </AlertDialogDescription>\n                </AlertDialogHeader>\n                <AlertDialogFooter>\n                  <AlertDialogCancel>Cancel</AlertDialogCancel>\n                  <AlertDialogAction\n                    onClick={handleBatchDelete}\n                    className=\"bg-destructive text-destructive-foreground hover:bg-destructive/90\"\n                  >\n                    Delete Subjects\n                  </AlertDialogAction>\n                </AlertDialogFooter>\n              </AlertDialogContent>\n            </AlertDialog>\n          )}\n          <Button onClick={openCreate}>+ Add Subject</Button>\n        </div>\n      </div>\n\n      {/* Table */}\n      {isLoading ? (\n        <div className=\"space-y-3\">\n          {Array.from({ length: 5 }).map((_, i) => (\n            <Skeleton key={i} className=\"h-14 w-full\" />\n          ))}\n        </div>\n      ) : filteredSubjects && filteredSubjects.length > 0 ? (\n        <div className=\"rounded-lg border bg-card overflow-hidden\">\n          <Table>\n            <TableHeader>\n              <TableRow>\n                <TableHead className=\"w-[40px]\">\n                  <input\n                    type=\"checkbox\"\n                    checked={\n                      filteredSubjects.length > 0 &&\n                      selectedIds.length === filteredSubjects.length\n                    }\n                    onChange={toggleSelectAll}\n                    className=\"size-4\"\n                  />\n                </TableHead>\n                <TableHead>Name</TableHead>\n                <TableHead>Branch</TableHead>\n                <TableHead className=\"text-center\">Assigned Teachers</TableHead>\n                <TableHead className=\"text-right\">Actions</TableHead>\n              </TableRow>\n            </TableHeader>\n            <TableBody>\n              {filteredSubjects.map((subject: SubjectItem) => (\n                <TableRow\n                  key={subject.id}\n                  data-state={\n                    selectedIds.includes(subject.id) ? 'selected' : undefined\n                  }\n                >\n                  <TableCell>\n                    <input\n                      type=\"checkbox\"\n                      checked={selectedIds.includes(subject.id)}\n                      onChange={() => toggleSelect(subject.id)}\n                      className=\"size-4\"\n                    />\n                  </TableCell>\n                  <TableCell className=\"font-medium\">{subject.name}</TableCell>\n                  <TableCell className=\"text-muted-foreground text-sm\">\n                    {subject.branch?.name || '—'}\n                  </TableCell>\n                  <TableCell className=\"text-center\">\n                    <Badge variant=\"secondary\">\n                      {subject._count?.subjectTeachers ?? 0}\n                    </Badge>\n                  </TableCell>\n                  <TableCell className=\"text-right\">\n                    <div className=\"flex items-center justify-end gap-1\">\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openView(subject)}\n                        title=\"View details\"\n                      >\n                        <Eye className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openEdit(subject)}\n                        title=\"Edit subject\"\n                      >\n                        <Pencil className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                      <Button\n                        variant=\"ghost\"\n                        size=\"icon\"\n                        className=\"size-8\"\n                        onClick={() => openAssignments(subject)}\n                        title=\"Assign Teachers\"\n                      >\n                        <BookOpen className=\"size-4 text-muted-foreground hover:text-foreground\" />\n                      </Button>\n                    </div>\n                  </TableCell>\n                </TableRow>\n              ))}\n            </TableBody>\n          </Table>\n          <div className=\"text-muted-foreground border-t px-4 py-2 text-xs\">\n            {filteredSubjects.length} subject\n            {filteredSubjects.length !== 1 ? 's' : ''}\n          </div>\n        </div>\n      ) : (\n        <Card>\n          <CardContent className=\"py-12 text-center\">\n            <p className=\"text-muted-foreground mb-4\">\n              {search\n                ? 'No subjects match your search.'\n                : 'No subjects yet. Create your first subject.'}\n            </p>\n            {!search && (\n              <Button variant=\"outline\" onClick={openCreate}>\n                + Add Subject\n              </Button>\n            )}\n          </CardContent>\n        </Card>\n      )}\n\n      {/* Create/Edit Drawer */}\n      <AppDrawer\n        open={drawerOpen}\n        onOpenChange={setDrawerOpen}\n        title={editingSubject ? 'Edit Subject' : 'New Subject'}\n        description={\n          editingSubject\n            ? 'Update subject details.'\n            : 'Create a new subject for a branch.'\n        }\n        footer={\n          <>\n            <Button\n              onClick={handleSave}\n              disabled={isPending || !form.name.trim() || !form.branchId}\n            >\n              {isPending\n                ? 'Saving...'\n                : editingSubject\n                  ? 'Save Changes'\n                  : 'Create Subject'}\n            </Button>\n            <Button variant=\"outline\" onClick={() => setDrawerOpen(false)}>\n              Cancel\n            </Button>\n          </>\n        }\n      >\n        <div className=\"space-y-2\">\n          <CustomSelect\n            label={\n              <>\n                Branch <span className=\"text-destructive\">*</span>\n              </>\n            }\n            value={form.branchId}\n            onValueChange={(value) =>\n              setForm((prev) => ({ ...prev, branchId: value }))\n            }\n            items={[\n              { label: 'Select branch', value: '' },\n              ...(branches || []).map((b: Branch) => ({\n                label: b.name,\n                value: b.id,\n              })),\n            ]}\n          />\n        </div>\n\n        <div className=\"space-y-2 mt-5\">\n          <Label>\n            Name <span className=\"text-destructive\">*</span>\n          </Label>\n          <Input\n            placeholder=\"e.g. Mathematics\"\n            value={form.name}\n            onChange={(e) =>\n              setForm((prev) => ({ ...prev, name: e.target.value }))\n            }\n          />\n        </div>\n      </AppDrawer>\n\n      {/* Teacher Assignment Drawer */}\n      <AppDrawer\n        open={assignDrawerOpen}\n        onOpenChange={setAssignDrawerOpen}\n        title=\"Teacher Assignments\"\n        description={`Manage teacher assignments for ${managingSubjectName}`}\n        footer={\n          <Button variant=\"outline\" onClick={() => setAssignDrawerOpen(false)}>\n            Close\n          </Button>\n        }\n      >\n        <div className=\"space-y-6\">\n          {/* Assign form */}\n          <div className=\"space-y-4 rounded-md border p-4\">\n            <p className=\"text-sm font-medium\">Assign a Teacher</p>\n\n            <div className=\"space-y-2\">\n              <CustomSelect\n                label=\"Teacher\"\n                value={assignStaffId}\n                onValueChange={setAssignStaffId}\n                items={[\n                  { label: 'Select teacher', value: '' },\n                  ...(branchStaffs || []).map((s: Staff) => ({\n                    label: s.fullname,\n                    value: s.id,\n                  })),\n                ]}\n              />\n            </div>\n\n            <div className=\"space-y-2\">\n              <CustomSelect\n                label=\"Class\"\n                value={assignClassId}\n                onValueChange={setAssignClassId}\n                items={[\n                  { label: 'Select class', value: '' },\n                  ...(branchClasses || []).map((c: ClassItem) => ({\n                    label: c.name,\n                    value: c.id,\n                  })),\n                ]}\n              />\n            </div>\n\n            <div className=\"space-y-2\">\n              <Label>Days</Label>\n              <div className=\"flex flex-wrap gap-2\">\n                {WEEKDAYS.map((day) => (\n                  <button\n                    key={day}\n                    type=\"button\"\n                    onClick={() => toggleDay(day)}\n                    className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${\n                      assignDays.includes(day)\n                        ? 'border-primary bg-primary text-primary-foreground'\n                        : 'hover:bg-muted'\n                    }`}\n                  >\n                    {day.slice(0, 3)}\n                  </button>\n                ))}\n              </div>\n            </div>\n\n            <Button\n              size=\"sm\"\n              className=\"w-full\"\n              onClick={handleAssignTeacher}\n              disabled={\n                assignMutation.isPending ||\n                !assignStaffId ||\n                !assignClassId ||\n                assignDays.length === 0\n              }\n            >\n              {assignMutation.isPending ? 'Assigning...' : 'Assign Teacher'}\n            </Button>\n          </div>\n\n          {/* Current assigned teachers */}\n          <div className=\"space-y-2\">\n            <p className=\"text-sm font-medium\">\n              Current Assigned Teachers (\n              {subjectDetail?.subjectTeachers?.length ?? 0})\n            </p>\n\n            {subjectDetail?.subjectTeachers &&\n            subjectDetail.subjectTeachers.length > 0 ? (\n              <div className=\"space-y-2\">\n                {subjectDetail.subjectTeachers.map(\n                  (assignment: SubjectTeacherAssignment) => (\n                    <div\n                      key={assignment.id}\n                      className=\"flex items-start justify-between rounded-md border px-3 py-2\"\n                    >\n                      <div className=\"space-y-0.5\">\n                        <div className=\"text-sm font-medium\">\n                          {assignment.teacher.fullname}\n                        </div>\n                        <div className=\"text-muted-foreground text-xs\">\n                          {assignment.class.name}\n                          {assignment.class.level &&\n                            ` · ${assignment.class.level}`}\n                        </div>\n                        <div className=\"flex flex-wrap gap-1 pt-1\">\n                          {assignment.days.split(',').map((day) => (\n                            <Badge\n                              key={day}\n                              variant=\"outline\"\n                              className=\"text-[10px] px-1.5 py-0\"\n                            >\n                              {day.trim().slice(0, 3)}\n                            </Badge>\n                          ))}\n                        </div>\n                      </div>\n                      <Button\n                        variant=\"ghost\"\n                        size=\"sm\"\n                        className=\"h-7 text-xs text-destructive hover:text-destructive\"\n                        onClick={() => handleRemoveAssignment(assignment.id)}\n                        disabled={removeMutation.isPending}\n                      >\n                        Remove\n                      </Button>\n                    </div>\n                  ),\n                )}\n              </div>\n            ) : (\n              <p className=\"text-muted-foreground rounded-md border border-dashed px-3 py-6 text-center text-sm\">\n                No teacher assignments yet.\n              </p>\n            )}\n          </div>\n        </div>\n      </AppDrawer>\n\n      {/* View Drawer */}\n      <AppDrawer\n        open={viewDrawerOpen}\n        onOpenChange={setViewDrawerOpen}\n        title=\"Subject Details\"\n        description={`Full information for ${viewingSubject?.name}`}\n        footer={\n          <Button variant=\"outline\" onClick={() => setViewDrawerOpen(false)}>\n            Close\n          </Button>\n        }\n      >\n        {viewingSubject && (\n          <div className=\"space-y-6 pb-8\">\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Subject Name\n              </p>\n              <p className=\"text-base font-medium\">{viewingSubject.name}</p>\n            </div>\n            <div className=\"space-y-1\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Branch\n              </p>\n              <p className=\"text-sm\">{viewingSubject.branch?.name || '—'}</p>\n            </div>\n            <div className=\"space-y-1 rounded-lg border p-3\">\n              <p className=\"text-xs font-medium text-muted-foreground\">\n                Active Assigned Teachers\n              </p>\n              <p className=\"text-2xl font-bold\">\n                {viewingSubject._count?.subjectTeachers ?? 0}\n              </p>\n            </div>\n          </div>\n        )}\n      </AppDrawer>\n    </div>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\dashboard\\timetable.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\_authenticated\\route.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 9,
+        "column": 22,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 9,
+        "endColumn": 24,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [375, 377], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'\nimport { useEffect, useRef } from 'react'\nimport { useAuthStore } from '@repo/api'\nimport { getLoginUrl, isLocalDev } from '@/lib/subdomain'\nimport { toast } from '@/lib/toast'\n\nexport const Route = createFileRoute('/_authenticated')({\n  beforeLoad: ({ context, location }) => {\n    if (!context.auth?.isAuthenticated) {\n      const loginUrl = getLoginUrl()\n      if (!isLocalDev()) {\n        // Full cross-origin redirect to login portal\n        window.location.href = loginUrl\n        // Prevent further routing while redirect happens\n        throw redirect({ to: '/login' })\n      } else {\n        throw redirect({\n          to: '/login',\n          search: {\n            redirect: location.href,\n          },\n        })\n      }\n    }\n  },\n  component: RouteComponent,\n})\n\nfunction AuthGuard({ children }: { children: React.ReactNode }) {\n  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)\n  const hasRedirected = useRef(false)\n\n  useEffect(() => {\n    if (!isAuthenticated && !hasRedirected.current) {\n      hasRedirected.current = true\n\n      toast.warning('Session expired', {\n        description: 'You have been logged out. Redirecting to login...',\n      })\n\n      setTimeout(() => {\n        const loginUrl = getLoginUrl()\n        if (isLocalDev()) {\n          window.location.href = '/login'\n        } else {\n          window.location.href = loginUrl\n        }\n      }, 2000)\n    }\n  }, [isAuthenticated])\n\n  if (!isAuthenticated) {\n    return null\n  }\n\n  return <>{children}</>\n}\n\nfunction RouteComponent() {\n  return (\n    <AuthGuard>\n      <Outlet />\n    </AuthGuard>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\demo\\tanstack-query.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\index.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 5,
+        "column": 21,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 5,
+        "endColumn": 23,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [165, 167], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 1,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { createFileRoute, redirect } from '@tanstack/react-router'\n\nexport const Route = createFileRoute('/')({\n  beforeLoad: ({ context }) => {\n    if (context.auth?.isAuthenticated) {\n      throw redirect({ to: '/dashboard' })\n    }\n    throw redirect({ to: '/login' })\n  },\n})\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\list.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\routes\\redirect.tsx",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 59,
+        "column": 18,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 59,
+        "endColumn": 20,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [2026, 2028], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      },
+      {
+        "ruleId": "@typescript-eslint/no-unnecessary-condition",
+        "severity": 2,
+        "message": "Unnecessary optional chain on a non-nullish value.",
+        "line": 59,
+        "column": 28,
+        "nodeType": "MemberExpression",
+        "messageId": "neverOptionalChain",
+        "endLine": 59,
+        "endColumn": 30,
+        "suggestions": [
+          {
+            "messageId": "suggestRemoveOptionalChain",
+            "fix": { "range": [2036, 2038], "text": "." },
+            "desc": "Remove unnecessary optional chain"
+          }
+        ]
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 2,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "import { createFileRoute, useNavigate } from '@tanstack/react-router'\nimport { useEffect, useState } from 'react'\nimport { useAuthStore } from '@repo/api'\nimport { profileApi } from '@/hooks/api/profile.api'\nimport { useQueryClient } from '@tanstack/react-query'\nimport { profileKeys } from '@/hooks/queries/profile.queries'\nimport { getLoginUrl, isLocalDev } from '@/lib/subdomain'\nimport { Loader2, Sparkles } from 'lucide-react'\n\nexport const Route = createFileRoute('/redirect')({\n  component: RedirectPage,\n})\n\nfunction RedirectPage() {\n  const navigate = useNavigate()\n  const queryClient = useQueryClient()\n  const [status, setStatus] = useState<\n    'hydrating' | 'loading' | 'ready' | 'error'\n  >('hydrating')\n  const [userName, setUserName] = useState('')\n\n  useEffect(() => {\n    async function handleRedirect() {\n      try {\n        // Step 1: Hydrate auth from URL params if present\n        const params = new URLSearchParams(window.location.search)\n        const authParam = params.get('auth')\n\n        if (authParam) {\n          const authData = JSON.parse(atob(decodeURIComponent(authParam)))\n          const store = useAuthStore.getState()\n          store.login({\n            user: authData.user,\n            token: authData.token,\n            refreshToken: authData.refreshToken,\n          })\n\n          // Clean the URL\n          window.history.replaceState({}, '', '/redirect')\n        }\n\n        // Verify we actually have auth state\n        const store = useAuthStore.getState()\n        if (!store.isAuthenticated || !store.token) {\n          const loginUrl = getLoginUrl()\n          window.location.href = loginUrl\n          return\n        }\n\n        // Step 2: Fetch user profile\n        setStatus('loading')\n        const profile = await profileApi.getProfile()\n\n        // Pre-fill the query cache so the dashboard doesn't re-fetch\n        queryClient.setQueryData(profileKeys.all, profile)\n\n        // Extract the user's first name for the welcome message\n        const firstName =\n          profile?.fullname?.split(' ')[0] ||\n          (store.user as any)?.fullname?.split(' ')[0] ||\n          ''\n        setUserName(firstName)\n\n        // Step 3: Brief pause for the welcome message to be visible\n        setStatus('ready')\n        await new Promise((r) => setTimeout(r, 1500))\n\n        // Step 4: Navigate to dashboard\n        navigate({ to: '/dashboard', replace: true })\n      } catch (err) {\n        console.error('Redirect failed:', err)\n        setStatus('error')\n\n        // Wait a moment then redirect to login\n        setTimeout(() => {\n          const loginUrl = getLoginUrl()\n          if (!isLocalDev()) {\n            window.location.href = loginUrl\n          } else {\n            navigate({ to: '/login', replace: true })\n          }\n        }, 2000)\n      }\n    }\n\n    handleRedirect()\n  }, [navigate, queryClient])\n\n  return (\n    <div className=\"min-h-screen flex flex-col items-center justify-center bg-background relative overflow-hidden\">\n      {/* Subtle animated background gradient */}\n      <div className=\"absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-primary/10 animate-pulse\" />\n\n      <div className=\"relative z-10 flex flex-col items-center gap-6 text-center px-6\">\n        {/* Animated icon */}\n        <div className=\"relative\">\n          <div className=\"h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center\">\n            {status === 'error' ? (\n              <span className=\"text-2xl\">⚠️</span>\n            ) : (\n              <Sparkles className=\"h-8 w-8 text-primary animate-pulse\" />\n            )}\n          </div>\n        </div>\n\n        {/* Status messages */}\n        <div className=\"space-y-2\">\n          {status === 'hydrating' && (\n            <>\n              <h2 className=\"text-xl font-semibold text-foreground\">\n                Signing you in...\n              </h2>\n              <p className=\"text-sm text-muted-foreground\">\n                Verifying your credentials\n              </p>\n            </>\n          )}\n\n          {status === 'loading' && (\n            <>\n              <h2 className=\"text-xl font-semibold text-foreground\">\n                Welcome back{userName ? `, ${userName}` : ''}! 👋\n              </h2>\n              <p className=\"text-sm text-muted-foreground\">\n                We're personalizing your dashboard...\n              </p>\n            </>\n          )}\n\n          {status === 'ready' && (\n            <>\n              <h2 className=\"text-xl font-semibold text-foreground\">\n                All set{userName ? `, ${userName}` : ''}! 🎉\n              </h2>\n              <p className=\"text-sm text-muted-foreground\">\n                Taking you to your dashboard now\n              </p>\n            </>\n          )}\n\n          {status === 'error' && (\n            <>\n              <h2 className=\"text-xl font-semibold text-foreground\">\n                Something went wrong\n              </h2>\n              <p className=\"text-sm text-muted-foreground\">\n                Redirecting you to login...\n              </p>\n            </>\n          )}\n        </div>\n\n        {/* Loading spinner */}\n        {status !== 'error' && (\n          <Loader2 className=\"h-5 w-5 animate-spin text-muted-foreground\" />\n        )}\n      </div>\n    </div>\n  )\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\src\\types\\naija-state-local-government.d.ts",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/method-signature-style",
+        "severity": 2,
+        "message": "Shorthand method signature is forbidden. Use a function property instead.",
+        "line": 9,
+        "column": 5,
+        "nodeType": "TSMethodSignature",
+        "messageId": "errorMethod",
+        "endLine": 9,
+        "endColumn": 28
+      },
+      {
+        "ruleId": "@typescript-eslint/method-signature-style",
+        "severity": 2,
+        "message": "Shorthand method signature is forbidden. Use a function property instead.",
+        "line": 10,
+        "column": 5,
+        "nodeType": "TSMethodSignature",
+        "messageId": "errorMethod",
+        "endLine": 10,
+        "endColumn": 50
+      },
+      {
+        "ruleId": "@typescript-eslint/method-signature-style",
+        "severity": 2,
+        "message": "Shorthand method signature is forbidden. Use a function property instead.",
+        "line": 11,
+        "column": 5,
+        "nodeType": "TSMethodSignature",
+        "messageId": "errorMethod",
+        "endLine": 11,
+        "endColumn": 49
+      },
+      {
+        "ruleId": "@typescript-eslint/method-signature-style",
+        "severity": 2,
+        "message": "Shorthand method signature is forbidden. Use a function property instead.",
+        "line": 12,
+        "column": 5,
+        "nodeType": "TSMethodSignature",
+        "messageId": "errorMethod",
+        "endLine": 12,
+        "endColumn": 31
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 4,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "declare module 'naija-state-local-government' {\n  interface StateDetails {\n    state: string\n    lgas: Array<string>\n    senatorial_districts?: Array<string>\n  }\n\n  interface NaijaStates {\n    states(): Array<string>\n    lgas(state: string): StateDetails | undefined\n    lga(state: string): StateDetails | undefined\n    all(): Array<StateDetails>\n  }\n\n  const NaijaStates: NaijaStates\n  export default NaijaStates\n\n  export function states(): Array<string>\n  export function lgas(state: string): StateDetails | undefined\n  export function lga(state: string): StateDetails | undefined\n  export function all(): Array<StateDetails>\n}\n",
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "C:\\Users\\OLATILEWA\\OneDrive\\Documents\\dev\\work\\edu\\apps\\schola-school-web\\vite.config.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  }
+]
