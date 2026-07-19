@@ -2,7 +2,7 @@ FROM oven/bun:latest AS builder
 WORKDIR /app
 
 # Install dependencies
-COPY package.json bun.lock ./
+COPY package.json bun.lockb* bun.lock* ./
 RUN bun install
 
 # Copy source and build

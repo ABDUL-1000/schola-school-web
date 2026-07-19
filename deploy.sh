@@ -2,7 +2,7 @@
 set -e
 
 # Default values if arguments are not provided
-TARGET_DIR=${1:-"/home/edumatrixapi/htdocs/school-web"}
+TARGET_DIR=${1:-"/home/edumatrixapi/htdocs/schola-school-web"}
 DOCKER_NAME=${2:-"school-web"}
 IMAGE_NAME=${3:-"schola-school-web:latest"}
 TAR_FILE=${4:-"school-web-prod.tar"}

@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "school-web-prod.tar,docker-compose.yml,deploy.sh"
-          target: "/home/edumatrixapi/htdocs/school-web"
+          target: "/home/edumatrixapi/htdocs/schola-school-web"
 
       - name: Load and Run on VPS
         uses: appleboy/ssh-action@v1.0.3
@@ -36,8 +36,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            chmod +x /home/edumatrixapi/htdocs/school-web/deploy.sh
-            /home/edumatrixapi/htdocs/school-web/deploy.sh "/home/edumatrixapi/htdocs/school-web" "school-web" "schola-school-web:latest" "school-web-prod.tar"
+            chmod +x /home/edumatrixapi/htdocs/schola-school-web/deploy.sh
+            /home/edumatrixapi/htdocs/schola-school-web/deploy.sh "/home/edumatrixapi/htdocs/schola-school-web" "school-web" "schola-school-web:latest" "school-web-prod.tar"
 
   cleanup-production:
     needs: deploy-production
@@ -59,4 +59,4 @@ jobs:
             docker builder prune --filter until=24h -f
 
             echo "Removing any leftover tar files..."
-            find /home/edumatrixapi/htdocs/school-web -name "*.tar" -delete
+            find /home/edumatrixapi/htdocs/schola-school-web -name "*.tar" -delete
