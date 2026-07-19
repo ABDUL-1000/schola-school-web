@@ -7,8 +7,6 @@ RUN bun install
 
 # Copy source and build
 COPY . .
-ARG VITE_API_BASE_URL
-ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 RUN bun run build
 
 # Serve Stage

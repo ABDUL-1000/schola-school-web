@@ -1,6 +1,7 @@
+Dockerfile
+.dockerignore
 node_modules
+npm-debug.log
+README.md
 dist
 .git
-.github
-.env
-.DS_Store
