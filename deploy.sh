@@ -20,3 +20,10 @@ echo "Managing Docker container '$DOCKER_NAME'..."
 DOCKER_NAME=$DOCKER_NAME IMAGE_NAME=$IMAGE_NAME docker compose -p $DOCKER_NAME up -d
 
 echo "Deployed successfully"
+
+
+echo "Cleaning up dangling images..."
+docker image prune -f || true
+
+echo "Clearing build cache older than 24h..."
+docker builder prune --filter until=24h -f || true

@@ -16,7 +16,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t schola-school-web:latest -f Dockerfile .
+          docker build -t schola-school-web:latest -f Dockerfile --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} .
           docker save -o school-web-prod.tar schola-school-web:latest
           sudo chmod 666 school-web-prod.tar
 
@@ -24,6 +24,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "school-web-prod.tar,docker-compose.yml,deploy.sh"
@@ -33,30 +34,9 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             chmod +x /home/edumatrixapi/htdocs/schola-school-web/deploy.sh
             /home/edumatrixapi/htdocs/schola-school-web/deploy.sh "/home/edumatrixapi/htdocs/schola-school-web" "school-web" "schola-school-web:latest" "school-web-prod.tar"
-
-  cleanup-production:
-    needs: deploy-production
-    runs-on: ubuntu-latest
-    continue-on-error: true
-
-    steps:
-      - name: Prune old images and build cache on VPS
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "Removing dangling images..."
-            docker image prune -f
-
-            echo "Clearing build cache older than 24h..."
-            docker builder prune --filter until=24h -f
-
-            echo "Removing any leftover tar files..."
-            find /home/edumatrixapi/htdocs/schola-school-web -name "*.tar" -delete
