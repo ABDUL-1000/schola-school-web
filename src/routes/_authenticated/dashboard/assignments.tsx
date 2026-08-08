@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import {
   useAssignmentsQuery,
   useAssignmentMetricsQuery,
@@ -161,13 +161,12 @@ function AssignmentsPage() {
             variant="ghost"
             size="icon"
             className="size-8"
-            onClick={() => {
-              setViewingAssignmentId(row.original.id)
-              setViewDrawerOpen(true)
-            }}
+            asChild
             title="View details"
           >
-            <Eye className="size-4 text-muted-foreground hover:text-foreground" />
+            <Link to={`/dashboard/assignments/${row.original.id}`}>
+              <Eye className="size-4 text-muted-foreground hover:text-foreground" />
+            </Link>
           </Button>
           {!row.original.isVerified && row.original.status === 'PUBLISHED' && (
              <Button

@@ -20,7 +20,7 @@ export interface PaginationMetadata {
 
 export interface PaginatedResponse<T> {
   pagination: PaginationMetadata;
-  data: T[];
+  data: Array<T>;
 }
 
 export interface BaseUser {
@@ -55,7 +55,7 @@ export interface School extends BaseUser {
   schoolName: string;
   slug: string;
   schoolType: SchoolType | null;
-  schoolCategory?: ("NURSERY" | "PRIMARY" | "SECONDARY" | "COMBINED")[] | null;
+  schoolCategory?: Array<("NURSERY" | "PRIMARY" | "SECONDARY" | "COMBINED")> | null;
   curriculumType?: "NIGERIAN" | "BRITISH" | "AMERICAN" | "MIXED" | null;
   address: string | null;
   logo: string | null;
@@ -169,8 +169,8 @@ export interface ExamQuestion {
     | "FILE_UPLOAD";
   allocatedScore: string | number;
   orderIndex: number;
-  options: ExamOption[];
-  attachments: ExamAttachment[];
+  options: Array<ExamOption>;
+  attachments: Array<ExamAttachment>;
 }
 
 export interface ExamSection {
@@ -181,7 +181,7 @@ export interface ExamSection {
   orderIndex: number;
   answerAll: boolean;
   maxQuestionsToAnswer?: number | null;
-  questions: ExamQuestion[];
+  questions: Array<ExamQuestion>;
 }
 
 export interface QuestionOption {
@@ -209,8 +209,8 @@ export interface Question {
   orderIndex: number;
   createdAt: string;
   updatedAt: string;
-  options?: QuestionOption[];
-  attachments?: any[]; // For now, can refine later
+  options?: Array<QuestionOption>;
+  attachments?: Array<any>; // For now, can refine later
 }
 
 export type ExamType = "TEST" | "QUIZ" | "FINAL";
@@ -234,8 +234,8 @@ export interface Exam {
   isVerified: boolean;
   createdAt: string;
   updatedAt: string;
-  questions?: Question[]; // Legacy/Simple
-  sections?: ExamSection[]; // New Nested Structure
+  questions?: Array<Question>; // Legacy/Simple
+  sections?: Array<ExamSection>; // New Nested Structure
   teacher?: {
     fullname: string;
   };
@@ -284,8 +284,8 @@ export interface Assignment {
   isVerified: boolean;
   createdAt: string;
   updatedAt: string;
-  sections?: ExamSection[]; // Reusing ExamSection structure as they are identical in DB
-  questions?: Question[];
+  sections?: Array<ExamSection>; // Reusing ExamSection structure as they are identical in DB
+  questions?: Array<Question>;
   class?: {
     name: string;
   };
@@ -374,8 +374,8 @@ export interface Staff extends BaseUser {
   branch?: {
     name: string;
   };
-  managedClasses?: ClassLead[];
-  subjectAssignments?: SubjectAssignment[];
+  managedClasses?: Array<ClassLead>;
+  subjectAssignments?: Array<SubjectAssignment>;
 }
 
 export interface CreateStaffDTO {

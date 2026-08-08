@@ -67,11 +67,11 @@ function LoginPage() {
       const data = await promise
 
       // Redirect to slug subdomain with auth tokens
-      const slug = data.slug
+      const slug = data.school?.slug || data.slug
       if (slug && !isLocalDev()) {
         const authPayload = btoa(
           JSON.stringify({
-            user: { ...data, role: 'SCHOOL' },
+            user: { ...(data.school || data), role: 'SCHOOL' },
             token: data.tokens.accessToken,
             refreshToken: data.tokens.refreshToken,
           }),

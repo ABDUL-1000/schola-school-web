@@ -87,6 +87,10 @@ const data = {
           title: 'Lesson Notes',
           url: '/dashboard/lesson-notes',
         },
+        {
+          title: 'Assessments Config',
+          url: '/dashboard/academics/assessments-config',
+        },
       ],
     },
     {

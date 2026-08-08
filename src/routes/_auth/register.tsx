@@ -21,6 +21,8 @@ import { useRegistrationStore } from '@/hooks/stores/registration.store'
 import { toast } from '@/lib/toast'
 import React, { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { buildSlugUrl, isLocalDev } from '@/lib/subdomain'
+import { useAuthStore } from '@/api'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { AuthPasswordField } from '@/components/auth/auth-password-field'
 import {
@@ -193,7 +195,23 @@ function RegistrationPage() {
       resetRegistration()
       sessionStorage.removeItem('edu-registration-storage')
       
-      navigate({ to: '/onboarding/profile' })
+      const slug = result.school?.slug || result.slug
+      if (slug && !isLocalDev()) {
+        const authPayload = btoa(
+          JSON.stringify({
+            user: { ...(result.school || result), role: 'SCHOOL' },
+            token: result.tokens.accessToken,
+            refreshToken: result.tokens.refreshToken,
+          }),
+        )
+        window.location.href = buildSlugUrl(
+          slug,
+          `/redirect?auth=${encodeURIComponent(authPayload)}&onboarding=true`,
+        )
+        useAuthStore.getState().logout()
+      } else {
+        navigate({ to: '/onboarding/profile' })
+      }
     } catch (error: any) {
       setOtpStatus('error')
       console.error('Failed to verify OTP', error)

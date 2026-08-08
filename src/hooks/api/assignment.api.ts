@@ -84,3 +84,16 @@ export const approveAssignment = async (id: string) => {
   return data
 }
 
+export const getAssignmentSubmissions = async (assignmentId: string) => {
+  const { data } = await api.get<ApiResponse<any>>(
+    `/school/assignment/${assignmentId}/submissions`,
+  )
+  return data.data
+}
+
+export const getSubmissionById = async (attemptId: string) => {
+  const { data } = await api.get<ApiResponse<any>>(
+    `/school/assignment/attempt/${attemptId}`,
+  )
+  return data.data
+}

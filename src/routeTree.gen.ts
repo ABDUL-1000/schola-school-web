@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as RedirectRouteImport } from './routes/redirect'
 import { Route as ListRouteImport } from './routes/list'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -45,13 +46,21 @@ import { Route as AuthenticatedDashboardHrPayrollRouteImport } from './routes/_a
 import { Route as AuthenticatedDashboardHrLeavesRouteImport } from './routes/_authenticated/dashboard/hr.leaves'
 import { Route as AuthenticatedDashboardAttendanceStudentsRouteImport } from './routes/_authenticated/dashboard/attendance/students'
 import { Route as AuthenticatedDashboardAttendanceStaffRouteImport } from './routes/_authenticated/dashboard/attendance/staff'
+import { Route as AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport } from './routes/_authenticated/dashboard/academics.assessments-config'
 import { Route as AuthenticatedDashboardStudentsStudentIdIndexRouteImport } from './routes/_authenticated/dashboard/students/$studentId.index'
 import { Route as AuthenticatedDashboardStaffStaffIdIndexRouteImport } from './routes/_authenticated/dashboard/staff/$staffId.index'
 import { Route as AuthenticatedDashboardLessonNotesIdIndexRouteImport } from './routes/_authenticated/dashboard/lesson-notes.$id.index'
+import { Route as AuthenticatedDashboardAssignmentsAssignmentIdIndexRouteImport } from './routes/_authenticated/dashboard/assignments.$assignmentId.index'
 import { Route as AuthenticatedDashboardStudentsStudentIdEditRouteImport } from './routes/_authenticated/dashboard/students/$studentId.edit'
 import { Route as AuthenticatedDashboardStaffStaffIdEditRouteImport } from './routes/_authenticated/dashboard/staff/$staffId.edit'
 import { Route as AuthenticatedDashboardLessonNotesIdEditRouteImport } from './routes/_authenticated/dashboard/lesson-notes.$id.edit'
+import { Route as AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport } from './routes/_authenticated/dashboard/assignments.attempt.$attemptId'
 
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RedirectRoute = RedirectRouteImport.update({
   id: '/redirect',
   path: '/redirect',
@@ -257,6 +266,12 @@ const AuthenticatedDashboardAttendanceStaffRoute =
     path: '/attendance/staff',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const AuthenticatedDashboardAcademicsAssessmentsConfigRoute =
+  AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport.update({
+    id: '/academics/assessments-config',
+    path: '/academics/assessments-config',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
 const AuthenticatedDashboardStudentsStudentIdIndexRoute =
   AuthenticatedDashboardStudentsStudentIdIndexRouteImport.update({
     id: '/students/$studentId/',
@@ -274,6 +289,12 @@ const AuthenticatedDashboardLessonNotesIdIndexRoute =
     id: '/lesson-notes/$id/',
     path: '/lesson-notes/$id/',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute =
+  AuthenticatedDashboardAssignmentsAssignmentIdIndexRouteImport.update({
+    id: '/$assignmentId/',
+    path: '/$assignmentId/',
+    getParentRoute: () => AuthenticatedDashboardAssignmentsRoute,
   } as any)
 const AuthenticatedDashboardStudentsStudentIdEditRoute =
   AuthenticatedDashboardStudentsStudentIdEditRouteImport.update({
@@ -293,11 +314,18 @@ const AuthenticatedDashboardLessonNotesIdEditRoute =
     path: '/lesson-notes/$id/edit',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute =
+  AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport.update({
+    id: '/attempt/$attemptId',
+    path: '/attempt/$attemptId',
+    getParentRoute: () => AuthenticatedDashboardAssignmentsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/list': typeof ListRoute
   '/redirect': typeof RedirectRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
   '/onboarding': typeof AuthenticatedOnboardingRouteRouteWithChildren
   '/forgot-password': typeof AuthForgotPasswordRoute
@@ -305,7 +333,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof AuthRegisterRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/dashboard/announcements': typeof AuthenticatedDashboardAnnouncementsRoute
-  '/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRoute
+  '/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   '/dashboard/branches': typeof AuthenticatedDashboardBranchesRoute
   '/dashboard/classes': typeof AuthenticatedDashboardClassesRoute
   '/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
@@ -320,6 +348,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/branch': typeof AuthenticatedOnboardingBranchRoute
   '/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/academics/assessments-config': typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
   '/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
   '/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
@@ -329,9 +358,11 @@ export interface FileRoutesByFullPath {
   '/dashboard/lesson-notes/': typeof AuthenticatedDashboardLessonNotesIndexRoute
   '/dashboard/staff/': typeof AuthenticatedDashboardStaffIndexRoute
   '/dashboard/students/': typeof AuthenticatedDashboardStudentsIndexRoute
+  '/dashboard/assignments/attempt/$attemptId': typeof AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute
   '/dashboard/lesson-notes/$id/edit': typeof AuthenticatedDashboardLessonNotesIdEditRoute
   '/dashboard/staff/$staffId/edit': typeof AuthenticatedDashboardStaffStaffIdEditRoute
   '/dashboard/students/$studentId/edit': typeof AuthenticatedDashboardStudentsStudentIdEditRoute
+  '/dashboard/assignments/$assignmentId/': typeof AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute
   '/dashboard/lesson-notes/$id/': typeof AuthenticatedDashboardLessonNotesIdIndexRoute
   '/dashboard/staff/$staffId/': typeof AuthenticatedDashboardStaffStaffIdIndexRoute
   '/dashboard/students/$studentId/': typeof AuthenticatedDashboardStudentsStudentIdIndexRoute
@@ -340,13 +371,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/list': typeof ListRoute
   '/redirect': typeof RedirectRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/onboarding': typeof AuthenticatedOnboardingRouteRouteWithChildren
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/dashboard/announcements': typeof AuthenticatedDashboardAnnouncementsRoute
-  '/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRoute
+  '/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   '/dashboard/branches': typeof AuthenticatedDashboardBranchesRoute
   '/dashboard/classes': typeof AuthenticatedDashboardClassesRoute
   '/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
@@ -361,6 +393,7 @@ export interface FileRoutesByTo {
   '/onboarding/branch': typeof AuthenticatedOnboardingBranchRoute
   '/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/academics/assessments-config': typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
   '/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
   '/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
@@ -370,9 +403,11 @@ export interface FileRoutesByTo {
   '/dashboard/lesson-notes': typeof AuthenticatedDashboardLessonNotesIndexRoute
   '/dashboard/staff': typeof AuthenticatedDashboardStaffIndexRoute
   '/dashboard/students': typeof AuthenticatedDashboardStudentsIndexRoute
+  '/dashboard/assignments/attempt/$attemptId': typeof AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute
   '/dashboard/lesson-notes/$id/edit': typeof AuthenticatedDashboardLessonNotesIdEditRoute
   '/dashboard/staff/$staffId/edit': typeof AuthenticatedDashboardStaffStaffIdEditRoute
   '/dashboard/students/$studentId/edit': typeof AuthenticatedDashboardStudentsStudentIdEditRoute
+  '/dashboard/assignments/$assignmentId': typeof AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute
   '/dashboard/lesson-notes/$id': typeof AuthenticatedDashboardLessonNotesIdIndexRoute
   '/dashboard/staff/$staffId': typeof AuthenticatedDashboardStaffStaffIdIndexRoute
   '/dashboard/students/$studentId': typeof AuthenticatedDashboardStudentsStudentIdIndexRoute
@@ -384,6 +419,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/list': typeof ListRoute
   '/redirect': typeof RedirectRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRouteRouteWithChildren
   '/_auth/forgot-password': typeof AuthForgotPasswordRoute
@@ -391,7 +427,7 @@ export interface FileRoutesById {
   '/_auth/register': typeof AuthRegisterRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/_authenticated/dashboard/announcements': typeof AuthenticatedDashboardAnnouncementsRoute
-  '/_authenticated/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRoute
+  '/_authenticated/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   '/_authenticated/dashboard/branches': typeof AuthenticatedDashboardBranchesRoute
   '/_authenticated/dashboard/classes': typeof AuthenticatedDashboardClassesRoute
   '/_authenticated/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
@@ -406,6 +442,7 @@ export interface FileRoutesById {
   '/_authenticated/onboarding/branch': typeof AuthenticatedOnboardingBranchRoute
   '/_authenticated/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/dashboard/academics/assessments-config': typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
   '/_authenticated/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/_authenticated/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
   '/_authenticated/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
@@ -415,9 +452,11 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/lesson-notes/': typeof AuthenticatedDashboardLessonNotesIndexRoute
   '/_authenticated/dashboard/staff/': typeof AuthenticatedDashboardStaffIndexRoute
   '/_authenticated/dashboard/students/': typeof AuthenticatedDashboardStudentsIndexRoute
+  '/_authenticated/dashboard/assignments/attempt/$attemptId': typeof AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute
   '/_authenticated/dashboard/lesson-notes/$id/edit': typeof AuthenticatedDashboardLessonNotesIdEditRoute
   '/_authenticated/dashboard/staff/$staffId/edit': typeof AuthenticatedDashboardStaffStaffIdEditRoute
   '/_authenticated/dashboard/students/$studentId/edit': typeof AuthenticatedDashboardStudentsStudentIdEditRoute
+  '/_authenticated/dashboard/assignments/$assignmentId/': typeof AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute
   '/_authenticated/dashboard/lesson-notes/$id/': typeof AuthenticatedDashboardLessonNotesIdIndexRoute
   '/_authenticated/dashboard/staff/$staffId/': typeof AuthenticatedDashboardStaffStaffIdIndexRoute
   '/_authenticated/dashboard/students/$studentId/': typeof AuthenticatedDashboardStudentsStudentIdIndexRoute
@@ -428,6 +467,7 @@ export interface FileRouteTypes {
     | '/'
     | '/list'
     | '/redirect'
+    | '/unauthorized'
     | '/dashboard'
     | '/onboarding'
     | '/forgot-password'
@@ -450,6 +490,7 @@ export interface FileRouteTypes {
     | '/onboarding/branch'
     | '/onboarding/profile'
     | '/dashboard/'
+    | '/dashboard/academics/assessments-config'
     | '/dashboard/attendance/staff'
     | '/dashboard/attendance/students'
     | '/dashboard/hr/leaves'
@@ -459,9 +500,11 @@ export interface FileRouteTypes {
     | '/dashboard/lesson-notes/'
     | '/dashboard/staff/'
     | '/dashboard/students/'
+    | '/dashboard/assignments/attempt/$attemptId'
     | '/dashboard/lesson-notes/$id/edit'
     | '/dashboard/staff/$staffId/edit'
     | '/dashboard/students/$studentId/edit'
+    | '/dashboard/assignments/$assignmentId/'
     | '/dashboard/lesson-notes/$id/'
     | '/dashboard/staff/$staffId/'
     | '/dashboard/students/$studentId/'
@@ -470,6 +513,7 @@ export interface FileRouteTypes {
     | '/'
     | '/list'
     | '/redirect'
+    | '/unauthorized'
     | '/onboarding'
     | '/forgot-password'
     | '/login'
@@ -491,6 +535,7 @@ export interface FileRouteTypes {
     | '/onboarding/branch'
     | '/onboarding/profile'
     | '/dashboard'
+    | '/dashboard/academics/assessments-config'
     | '/dashboard/attendance/staff'
     | '/dashboard/attendance/students'
     | '/dashboard/hr/leaves'
@@ -500,9 +545,11 @@ export interface FileRouteTypes {
     | '/dashboard/lesson-notes'
     | '/dashboard/staff'
     | '/dashboard/students'
+    | '/dashboard/assignments/attempt/$attemptId'
     | '/dashboard/lesson-notes/$id/edit'
     | '/dashboard/staff/$staffId/edit'
     | '/dashboard/students/$studentId/edit'
+    | '/dashboard/assignments/$assignmentId'
     | '/dashboard/lesson-notes/$id'
     | '/dashboard/staff/$staffId'
     | '/dashboard/students/$studentId'
@@ -513,6 +560,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/list'
     | '/redirect'
+    | '/unauthorized'
     | '/_authenticated/dashboard'
     | '/_authenticated/onboarding'
     | '/_auth/forgot-password'
@@ -535,6 +583,7 @@ export interface FileRouteTypes {
     | '/_authenticated/onboarding/branch'
     | '/_authenticated/onboarding/profile'
     | '/_authenticated/dashboard/'
+    | '/_authenticated/dashboard/academics/assessments-config'
     | '/_authenticated/dashboard/attendance/staff'
     | '/_authenticated/dashboard/attendance/students'
     | '/_authenticated/dashboard/hr/leaves'
@@ -544,9 +593,11 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/lesson-notes/'
     | '/_authenticated/dashboard/staff/'
     | '/_authenticated/dashboard/students/'
+    | '/_authenticated/dashboard/assignments/attempt/$attemptId'
     | '/_authenticated/dashboard/lesson-notes/$id/edit'
     | '/_authenticated/dashboard/staff/$staffId/edit'
     | '/_authenticated/dashboard/students/$studentId/edit'
+    | '/_authenticated/dashboard/assignments/$assignmentId/'
     | '/_authenticated/dashboard/lesson-notes/$id/'
     | '/_authenticated/dashboard/staff/$staffId/'
     | '/_authenticated/dashboard/students/$studentId/'
@@ -558,11 +609,19 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   ListRoute: typeof ListRoute
   RedirectRoute: typeof RedirectRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/unauthorized': {
+      id: '/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/redirect': {
       id: '/redirect'
       path: '/redirect'
@@ -815,6 +874,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAttendanceStaffRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
+    '/_authenticated/dashboard/academics/assessments-config': {
+      id: '/_authenticated/dashboard/academics/assessments-config'
+      path: '/academics/assessments-config'
+      fullPath: '/dashboard/academics/assessments-config'
+      preLoaderRoute: typeof AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
     '/_authenticated/dashboard/students/$studentId/': {
       id: '/_authenticated/dashboard/students/$studentId/'
       path: '/students/$studentId'
@@ -835,6 +901,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/lesson-notes/$id/'
       preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIdIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/assignments/$assignmentId/': {
+      id: '/_authenticated/dashboard/assignments/$assignmentId/'
+      path: '/$assignmentId'
+      fullPath: '/dashboard/assignments/$assignmentId/'
+      preLoaderRoute: typeof AuthenticatedDashboardAssignmentsAssignmentIdIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardAssignmentsRoute
     }
     '/_authenticated/dashboard/students/$studentId/edit': {
       id: '/_authenticated/dashboard/students/$studentId/edit'
@@ -857,6 +930,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIdEditRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
+    '/_authenticated/dashboard/assignments/attempt/$attemptId': {
+      id: '/_authenticated/dashboard/assignments/attempt/$attemptId'
+      path: '/attempt/$attemptId'
+      fullPath: '/dashboard/assignments/attempt/$attemptId'
+      preLoaderRoute: typeof AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardAssignmentsRoute
+    }
   }
 }
 
@@ -876,9 +956,27 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
+interface AuthenticatedDashboardAssignmentsRouteChildren {
+  AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute: typeof AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute
+  AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute: typeof AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute
+}
+
+const AuthenticatedDashboardAssignmentsRouteChildren: AuthenticatedDashboardAssignmentsRouteChildren =
+  {
+    AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute:
+      AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute,
+    AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute:
+      AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute,
+  }
+
+const AuthenticatedDashboardAssignmentsRouteWithChildren =
+  AuthenticatedDashboardAssignmentsRoute._addFileChildren(
+    AuthenticatedDashboardAssignmentsRouteChildren,
+  )
+
 interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardAnnouncementsRoute: typeof AuthenticatedDashboardAnnouncementsRoute
-  AuthenticatedDashboardAssignmentsRoute: typeof AuthenticatedDashboardAssignmentsRoute
+  AuthenticatedDashboardAssignmentsRoute: typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   AuthenticatedDashboardBranchesRoute: typeof AuthenticatedDashboardBranchesRoute
   AuthenticatedDashboardClassesRoute: typeof AuthenticatedDashboardClassesRoute
   AuthenticatedDashboardDepartmentsRoute: typeof AuthenticatedDashboardDepartmentsRoute
@@ -890,6 +988,7 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardSubjectsRoute: typeof AuthenticatedDashboardSubjectsRoute
   AuthenticatedDashboardTimetableRoute: typeof AuthenticatedDashboardTimetableRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+  AuthenticatedDashboardAcademicsAssessmentsConfigRoute: typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
   AuthenticatedDashboardAttendanceStaffRoute: typeof AuthenticatedDashboardAttendanceStaffRoute
   AuthenticatedDashboardAttendanceStudentsRoute: typeof AuthenticatedDashboardAttendanceStudentsRoute
   AuthenticatedDashboardHrLeavesRoute: typeof AuthenticatedDashboardHrLeavesRoute
@@ -912,7 +1011,7 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
     AuthenticatedDashboardAnnouncementsRoute:
       AuthenticatedDashboardAnnouncementsRoute,
     AuthenticatedDashboardAssignmentsRoute:
-      AuthenticatedDashboardAssignmentsRoute,
+      AuthenticatedDashboardAssignmentsRouteWithChildren,
     AuthenticatedDashboardBranchesRoute: AuthenticatedDashboardBranchesRoute,
     AuthenticatedDashboardClassesRoute: AuthenticatedDashboardClassesRoute,
     AuthenticatedDashboardDepartmentsRoute:
@@ -925,6 +1024,8 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
     AuthenticatedDashboardSubjectsRoute: AuthenticatedDashboardSubjectsRoute,
     AuthenticatedDashboardTimetableRoute: AuthenticatedDashboardTimetableRoute,
     AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+    AuthenticatedDashboardAcademicsAssessmentsConfigRoute:
+      AuthenticatedDashboardAcademicsAssessmentsConfigRoute,
     AuthenticatedDashboardAttendanceStaffRoute:
       AuthenticatedDashboardAttendanceStaffRoute,
     AuthenticatedDashboardAttendanceStudentsRoute:
@@ -998,6 +1099,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   ListRoute: ListRoute,
   RedirectRoute: RedirectRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }
 export const routeTree = rootRouteImport

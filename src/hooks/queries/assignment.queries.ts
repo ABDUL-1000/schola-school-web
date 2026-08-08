@@ -4,6 +4,8 @@ import {
   getAssignmentMetrics,
   getAssignmentById,
   approveAssignment,
+  getAssignmentSubmissions,
+  getSubmissionById,
   type GetAssignmentsParams,
 } from '../api/assignment.api'
 
@@ -47,5 +49,21 @@ export function useApproveAssignmentMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: assignmentKeys.all })
     },
+  })
+}
+
+export function useAssignmentSubmissionsQuery(assignmentId: string) {
+  return useQuery({
+    queryKey: [...assignmentKeys.all, 'submissions', assignmentId],
+    queryFn: () => getAssignmentSubmissions(assignmentId),
+    enabled: !!assignmentId,
+  })
+}
+
+export function useSubmissionByIdQuery(attemptId: string) {
+  return useQuery({
+    queryKey: [...assignmentKeys.all, 'attempt', attemptId],
+    queryFn: () => getSubmissionById(attemptId),
+    enabled: !!attemptId,
   })
 }

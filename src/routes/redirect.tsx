@@ -26,7 +26,9 @@ function RedirectPage() {
         const params = new URLSearchParams(window.location.search)
         const authParam = params.get('auth')
 
+        let isOnboarding = false
         if (authParam) {
+          isOnboarding = params.get('onboarding') === 'true'
           const authData = JSON.parse(atob(decodeURIComponent(authParam)))
           const store = useAuthStore.getState()
           store.login({
@@ -65,8 +67,12 @@ function RedirectPage() {
         setStatus('ready')
         await new Promise((r) => setTimeout(r, 1500))
 
-        // Step 4: Navigate to dashboard
-        navigate({ to: '/dashboard', replace: true })
+        // Step 4: Navigate to dashboard or onboarding
+        if (isOnboarding) {
+          navigate({ to: '/onboarding/profile', replace: true })
+        } else {
+          navigate({ to: '/dashboard', replace: true })
+        }
       } catch (err) {
         console.error('Redirect failed:', err)
         setStatus('error')
