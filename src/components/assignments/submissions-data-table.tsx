@@ -11,32 +11,42 @@ interface SubmissionsDataTableProps {
   assignmentId: string
 }
 
-export function SubmissionsDataTable({ assignmentId }: SubmissionsDataTableProps) {
-  const { data: submissions, isLoading, isError } = useAssignmentSubmissionsQuery(assignmentId)
+export function SubmissionsDataTable({
+  assignmentId,
+}: SubmissionsDataTableProps) {
+  const {
+    data: submissions,
+    isLoading,
+    isError,
+  } = useAssignmentSubmissionsQuery(assignmentId)
 
-  const columns = useMemo<ColumnDef<any>[]>(
+  const columns = useMemo<Array<ColumnDef<any>>>(
     () => [
       {
         accessorKey: 'student.fullname',
         header: 'Student Name',
         cell: ({ row }) => (
           <div className="flex flex-col">
-            <span className="font-medium">{row.original.student?.fullname}</span>
-            <span className="text-xs text-muted-foreground">{row.original.student?.regNumber}</span>
+            <span className="font-medium">
+              {row.original.student?.fullname}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {row.original.student?.regNumber}
+            </span>
           </div>
-        )
+        ),
       },
       {
         accessorKey: 'status',
         header: 'Status',
         cell: ({ row }) => {
-          const status = row.getValue('status') as string
+          const status = row.getValue('status')
           return (
             <Badge variant={status === 'GRADED' ? 'default' : 'secondary'}>
-              {status}
+              {String(status)}
             </Badge>
           )
-        }
+        },
       },
       {
         accessorKey: 'submittedAt',
@@ -44,7 +54,7 @@ export function SubmissionsDataTable({ assignmentId }: SubmissionsDataTableProps
         cell: ({ row }) => {
           const date = row.getValue('submittedAt')
           return date ? new Date(date as string).toLocaleString() : '-'
-        }
+        },
       },
       {
         accessorKey: 'totalScore',
@@ -56,7 +66,7 @@ export function SubmissionsDataTable({ assignmentId }: SubmissionsDataTableProps
           ) : (
             <span className="text-muted-foreground">Pending</span>
           )
-        }
+        },
       },
       {
         id: 'actions',
@@ -70,10 +80,10 @@ export function SubmissionsDataTable({ assignmentId }: SubmissionsDataTableProps
               </Button>
             </div>
           )
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   )
 
   if (isLoading) {
@@ -95,9 +105,10 @@ export function SubmissionsDataTable({ assignmentId }: SubmissionsDataTableProps
   return (
     <div className="space-y-4">
       <DataTable
-        columns={columns}
+        columns={columns as any}
         data={submissions || []}
-        searchKey="student.fullname"
+        onPageChange={() => {}}
+        onPageSizeChange={() => {}}
       />
     </div>
   )
