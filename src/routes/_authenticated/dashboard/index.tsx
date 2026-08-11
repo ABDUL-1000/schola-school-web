@@ -275,7 +275,7 @@ function DashboardPage() {
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium">
-                        {format(new Date(exam.date), 'MMM d, yyyy')}
+                        {exam.date ? format(new Date(exam.date), 'MMM d, yyyy') : 'N/A'}
                       </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
                         {exam.duration} mins
@@ -349,7 +349,7 @@ function DashboardPage() {
                       </p>
                     </div>
                     <div className="text-xs text-muted-foreground whitespace-nowrap pt-1">
-                      {format(new Date(note.date), 'MMM d')}
+                      {note.date ? format(new Date(note.date), 'MMM d') : note.createdAt ? format(new Date(note.createdAt), 'MMM d') : ''}
                     </div>
                   </Link>
                 ))}
