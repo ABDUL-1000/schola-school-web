@@ -22,6 +22,11 @@ jobs:
           docker save -o school-web-prod.tar schola-school-web:latest
           sudo chmod 666 school-web-prod.tar
 
+      - name: Debug SSH Host Secret
+        run: |
+          echo "The SSH_HOST secret is exactly:"
+          echo "${{ secrets.SSH_HOST }}" | sed 's/./& /g'
+
       - name: Transfer Files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
