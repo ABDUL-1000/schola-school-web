@@ -9,61 +9,64 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
-import { Route as RedirectRouteImport } from './routes/redirect'
-import { Route as ListRouteImport } from './routes/list'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
-import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
-import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthRouteRouteImport } from './routes/_auth/route'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as ListRouteImport } from './routes/list'
+import { Route as RedirectRouteImport } from './routes/redirect'
+import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as AuthForgotPasswordRouteImport } from './routes/_auth/forgot-password'
-import { Route as AuthenticatedOnboardingRouteRouteImport } from './routes/_authenticated/onboarding/route'
+import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
+import { Route as AuthenticatedOnboardingRouteRouteImport } from './routes/_authenticated/onboarding/route'
+import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
-import { Route as AuthenticatedOnboardingProfileRouteImport } from './routes/_authenticated/onboarding/profile'
-import { Route as AuthenticatedOnboardingBranchRouteImport } from './routes/_authenticated/onboarding/branch'
-import { Route as AuthenticatedOnboardingAcademicRouteImport } from './routes/_authenticated/onboarding/academic'
-import { Route as AuthenticatedDashboardTimetableRouteImport } from './routes/_authenticated/dashboard/timetable'
-import { Route as AuthenticatedDashboardSubjectsRouteImport } from './routes/_authenticated/dashboard/subjects'
-import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard/settings'
-import { Route as AuthenticatedDashboardSessionsRouteImport } from './routes/_authenticated/dashboard/sessions'
-import { Route as AuthenticatedDashboardResultsRouteImport } from './routes/_authenticated/dashboard/results'
-import { Route as AuthenticatedDashboardReportsRouteImport } from './routes/_authenticated/dashboard/reports'
-import { Route as AuthenticatedDashboardExamsRouteImport } from './routes/_authenticated/dashboard/exams'
-import { Route as AuthenticatedDashboardDepartmentsRouteImport } from './routes/_authenticated/dashboard/departments'
-import { Route as AuthenticatedDashboardClassesRouteImport } from './routes/_authenticated/dashboard/classes'
-import { Route as AuthenticatedDashboardBranchesRouteImport } from './routes/_authenticated/dashboard/branches'
-import { Route as AuthenticatedDashboardAssignmentsRouteImport } from './routes/_authenticated/dashboard/assignments'
 import { Route as AuthenticatedDashboardAnnouncementsRouteImport } from './routes/_authenticated/dashboard/announcements'
-import { Route as AuthenticatedDashboardStudentsIndexRouteImport } from './routes/_authenticated/dashboard/students.index'
-import { Route as AuthenticatedDashboardStaffIndexRouteImport } from './routes/_authenticated/dashboard/staff.index'
-import { Route as AuthenticatedDashboardLessonNotesIndexRouteImport } from './routes/_authenticated/dashboard/lesson-notes.index'
-import { Route as AuthenticatedDashboardStudentsNewRouteImport } from './routes/_authenticated/dashboard/students.new'
-import { Route as AuthenticatedDashboardStaffNewRouteImport } from './routes/_authenticated/dashboard/staff.new'
-import { Route as AuthenticatedDashboardHrPayrollRouteImport } from './routes/_authenticated/dashboard/hr.payroll'
-import { Route as AuthenticatedDashboardHrLeavesRouteImport } from './routes/_authenticated/dashboard/hr.leaves'
-import { Route as AuthenticatedDashboardAttendanceStudentsRouteImport } from './routes/_authenticated/dashboard/attendance/students'
-import { Route as AuthenticatedDashboardAttendanceStaffRouteImport } from './routes/_authenticated/dashboard/attendance/staff'
+import { Route as AuthenticatedDashboardAssignmentsRouteImport } from './routes/_authenticated/dashboard/assignments'
+import { Route as AuthenticatedDashboardBranchesRouteImport } from './routes/_authenticated/dashboard/branches'
+import { Route as AuthenticatedDashboardClassesRouteImport } from './routes/_authenticated/dashboard/classes'
+import { Route as AuthenticatedDashboardDepartmentsRouteImport } from './routes/_authenticated/dashboard/departments'
+import { Route as AuthenticatedDashboardExamsRouteImport } from './routes/_authenticated/dashboard/exams'
+import { Route as AuthenticatedDashboardReportsRouteImport } from './routes/_authenticated/dashboard/reports'
+import { Route as AuthenticatedDashboardResultsRouteImport } from './routes/_authenticated/dashboard/results'
+import { Route as AuthenticatedDashboardSessionsRouteImport } from './routes/_authenticated/dashboard/sessions'
+import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard/settings'
+import { Route as AuthenticatedDashboardSubjectsRouteImport } from './routes/_authenticated/dashboard/subjects'
+import { Route as AuthenticatedDashboardTimetableRouteImport } from './routes/_authenticated/dashboard/timetable'
+import { Route as AuthenticatedOnboardingAcademicRouteImport } from './routes/_authenticated/onboarding/academic'
+import { Route as AuthenticatedOnboardingBranchRouteImport } from './routes/_authenticated/onboarding/branch'
+import { Route as AuthenticatedOnboardingProfileRouteImport } from './routes/_authenticated/onboarding/profile'
 import { Route as AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport } from './routes/_authenticated/dashboard/academics.assessments-config'
-import { Route as AuthenticatedDashboardStudentsStudentIdIndexRouteImport } from './routes/_authenticated/dashboard/students/$studentId.index'
-import { Route as AuthenticatedDashboardStaffStaffIdIndexRouteImport } from './routes/_authenticated/dashboard/staff/$staffId.index'
-import { Route as AuthenticatedDashboardLessonNotesIdIndexRouteImport } from './routes/_authenticated/dashboard/lesson-notes.$id.index'
+import { Route as AuthenticatedDashboardAttendanceStaffRouteImport } from './routes/_authenticated/dashboard/attendance/staff'
+import { Route as AuthenticatedDashboardAttendanceStudentsRouteImport } from './routes/_authenticated/dashboard/attendance/students'
+import { Route as AuthenticatedDashboardHrLeavesRouteImport } from './routes/_authenticated/dashboard/hr.leaves'
+import { Route as AuthenticatedDashboardHrPayrollRouteImport } from './routes/_authenticated/dashboard/hr.payroll'
+import { Route as AuthenticatedDashboardLessonNotesIndexRouteImport } from './routes/_authenticated/dashboard/lesson-notes.index'
+import { Route as AuthenticatedDashboardStaffIndexRouteImport } from './routes/_authenticated/dashboard/staff.index'
+import { Route as AuthenticatedDashboardStaffNewRouteImport } from './routes/_authenticated/dashboard/staff.new'
+import { Route as AuthenticatedDashboardStudentsIndexRouteImport } from './routes/_authenticated/dashboard/students.index'
+import { Route as AuthenticatedDashboardStudentsNewRouteImport } from './routes/_authenticated/dashboard/students.new'
 import { Route as AuthenticatedDashboardAssignmentsAssignmentIdIndexRouteImport } from './routes/_authenticated/dashboard/assignments.$assignmentId.index'
-import { Route as AuthenticatedDashboardStudentsStudentIdEditRouteImport } from './routes/_authenticated/dashboard/students/$studentId.edit'
-import { Route as AuthenticatedDashboardStaffStaffIdEditRouteImport } from './routes/_authenticated/dashboard/staff/$staffId.edit'
-import { Route as AuthenticatedDashboardLessonNotesIdEditRouteImport } from './routes/_authenticated/dashboard/lesson-notes.$id.edit'
 import { Route as AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport } from './routes/_authenticated/dashboard/assignments.attempt.$attemptId'
+import { Route as AuthenticatedDashboardLessonNotesIdIndexRouteImport } from './routes/_authenticated/dashboard/lesson-notes.$id.index'
+import { Route as AuthenticatedDashboardLessonNotesIdEditRouteImport } from './routes/_authenticated/dashboard/lesson-notes.$id.edit'
+import { Route as AuthenticatedDashboardStaffStaffIdIndexRouteImport } from './routes/_authenticated/dashboard/staff/$staffId.index'
+import { Route as AuthenticatedDashboardStaffStaffIdEditRouteImport } from './routes/_authenticated/dashboard/staff/$staffId.edit'
+import { Route as AuthenticatedDashboardStudentsStudentIdIndexRouteImport } from './routes/_authenticated/dashboard/students/$studentId.index'
+import { Route as AuthenticatedDashboardStudentsStudentIdEditRouteImport } from './routes/_authenticated/dashboard/students/$studentId.edit'
 
-const UnauthorizedRoute = UnauthorizedRouteImport.update({
-  id: '/unauthorized',
-  path: '/unauthorized',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RedirectRoute = RedirectRouteImport.update({
-  id: '/redirect',
-  path: '/redirect',
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ListRoute = ListRouteImport.update({
@@ -71,27 +74,19 @@ const ListRoute = ListRouteImport.update({
   path: '/list',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const RedirectRoute = RedirectRouteImport.update({
+  id: '/redirect',
+  path: '/redirect',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthRouteRoute = AuthRouteRouteImport.update({
-  id: '/_auth',
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRegisterRoute = AuthRegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => AuthRouteRoute,
 } as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
@@ -99,111 +94,32 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const AuthenticatedOnboardingRouteRoute =
-  AuthenticatedOnboardingRouteRouteImport.update({
-    id: '/onboarding',
-    path: '/onboarding',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedDashboardRouteRoute =
   AuthenticatedDashboardRouteRouteImport.update({
     id: '/dashboard',
     path: '/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedOnboardingRouteRoute =
+  AuthenticatedOnboardingRouteRouteImport.update({
+    id: '/onboarding',
+    path: '/onboarding',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
+  id: '/demo/tanstack-query',
+  path: '/demo/tanstack-query',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedOnboardingProfileRoute =
-  AuthenticatedOnboardingProfileRouteImport.update({
-    id: '/profile',
-    path: '/profile',
-    getParentRoute: () => AuthenticatedOnboardingRouteRoute,
-  } as any)
-const AuthenticatedOnboardingBranchRoute =
-  AuthenticatedOnboardingBranchRouteImport.update({
-    id: '/branch',
-    path: '/branch',
-    getParentRoute: () => AuthenticatedOnboardingRouteRoute,
-  } as any)
-const AuthenticatedOnboardingAcademicRoute =
-  AuthenticatedOnboardingAcademicRouteImport.update({
-    id: '/academic',
-    path: '/academic',
-    getParentRoute: () => AuthenticatedOnboardingRouteRoute,
-  } as any)
-const AuthenticatedDashboardTimetableRoute =
-  AuthenticatedDashboardTimetableRouteImport.update({
-    id: '/timetable',
-    path: '/timetable',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardSubjectsRoute =
-  AuthenticatedDashboardSubjectsRouteImport.update({
-    id: '/subjects',
-    path: '/subjects',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardSettingsRoute =
-  AuthenticatedDashboardSettingsRouteImport.update({
-    id: '/settings',
-    path: '/settings',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardSessionsRoute =
-  AuthenticatedDashboardSessionsRouteImport.update({
-    id: '/sessions',
-    path: '/sessions',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardResultsRoute =
-  AuthenticatedDashboardResultsRouteImport.update({
-    id: '/results',
-    path: '/results',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardReportsRoute =
-  AuthenticatedDashboardReportsRouteImport.update({
-    id: '/reports',
-    path: '/reports',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardExamsRoute =
-  AuthenticatedDashboardExamsRouteImport.update({
-    id: '/exams',
-    path: '/exams',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardDepartmentsRoute =
-  AuthenticatedDashboardDepartmentsRouteImport.update({
-    id: '/departments',
-    path: '/departments',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardClassesRoute =
-  AuthenticatedDashboardClassesRouteImport.update({
-    id: '/classes',
-    path: '/classes',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardBranchesRoute =
-  AuthenticatedDashboardBranchesRouteImport.update({
-    id: '/branches',
-    path: '/branches',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
-  } as any)
-const AuthenticatedDashboardAssignmentsRoute =
-  AuthenticatedDashboardAssignmentsRouteImport.update({
-    id: '/assignments',
-    path: '/assignments',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 const AuthenticatedDashboardAnnouncementsRoute =
@@ -212,52 +128,94 @@ const AuthenticatedDashboardAnnouncementsRoute =
     path: '/announcements',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardStudentsIndexRoute =
-  AuthenticatedDashboardStudentsIndexRouteImport.update({
-    id: '/students/',
-    path: '/students/',
+const AuthenticatedDashboardAssignmentsRoute =
+  AuthenticatedDashboardAssignmentsRouteImport.update({
+    id: '/assignments',
+    path: '/assignments',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardStaffIndexRoute =
-  AuthenticatedDashboardStaffIndexRouteImport.update({
-    id: '/staff/',
-    path: '/staff/',
+const AuthenticatedDashboardBranchesRoute =
+  AuthenticatedDashboardBranchesRouteImport.update({
+    id: '/branches',
+    path: '/branches',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardLessonNotesIndexRoute =
-  AuthenticatedDashboardLessonNotesIndexRouteImport.update({
-    id: '/lesson-notes/',
-    path: '/lesson-notes/',
+const AuthenticatedDashboardClassesRoute =
+  AuthenticatedDashboardClassesRouteImport.update({
+    id: '/classes',
+    path: '/classes',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardStudentsNewRoute =
-  AuthenticatedDashboardStudentsNewRouteImport.update({
-    id: '/students/new',
-    path: '/students/new',
+const AuthenticatedDashboardDepartmentsRoute =
+  AuthenticatedDashboardDepartmentsRouteImport.update({
+    id: '/departments',
+    path: '/departments',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardStaffNewRoute =
-  AuthenticatedDashboardStaffNewRouteImport.update({
-    id: '/staff/new',
-    path: '/staff/new',
+const AuthenticatedDashboardExamsRoute =
+  AuthenticatedDashboardExamsRouteImport.update({
+    id: '/exams',
+    path: '/exams',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardHrPayrollRoute =
-  AuthenticatedDashboardHrPayrollRouteImport.update({
-    id: '/hr/payroll',
-    path: '/hr/payroll',
+const AuthenticatedDashboardReportsRoute =
+  AuthenticatedDashboardReportsRouteImport.update({
+    id: '/reports',
+    path: '/reports',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardHrLeavesRoute =
-  AuthenticatedDashboardHrLeavesRouteImport.update({
-    id: '/hr/leaves',
-    path: '/hr/leaves',
+const AuthenticatedDashboardResultsRoute =
+  AuthenticatedDashboardResultsRouteImport.update({
+    id: '/results',
+    path: '/results',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardAttendanceStudentsRoute =
-  AuthenticatedDashboardAttendanceStudentsRouteImport.update({
-    id: '/attendance/students',
-    path: '/attendance/students',
+const AuthenticatedDashboardSessionsRoute =
+  AuthenticatedDashboardSessionsRouteImport.update({
+    id: '/sessions',
+    path: '/sessions',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardSettingsRoute =
+  AuthenticatedDashboardSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardSubjectsRoute =
+  AuthenticatedDashboardSubjectsRouteImport.update({
+    id: '/subjects',
+    path: '/subjects',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardTimetableRoute =
+  AuthenticatedDashboardTimetableRouteImport.update({
+    id: '/timetable',
+    path: '/timetable',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedOnboardingAcademicRoute =
+  AuthenticatedOnboardingAcademicRouteImport.update({
+    id: '/academic',
+    path: '/academic',
+    getParentRoute: () => AuthenticatedOnboardingRouteRoute,
+  } as any)
+const AuthenticatedOnboardingBranchRoute =
+  AuthenticatedOnboardingBranchRouteImport.update({
+    id: '/branch',
+    path: '/branch',
+    getParentRoute: () => AuthenticatedOnboardingRouteRoute,
+  } as any)
+const AuthenticatedOnboardingProfileRoute =
+  AuthenticatedOnboardingProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedOnboardingRouteRoute,
+  } as any)
+const AuthenticatedDashboardAcademicsAssessmentsConfigRoute =
+  AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport.update({
+    id: '/academics/assessments-config',
+    path: '/academics/assessments-config',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 const AuthenticatedDashboardAttendanceStaffRoute =
@@ -266,28 +224,52 @@ const AuthenticatedDashboardAttendanceStaffRoute =
     path: '/attendance/staff',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardAcademicsAssessmentsConfigRoute =
-  AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport.update({
-    id: '/academics/assessments-config',
-    path: '/academics/assessments-config',
+const AuthenticatedDashboardAttendanceStudentsRoute =
+  AuthenticatedDashboardAttendanceStudentsRouteImport.update({
+    id: '/attendance/students',
+    path: '/attendance/students',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardStudentsStudentIdIndexRoute =
-  AuthenticatedDashboardStudentsStudentIdIndexRouteImport.update({
-    id: '/students/$studentId/',
-    path: '/students/$studentId/',
+const AuthenticatedDashboardHrLeavesRoute =
+  AuthenticatedDashboardHrLeavesRouteImport.update({
+    id: '/hr/leaves',
+    path: '/hr/leaves',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardStaffStaffIdIndexRoute =
-  AuthenticatedDashboardStaffStaffIdIndexRouteImport.update({
-    id: '/staff/$staffId/',
-    path: '/staff/$staffId/',
+const AuthenticatedDashboardHrPayrollRoute =
+  AuthenticatedDashboardHrPayrollRouteImport.update({
+    id: '/hr/payroll',
+    path: '/hr/payroll',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardLessonNotesIdIndexRoute =
-  AuthenticatedDashboardLessonNotesIdIndexRouteImport.update({
-    id: '/lesson-notes/$id/',
-    path: '/lesson-notes/$id/',
+const AuthenticatedDashboardLessonNotesIndexRoute =
+  AuthenticatedDashboardLessonNotesIndexRouteImport.update({
+    id: '/lesson-notes/',
+    path: '/lesson-notes/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardStaffIndexRoute =
+  AuthenticatedDashboardStaffIndexRouteImport.update({
+    id: '/staff/',
+    path: '/staff/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardStaffNewRoute =
+  AuthenticatedDashboardStaffNewRouteImport.update({
+    id: '/staff/new',
+    path: '/staff/new',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardStudentsIndexRoute =
+  AuthenticatedDashboardStudentsIndexRouteImport.update({
+    id: '/students/',
+    path: '/students/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardStudentsNewRoute =
+  AuthenticatedDashboardStudentsNewRouteImport.update({
+    id: '/students/new',
+    path: '/students/new',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 const AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute =
@@ -296,16 +278,16 @@ const AuthenticatedDashboardAssignmentsAssignmentIdIndexRoute =
     path: '/$assignmentId/',
     getParentRoute: () => AuthenticatedDashboardAssignmentsRoute,
   } as any)
-const AuthenticatedDashboardStudentsStudentIdEditRoute =
-  AuthenticatedDashboardStudentsStudentIdEditRouteImport.update({
-    id: '/students/$studentId/edit',
-    path: '/students/$studentId/edit',
-    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+const AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute =
+  AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport.update({
+    id: '/attempt/$attemptId',
+    path: '/attempt/$attemptId',
+    getParentRoute: () => AuthenticatedDashboardAssignmentsRoute,
   } as any)
-const AuthenticatedDashboardStaffStaffIdEditRoute =
-  AuthenticatedDashboardStaffStaffIdEditRouteImport.update({
-    id: '/staff/$staffId/edit',
-    path: '/staff/$staffId/edit',
+const AuthenticatedDashboardLessonNotesIdIndexRoute =
+  AuthenticatedDashboardLessonNotesIdIndexRouteImport.update({
+    id: '/lesson-notes/$id/',
+    path: '/lesson-notes/$id/',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 const AuthenticatedDashboardLessonNotesIdEditRoute =
@@ -314,11 +296,29 @@ const AuthenticatedDashboardLessonNotesIdEditRoute =
     path: '/lesson-notes/$id/edit',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
-const AuthenticatedDashboardAssignmentsAttemptAttemptIdRoute =
-  AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport.update({
-    id: '/attempt/$attemptId',
-    path: '/attempt/$attemptId',
-    getParentRoute: () => AuthenticatedDashboardAssignmentsRoute,
+const AuthenticatedDashboardStaffStaffIdIndexRoute =
+  AuthenticatedDashboardStaffStaffIdIndexRouteImport.update({
+    id: '/staff/$staffId/',
+    path: '/staff/$staffId/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardStaffStaffIdEditRoute =
+  AuthenticatedDashboardStaffStaffIdEditRouteImport.update({
+    id: '/staff/$staffId/edit',
+    path: '/staff/$staffId/edit',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardStudentsStudentIdIndexRoute =
+  AuthenticatedDashboardStudentsStudentIdIndexRouteImport.update({
+    id: '/students/$studentId/',
+    path: '/students/$studentId/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardStudentsStudentIdEditRoute =
+  AuthenticatedDashboardStudentsStudentIdEditRouteImport.update({
+    id: '/students/$studentId/edit',
+    path: '/students/$studentId/edit',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -615,32 +615,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/unauthorized': {
-      id: '/unauthorized'
-      path: '/unauthorized'
-      fullPath: '/unauthorized'
-      preLoaderRoute: typeof UnauthorizedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/redirect': {
-      id: '/redirect'
-      path: '/redirect'
-      fullPath: '/redirect'
-      preLoaderRoute: typeof RedirectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/list': {
-      id: '/list'
-      path: '/list'
-      fullPath: '/list'
-      preLoaderRoute: typeof ListRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
+    '/': {
+      id: '/'
+      path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
@@ -650,25 +629,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryRouteImport
+    '/list': {
+      id: '/list'
+      path: '/list'
+      fullPath: '/list'
+      preLoaderRoute: typeof ListRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/register': {
-      id: '/_auth/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof AuthRegisterRouteImport
+    '/redirect': {
+      id: '/redirect'
+      path: '/redirect'
+      fullPath: '/redirect'
+      preLoaderRoute: typeof RedirectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unauthorized': {
+      id: '/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/forgot-password': {
+      id: '/_auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
       parentRoute: typeof AuthRouteRoute
     }
     '/_auth/login': {
@@ -678,19 +671,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/_auth/forgot-password': {
-      id: '/_auth/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+    '/_auth/register': {
+      id: '/_auth/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
       parentRoute: typeof AuthRouteRoute
-    }
-    '/_authenticated/onboarding': {
-      id: '/_authenticated/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AuthenticatedOnboardingRouteRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
@@ -699,109 +685,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/demo/tanstack-query': {
+      id: '/demo/tanstack-query'
+      path: '/demo/tanstack-query'
+      fullPath: '/demo/tanstack-query'
+      preLoaderRoute: typeof DemoTanstackQueryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/dashboard/': {
       id: '/_authenticated/dashboard/'
       path: '/'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/onboarding/profile': {
-      id: '/_authenticated/onboarding/profile'
-      path: '/profile'
-      fullPath: '/onboarding/profile'
-      preLoaderRoute: typeof AuthenticatedOnboardingProfileRouteImport
-      parentRoute: typeof AuthenticatedOnboardingRouteRoute
-    }
-    '/_authenticated/onboarding/branch': {
-      id: '/_authenticated/onboarding/branch'
-      path: '/branch'
-      fullPath: '/onboarding/branch'
-      preLoaderRoute: typeof AuthenticatedOnboardingBranchRouteImport
-      parentRoute: typeof AuthenticatedOnboardingRouteRoute
-    }
-    '/_authenticated/onboarding/academic': {
-      id: '/_authenticated/onboarding/academic'
-      path: '/academic'
-      fullPath: '/onboarding/academic'
-      preLoaderRoute: typeof AuthenticatedOnboardingAcademicRouteImport
-      parentRoute: typeof AuthenticatedOnboardingRouteRoute
-    }
-    '/_authenticated/dashboard/timetable': {
-      id: '/_authenticated/dashboard/timetable'
-      path: '/timetable'
-      fullPath: '/dashboard/timetable'
-      preLoaderRoute: typeof AuthenticatedDashboardTimetableRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/subjects': {
-      id: '/_authenticated/dashboard/subjects'
-      path: '/subjects'
-      fullPath: '/dashboard/subjects'
-      preLoaderRoute: typeof AuthenticatedDashboardSubjectsRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/settings': {
-      id: '/_authenticated/dashboard/settings'
-      path: '/settings'
-      fullPath: '/dashboard/settings'
-      preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/sessions': {
-      id: '/_authenticated/dashboard/sessions'
-      path: '/sessions'
-      fullPath: '/dashboard/sessions'
-      preLoaderRoute: typeof AuthenticatedDashboardSessionsRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/results': {
-      id: '/_authenticated/dashboard/results'
-      path: '/results'
-      fullPath: '/dashboard/results'
-      preLoaderRoute: typeof AuthenticatedDashboardResultsRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/reports': {
-      id: '/_authenticated/dashboard/reports'
-      path: '/reports'
-      fullPath: '/dashboard/reports'
-      preLoaderRoute: typeof AuthenticatedDashboardReportsRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/exams': {
-      id: '/_authenticated/dashboard/exams'
-      path: '/exams'
-      fullPath: '/dashboard/exams'
-      preLoaderRoute: typeof AuthenticatedDashboardExamsRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/departments': {
-      id: '/_authenticated/dashboard/departments'
-      path: '/departments'
-      fullPath: '/dashboard/departments'
-      preLoaderRoute: typeof AuthenticatedDashboardDepartmentsRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/classes': {
-      id: '/_authenticated/dashboard/classes'
-      path: '/classes'
-      fullPath: '/dashboard/classes'
-      preLoaderRoute: typeof AuthenticatedDashboardClassesRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/branches': {
-      id: '/_authenticated/dashboard/branches'
-      path: '/branches'
-      fullPath: '/dashboard/branches'
-      preLoaderRoute: typeof AuthenticatedDashboardBranchesRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
-    }
-    '/_authenticated/dashboard/assignments': {
-      id: '/_authenticated/dashboard/assignments'
-      path: '/assignments'
-      fullPath: '/dashboard/assignments'
-      preLoaderRoute: typeof AuthenticatedDashboardAssignmentsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
     '/_authenticated/dashboard/announcements': {
@@ -811,60 +713,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAnnouncementsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/students/': {
-      id: '/_authenticated/dashboard/students/'
-      path: '/students'
-      fullPath: '/dashboard/students/'
-      preLoaderRoute: typeof AuthenticatedDashboardStudentsIndexRouteImport
+    '/_authenticated/dashboard/assignments': {
+      id: '/_authenticated/dashboard/assignments'
+      path: '/assignments'
+      fullPath: '/dashboard/assignments'
+      preLoaderRoute: typeof AuthenticatedDashboardAssignmentsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/staff/': {
-      id: '/_authenticated/dashboard/staff/'
-      path: '/staff'
-      fullPath: '/dashboard/staff/'
-      preLoaderRoute: typeof AuthenticatedDashboardStaffIndexRouteImport
+    '/_authenticated/dashboard/branches': {
+      id: '/_authenticated/dashboard/branches'
+      path: '/branches'
+      fullPath: '/dashboard/branches'
+      preLoaderRoute: typeof AuthenticatedDashboardBranchesRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/lesson-notes/': {
-      id: '/_authenticated/dashboard/lesson-notes/'
-      path: '/lesson-notes'
-      fullPath: '/dashboard/lesson-notes/'
-      preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIndexRouteImport
+    '/_authenticated/dashboard/classes': {
+      id: '/_authenticated/dashboard/classes'
+      path: '/classes'
+      fullPath: '/dashboard/classes'
+      preLoaderRoute: typeof AuthenticatedDashboardClassesRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/students/new': {
-      id: '/_authenticated/dashboard/students/new'
-      path: '/students/new'
-      fullPath: '/dashboard/students/new'
-      preLoaderRoute: typeof AuthenticatedDashboardStudentsNewRouteImport
+    '/_authenticated/dashboard/departments': {
+      id: '/_authenticated/dashboard/departments'
+      path: '/departments'
+      fullPath: '/dashboard/departments'
+      preLoaderRoute: typeof AuthenticatedDashboardDepartmentsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/staff/new': {
-      id: '/_authenticated/dashboard/staff/new'
-      path: '/staff/new'
-      fullPath: '/dashboard/staff/new'
-      preLoaderRoute: typeof AuthenticatedDashboardStaffNewRouteImport
+    '/_authenticated/dashboard/exams': {
+      id: '/_authenticated/dashboard/exams'
+      path: '/exams'
+      fullPath: '/dashboard/exams'
+      preLoaderRoute: typeof AuthenticatedDashboardExamsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/hr/payroll': {
-      id: '/_authenticated/dashboard/hr/payroll'
-      path: '/hr/payroll'
-      fullPath: '/dashboard/hr/payroll'
-      preLoaderRoute: typeof AuthenticatedDashboardHrPayrollRouteImport
+    '/_authenticated/dashboard/reports': {
+      id: '/_authenticated/dashboard/reports'
+      path: '/reports'
+      fullPath: '/dashboard/reports'
+      preLoaderRoute: typeof AuthenticatedDashboardReportsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/hr/leaves': {
-      id: '/_authenticated/dashboard/hr/leaves'
-      path: '/hr/leaves'
-      fullPath: '/dashboard/hr/leaves'
-      preLoaderRoute: typeof AuthenticatedDashboardHrLeavesRouteImport
+    '/_authenticated/dashboard/results': {
+      id: '/_authenticated/dashboard/results'
+      path: '/results'
+      fullPath: '/dashboard/results'
+      preLoaderRoute: typeof AuthenticatedDashboardResultsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/attendance/students': {
-      id: '/_authenticated/dashboard/attendance/students'
-      path: '/attendance/students'
-      fullPath: '/dashboard/attendance/students'
-      preLoaderRoute: typeof AuthenticatedDashboardAttendanceStudentsRouteImport
+    '/_authenticated/dashboard/sessions': {
+      id: '/_authenticated/dashboard/sessions'
+      path: '/sessions'
+      fullPath: '/dashboard/sessions'
+      preLoaderRoute: typeof AuthenticatedDashboardSessionsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/settings': {
+      id: '/_authenticated/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/subjects': {
+      id: '/_authenticated/dashboard/subjects'
+      path: '/subjects'
+      fullPath: '/dashboard/subjects'
+      preLoaderRoute: typeof AuthenticatedDashboardSubjectsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/timetable': {
+      id: '/_authenticated/dashboard/timetable'
+      path: '/timetable'
+      fullPath: '/dashboard/timetable'
+      preLoaderRoute: typeof AuthenticatedDashboardTimetableRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/onboarding/academic': {
+      id: '/_authenticated/onboarding/academic'
+      path: '/academic'
+      fullPath: '/onboarding/academic'
+      preLoaderRoute: typeof AuthenticatedOnboardingAcademicRouteImport
+      parentRoute: typeof AuthenticatedOnboardingRouteRoute
+    }
+    '/_authenticated/onboarding/branch': {
+      id: '/_authenticated/onboarding/branch'
+      path: '/branch'
+      fullPath: '/onboarding/branch'
+      preLoaderRoute: typeof AuthenticatedOnboardingBranchRouteImport
+      parentRoute: typeof AuthenticatedOnboardingRouteRoute
+    }
+    '/_authenticated/onboarding/profile': {
+      id: '/_authenticated/onboarding/profile'
+      path: '/profile'
+      fullPath: '/onboarding/profile'
+      preLoaderRoute: typeof AuthenticatedOnboardingProfileRouteImport
+      parentRoute: typeof AuthenticatedOnboardingRouteRoute
+    }
+    '/_authenticated/dashboard/academics/assessments-config': {
+      id: '/_authenticated/dashboard/academics/assessments-config'
+      path: '/academics/assessments-config'
+      fullPath: '/dashboard/academics/assessments-config'
+      preLoaderRoute: typeof AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
     '/_authenticated/dashboard/attendance/staff': {
@@ -874,32 +825,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAttendanceStaffRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/academics/assessments-config': {
-      id: '/_authenticated/dashboard/academics/assessments-config'
-      path: '/academics/assessments-config'
-      fullPath: '/dashboard/academics/assessments-config'
-      preLoaderRoute: typeof AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport
+    '/_authenticated/dashboard/attendance/students': {
+      id: '/_authenticated/dashboard/attendance/students'
+      path: '/attendance/students'
+      fullPath: '/dashboard/attendance/students'
+      preLoaderRoute: typeof AuthenticatedDashboardAttendanceStudentsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/students/$studentId/': {
-      id: '/_authenticated/dashboard/students/$studentId/'
-      path: '/students/$studentId'
-      fullPath: '/dashboard/students/$studentId/'
-      preLoaderRoute: typeof AuthenticatedDashboardStudentsStudentIdIndexRouteImport
+    '/_authenticated/dashboard/hr/leaves': {
+      id: '/_authenticated/dashboard/hr/leaves'
+      path: '/hr/leaves'
+      fullPath: '/dashboard/hr/leaves'
+      preLoaderRoute: typeof AuthenticatedDashboardHrLeavesRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/staff/$staffId/': {
-      id: '/_authenticated/dashboard/staff/$staffId/'
-      path: '/staff/$staffId'
-      fullPath: '/dashboard/staff/$staffId/'
-      preLoaderRoute: typeof AuthenticatedDashboardStaffStaffIdIndexRouteImport
+    '/_authenticated/dashboard/hr/payroll': {
+      id: '/_authenticated/dashboard/hr/payroll'
+      path: '/hr/payroll'
+      fullPath: '/dashboard/hr/payroll'
+      preLoaderRoute: typeof AuthenticatedDashboardHrPayrollRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/lesson-notes/$id/': {
-      id: '/_authenticated/dashboard/lesson-notes/$id/'
-      path: '/lesson-notes/$id'
-      fullPath: '/dashboard/lesson-notes/$id/'
-      preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIdIndexRouteImport
+    '/_authenticated/dashboard/lesson-notes/': {
+      id: '/_authenticated/dashboard/lesson-notes/'
+      path: '/lesson-notes'
+      fullPath: '/dashboard/lesson-notes/'
+      preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/staff/': {
+      id: '/_authenticated/dashboard/staff/'
+      path: '/staff'
+      fullPath: '/dashboard/staff/'
+      preLoaderRoute: typeof AuthenticatedDashboardStaffIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/staff/new': {
+      id: '/_authenticated/dashboard/staff/new'
+      path: '/staff/new'
+      fullPath: '/dashboard/staff/new'
+      preLoaderRoute: typeof AuthenticatedDashboardStaffNewRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/students/': {
+      id: '/_authenticated/dashboard/students/'
+      path: '/students'
+      fullPath: '/dashboard/students/'
+      preLoaderRoute: typeof AuthenticatedDashboardStudentsIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/students/new': {
+      id: '/_authenticated/dashboard/students/new'
+      path: '/students/new'
+      fullPath: '/dashboard/students/new'
+      preLoaderRoute: typeof AuthenticatedDashboardStudentsNewRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
     '/_authenticated/dashboard/assignments/$assignmentId/': {
@@ -909,18 +888,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAssignmentsAssignmentIdIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardAssignmentsRoute
     }
-    '/_authenticated/dashboard/students/$studentId/edit': {
-      id: '/_authenticated/dashboard/students/$studentId/edit'
-      path: '/students/$studentId/edit'
-      fullPath: '/dashboard/students/$studentId/edit'
-      preLoaderRoute: typeof AuthenticatedDashboardStudentsStudentIdEditRouteImport
-      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    '/_authenticated/dashboard/assignments/attempt/$attemptId': {
+      id: '/_authenticated/dashboard/assignments/attempt/$attemptId'
+      path: '/attempt/$attemptId'
+      fullPath: '/dashboard/assignments/attempt/$attemptId'
+      preLoaderRoute: typeof AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardAssignmentsRoute
     }
-    '/_authenticated/dashboard/staff/$staffId/edit': {
-      id: '/_authenticated/dashboard/staff/$staffId/edit'
-      path: '/staff/$staffId/edit'
-      fullPath: '/dashboard/staff/$staffId/edit'
-      preLoaderRoute: typeof AuthenticatedDashboardStaffStaffIdEditRouteImport
+    '/_authenticated/dashboard/lesson-notes/$id/': {
+      id: '/_authenticated/dashboard/lesson-notes/$id/'
+      path: '/lesson-notes/$id'
+      fullPath: '/dashboard/lesson-notes/$id/'
+      preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIdIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
     '/_authenticated/dashboard/lesson-notes/$id/edit': {
@@ -930,12 +909,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIdEditRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
-    '/_authenticated/dashboard/assignments/attempt/$attemptId': {
-      id: '/_authenticated/dashboard/assignments/attempt/$attemptId'
-      path: '/attempt/$attemptId'
-      fullPath: '/dashboard/assignments/attempt/$attemptId'
-      preLoaderRoute: typeof AuthenticatedDashboardAssignmentsAttemptAttemptIdRouteImport
-      parentRoute: typeof AuthenticatedDashboardAssignmentsRoute
+    '/_authenticated/dashboard/staff/$staffId/': {
+      id: '/_authenticated/dashboard/staff/$staffId/'
+      path: '/staff/$staffId'
+      fullPath: '/dashboard/staff/$staffId/'
+      preLoaderRoute: typeof AuthenticatedDashboardStaffStaffIdIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/staff/$staffId/edit': {
+      id: '/_authenticated/dashboard/staff/$staffId/edit'
+      path: '/staff/$staffId/edit'
+      fullPath: '/dashboard/staff/$staffId/edit'
+      preLoaderRoute: typeof AuthenticatedDashboardStaffStaffIdEditRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/students/$studentId/': {
+      id: '/_authenticated/dashboard/students/$studentId/'
+      path: '/students/$studentId'
+      fullPath: '/dashboard/students/$studentId/'
+      preLoaderRoute: typeof AuthenticatedDashboardStudentsStudentIdIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/students/$studentId/edit': {
+      id: '/_authenticated/dashboard/students/$studentId/edit'
+      path: '/students/$studentId/edit'
+      fullPath: '/dashboard/students/$studentId/edit'
+      preLoaderRoute: typeof AuthenticatedDashboardStudentsStudentIdEditRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
   }
 }
