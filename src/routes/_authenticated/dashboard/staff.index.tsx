@@ -156,16 +156,21 @@ function StaffPage() {
       header: 'Status',
       cell: ({ row }) => {
         const staff = row.original as any;
-        const isIncomplete = staff.contract ? (!staff.contract.baseSalary || !staff.contract.startDate) : true;
+        const status = row.getValue('status');
+        const isIncomplete =
+          status !== 'ACTIVE' &&
+          (staff.contract
+            ? !staff.contract.baseSalary || !staff.contract.startDate
+            : true);
         
         return (
           <div className="flex flex-col gap-1 items-start">
             <Badge
               variant={
-                row.getValue('status') === 'ACTIVE' ? 'default' : 'destructive'
+                status === 'ACTIVE' ? 'default' : 'destructive'
               }
             >
-              {row.getValue('status')}
+              {status as string}
             </Badge>
             {isIncomplete && (
               <Badge variant="outline" className="text-amber-600 border-amber-600/30 bg-amber-50 whitespace-nowrap">

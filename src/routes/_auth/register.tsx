@@ -29,8 +29,13 @@ import {
   PasswordStrengthIndicator,
   passwordCriteria,
 } from '@/components/auth/password-strength-indicator'
+import { Loader2 } from 'lucide-react'
 
 export const Route = createFileRoute('/_auth/register')({
+  validateSearch: (search: Record<string, unknown>) => ({
+    email: typeof search.email === 'string' ? search.email : undefined,
+    step: typeof search.step === 'number' ? search.step : undefined,
+  }),
   component: RegistrationPage,
 })
 
@@ -45,6 +50,7 @@ const STEPS = [
 
 function RegistrationPage() {
   const navigate = useNavigate()
+  const search = Route.useSearch()
   const {
     step,
     setStep,
@@ -56,12 +62,37 @@ function RegistrationPage() {
     'idle' | 'success' | 'error'
   >('idle')
   const [errors, setErrors] = useState<Record<string, boolean>>({})
+  const [resendCountdown, setResendCountdown] = useState(60)
 
+  // Synchronize route search parameters if provided (e.g. redirected from login)
   React.useEffect(() => {
-    return () => {
-      resetRegistration()
+    if (search.email && search.email !== formData.email) {
+      updateFormData({ email: search.email })
     }
-  }, [resetRegistration])
+    if (search.step && search.step !== step) {
+      setStep(search.step)
+    }
+  }, [search.email, search.step, formData.email, step, updateFormData, setStep])
+
+  // Fallback to step 1 if on step 2 without an email
+  React.useEffect(() => {
+    if (step === 2 && !formData.email && !search.email) {
+      setStep(1)
+    }
+  }, [step, formData.email, search.email, setStep])
+
+  // Countdown timer for Resend OTP
+  React.useEffect(() => {
+    let timer: NodeJS.Timeout | null = null
+    if (step === 2 && resendCountdown > 0) {
+      timer = setInterval(() => {
+        setResendCountdown((prev) => (prev > 0 ? prev - 1 : 0))
+      }, 1000)
+    }
+    return () => {
+      if (timer) clearInterval(timer)
+    }
+  }, [step, resendCountdown])
 
   const validateStep = (stepNumber: number) => {
     const newErrors: Record<string, boolean> = {}
@@ -166,16 +197,46 @@ function RegistrationPage() {
 
       await promise
       setStep(2)
+      setResendCountdown(60)
     } catch (error: any) {
       console.error('Failed to register', error)
+    }
+  }
+
+  const handleResendOtp = async () => {
+    if (resendCountdown > 0 || isRequestingOtp) return
+    const targetEmail = formData.email || search.email
+    if (!targetEmail) {
+      toast.error('Email address is missing')
+      return
+    }
+
+    try {
+      const promise = requestOtpAsync({
+        email: targetEmail,
+        firstName: formData.firstName,
+      })
+
+      toast.promise(promise, {
+        loading: 'Sending new verification code...',
+        success: 'A new verification code has been sent to your email.',
+        error: (error: any) =>
+          error.message || 'Failed to send verification code',
+      })
+
+      await promise
+      setResendCountdown(60)
+    } catch (error: any) {
+      console.error('Failed to resend OTP', error)
     }
   }
 
   const submitOtp = async (otp: string) => {
     try {
       setOtpStatus('idle')
+      const targetEmail = formData.email || search.email || ''
       const promise = verifyOtpAsync({
-        email: formData.email,
+        email: targetEmail,
         code: otp,
       })
       toast.promise(promise, {
@@ -394,6 +455,33 @@ function RegistrationPage() {
                 </InputOTP>
               </div>
             </div>
+
+            {/* Resend OTP Section */}
+            <div className="flex items-center justify-center text-sm pt-2">
+              <span className="text-muted-foreground mr-1.5">
+                Didn&apos;t receive the code?
+              </span>
+              {resendCountdown > 0 ? (
+                <span className="text-muted-foreground font-medium">
+                  Resend in{' '}
+                  <span className="text-primary font-semibold">
+                    {resendCountdown}s
+                  </span>
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleResendOtp}
+                  disabled={isRequestingOtp}
+                  className="inline-flex items-center gap-1.5 font-semibold text-primary hover:underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isRequestingOtp && (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  )}
+                  Resend Code
+                </button>
+              )}
+            </div>
           </div>
 
           <Button
@@ -404,14 +492,24 @@ function RegistrationPage() {
             {isVerifyingOtp ? 'Verifying...' : 'Verify Code'}
           </Button>
 
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => setStep(1)}
-              className="text-sm font-medium text-muted-foreground hover:text-primary"
-            >
-              ← Back to details
-            </button>
+          <div className="text-center space-y-2 pt-2">
+            <div>
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+              >
+                ← Back to details
+              </button>
+            </div>
+            <div>
+              <Link
+                to="/login"
+                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                Already verified? Sign In
+              </Link>
+            </div>
           </div>
         </form>
       )}

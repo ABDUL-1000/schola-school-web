@@ -5,6 +5,7 @@ import {
   useExamMetricsQuery,
   useApproveExamMutation,
   useDeleteExamMutation,
+  useTogglePublishResultsMutation,
   useExamByIdQuery,
 } from '@/hooks/queries/exam.queries'
 import { useBranchesQuery } from '@/hooks/queries/branch.queries'
@@ -36,6 +37,8 @@ import {
   XCircle,
   Loader2,
   Trash2,
+  CheckCheck,
+  EyeOff,
 } from 'lucide-react'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { format } from 'date-fns'
@@ -57,6 +60,7 @@ function ExamsPage() {
   const [viewDrawerOpen, setViewDrawerOpen] = useState(false)
   const [viewingExamId, setViewingExamId] = useState<string | null>(null)
   const [examToDelete, setExamToDelete] = useState<string | null>(null)
+  const [resultsModalTarget, setResultsModalTarget] = useState<{ exam: Exam; nextState: boolean } | null>(null)
 
   const { data: metrics } = useExamMetricsQuery()
   const { data: branches } = useBranchesQuery()
@@ -83,6 +87,7 @@ function ExamsPage() {
 
   const approveMutation = useApproveExamMutation()
   const deleteMutation = useDeleteExamMutation()
+  const toggleResultsMutation = useTogglePublishResultsMutation()
 
   const exams = paginatedExams?.data || []
   const pagination = paginatedExams?.pagination
@@ -120,12 +125,22 @@ function ExamsPage() {
       ),
     },
     {
+      accessorKey: 'class',
+      header: 'Class',
+      cell: ({ row }) => row.original.class?.name || '—',
+    },
+    {
+      accessorKey: 'subject',
+      header: 'Subject',
+      cell: ({ row }) => row.original.subject?.name || '—',
+    },
+    {
       accessorKey: 'status',
       header: 'Status',
       cell: ({ row }) => {
-        const status = row.original.status
-        const colors = {
-          DRAFT: 'bg-slate-100 text-slate-700',
+        const status = row.getValue('status') as string
+        const colors: Record<string, string> = {
+          DRAFT: 'bg-gray-100 text-gray-700',
           PUBLISHED: 'bg-blue-100 text-blue-700',
           CLOSED: 'bg-orange-100 text-orange-700',
           ARCHIVED: 'bg-purple-100 text-purple-700',
@@ -152,6 +167,25 @@ function ExamsPage() {
         ),
     },
     {
+      accessorKey: 'publishResults',
+      header: 'Student Results',
+      cell: ({ row }) => {
+        const isPublished = Boolean((row.original as any).publishResults)
+        return (
+          <Badge
+            variant="outline"
+            className={
+              isPublished
+                ? 'text-emerald-700 bg-emerald-50 border-emerald-300 font-semibold'
+                : 'text-amber-700 bg-amber-50 border-amber-300 font-medium'
+            }
+          >
+            {isPublished ? 'Released' : 'Hidden'}
+          </Badge>
+        )
+      },
+    },
+    {
       accessorKey: 'createdAt',
       header: 'Created',
       cell: ({ row }) =>
@@ -160,38 +194,68 @@ function ExamsPage() {
     {
       id: 'actions',
       header: () => <div className="text-right">Actions</div>,
-      cell: ({ row }) => (
-        <div className="flex items-center justify-end gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-8"
-            onClick={() => {
-              setViewingExamId(row.original.id)
-              setViewDrawerOpen(true)
-            }}
-          >
-            <Eye className="size-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-8 text-red-500 hover:text-red-600 hover:bg-red-50"
-            onClick={() => setExamToDelete(row.original.id)}
-            disabled={
-              deleteMutation.isPending &&
-              deleteMutation.variables === row.original.id
-            }
-          >
-            {deleteMutation.isPending &&
-            deleteMutation.variables === row.original.id ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <Trash2 className="size-4" />
-            )}
-          </Button>
-        </div>
-      ),
+      cell: ({ row }) => {
+        const isPublished = Boolean((row.original as any).publishResults)
+        return (
+          <div className="flex items-center justify-end gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={`size-8 ${
+                isPublished
+                  ? 'text-emerald-600 hover:bg-emerald-50'
+                  : 'text-amber-600 hover:bg-amber-50'
+              }`}
+              title={
+                isPublished
+                  ? 'Hide Results from Students'
+                  : 'Release Results to Students'
+              }
+              disabled={toggleResultsMutation.isPending}
+              onClick={() => {
+                setResultsModalTarget({
+                  exam: row.original,
+                  nextState: !isPublished,
+                })
+              }}
+            >
+              {isPublished ? (
+                <CheckCheck className="size-4" />
+              ) : (
+                <EyeOff className="size-4" />
+              )}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8"
+              onClick={() => {
+                setViewingExamId(row.original.id)
+                setViewDrawerOpen(true)
+              }}
+            >
+              <Eye className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8 text-red-500 hover:text-red-600 hover:bg-red-50"
+              onClick={() => setExamToDelete(row.original.id)}
+              disabled={
+                deleteMutation.isPending &&
+                deleteMutation.variables === row.original.id
+              }
+            >
+              {deleteMutation.isPending &&
+              deleteMutation.variables === row.original.id ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Trash2 className="size-4" />
+              )}
+            </Button>
+          </div>
+        )
+      },
     },
   ]
 
@@ -397,6 +461,88 @@ function ExamsPage() {
                 </>
               ) : (
                 'Delete Exam'
+              )}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Release/Hide CBT Results Confirmation Modal */}
+      <AlertDialog
+        open={!!resultsModalTarget}
+        onOpenChange={(open) => !open && setResultsModalTarget(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              {resultsModalTarget?.nextState ? (
+                <>
+                  <CheckCheck className="size-5 text-emerald-600" />
+                  Release CBT Results
+                </>
+              ) : (
+                <>
+                  <EyeOff className="size-5 text-amber-600" />
+                  Hide CBT Results
+                </>
+              )}
+            </AlertDialogTitle>
+            <AlertDialogDescription className="space-y-2 pt-1 text-sm text-foreground/80">
+              {resultsModalTarget?.nextState ? (
+                <p>
+                  Release CBT results to students? Students will immediately be able to view their scores.
+                </p>
+              ) : (
+                <p>
+                  Hide CBT results from students?
+                </p>
+              )}
+              <p className="text-xs text-muted-foreground">
+                Exam: <strong className="text-foreground">{resultsModalTarget?.exam?.title}</strong>
+              </p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={toggleResultsMutation.isPending}>
+              Cancel
+            </AlertDialogCancel>
+            <Button
+              className={
+                resultsModalTarget?.nextState
+                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                  : 'bg-amber-600 hover:bg-amber-700 text-white'
+              }
+              disabled={toggleResultsMutation.isPending}
+              onClick={() => {
+                if (!resultsModalTarget) return
+                toggleResultsMutation.mutate(
+                  {
+                    id: resultsModalTarget.exam.id,
+                    publishResults: resultsModalTarget.nextState,
+                  },
+                  {
+                    onSuccess: (data: any) => {
+                      toast.success(data?.message || 'CBT results status updated')
+                      setResultsModalTarget(null)
+                    },
+                    onError: (err: any) => {
+                      toast.error(
+                        err?.message || 'Failed to update results status',
+                      )
+                    },
+                  },
+                )
+              }}
+            >
+              {toggleResultsMutation.isPending ? (
+                <>
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                  Updating...
+                </>
+              ) : resultsModalTarget?.nextState ? (
+                'Release Results'
+              ) : (
+                'Hide Results'
               )}
             </Button>
           </AlertDialogFooter>

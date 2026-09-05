@@ -31,10 +31,19 @@ function GradingInterfaceReadOnlyRoute() {
     if (!attempt) return 0
     let total = Number(attempt.objectiveScore || 0)
     attempt.answers?.forEach((ans: any) => {
-      if (
-        ans.question?.type !== 'MULTIPLE_CHOICE' &&
-        ans.question?.type !== 'TRUE_FALSE'
-      ) {
+      let qType = ans.question?.questionType || ans.question?.type
+      if (!qType && attempt.assignment?.sections) {
+        for (const sec of attempt.assignment.sections) {
+          const matchedQ = sec.questions?.find(
+            (q: any) => q.id === ans.questionId,
+          )
+          if (matchedQ) {
+            qType = matchedQ.questionType || matchedQ.type
+            break
+          }
+        }
+      }
+      if (qType !== 'MULTIPLE_CHOICE' && qType !== 'TRUE_FALSE') {
         total += Number(ans.manualScore || 0)
       }
     })
@@ -116,8 +125,20 @@ function GradingInterfaceReadOnlyRoute() {
                 const answer = attempt.answers?.find(
                   (a: any) => a.questionId === q.id,
                 )
+                const qType = q.questionType || q.type
                 const isAutoGraded =
-                  q.type === 'MULTIPLE_CHOICE' || q.type === 'TRUE_FALSE'
+                  qType === 'MULTIPLE_CHOICE' || qType === 'TRUE_FALSE'
+
+                const selectedOption =
+                  answer?.selectedOption ||
+                  q.options?.find(
+                    (o: any) => o.id === answer?.selectedOptionId,
+                  )
+                const optionText =
+                  selectedOption?.text || selectedOption?.optionText
+
+                const studentAnswerText =
+                  answer?.answerText || answer?.text || answer?.answer
 
                 return (
                   <Card key={q.id}>
@@ -138,7 +159,7 @@ function GradingInterfaceReadOnlyRoute() {
                       {/* Student's Answer */}
                       <div>
                         <Label className="text-xs text-muted-foreground uppercase mb-2 block">
-                          Student's Answer
+                           Student's Answer
                         </Label>
                         {isAutoGraded ? (
                           <div className="flex items-center space-x-2">
@@ -148,12 +169,16 @@ function GradingInterfaceReadOnlyRoute() {
                               <X className="h-5 w-5 text-destructive" />
                             )}
                             <span className="font-medium">
-                              {answer?.selectedOption?.text || 'No Answer'}
+                              {optionText || 'No Answer'}
                             </span>
                           </div>
                         ) : (
                           <div className="bg-muted p-4 rounded-md text-sm whitespace-pre-wrap">
-                            {answer?.text || 'No text submitted.'}
+                            {studentAnswerText || (answer?.files && answer.files.length > 0 ? (
+                              <span className="text-muted-foreground italic">Student submitted attachment(s) below.</span>
+                            ) : (
+                              'No text submitted.'
+                            ))}
                           </div>
                         )}
                         {answer?.files && answer.files.length > 0 && (
@@ -161,12 +186,12 @@ function GradingInterfaceReadOnlyRoute() {
                             {answer.files.map((file: any) => (
                               <a
                                 key={file.id}
-                                href={file.url}
+                                href={file.fileUrl || file.url}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-sm text-blue-500 hover:underline block"
                               >
-                                📎 View Attachment
+                                📎 View Attachment ({file.fileName || 'File'})
                               </a>
                             ))}
                           </div>

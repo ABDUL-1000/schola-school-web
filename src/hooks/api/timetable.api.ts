@@ -2,6 +2,14 @@ import { api } from '../../lib/api'
 
 // ===== Types =====
 
+export type PeriodType =
+  | 'ACADEMIC'
+  | 'BREAK'
+  | 'ASSEMBLY'
+  | 'SPORTS'
+  | 'PREP'
+  | 'CLUB'
+
 export interface TimetablePeriod {
   id: string
   schoolId: string
@@ -10,6 +18,8 @@ export interface TimetablePeriod {
   startTime: string
   endTime: string
   isBreak: boolean
+  periodType?: PeriodType
+  globalActivityName?: string | null
   sortOrder: number
   createdAt: string
   updatedAt: string
@@ -22,6 +32,9 @@ export interface TimetableEntry {
   staff: { id: string; fullname: string } | null
   class?: { id: string; name: string; level: string } | null
   isSport: boolean
+  isLocked?: boolean
+  isGlobal?: boolean
+  note?: string | null
 }
 
 export type WeekDay =
@@ -53,6 +66,8 @@ export interface CreatePeriodDTO {
   startTime: string
   endTime: string
   isBreak?: boolean
+  periodType?: PeriodType
+  globalActivityName?: string
   sortOrder?: number
 }
 
@@ -63,6 +78,46 @@ export interface SetEntryDTO {
   subjectId?: string | null
   staffId?: string | null
   isSport?: boolean
+  isLocked?: boolean
+  note?: string | null
+}
+
+export interface GenerateTimetableDTO {
+  branchId: string
+  classIds?: string[]
+  academicDays?: WeekDay[]
+  preferMorningCoreSubjects?: boolean
+  spreadSubjectsAcrossDays?: boolean
+  respectDoublePeriods?: boolean
+  commit?: boolean
+  clearExistingUnlocked?: boolean
+}
+
+export interface GenerateTimetableResponse {
+  success: boolean
+  committed: boolean
+  totalSlotsNeeded: number
+  totalSlotsAllocated: number
+  conflictsCount: number
+  conflicts: Array<{
+    classId: string
+    className: string
+    subjectId: string
+    subjectName: string
+    staffId: string
+    staffName: string
+    isDouble: boolean
+    reason: string
+  }>
+  statistics: {
+    totalClasses: number
+    totalTeachers: number
+    academicPeriodsPerDay: number
+    academicDaysCount: number
+    totalAcademicSlotsAvailable: number
+    utilizationRate: string
+  }
+  generatedEntriesCount: number
 }
 
 // ===== API Functions =====
@@ -127,4 +182,36 @@ export const timetableApi = {
     )
     return response.data
   },
+
+  // Timetable Engine
+  generateTimetable: async (data: GenerateTimetableDTO) => {
+    const response = await api.post<any>('/school/timetable/generate', data)
+    return response.data.data as GenerateTimetableResponse
+  },
+
+  validateSlot: async (data: {
+    branchId: string
+    classId: string
+    periodId: string
+    day: WeekDay
+    staffId?: string | null
+    subjectId?: string | null
+    currentEntryId?: string | null
+  }) => {
+    const response = await api.post<any>('/school/timetable/validate-slot', data)
+    return response.data.data as {
+      valid: boolean
+      errors: string[]
+      warnings: string[]
+    }
+  },
+
+  toggleLockEntry: async (entryId: string, isLocked: boolean) => {
+    const response = await api.patch<any>(
+      `/school/timetable/entry/${entryId}/lock`,
+      { isLocked },
+    )
+    return response.data.data
+  },
 }
+

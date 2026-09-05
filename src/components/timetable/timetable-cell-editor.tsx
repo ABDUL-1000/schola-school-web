@@ -3,6 +3,8 @@ import type { WeekDay } from '@/hooks/api/timetable.api'
 import { Button } from '@/components/ui/button'
 import { AppDrawer } from '@/components/ui/app-drawer'
 import { CustomSelect } from '@/components/ui/custom-select'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   useSetEntryMutation,
   useRemoveEntryMutation,
@@ -20,6 +22,8 @@ interface TimetableEntryDrawerProps {
   existingSubjectId?: string
   existingStaffId?: string
   existingIsSport?: boolean
+  existingIsLocked?: boolean
+  existingNote?: string | null
   subjects: Array<{ id: string; name: string }>
   staffs: Array<{ id: string; fullname: string }>
   onSaved: () => void
@@ -36,6 +40,8 @@ export function TimetableEntryDrawer({
   existingSubjectId,
   existingStaffId,
   existingIsSport,
+  existingIsLocked,
+  existingNote,
   subjects,
   staffs,
   onSaved,
@@ -43,6 +49,8 @@ export function TimetableEntryDrawer({
   const [subjectId, setSubjectId] = useState(existingSubjectId || '')
   const [staffId, setStaffId] = useState(existingStaffId || '')
   const [isSport, setIsSport] = useState(existingIsSport || false)
+  const [isLocked, setIsLocked] = useState(existingIsLocked || false)
+  const [note, setNote] = useState(existingNote || '')
 
   const setEntryMutation = useSetEntryMutation()
   const removeEntryMutation = useRemoveEntryMutation()
@@ -53,6 +61,8 @@ export function TimetableEntryDrawer({
       setSubjectId(existingSubjectId || '')
       setStaffId(existingStaffId || '')
       setIsSport(existingIsSport || false)
+      setIsLocked(existingIsLocked || false)
+      setNote(existingNote || '')
     }
     onOpenChange(isOpen)
   }
@@ -66,6 +76,8 @@ export function TimetableEntryDrawer({
         subjectId: subjectId || null,
         staffId: staffId || null,
         isSport,
+        isLocked,
+        note: note || null,
       },
       {
         onSuccess: () => {
@@ -160,10 +172,38 @@ export function TimetableEntryDrawer({
         <div>
           <div className="font-medium">Sports / P.E. Period</div>
           <div className="text-muted-foreground text-xs">
-            Marks this entry as a sports time (⚽)
+            Marks this entry as a sports activity (⚽)
           </div>
         </div>
       </label>
+
+      {/* Lock Checkbox */}
+      <label className="flex items-center gap-3 rounded-md border p-3 text-sm cursor-pointer mt-4 bg-muted/20">
+        <input
+          type="checkbox"
+          checked={isLocked}
+          onChange={(e) => setIsLocked(e.target.checked)}
+          className="size-4"
+        />
+        <div>
+          <div className="font-medium flex items-center gap-1.5">
+            <span>🔒</span> Pin / Lock this Slot
+          </div>
+          <div className="text-muted-foreground text-xs">
+            Protects this lesson so the Auto-Generator won't replace or overwrite it
+          </div>
+        </div>
+      </label>
+
+      {/* Note input */}
+      <div className="space-y-2 mt-4">
+        <Label>Note / Room (Optional)</Label>
+        <Input
+          placeholder="e.g. Science Lab 2, Double Period"
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
+      </div>
     </AppDrawer>
   )
 }

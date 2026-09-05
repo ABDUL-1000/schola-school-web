@@ -15,6 +15,7 @@ import { AuthLayout } from '@/components/auth/auth-layout'
 import { AuthPasswordField } from '@/components/auth/auth-password-field'
 import { buildSlugUrl, isLocalDev, getSubdomain } from '@/lib/subdomain'
 import { useAuthStore } from '@/api'
+import { useRegistrationStore } from '@/hooks/stores/registration.store'
 import { Image } from '@unpic/react'
 
 export const Route = createFileRoute('/_auth/login')({
@@ -59,12 +60,46 @@ function LoginPage() {
       })
       toast.promise(promise, {
         loading: 'Logging in...',
-        success: () => `Welcome back!`,
+        success: (data: any) => {
+          if (data?.isVerified === false || data?.school?.isVerified === false) {
+            return 'Account verification required'
+          }
+          return 'Welcome back!'
+        },
         error: (error: any) =>
           error.message || 'Login failed. Please check your credentials.',
       })
 
       const data = await promise
+
+      // If user has not verified their OTP, redirect them to the OTP page
+      if (data?.isVerified === false || data?.school?.isVerified === false) {
+        const schoolEmail = data?.school?.email || data?.email || email
+        const firstName = data?.school?.fullname || ''
+        const schoolName = data?.school?.schoolName || ''
+
+        useRegistrationStore.getState().updateFormData({
+          email: schoolEmail,
+          firstName,
+          schoolName,
+          otp: '',
+        })
+        useRegistrationStore.getState().setStep(2)
+
+        toast.info('Verification Required', {
+          description:
+            'A verification code has been sent to your email. Please enter it to complete your login.',
+        })
+
+        navigate({
+          to: '/register',
+          search: {
+            email: schoolEmail,
+            step: 2,
+          },
+        })
+        return
+      }
 
       // Redirect to slug subdomain with auth tokens
       const slug = data.school?.slug || data.slug

@@ -120,7 +120,7 @@ export function useSetEntryMutation() {
   })
 }
 
-export function useRemoveEntryMutation() {
+export const useRemoveEntryMutation = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -130,3 +130,27 @@ export function useRemoveEntryMutation() {
     },
   })
 }
+
+export function useGenerateTimetableMutation() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: timetableApi.generateTimetable,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: timetableKeys.all })
+    },
+  })
+}
+
+export function useToggleLockEntryMutation() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ entryId, isLocked }: { entryId: string; isLocked: boolean }) =>
+      timetableApi.toggleLockEntry(entryId, isLocked),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: timetableKeys.all })
+    },
+  })
+}
+

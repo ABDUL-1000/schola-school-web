@@ -11,6 +11,7 @@ import {
   Home,
   Megaphone,
   Briefcase,
+  Landmark,
 } from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
@@ -139,6 +140,29 @@ const data = {
         {
           title: 'Payroll Runs',
           url: '/dashboard/hr/payroll',
+        },
+      ],
+    },
+    {
+      title: 'School Finance',
+      url: '#',
+      icon: Landmark,
+      items: [
+        {
+          title: 'Finance Overview',
+          url: '/dashboard/finance',
+        },
+        {
+          title: 'Fee Schedules',
+          url: '/dashboard/finance/structures',
+        },
+        {
+          title: 'Fee Collection',
+          url: '/dashboard/finance/payments',
+        },
+        {
+          title: 'Operational Expenses',
+          url: '/dashboard/finance/expenses',
         },
       ],
     },

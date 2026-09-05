@@ -60,3 +60,15 @@ export function useDeleteExamMutation() {
     },
   })
 }
+
+export function useTogglePublishResultsMutation() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ id, publishResults }: { id: string; publishResults?: boolean }) =>
+      examApi.togglePublishResults(id, publishResults),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: examKeys.all })
+    },
+  })
+}
