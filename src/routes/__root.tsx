@@ -61,6 +61,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         logo: schoolData.logo,
       })
     } catch (error) {
+      console.error('[Root beforeLoad] Slug resolution error:', error)
       // 404 or other error means invalid slug
       throw redirect({
         to: '/unauthorized',
