@@ -16,6 +16,7 @@ import { NotFound } from '@/components/not-found'
 import { GlobalErrorComponent } from '@/components/ui/error-component'
 import { authApi } from '@/hooks/api/auth.api'
 import { useSchoolStore } from '@/api/school-store'
+import { getSubdomain } from '@/lib/subdomain'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -24,20 +25,8 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   beforeLoad: async ({ location }) => {
-    // 1. Extract Subdomain
-    const hostname = window.location.hostname
-    const parts = hostname.split('.')
-
-    // Check if we are on a subdomain (e.g., [slug].edumatrix.xyz)
-    // This simple check assumes the domain is at least 3 parts if it has a subdomain on a .xyz
-    // e.g. school.edumatrix.xyz (3 parts), localhost (1 part)
-    let subdomain = ''
-    if (parts.length >= 3 && hostname.includes('edumatrix.xyz')) {
-      subdomain = parts[0]
-    } else if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      // Handle other custom domains or environments if needed
-      // For now, assume no subdomain if not matching pattern
-    }
+    // 1. Extract Subdomain using shared helper
+    const subdomain = getSubdomain()
 
     // 2. Ignore reserved subdomains or local testing
     if (

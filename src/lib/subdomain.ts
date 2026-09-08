@@ -1,9 +1,9 @@
-const BASE_DOMAIN = import.meta.env.VITE_APP_URL
+const BASE_DOMAIN = import.meta.env.VITE_APP_URL || 'schola.com.ng'
 const LOGIN_ORIGIN = `https://school.${BASE_DOMAIN}`
 
 /**
  * Extract the subdomain from the current hostname.
- * Returns null on localhost or when on the generic login portal (school.schola.xyz).
+ * Returns null on localhost or when on the generic login portal (school.schola.com.ng).
  */
 export function getSubdomain(): string | null {
   const hostname = window.location.hostname
@@ -11,13 +11,20 @@ export function getSubdomain(): string | null {
   // localhost — no subdomain concept
   if (hostname === 'localhost' || hostname === '127.0.0.1') return null
 
-  // e.g. "khms.schola.xyz" → "khms"
-  const parts = hostname.split('.')
-  if (parts.length === 3 && hostname.endsWith(BASE_DOMAIN)) {
-    const sub = parts[0]
+  // e.g. "greensprings.schola.com.ng" with BASE_DOMAIN="schola.com.ng"
+  if (hostname.endsWith(`.${BASE_DOMAIN}`)) {
+    const sub = hostname.slice(0, -(BASE_DOMAIN.length + 1))
     // "school" is the generic portal, not a school slug
     return sub === 'school' ? null : sub
   }
+
+  // Fallback for legacy .xyz domain or other environments
+  const parts = hostname.split('.')
+  if (parts.length >= 3) {
+    const sub = parts[0]
+    return sub === 'school' ? null : sub
+  }
+
   return null
 }
 
