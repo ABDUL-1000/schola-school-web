@@ -140,5 +140,11 @@ export const studentApi = {
     )
     return response.data
   },
+
+  bulkImportStudents: async (payload: { branchId?: string; students: Array<any> }) => {
+    const response = await api.post<ApiResponse<any>>('/school/student/bulk', payload)
+    return response.data
+  },
 }
+
 

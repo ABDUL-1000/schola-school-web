@@ -10,7 +10,7 @@ import {
 } from '@/hooks/queries/staff.queries'
 import { api } from '@/lib/api'
 import { useQuery } from '@tanstack/react-query'
-import Papa from 'papaparse'
+import { useAuth } from '@/auth'
 import { useBranchesQuery } from '@/hooks/queries/branch.queries'
 import type { Staff, CreateStaffDTO, Branch } from '@/types'
 import { Button } from '@/components/ui/button'
@@ -33,12 +33,12 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { toast } from '@/lib/toast'
-import { Pencil, Eye, Mail } from 'lucide-react'
+import { Pencil, Eye, Mail, FileSpreadsheet } from 'lucide-react'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { useRequireProfileCompletion } from '@/components/profile-completion-alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { StaffContractTab } from '@/components/staff-contract-tab'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { BulkImportModal } from '@/components/bulk-import/BulkImportModal'
 
 export const Route = createFileRoute('/_authenticated/dashboard/staff/')({
   component: StaffPage,
@@ -55,6 +55,7 @@ const emptyForm: CreateStaffDTO = {
 }
 
 function StaffPage() {
+  const { user } = useAuth()
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
   const [filterBranchId, setFilterBranchId] = useState('')
@@ -63,7 +64,6 @@ function StaffPage() {
   const [pageSize, setPageSize] = useState(10)
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
   const [bulkUploadOpen, setBulkUploadOpen] = useState(false)
-  const [isBulkLoading, setIsBulkLoading] = useState(false)
 
   const { data: branches } = useBranchesQuery()
   const { data: deptData } = useQuery({
@@ -340,8 +340,13 @@ function StaffPage() {
               </AlertDialogContent>
             </AlertDialog>
           )}
-          <Button variant="outline" onClick={() => setBulkUploadOpen(true)}>
-            Bulk Upload CSV
+          <Button
+            variant="outline"
+            className="gap-2"
+            onClick={() => requireCompleteProfile(() => setBulkUploadOpen(true))}
+          >
+            <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
+            Bulk Upload Staff
           </Button>
           <Button onClick={openCreate}>+ Add Staff</Button>
         </div>
@@ -359,94 +364,20 @@ function StaffPage() {
         onRowSelectionChange={setSelectedIds}
       />
 
-
-
-      {/* Bulk Upload Dialog */}
-      <Dialog open={bulkUploadOpen} onOpenChange={setBulkUploadOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Bulk Upload Staff</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 pt-4">
-            <p className="text-sm text-muted-foreground">
-              Upload a CSV file containing staff details. The CSV should have the following headers (case-sensitive):
-              <br />
-              <code>fullname, email, phone, roles, jobTitle</code>
-            </p>
-            <div className="space-y-2">
-              <Label>Branch <span className="text-destructive">*</span></Label>
-              <CustomSelect
-                value={filterBranchId}
-                onValueChange={setFilterBranchId}
-                items={[
-                  { label: 'Select a branch', value: '' },
-                  ...(branches || []).map((b: Branch) => ({
-                    label: b.name,
-                    value: b.id,
-                  })),
-                ]}
-              />
-            </div>
-            <div className="space-y-2 mt-4">
-              <Label>CSV File</Label>
-              <Input
-                type="file"
-                accept=".csv"
-                onChange={(e) => {
-                  const file = e.target.files?.[0]
-                  if (!file) return
-                  if (!filterBranchId) {
-                    toast.error('Please select a branch first')
-                    e.target.value = ''
-                    return
-                  }
-                  
-                  setIsBulkLoading(true)
-                  Papa.parse(file, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: (results) => {
-                      setIsBulkLoading(false)
-                      if (results.errors.length > 0) {
-                        toast.error('Failed to parse CSV file')
-                        return
-                      }
-                      
-                      const mappedStaffs = results.data.map((row: any) => ({
-                        branchId: filterBranchId,
-                        fullname: row.fullname,
-                        email: row.email,
-                        phone: row.phone,
-                        roles: row.roles || 'TEACHER',
-                        jobTitle: row.jobTitle,
-                      }))
-                      
-                      bulkCreateMutation.mutate(
-                        { branchId: filterBranchId, staffs: mappedStaffs },
-                        {
-                          onSuccess: (res: any) => {
-                            toast.success(`Bulk upload complete! ${res.createdCount} created, ${res.failedCount} failed.`)
-                            setBulkUploadOpen(false)
-                          },
-                          onError: (err: any) => toast.error(err?.message || 'Bulk upload failed'),
-                        }
-                      )
-                    },
-                    error: () => {
-                      setIsBulkLoading(false)
-                      toast.error('Failed to read CSV file')
-                    }
-                  })
-                  
-                  e.target.value = ''
-                }}
-                disabled={isBulkLoading || !filterBranchId || bulkCreateMutation.isPending}
-              />
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Bulk Import Modal */}
+      <BulkImportModal
+        open={bulkUploadOpen}
+        onOpenChange={setBulkUploadOpen}
+        type="staff"
+        branches={branches || []}
+        schoolName={(user as any)?.schoolName || (user as any)?.fullname || 'School'}
+        defaultBranchId={filterBranchId || undefined}
+        onImportStaff={async ({ branchId, staffMembers }) => {
+          await bulkCreateMutation.mutateAsync({ branchId, staffs: staffMembers })
+        }}
+      />
     </div>
   )
 }
+
 
