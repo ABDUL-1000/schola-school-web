@@ -15,6 +15,7 @@ import { Label } from '@/components/ui/label'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { Loader2, ArrowLeft, Camera } from 'lucide-react'
 import { toast } from '@/lib/toast'
+import { StaffDesignationsField, initialDesignations } from '@/components/staff-designations-field'
 
 const staffSchema = z.object({
   branchId: z.string().min(1, 'Required'),
@@ -23,6 +24,7 @@ const staffSchema = z.object({
   email: z.string().email('Invalid email').min(1, 'Required').or(z.literal('')),
   phone: z.string().min(1, 'Required'),
   roles: z.string().min(1, 'Required'),
+  designations: z.array(z.enum(['ADMIN', 'BURSAR', 'EXAM_OFFICER'])),
   jobTitle: z.string().optional(),
   profileImage: z.string().optional(),
 })
@@ -50,6 +52,7 @@ function EditStaffComponent() {
       email: '',
       phone: '',
       roles: 'TEACHER',
+      designations: [],
       jobTitle: '',
       profileImage: '',
     }
@@ -66,7 +69,8 @@ function EditStaffComponent() {
         fullname: staff.fullname || '',
         email: staff.email || '',
         phone: staff.phone || '',
-        roles: staff.roles || 'TEACHER',
+        roles: 'TEACHER',
+        designations: initialDesignations(staff),
         jobTitle: (staff as any).contract?.jobTitle || staff.jobTitle || '',
         profileImage: staff.profileImage || '',
       })
@@ -188,18 +192,6 @@ function EditStaffComponent() {
                 {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
               </div>
 
-              <div className="space-y-2">
-                <Label>Role <span className="text-destructive">*</span></Label>
-                <CustomSelect
-                  value={watch('roles')}
-                  onValueChange={(val) => setValue('roles', val, { shouldDirty: true })}
-                  items={[
-                    { label: 'Teacher', value: 'TEACHER' },
-                    { label: 'Admin', value: 'ADMIN' }
-                  ]}
-                />
-                {errors.roles && <p className="text-sm text-destructive">{errors.roles.message}</p>}
-              </div>
 
               <div className="space-y-2">
                 <Label>Job Title</Label>
@@ -215,6 +207,13 @@ function EditStaffComponent() {
                     { label: 'None', value: '' },
                     ...(departments || []).map((d: any) => ({ label: d.name, value: d.id }))
                   ]}
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <StaffDesignationsField
+                  value={watch('designations')}
+                  onChange={(next) => setValue('designations', next, { shouldDirty: true })}
                 />
               </div>
             </div>

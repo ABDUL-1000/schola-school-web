@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
+import { designationLabel, initialDesignations } from '@/components/staff-designations-field'
 import { useState } from 'react'
 import { useStaffByIdQuery, useDeleteStaffsMutation } from '@/hooks/queries/staff.queries'
 import { Button } from '@/components/ui/button'
@@ -163,9 +164,10 @@ function StaffDetailsPage() {
                   <Badge variant={staff.status === 'ACTIVE' ? 'default' : 'destructive'}>
                     {staff.status}
                   </Badge>
-                  <Badge variant={staff.roles === 'ADMIN' ? 'default' : 'secondary'}>
-                    {staff.roles}
-                  </Badge>
+                  <Badge variant="secondary">Teacher</Badge>
+                  {initialDesignations(staff).map((d) => (
+                    <Badge key={d} variant="default">{designationLabel(d)}</Badge>
+                  ))}
                 </div>
               </div>
             </div>

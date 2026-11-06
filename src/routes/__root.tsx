@@ -25,16 +25,10 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   beforeLoad: async ({ location }) => {
-    // 1. Extract Subdomain using shared helper
+    // 1. Extract the school slug from the subdomain (e.g. [slug].edumatrix.xyz,
+    //    [slug].schola.com.ng). Reserved/portal subdomains return null.
     const subdomain = getSubdomain()
-
-    // 2. Ignore reserved subdomains or local testing
-    if (
-      !subdomain ||
-      subdomain === 'school' ||
-      subdomain === 'api' ||
-      subdomain === 'www'
-    ) {
+    if (!subdomain) {
       return // Proceed normally to generic dashboard login or landing
     }
 

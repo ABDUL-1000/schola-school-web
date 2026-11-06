@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { Loader2, ArrowLeft, CheckCircle2 } from 'lucide-react'
 import { toast } from '@/lib/toast'
+import { StaffDesignationsField } from '@/components/staff-designations-field'
 
 const staffSchema = z.object({
   branchId: z.string().min(1, 'Required'),
@@ -22,6 +23,7 @@ const staffSchema = z.object({
   email: z.string().email('Invalid email').min(1, 'Required'),
   phone: z.string().min(1, 'Required'),
   roles: z.string().min(1, 'Required'),
+  designations: z.array(z.enum(['ADMIN', 'BURSAR', 'EXAM_OFFICER'])),
   jobTitle: z.string().optional(),
 })
 
@@ -46,6 +48,7 @@ function NewStaffComponent() {
       email: '',
       phone: '',
       roles: 'TEACHER',
+      designations: [],
       jobTitle: '',
     }
   })
@@ -66,7 +69,7 @@ function NewStaffComponent() {
     try {
       await createMutation.mutateAsync({
         ...data,
-        roles: data.roles as any
+        roles: 'TEACHER',
       })
       setCreatedStaffName(data.fullname)
       setSuccessMode(true)
@@ -153,18 +156,6 @@ function NewStaffComponent() {
                 {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
               </div>
 
-              <div className="space-y-2">
-                <Label>Role <span className="text-destructive">*</span></Label>
-                <CustomSelect
-                  value={watch('roles')}
-                  onValueChange={(val) => setValue('roles', val)}
-                  items={[
-                    { label: 'Teacher', value: 'TEACHER' },
-                    { label: 'Admin', value: 'ADMIN' }
-                  ]}
-                />
-                {errors.roles && <p className="text-sm text-destructive">{errors.roles.message}</p>}
-              </div>
 
               <div className="space-y-2">
                 <Label>Job Title</Label>
@@ -184,11 +175,17 @@ function NewStaffComponent() {
               </div>
             </div>
 
+            <StaffDesignationsField
+              value={watch('designations')}
+              onChange={(next) => setValue('designations', next, { shouldDirty: true })}
+            />
+
             <div className="flex justify-end pt-4 border-t">
               <Button type="submit" disabled={createMutation.isPending} size="lg">
                 {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                 Create Staff Member
               </Button>
+
             </div>
           </form>
         </CardContent>

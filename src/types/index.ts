@@ -371,6 +371,7 @@ export interface Staff extends BaseUser {
   schoolId: string;
   branchId: string;
   roles: StaffRole;
+  designations?: Array<'ADMIN' | 'BURSAR' | 'EXAM_OFFICER'>;
   branch?: {
     name: string;
   };
@@ -384,6 +385,7 @@ export interface CreateStaffDTO {
   email: string;
   phone: string;
   roles?: StaffRole;
+  designations?: Array<'ADMIN' | 'BURSAR' | 'EXAM_OFFICER'>;
   jobTitle?: string;
   departmentId?: string;
   profileImage?: string;
