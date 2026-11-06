@@ -50,6 +50,14 @@ const data = {
           url: '/dashboard/students',
         },
         {
+          title: 'Enrolment Queue',
+          url: '/dashboard/enrolment-queue',
+        },
+        {
+          title: 'Staff Queue',
+          url: '/dashboard/staff-queue',
+        },
+        {
           title: 'Branches',
           url: '/dashboard/branches',
         },
@@ -126,6 +134,10 @@ const data = {
           title: 'Results / Gradebook',
           url: '/dashboard/results',
         },
+        {
+          title: 'Question Bank',
+          url: '/dashboard/question-bank',
+        },
       ],
     },
     {
@@ -159,6 +171,10 @@ const data = {
         {
           title: 'Fee Collection',
           url: '/dashboard/finance/payments',
+        },
+        {
+          title: 'Fee Balances',
+          url: '/dashboard/finance/balances',
         },
         {
           title: 'Operational Expenses',
