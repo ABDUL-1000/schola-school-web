@@ -97,6 +97,10 @@ const data = {
           url: '/dashboard/lesson-notes',
         },
         {
+          title: 'Lesson Plans',
+          url: '/dashboard/lesson-plans',
+        },
+        {
           title: 'Assessments Config',
           url: '/dashboard/academics/assessments-config',
         },
