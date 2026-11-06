@@ -54,6 +54,8 @@ import { Route as AuthenticatedDashboardFinanceStructuresRouteImport } from './r
 import { Route as AuthenticatedDashboardHrLeavesRouteImport } from './routes/_authenticated/dashboard/hr.leaves'
 import { Route as AuthenticatedDashboardHrPayrollRouteImport } from './routes/_authenticated/dashboard/hr.payroll'
 import { Route as AuthenticatedDashboardLessonNotesIndexRouteImport } from './routes/_authenticated/dashboard/lesson-notes.index'
+import { Route as AuthenticatedDashboardLessonPlansIndexRouteImport } from './routes/_authenticated/dashboard/lesson-plans.index'
+import { Route as AuthenticatedDashboardLessonPlansPlanIdRouteImport } from './routes/_authenticated/dashboard/lesson-plans.$planId'
 import { Route as AuthenticatedDashboardQuestionBankIndexRouteImport } from './routes/_authenticated/dashboard/question-bank.index'
 import { Route as AuthenticatedDashboardStaffIndexRouteImport } from './routes/_authenticated/dashboard/staff.index'
 import { Route as AuthenticatedDashboardStaffNewRouteImport } from './routes/_authenticated/dashboard/staff.new'
@@ -323,6 +325,18 @@ const AuthenticatedDashboardLessonNotesIndexRoute =
     path: '/lesson-notes/',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const AuthenticatedDashboardLessonPlansIndexRoute =
+  AuthenticatedDashboardLessonPlansIndexRouteImport.update({
+    id: '/lesson-plans/',
+    path: '/lesson-plans/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardLessonPlansPlanIdRoute =
+  AuthenticatedDashboardLessonPlansPlanIdRouteImport.update({
+    id: '/lesson-plans/$planId',
+    path: '/lesson-plans/$planId',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
 const AuthenticatedDashboardQuestionBankIndexRoute =
   AuthenticatedDashboardQuestionBankIndexRouteImport.update({
     id: '/question-bank/',
@@ -450,10 +464,12 @@ export interface FileRoutesByFullPath {
   '/dashboard/finance/structures': typeof AuthenticatedDashboardFinanceStructuresRoute
   '/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
   '/dashboard/hr/payroll': typeof AuthenticatedDashboardHrPayrollRoute
+  '/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   '/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
   '/dashboard/finance/': typeof AuthenticatedDashboardFinanceIndexRoute
   '/dashboard/lesson-notes/': typeof AuthenticatedDashboardLessonNotesIndexRoute
+  '/dashboard/lesson-plans/': typeof AuthenticatedDashboardLessonPlansIndexRoute
   '/dashboard/question-bank/': typeof AuthenticatedDashboardQuestionBankIndexRoute
   '/dashboard/staff/': typeof AuthenticatedDashboardStaffIndexRoute
   '/dashboard/students/': typeof AuthenticatedDashboardStudentsIndexRoute
@@ -508,10 +524,12 @@ export interface FileRoutesByTo {
   '/dashboard/finance/structures': typeof AuthenticatedDashboardFinanceStructuresRoute
   '/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
   '/dashboard/hr/payroll': typeof AuthenticatedDashboardHrPayrollRoute
+  '/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   '/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
   '/dashboard/finance': typeof AuthenticatedDashboardFinanceIndexRoute
   '/dashboard/lesson-notes': typeof AuthenticatedDashboardLessonNotesIndexRoute
+  '/dashboard/lesson-plans': typeof AuthenticatedDashboardLessonPlansIndexRoute
   '/dashboard/question-bank': typeof AuthenticatedDashboardQuestionBankIndexRoute
   '/dashboard/staff': typeof AuthenticatedDashboardStaffIndexRoute
   '/dashboard/students': typeof AuthenticatedDashboardStudentsIndexRoute
@@ -570,10 +588,12 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/finance/structures': typeof AuthenticatedDashboardFinanceStructuresRoute
   '/_authenticated/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
   '/_authenticated/dashboard/hr/payroll': typeof AuthenticatedDashboardHrPayrollRoute
+  '/_authenticated/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   '/_authenticated/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/_authenticated/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
   '/_authenticated/dashboard/finance/': typeof AuthenticatedDashboardFinanceIndexRoute
   '/_authenticated/dashboard/lesson-notes/': typeof AuthenticatedDashboardLessonNotesIndexRoute
+  '/_authenticated/dashboard/lesson-plans/': typeof AuthenticatedDashboardLessonPlansIndexRoute
   '/_authenticated/dashboard/question-bank/': typeof AuthenticatedDashboardQuestionBankIndexRoute
   '/_authenticated/dashboard/staff/': typeof AuthenticatedDashboardStaffIndexRoute
   '/_authenticated/dashboard/students/': typeof AuthenticatedDashboardStudentsIndexRoute
@@ -631,10 +651,12 @@ export interface FileRouteTypes {
     | '/dashboard/finance/structures'
     | '/dashboard/hr/leaves'
     | '/dashboard/hr/payroll'
+    | '/dashboard/lesson-plans/$planId'
     | '/dashboard/staff/new'
     | '/dashboard/students/new'
     | '/dashboard/finance/'
     | '/dashboard/lesson-notes/'
+    | '/dashboard/lesson-plans/'
     | '/dashboard/question-bank/'
     | '/dashboard/staff/'
     | '/dashboard/students/'
@@ -689,10 +711,12 @@ export interface FileRouteTypes {
     | '/dashboard/finance/structures'
     | '/dashboard/hr/leaves'
     | '/dashboard/hr/payroll'
+    | '/dashboard/lesson-plans/$planId'
     | '/dashboard/staff/new'
     | '/dashboard/students/new'
     | '/dashboard/finance'
     | '/dashboard/lesson-notes'
+    | '/dashboard/lesson-plans'
     | '/dashboard/question-bank'
     | '/dashboard/staff'
     | '/dashboard/students'
@@ -750,10 +774,12 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/finance/structures'
     | '/_authenticated/dashboard/hr/leaves'
     | '/_authenticated/dashboard/hr/payroll'
+    | '/_authenticated/dashboard/lesson-plans/$planId'
     | '/_authenticated/dashboard/staff/new'
     | '/_authenticated/dashboard/students/new'
     | '/_authenticated/dashboard/finance/'
     | '/_authenticated/dashboard/lesson-notes/'
+    | '/_authenticated/dashboard/lesson-plans/'
     | '/_authenticated/dashboard/question-bank/'
     | '/_authenticated/dashboard/staff/'
     | '/_authenticated/dashboard/students/'
@@ -1099,6 +1125,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardLessonNotesIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
+    '/_authenticated/dashboard/lesson-plans/': {
+      id: '/_authenticated/dashboard/lesson-plans/'
+      path: '/lesson-plans'
+      fullPath: '/dashboard/lesson-plans/'
+      preLoaderRoute: typeof AuthenticatedDashboardLessonPlansIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/lesson-plans/$planId': {
+      id: '/_authenticated/dashboard/lesson-plans/$planId'
+      path: '/lesson-plans/$planId'
+      fullPath: '/dashboard/lesson-plans/$planId'
+      preLoaderRoute: typeof AuthenticatedDashboardLessonPlansPlanIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
     '/_authenticated/dashboard/question-bank/': {
       id: '/_authenticated/dashboard/question-bank/'
       path: '/question-bank'
@@ -1259,10 +1299,12 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardFinanceStructuresRoute: typeof AuthenticatedDashboardFinanceStructuresRoute
   AuthenticatedDashboardHrLeavesRoute: typeof AuthenticatedDashboardHrLeavesRoute
   AuthenticatedDashboardHrPayrollRoute: typeof AuthenticatedDashboardHrPayrollRoute
+  AuthenticatedDashboardLessonPlansPlanIdRoute: typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   AuthenticatedDashboardStaffNewRoute: typeof AuthenticatedDashboardStaffNewRoute
   AuthenticatedDashboardStudentsNewRoute: typeof AuthenticatedDashboardStudentsNewRoute
   AuthenticatedDashboardFinanceIndexRoute: typeof AuthenticatedDashboardFinanceIndexRoute
   AuthenticatedDashboardLessonNotesIndexRoute: typeof AuthenticatedDashboardLessonNotesIndexRoute
+  AuthenticatedDashboardLessonPlansIndexRoute: typeof AuthenticatedDashboardLessonPlansIndexRoute
   AuthenticatedDashboardQuestionBankIndexRoute: typeof AuthenticatedDashboardQuestionBankIndexRoute
   AuthenticatedDashboardStaffIndexRoute: typeof AuthenticatedDashboardStaffIndexRoute
   AuthenticatedDashboardStudentsIndexRoute: typeof AuthenticatedDashboardStudentsIndexRoute
@@ -1313,6 +1355,8 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
       AuthenticatedDashboardFinanceStructuresRoute,
     AuthenticatedDashboardHrLeavesRoute: AuthenticatedDashboardHrLeavesRoute,
     AuthenticatedDashboardHrPayrollRoute: AuthenticatedDashboardHrPayrollRoute,
+    AuthenticatedDashboardLessonPlansPlanIdRoute:
+      AuthenticatedDashboardLessonPlansPlanIdRoute,
     AuthenticatedDashboardStaffNewRoute: AuthenticatedDashboardStaffNewRoute,
     AuthenticatedDashboardStudentsNewRoute:
       AuthenticatedDashboardStudentsNewRoute,
@@ -1320,6 +1364,8 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
       AuthenticatedDashboardFinanceIndexRoute,
     AuthenticatedDashboardLessonNotesIndexRoute:
       AuthenticatedDashboardLessonNotesIndexRoute,
+    AuthenticatedDashboardLessonPlansIndexRoute:
+      AuthenticatedDashboardLessonPlansIndexRoute,
     AuthenticatedDashboardQuestionBankIndexRoute:
       AuthenticatedDashboardQuestionBankIndexRoute,
     AuthenticatedDashboardStaffIndexRoute:
