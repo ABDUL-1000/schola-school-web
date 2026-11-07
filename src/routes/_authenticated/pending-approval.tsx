@@ -1,6 +1,16 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
-import { CheckCircle2, Circle, Clock, Loader2, LogOut, RefreshCw, XCircle } from 'lucide-react'
+import {
+  CheckCircle2,
+  Circle,
+  Clock,
+  Loader2,
+  LogOut,
+  Mail,
+  PartyPopper,
+  RefreshCw,
+  XCircle,
+} from 'lucide-react'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/api'
@@ -10,16 +20,22 @@ export const Route = createFileRoute('/_authenticated/pending-approval')({
   component: PendingApprovalPage,
 })
 
+const SUPPORT_EMAIL = 'schola.com.ng@gmail.com'
+
+/**
+ * Shown right after a school verifies its email. Sign-up stops here until the
+ * Schola team approves the application; then the school continues to setup
+ * (profile, branches, academic session). The page checks by itself every 30s.
+ */
 function PendingApprovalPage() {
   const navigate = useNavigate()
   const logout = useAuthStore((s) => s.logout)
   const { data: status, isLoading, isFetching, refetch, error } = useOnboardingStatusQuery({ poll: true })
 
-  // Approved → straight into the dashboard. Setup unfinished → back to the wizard.
+  // Approved → continue to setup (or the dashboard if setup is already done).
   useEffect(() => {
-    if (!status) return
-    if (status.approved) navigate({ to: '/dashboard', replace: true })
-    else if (status.nextStep) navigate({ to: `/onboarding/${status.nextStep}`, replace: true })
+    if (!status?.approved) return
+    navigate({ to: status.nextStep ? `/onboarding/${status.nextStep}` : '/dashboard', replace: true })
   }, [status, navigate])
 
   const signOut = () => {
@@ -31,11 +47,11 @@ function PendingApprovalPage() {
 
   return (
     <AuthLayout
-      title={rejected ? 'Application not approved' : 'Waiting for approval'}
+      title={rejected ? 'Application not approved' : 'Application submitted'}
       description={
         rejected
-          ? 'Your school registration was reviewed by the Schola team.'
-          : 'Your school is set up. The Schola team is reviewing your registration.'
+          ? 'The Schola team has reviewed your school registration.'
+          : "You're all set for now. We'll take it from here."
       }
     >
       {isLoading || !status ? (
@@ -56,34 +72,43 @@ function PendingApprovalPage() {
               </div>
               <p className="mt-2 text-sm">{status.rejectionReason || 'Your registration details could not be verified.'}</p>
               <p className="mt-2 text-sm text-muted-foreground">
-                If you think this is a mistake, reply to the email we sent you or contact Schola support.
+                If you think this is a mistake, reply to the email we sent you or write to{' '}
+                <a className="font-medium text-foreground underline" href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
               </p>
             </div>
           ) : (
-            <div className="rounded-xl border bg-muted/40 p-4">
-              <div className="flex items-center gap-2 font-semibold">
-                <Clock className="size-5 text-amber-500" /> Under review
+            <>
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4">
+                <div className="flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400">
+                  <PartyPopper className="size-5" /> Congratulations, your application is in!
+                </div>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  <span className="font-medium text-foreground">{status.schoolName}</span> has been submitted to Schola
+                  for review. We usually review applications within one working day.
+                </p>
               </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                We'll email <span className="font-medium text-foreground">{status.email}</span> as soon as{' '}
-                <span className="font-medium text-foreground">{status.schoolName}</span> is approved. This page also
-                updates by itself — you can leave it open.
-              </p>
-            </div>
+
+              <div className="flex gap-3 rounded-xl border bg-muted/40 p-4">
+                <Mail className="mt-0.5 size-5 shrink-0 text-primary" />
+                <p className="text-sm text-muted-foreground">
+                  We've emailed <span className="font-medium text-foreground">{status.email}</span> a confirmation. Once
+                  you're approved, we'll email you a link to sign in and finish setting up your school: branches,
+                  academic session and classes. You can also leave this page open, as it updates by itself.
+                </p>
+              </div>
+            </>
           )}
 
           <ul className="space-y-2 text-sm">
-            <Step done label="Account created" />
+            <Step done label="School account created" />
             <Step done={status.isVerified} label="Email verified" />
-            <Step done={status.steps.profile} label="School profile" />
-            <Step done={status.steps.branches} label="Branches" />
-            <Step done={status.steps.academic} label="Academic session & classes" />
-            <Step done={status.approved} pending={!rejected} label="Approved by Schola" />
+            <Step done={status.approved} pending={!rejected} failed={rejected} label="Approved by Schola" />
+            <Step done={false} label="Set up branches, session and classes (after approval)" />
           </ul>
 
           <div className="flex flex-col gap-2 sm:flex-row">
             <Button variant="outline" className="flex-1" onClick={() => refetch()} disabled={isFetching}>
-              <RefreshCw className={`mr-2 size-4 ${isFetching ? 'animate-spin' : ''}`} /> Check again
+              <RefreshCw className={`mr-2 size-4 ${isFetching ? 'animate-spin' : ''}`} /> Check status
             </Button>
             <Button variant="ghost" className="flex-1" onClick={signOut}>
               <LogOut className="mr-2 size-4" /> Sign out
@@ -95,15 +120,17 @@ function PendingApprovalPage() {
   )
 }
 
-function Step({ done, pending, label }: { done: boolean; pending?: boolean; label: string }) {
+function Step({ done, pending, failed, label }: { done: boolean; pending?: boolean; failed?: boolean; label: string }) {
   return (
     <li className="flex items-center gap-2">
       {done ? (
-        <CheckCircle2 className="size-4 text-emerald-600" />
+        <CheckCircle2 className="size-4 shrink-0 text-emerald-600" />
+      ) : failed ? (
+        <XCircle className="size-4 shrink-0 text-destructive" />
       ) : pending ? (
-        <Clock className="size-4 text-amber-500" />
+        <Clock className="size-4 shrink-0 text-amber-500" />
       ) : (
-        <Circle className="size-4 text-muted-foreground" />
+        <Circle className="size-4 shrink-0 text-muted-foreground" />
       )}
       <span className={done ? '' : 'text-muted-foreground'}>{label}</span>
     </li>

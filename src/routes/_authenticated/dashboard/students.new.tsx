@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
+import { NoBranchesHint } from '@/components/branches/no-branches-hint'
 import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -118,6 +119,10 @@ function NewStudentComponent() {
   const formDocuments = watch('documents')
 
   const { data: branches } = useBranchesQuery()
+  // One branch (single-campus school): pick it for them.
+  useEffect(() => {
+    if (branches?.length === 1 && !branchId) setValue('branchId', branches[0].id)
+  }, [branches])
   const { data: paginatedClasses } = useClassesQuery(branchId || undefined)
   const classes = paginatedClasses?.data || []
   
@@ -279,6 +284,7 @@ function NewStudentComponent() {
                       {branches?.map((b: any) => <SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>)}
                     </SelectContent>
                   </Select>
+                  <NoBranchesHint branches={branches} />
                   {errors.branchId && <p className="text-sm text-destructive">{errors.branchId.message}</p>}
                 </div>
                 <div className="space-y-2">

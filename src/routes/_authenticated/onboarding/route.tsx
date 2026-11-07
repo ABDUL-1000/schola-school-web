@@ -1,6 +1,8 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { Navigate, Outlet, createFileRoute } from '@tanstack/react-router'
+import { Loader2 } from 'lucide-react'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { useOnboardingStore } from '@/hooks/stores/onboarding.store'
+import { useOnboardingStatusQuery } from '@/hooks/queries/onboarding.queries'
 
 export const Route = createFileRoute('/_authenticated/onboarding')({
   component: OnboardingLayout,
@@ -14,6 +16,16 @@ const STEPS = [
 
 function OnboardingLayout() {
   const step = useOnboardingStore((s) => s.step)
+  // Setup opens only after Schola approves the application.
+  const { data: status, isLoading } = useOnboardingStatusQuery()
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Loader2 className="size-6 animate-spin text-primary" />
+      </div>
+    )
+  }
+  if (status && !status.approved) return <Navigate to="/pending-approval" replace />
 
   return (
     <AuthLayout

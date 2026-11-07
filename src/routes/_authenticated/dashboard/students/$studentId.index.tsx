@@ -833,8 +833,8 @@ function StudentDetailsPage() {
             <div className="space-y-4 pt-2 border p-4 rounded-lg bg-white text-slate-900 shadow-sm print:border-none">
               {/* Receipt Header */}
               <div className="text-center border-b pb-3">
-                <h3 className="text-base font-bold uppercase">{receiptDetails.school?.schoolName || 'Emerald Heights Academy'}</h3>
-                <p className="text-[11px] text-slate-500">{receiptDetails.school?.address || 'Victoria Island Campus'}</p>
+                <h3 className="text-base font-bold uppercase">{receiptDetails.school?.schoolName || ''}</h3>
+                <p className="text-[11px] text-slate-500">{receiptDetails.school?.address || ''}</p>
                 <div className="mt-2 inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">
                   OFFICIAL PAYMENT RECEIPT
                 </div>

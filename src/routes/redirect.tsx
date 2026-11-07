@@ -67,9 +67,10 @@ function RedirectPage() {
         setStatus('ready')
         await new Promise((r) => setTimeout(r, 1500))
 
-        // Step 4: Navigate to dashboard or onboarding
+        // Step 4: A school that just signed up waits for approval; everyone else goes to the
+        // dashboard, which forwards to the setup wizard if setup isn't finished.
         if (isOnboarding) {
-          navigate({ to: '/onboarding/profile', replace: true })
+          navigate({ to: '/pending-approval', replace: true })
         } else {
           navigate({ to: '/dashboard', replace: true })
         }

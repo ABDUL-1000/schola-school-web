@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { useSchoolReportsQuery } from '@/hooks/queries/reports.queries'
 import { useSessionsQuery } from '@/hooks/queries/academic.queries'
 import { useBranchesQuery } from '@/hooks/queries/branch.queries'
+import { useProfileQuery } from '@/hooks/queries/profile.queries'
 import { Button } from '@/components/ui/button'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { Badge } from '@/components/ui/badge'
@@ -46,6 +47,16 @@ function ReportsPage() {
   // Queries
   const { data: sessions } = useSessionsQuery()
   const { data: branches } = useBranchesQuery()
+  const { data: school } = useProfileQuery()
+  const schoolAddress = [school?.address, school?.city, school?.state, school?.country]
+    .filter(Boolean)
+    .join(', ')
+  const curriculumLabel: Record<string, string> = {
+    NIGERIAN: 'Nigerian curriculum (WAEC / NECO)',
+    BRITISH: 'British curriculum',
+    AMERICAN: 'American curriculum',
+    MIXED: 'Mixed curriculum',
+  }
 
   // Derive available terms from selected session
   const currentSession = sessions?.find(
@@ -82,6 +93,12 @@ function ReportsPage() {
   const attendance = reportData?.attendance
   const demographics = reportData?.demographics
 
+  // Only real results count: a new school has no classes/students assessed yet.
+  const topClass = (academics?.classPerformance || [])
+    .filter((c) => c.assessedStudents > 0)
+    .sort((a, b) => b.averageScore - a.averageScore)[0]
+  const topStudent = academics?.honorRoll?.[0]
+
   const formatCurrency = (val: number) =>
     `₦${Number(val || 0).toLocaleString('en-NG', { minimumFractionDigits: 0 })}`
 
@@ -90,16 +107,14 @@ function ReportsPage() {
       {/* Official Print Header (Only visible on print) */}
       <div className="hidden print:block text-center border-b pb-4 mb-4">
         <h1 className="text-xl font-black tracking-wide uppercase">
-          Emerald Heights Academy
+          {school?.schoolName || ''}
         </h1>
-        <p className="text-xs text-slate-600">
-          14 Victoria Island Boulevard, Victoria Island, Lagos State, Nigeria
-        </p>
+        {schoolAddress && <p className="text-xs text-slate-600">{schoolAddress}</p>}
         <div className="mt-2 inline-block bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1 rounded border">
           EXECUTIVE SCHOOL INTELLIGENCE & ACADEMIC AUDIT REPORT
         </div>
-        <div className="mt-2 text-[10px] text-slate-500 flex justify-between px-4">
-          <span>Session: {currentSession?.name || '2025/2026 Academic Session'}</span>
+        <div className="mt-2 text-[10px] text-slate-500 flex flex-wrap justify-between gap-x-4 px-4">
+          <span>Session: {currentSession?.name || '—'}</span>
           <span>
             Generated: {format(new Date(), 'EEEE, MMMM d, yyyy - hh:mm a')}
           </span>
@@ -119,7 +134,7 @@ function ReportsPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -213,7 +228,7 @@ function ReportsPage() {
           <div className="text-xl font-bold text-emerald-600">
             {exec.schoolAverageScore}%
           </div>
-          <p className="text-[10px] text-emerald-600/80">Term WAEC average</p>
+          <p className="text-[10px] text-emerald-600/80">Term average</p>
         </div>
 
         <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl space-y-1 shadow-sm">
@@ -279,7 +294,7 @@ function ReportsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Academic & Quality Highlights */}
             <div className="p-5 rounded-xl border bg-card space-y-4 shadow-sm">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2 font-semibold text-sm">
                   <Award className="h-4 w-4 text-emerald-600" />
                   <span>Academic Performance Summary</span>
@@ -290,32 +305,38 @@ function ReportsPage() {
               </div>
 
               <div className="space-y-3 text-xs">
-                <div className="flex justify-between py-1.5 border-b">
+                <div className="flex justify-between gap-3 py-1.5 border-b">
                   <span className="text-muted-foreground">School Overall Average:</span>
                   <span className="font-bold text-foreground">{exec.schoolAverageScore}%</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b">
+                <div className="flex justify-between gap-3 py-1.5 border-b">
                   <span className="text-muted-foreground">Top Performing Class:</span>
-                  <span className="font-semibold text-foreground">
-                    {academics?.classPerformance?.slice().sort((a, b) => b.averageScore - a.averageScore)[0]?.className || 'JSS 1 Gold'}
+                  <span className="font-semibold text-foreground text-right">
+                    {topClass ? topClass.className : <span className="font-normal text-muted-foreground">No results yet</span>}
                   </span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b">
+                <div className="flex justify-between gap-3 py-1.5 border-b">
                   <span className="text-muted-foreground">Highest Scoring Student:</span>
-                  <span className="font-semibold text-emerald-600">
-                    {academics?.honorRoll[0]?.studentName || 'Chidinma Eze'} ({academics?.honorRoll[0]?.averageScore || 92}%)
+                  <span className="font-semibold text-emerald-600 text-right">
+                    {topStudent ? (
+                      `${topStudent.studentName} (${topStudent.averageScore}%)`
+                    ) : (
+                      <span className="font-normal text-muted-foreground">No results yet</span>
+                    )}
                   </span>
                 </div>
-                <div className="flex justify-between py-1.5">
-                  <span className="text-muted-foreground">Curriculum Standards:</span>
-                  <span className="font-medium text-foreground">WAEC 9-Point Scale Compliant</span>
+                <div className="flex justify-between gap-3 py-1.5">
+                  <span className="text-muted-foreground">Curriculum:</span>
+                  <span className="font-medium text-foreground text-right">
+                    {(school?.curriculumType && curriculumLabel[school.curriculumType]) || '—'}
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Financial Health Summary */}
             <div className="p-5 rounded-xl border bg-card space-y-4 shadow-sm">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2 font-semibold text-sm">
                   <Landmark className="h-4 w-4 text-primary" />
                   <span>Financial Position & Inflows</span>
@@ -326,19 +347,19 @@ function ReportsPage() {
               </div>
 
               <div className="space-y-3 text-xs">
-                <div className="flex justify-between py-1.5 border-b">
+                <div className="flex justify-between gap-3 py-1.5 border-b">
                   <span className="text-muted-foreground">Total Expected Fee Revenue:</span>
                   <span className="font-bold text-foreground">{formatCurrency(finance?.totalBilled || 0)}</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b">
+                <div className="flex justify-between gap-3 py-1.5 border-b">
                   <span className="text-muted-foreground">Total Collected Cash Inflow:</span>
                   <span className="font-bold text-emerald-600">{formatCurrency(finance?.totalPaid || 0)}</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b">
+                <div className="flex justify-between gap-3 py-1.5 border-b">
                   <span className="text-muted-foreground">Outstanding School Fee Debt:</span>
                   <span className="font-bold text-rose-600">{formatCurrency(finance?.totalOutstanding || 0)}</span>
                 </div>
-                <div className="flex justify-between py-1.5">
+                <div className="flex justify-between gap-3 py-1.5">
                   <span className="text-muted-foreground">Operating Expenses:</span>
                   <span className="font-medium text-foreground">{formatCurrency(finance?.totalExpenses || 0)}</span>
                 </div>
@@ -360,7 +381,12 @@ function ReportsPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+            {!academics?.honorRoll?.length && (
+              <p className="rounded-lg border border-dashed p-6 text-center text-xs text-muted-foreground">
+                No published results yet. Top students appear here once report sheets are published.
+              </p>
+            )}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {(academics?.honorRoll || []).map((student, idx) => (
                 <div
                   key={student.studentId}
@@ -376,7 +402,7 @@ function ReportsPage() {
                     {student.studentName}
                   </div>
                   <div className="text-xs text-muted-foreground font-mono">
-                    {student.regNumber || 'REG-001'}
+                    {student.regNumber || '—'}
                   </div>
                   <div className="text-base font-black text-emerald-600 pt-1">
                     {student.averageScore}%
@@ -741,7 +767,7 @@ function ReportsPage() {
                     {demographics?.genderDemographics?.male || 0}
                   </div>
                   <p className="text-xs text-blue-600/80">
-                    {demographics?.genderDemographics?.malePercentage || 50}% of student body
+                    {demographics?.genderDemographics?.malePercentage || 0}% of student body
                   </p>
                 </div>
                 <div className="p-4 rounded-lg bg-pink-500/10 border border-pink-500/20 space-y-1">
@@ -750,7 +776,7 @@ function ReportsPage() {
                     {demographics?.genderDemographics?.female || 0}
                   </div>
                   <p className="text-xs text-pink-600/80">
-                    {demographics?.genderDemographics?.femalePercentage || 50}% of student body
+                    {demographics?.genderDemographics?.femalePercentage || 0}% of student body
                   </p>
                 </div>
               </div>
@@ -758,14 +784,14 @@ function ReportsPage() {
               {/* Gender Visual Progress Bar */}
               <div className="space-y-1 pt-2">
                 <div className="flex justify-between text-xs text-muted-foreground">
-                  <span>Male ({demographics?.genderDemographics?.malePercentage || 50}%)</span>
-                  <span>Female ({demographics?.genderDemographics?.femalePercentage || 50}%)</span>
+                  <span>Male ({demographics?.genderDemographics?.malePercentage || 0}%)</span>
+                  <span>Female ({demographics?.genderDemographics?.femalePercentage || 0}%)</span>
                 </div>
                 <div className="h-3 w-full bg-pink-200 dark:bg-pink-900/40 rounded-full overflow-hidden flex">
                   <div
                     className="bg-blue-500 h-full"
                     style={{
-                      width: `${demographics?.genderDemographics?.malePercentage || 50}%`,
+                      width: `${demographics?.genderDemographics?.malePercentage || 0}%`,
                     }}
                   />
                 </div>
@@ -801,16 +827,16 @@ function ReportsPage() {
       {/* Official Sign-off Block (Visible only on print) */}
       <div className="hidden print:grid grid-cols-3 gap-8 pt-12 mt-12 border-t text-xs">
         <div className="border-t pt-2 text-center">
-          <p className="font-bold">Dr. Chukwuemeka Obi</p>
-          <p className="text-slate-500 text-[10px]">Executive Principal & Administrator</p>
+          <p className="font-bold">&nbsp;</p>
+          <p className="text-slate-500 text-[10px]">Principal / Head of School</p>
         </div>
         <div className="border-t pt-2 text-center">
-          <p className="font-bold">Mrs. Fatima Bello</p>
-          <p className="text-slate-500 text-[10px]">Head Bursar & Chief Financial Officer</p>
+          <p className="font-bold">&nbsp;</p>
+          <p className="text-slate-500 text-[10px]">Bursar</p>
         </div>
         <div className="border-t pt-2 text-center">
-          <p className="font-bold">Board of Governors</p>
-          <p className="text-slate-500 text-[10px]">Emerald Heights Academy</p>
+          <p className="font-bold">&nbsp;</p>
+          <p className="text-slate-500 text-[10px]">Proprietor / Board{school?.schoolName ? ` — ${school.schoolName}` : ''}</p>
         </div>
       </div>
     </div>

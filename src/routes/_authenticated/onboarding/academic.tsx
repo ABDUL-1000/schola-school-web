@@ -101,10 +101,9 @@ function AcademicStep() {
       })
 
       await promise
-      // New schools wait for platform approval; approved ones go straight in
-      // (the pending page forwards to the dashboard once approved).
+      // Setup happens after approval, so this is the last step before the dashboard.
       await queryClient.invalidateQueries({ queryKey: onboardingKeys.status })
-      navigate({ to: '/pending-approval' })
+      navigate({ to: '/dashboard' })
     } catch (error) {
       console.error(error)
     }
