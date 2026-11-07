@@ -38,12 +38,18 @@ export function useLoginMutation() {
   return useMutation({
     mutationFn: authApi.login,
     onSuccess: (data) => {
-      // 1. Store auth state
-      store.login({
-        user: { ...data, role: 'SCHOOL' } as any,
-        token: data.tokens.accessToken,
-        refreshToken: data.tokens.refreshToken,
-      })
+      // 1. Store auth state only if verified and tokens are present
+      if (
+        data?.tokens &&
+        data?.isVerified !== false &&
+        data?.school?.isVerified !== false
+      ) {
+        store.login({
+          user: { ...data, role: 'SCHOOL' } as any,
+          token: data.tokens.accessToken,
+          refreshToken: data.tokens.refreshToken,
+        })
+      }
     },
   })
 }

@@ -49,5 +49,13 @@ export const examApi = {
   deleteExam: async (id: string): Promise<void> => {
     await api.delete(`/school/exam/${id}`)
   },
+
+  togglePublishResults: async (id: string, publishResults?: boolean): Promise<any> => {
+    const response = await api.patch<ApiResponse<any>>(
+      `/school/exam/${id}/toggle-results`,
+      { publishResults },
+    )
+    return response.data.data
+  },
 }
 

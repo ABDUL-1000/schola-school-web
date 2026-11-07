@@ -14,7 +14,9 @@ import { PeriodManager } from '@/components/timetable/period-manager'
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { CustomSelect } from '@/components/ui/custom-select'
+import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AutoGeneratorDialog } from '@/components/timetable/auto-generator-dialog'
 
 export const Route = createFileRoute('/_authenticated/dashboard/timetable')({
   component: TimetablePage,
@@ -25,6 +27,7 @@ function TimetablePage() {
   const [selectedBranchId, setSelectedBranchId] = useState('')
   const [selectedClassId, setSelectedClassId] = useState('')
   const [selectedStaffId, setSelectedStaffId] = useState('')
+  const [autoGenOpen, setAutoGenOpen] = useState(false)
 
   // Queries
   const { data: branches, isLoading: branchesLoading } = useBranchesQuery()
@@ -68,11 +71,21 @@ function TimetablePage() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Timetable</h1>
-        <p className="text-muted-foreground text-sm">
-          Manage class schedules and teacher assignments
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Timetable</h1>
+          <p className="text-muted-foreground text-sm">
+            Manage class schedules, bell schedule periods, and automated conflict-free generation
+          </p>
+        </div>
+        {selectedBranchId && viewMode === 'CLASS' && (
+          <Button
+            onClick={() => setAutoGenOpen(true)}
+            className="flex items-center gap-2 bg-primary text-primary-foreground shadow-xs font-semibold"
+          >
+            <span>⚡</span> Auto-Generate Timetable
+          </Button>
+        )}
       </div>
 
       {/* Filters */}
@@ -213,6 +226,19 @@ function TimetablePage() {
             </p>
           </CardContent>
         </Card>
+      )}
+
+      {/* Auto-generator modal */}
+      {selectedBranchId && (
+        <AutoGeneratorDialog
+          open={autoGenOpen}
+          onOpenChange={setAutoGenOpen}
+          branchId={selectedBranchId}
+          currentClassId={selectedClassId}
+          currentClassName={classes?.data?.find((c: any) => c.id === selectedClassId)?.name}
+          classes={classes?.data || []}
+          onGenerated={() => refetchClass()}
+        />
       )}
     </div>
   )

@@ -30,27 +30,58 @@ function BranchStep() {
     // Initialize with one branch if empty
     if (formData.branches.length === 0) {
       updateFormData({
-        branches: [{ name: 'Main Campus', isHQ: true, address: '', state: '', city: '', phone: '' }],
+        branches: [
+          {
+            name: formData.schoolName || 'Main Campus',
+            isHQ: true,
+            address: '',
+            state: '',
+            city: '',
+            phone: '',
+          },
+        ],
       })
     }
-  }, [setStep, formData.branches.length, updateFormData])
+  }, [setStep, formData.branches.length, formData.schoolName, updateFormData])
 
   const handleNext = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    // Validate
-    const hasEmpty = formData.branches.some(b => !b.name || !b.state || !b.city || !b.address)
-    if (hasEmpty) {
-      toast.error('Please fill all required branch fields')
-      return
+
+    const isSingle = formData.schoolType === 'SINGLE_BRANCH'
+
+    // Validate: only require all fields for MULTI_BRANCH layout
+    if (!isSingle) {
+      const hasEmpty = formData.branches.some(
+        (b) => !b.name?.trim() || !b.state || !b.city || !b.address?.trim(),
+      )
+      if (hasEmpty) {
+        toast.error('Please fill all required branch fields')
+        return
+      }
     }
 
     try {
-      const promise = setupBranches({ branches: formData.branches })
+      const branchesPayload = isSingle
+        ? [
+            {
+              name:
+                formData.branches[0]?.name?.trim() ||
+                formData.schoolName ||
+                'Main Campus',
+              isHQ: true,
+              address: formData.branches[0]?.address?.trim() || '',
+              state: formData.branches[0]?.state || '',
+              city: formData.branches[0]?.city || '',
+              phone: formData.branches[0]?.phone?.trim() || '',
+            },
+          ]
+        : formData.branches
+
+      const promise = setupBranches({ branches: branchesPayload })
       toast.promise(promise, {
         loading: 'Configuring branches...',
         success: 'Branches configured!',
-        error: 'Failed to configure branches',
+        error: (err: any) => err?.message || 'Failed to configure branches',
       })
 
       await promise
@@ -62,7 +93,17 @@ function BranchStep() {
 
   const addBranch = () => {
     updateFormData({
-      branches: [...formData.branches, { name: '', isHQ: false, address: '', state: '', city: '', phone: '' }],
+      branches: [
+        ...formData.branches,
+        {
+          name: '',
+          isHQ: false,
+          address: '',
+          state: '',
+          city: '',
+          phone: '',
+        },
+      ],
     })
   }
 
@@ -90,8 +131,87 @@ function BranchStep() {
   return (
     <form onSubmit={handleNext} className="space-y-6">
       {formData.schoolType === 'SINGLE_BRANCH' ? (
-        <div className="bg-blue-50/50 p-4 rounded-md border border-blue-100 text-sm text-blue-800">
-          You selected Single Branch. We will automatically configure your Main Campus using your registration details. Just click Next.
+        <div className="space-y-4">
+          <div className="bg-blue-50/50 p-4 rounded-md border border-blue-100 text-sm text-blue-800">
+            You selected <strong>Single Branch</strong>. We will configure your{' '}
+            <strong>Main Campus</strong>. You can optionally add location
+            details below, or simply click <strong>Next Step</strong> to
+            continue.
+          </div>
+
+          <div className="p-4 border rounded-md relative space-y-4 bg-card">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2 col-span-2 md:col-span-1">
+                <Label>Campus Name</Label>
+                <Input
+                  placeholder="Main Campus"
+                  value={formData.branches[0]?.name || ''}
+                  onChange={(e) => updateBranch(0, 'name', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2 col-span-2 md:col-span-1">
+                <Label>Phone (Optional)</Label>
+                <Input
+                  placeholder="+234..."
+                  value={formData.branches[0]?.phone || ''}
+                  onChange={(e) => updateBranch(0, 'phone', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2 col-span-2">
+                <Label>Address (Optional)</Label>
+                <Input
+                  placeholder="123 School Street"
+                  value={formData.branches[0]?.address || ''}
+                  onChange={(e) => updateBranch(0, 'address', e.target.value)}
+                />
+              </div>
+
+              <div className="space-y-2 col-span-2 md:col-span-1">
+                <Label>State (Optional)</Label>
+                <Select
+                  value={formData.branches[0]?.state || ''}
+                  onValueChange={(val) => {
+                    updateBranchFields(0, { state: val, city: '' })
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select State" />
+                  </SelectTrigger>
+                  <SelectContent position="popper">
+                    {NaijaStates.states().map((s: string) => (
+                      <SelectItem key={s} value={s}>
+                        {s}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2 col-span-2 md:col-span-1">
+                <Label>Local Government (Optional)</Label>
+                <Select
+                  value={formData.branches[0]?.city || ''}
+                  onValueChange={(val) => updateBranch(0, 'city', val)}
+                  disabled={!formData.branches[0]?.state}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select LGA" />
+                  </SelectTrigger>
+                  <SelectContent position="popper">
+                    {(
+                      (formData.branches[0]?.state
+                        ? NaijaStates.lgas(formData.branches[0].state)?.lgas
+                        : []) || []
+                    ).map((lga: string) => (
+                      <SelectItem key={lga} value={lga}>
+                        {lga}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="space-y-6">

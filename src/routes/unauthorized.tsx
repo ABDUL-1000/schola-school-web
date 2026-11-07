@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
 import { AlertCircle } from 'lucide-react'
 
+import { getLoginUrl } from '@/lib/subdomain'
+
 export const Route = createFileRoute('/unauthorized')({
   component: UnauthorizedComponent,
 })
@@ -9,7 +11,7 @@ export const Route = createFileRoute('/unauthorized')({
 function UnauthorizedComponent() {
   const handleReturnHome = () => {
     // Navigate back to the generic school login
-    window.location.href = 'https://school.edumatrix.xyz'
+    window.location.href = getLoginUrl()
   }
 
   return (

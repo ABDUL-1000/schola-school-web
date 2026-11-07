@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useOnboardingStore } from '@/hooks/stores/onboarding.store'
-import { useSetupAcademicMutation } from '@/hooks/queries/onboarding.queries'
+import { onboardingKeys, useSetupAcademicMutation } from '@/hooks/queries/onboarding.queries'
+import { useQueryClient } from '@tanstack/react-query'
 import { toast } from '@/lib/toast'
 import React, { useEffect } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -37,6 +38,7 @@ function AcademicStep() {
   const navigate = useNavigate()
   const { formData, updateFormData, setStep } = useOnboardingStore()
   const { mutateAsync: setupAcademic, isPending } = useSetupAcademicMutation()
+  const queryClient = useQueryClient()
 
   useEffect(() => {
     setStep(3)
@@ -94,13 +96,14 @@ function AcademicStep() {
 
       toast.promise(promise, {
         loading: 'Setting up academic foundation...',
-        success: 'Welcome to your Dashboard!',
-        error: 'Failed to complete setup',
+        success: 'Setup complete!',
+        error: (err: any) => err?.message || 'Failed to complete setup',
       })
 
       await promise
-      // Final Redirect
-      window.location.href = '/dashboard'
+      // Setup happens after approval, so this is the last step before the dashboard.
+      await queryClient.invalidateQueries({ queryKey: onboardingKeys.status })
+      navigate({ to: '/dashboard' })
     } catch (error) {
       console.error(error)
     }

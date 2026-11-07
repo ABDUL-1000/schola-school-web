@@ -4,7 +4,9 @@ import {
   useStudentsQuery,
   useReassignStudentMutation,
   useDeleteStudentsMutation,
+  useBulkImportStudentsMutation,
 } from '@/hooks/queries/student.queries'
+import { BulkImportModal } from '@/components/bulk-import/BulkImportModal'
 import { useBranchesQuery } from '@/hooks/queries/branch.queries'
 import { useClassesQuery } from '@/hooks/queries/class.queries'
 import type { StudentItem } from '@/hooks/api/student.api'
@@ -31,7 +33,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { toast } from '@/lib/toast'
-import { Pencil, Eye, ArrowRightLeft, LinkIcon } from 'lucide-react'
+import { Pencil, Eye, ArrowRightLeft, LinkIcon, FileSpreadsheet } from 'lucide-react'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { useRequireProfileCompletion } from '@/components/profile-completion-alert'
 import { useAuth } from '@/auth'
@@ -52,6 +54,7 @@ function StudentsPage() {
 
   // CRUD state
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
+  const [bulkModalOpen, setBulkModalOpen] = useState(false)
 
   // Reassign state
   const [reassignDrawerOpen, setReassignDrawerOpen] = useState(false)
@@ -88,6 +91,7 @@ function StudentsPage() {
   // Mutations
   const reassignMutation = useReassignStudentMutation()
   const deleteMutation = useDeleteStudentsMutation()
+  const bulkImportMutation = useBulkImportStudentsMutation()
   const requireCompleteProfile = useRequireProfileCompletion()
 
   const filteredStudents = students.filter(
@@ -283,6 +287,10 @@ function StudentsPage() {
   // }
 
 
+  const registrationLink = `${
+    window.location.hostname === 'localhost' ? 'http://localhost:3003' : 'https://edu-coral-ten.vercel.app'
+  }/register/${(user as any)?.slug}`
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -301,7 +309,7 @@ function StudentsPage() {
             <TabsTrigger value="pending">Pending Admissions</TabsTrigger>
           </TabsList>
           
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {selectedIds.length > 0 && (
               <AlertDialog
                 open={deleteConfirmOpen}
@@ -340,23 +348,29 @@ function StudentsPage() {
               </AlertDialog>
             )}
             <div className="flex items-center gap-2 bg-muted/50 border rounded-md pl-3 pr-1 py-1 max-w-full">
-              <span className="text-sm text-muted-foreground truncate max-w-[120px] sm:max-w-[200px]" title={window.location.hostname === "localhost" ? "http://localhost:3003/register/${(user as any)?.slug}" : "https://edu-coral-ten.vercel.app/register/${(user as any)?.slug}"}>
-                {window.location.hostname === 'localhost' ? 'http://localhost:3003/register/${(user as any)?.slug}' : 'https://edu-coral-ten.vercel.app/register/${(user as any)?.slug}'}
+              <span className="text-sm text-muted-foreground truncate max-w-[160px] sm:max-w-[200px]" title={registrationLink}>
+                {registrationLink}
               </span>
               <Button 
                 variant="ghost" 
                 size="icon"
                 className="h-7 w-7"
                 onClick={() => {
-                  const baseUrl = window.location.hostname === 'localhost' ? 'http://localhost:3003' : 'https://edu-coral-ten.vercel.app'
-                  const link = `${baseUrl}/register/${(user as any)?.slug}`;
-                  navigator.clipboard.writeText(link);
+                  navigator.clipboard.writeText(registrationLink);
                   toast.success('Registration link copied to clipboard!');
                 }}
               >
                 <LinkIcon className="w-4 h-4 text-muted-foreground" />
               </Button>
             </div>
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={() => requireCompleteProfile(() => setBulkModalOpen(true))}
+            >
+              <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
+              Bulk Upload
+            </Button>
             <Button onClick={openCreate}>+ Add Student</Button>
           </div>
         </div>
@@ -488,7 +502,22 @@ function StudentsPage() {
           />
         </div>
       </AppDrawer>
+
+      {/* Bulk Import Modal */}
+      <BulkImportModal
+        open={bulkModalOpen}
+        onOpenChange={setBulkModalOpen}
+        type="student"
+        branches={branches || []}
+        availableClasses={filterClasses || []}
+        schoolName={(user as any)?.schoolName || (user as any)?.fullname || 'School'}
+        defaultBranchId={filterBranchId || undefined}
+        onImportStudents={async ({ branchId, students }) => {
+          await bulkImportMutation.mutateAsync({ branchId, students })
+        }}
+      />
     </div>
   )
 }
+
 

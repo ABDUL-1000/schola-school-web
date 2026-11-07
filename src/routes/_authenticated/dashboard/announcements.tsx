@@ -85,6 +85,7 @@ function AnnouncementsPage() {
                       { label: 'Entire School', value: 'ALL' },
                       { label: 'Staff Only', value: 'STAFF' },
                       { label: 'Students Only', value: 'STUDENTS' },
+                      { label: 'Guardians Only', value: 'GUARDIANS' },
                     ]}
                   />
                 </div>

@@ -73,7 +73,17 @@ export const isTokenExpired = (token: string): boolean => {
   try {
     const payloadBase64 = token.split(".")[1];
     if (!payloadBase64) return true;
-    const decodedPayload = JSON.parse(atob(payloadBase64));
+    let base64 = payloadBase64.replace(/-/g, "+").replace(/_/g, "/");
+    while (base64.length % 4) {
+      base64 += "=";
+    }
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    const decodedPayload = JSON.parse(jsonPayload);
     const exp = decodedPayload.exp;
     if (!exp) return false; // If no exp claim, assume it doesn't expire
     const now = Math.floor(Date.now() / 1000);

@@ -16,7 +16,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          echo "VITE_API_BASE_URL=https://api.edumatrix.xyz/api/v1" > .env
+          echo "VITE_API_BASE_URL=https://api.schola.com.ng/api/v1" > .env
           echo "VITE_APP_URL=edumatrix.xyz" >> .env
           docker build -t schola-school-web:latest -f Dockerfile .
           docker save -o school-web-prod.tar schola-school-web:latest

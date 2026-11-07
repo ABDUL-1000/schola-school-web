@@ -1,4 +1,5 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { Navigate, Outlet, createFileRoute } from '@tanstack/react-router'
+import { Loader2 } from 'lucide-react'
 import { AppSidebar } from '@/components/app-sidebar'
 import { UserNav } from '@/components/user-nav'
 import {
@@ -8,12 +9,26 @@ import {
 } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
 import { ProfileCompletionAlert } from '@/components/profile-completion-alert'
+import { useOnboardingStatusQuery } from '@/hooks/queries/onboarding.queries'
 
 export const Route = createFileRoute('/_authenticated/dashboard')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  // Not approved yet → the "application under review" page. Approved but setup not
+  // finished (profile, branches, academic session) → the next setup step.
+  const { data: status, isLoading } = useOnboardingStatusQuery()
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Loader2 className="size-6 animate-spin text-primary" />
+      </div>
+    )
+  }
+  if (status && !status.approved) return <Navigate to="/pending-approval" replace />
+  if (status?.nextStep) return <Navigate to={`/onboarding/${status.nextStep}`} replace />
+
   return (
     <SidebarProvider>
       <AppSidebar />

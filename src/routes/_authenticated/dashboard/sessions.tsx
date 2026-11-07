@@ -141,7 +141,7 @@ function AcademicSessionsPage() {
         <div className="space-y-6">
           {sessions.map((session: any) => (
             <Card key={session.id}>
-              <CardHeader className="flex flex-row items-center justify-between py-4">
+              <CardHeader className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-1">
                   <CardTitle className="flex items-center gap-2">
                     <CalendarDays className="size-5 text-primary" />

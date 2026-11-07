@@ -11,6 +11,7 @@ import {
   Home,
   Megaphone,
   Briefcase,
+  Landmark,
 } from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
@@ -47,6 +48,14 @@ const data = {
         {
           title: 'Students',
           url: '/dashboard/students',
+        },
+        {
+          title: 'Enrolment Queue',
+          url: '/dashboard/enrolment-queue',
+        },
+        {
+          title: 'Staff Queue',
+          url: '/dashboard/staff-queue',
         },
         {
           title: 'Branches',
@@ -88,6 +97,10 @@ const data = {
           url: '/dashboard/lesson-notes',
         },
         {
+          title: 'Lesson Plans',
+          url: '/dashboard/lesson-plans',
+        },
+        {
           title: 'Assessments Config',
           url: '/dashboard/academics/assessments-config',
         },
@@ -125,6 +138,10 @@ const data = {
           title: 'Results / Gradebook',
           url: '/dashboard/results',
         },
+        {
+          title: 'Question Bank',
+          url: '/dashboard/question-bank',
+        },
       ],
     },
     {
@@ -139,6 +156,33 @@ const data = {
         {
           title: 'Payroll Runs',
           url: '/dashboard/hr/payroll',
+        },
+      ],
+    },
+    {
+      title: 'School Finance',
+      url: '#',
+      icon: Landmark,
+      items: [
+        {
+          title: 'Finance Overview',
+          url: '/dashboard/finance',
+        },
+        {
+          title: 'Fee Schedules',
+          url: '/dashboard/finance/structures',
+        },
+        {
+          title: 'Fee Collection',
+          url: '/dashboard/finance/payments',
+        },
+        {
+          title: 'Fee Balances',
+          url: '/dashboard/finance/balances',
+        },
+        {
+          title: 'Operational Expenses',
+          url: '/dashboard/finance/expenses',
         },
       ],
     },
@@ -168,22 +212,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     logo: profile?.logo || '',
   }
 
-  const dynamicNavMain = React.useMemo(() => {
-    return data.navMain.map((group) => {
-      if (group.title === 'Management') {
-        return {
-          ...group,
-          items: group.items?.filter((item) => {
-            if (item.title === 'Branches') {
-              return profile?.schoolType === 'MULTI_BRANCH'
-            }
-            return true
-          }),
-        }
-      }
-      return group
-    })
-  }, [profile?.schoolType])
+  // Every school has at least one branch (its main campus) that staff, classes and
+  // students belong to, so Branches is shown to single-campus schools too.
+  const dynamicNavMain = data.navMain
 
   return (
     <Sidebar collapsible="icon" variant="sidebar" {...props}>

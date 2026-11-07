@@ -98,3 +98,15 @@ export function useResetStudentPasswordMutation() {
     },
   })
 }
+
+export function useBulkImportStudentsMutation() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: studentApi.bulkImportStudents,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: studentKeys.all })
+    },
+  })
+}
+

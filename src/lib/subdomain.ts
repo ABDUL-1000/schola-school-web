@@ -1,9 +1,10 @@
-const BASE_DOMAIN = import.meta.env.VITE_APP_URL
+// Base domain the per-school subdomains hang off (e.g. schola.com.ng).
+const BASE_DOMAIN: string = import.meta.env.VITE_APP_URL || 'schola.com.ng'
 const LOGIN_ORIGIN = `https://school.${BASE_DOMAIN}`
 
 /**
  * Extract the subdomain from the current hostname.
- * Returns null on localhost or when on the generic login portal (school.schola.xyz).
+ * Returns null on localhost or when on the generic login portal (school.schola.com.ng).
  */
 export function getSubdomain(): string | null {
   const hostname = window.location.hostname
@@ -11,13 +12,22 @@ export function getSubdomain(): string | null {
   // localhost — no subdomain concept
   if (hostname === 'localhost' || hostname === '127.0.0.1') return null
 
-  // e.g. "khms.schola.xyz" → "khms"
-  const parts = hostname.split('.')
-  if (parts.length === 3 && hostname.endsWith(BASE_DOMAIN)) {
-    const sub = parts[0]
-    // "school" is the generic portal, not a school slug
-    return sub === 'school' ? null : sub
+  // e.g. "khms.schola.xyz" → "khms", "emerald-heights.schola.com.ng" → "emerald-heights"
+  // (works for multi-part base domains like schola.com.ng)
+  if (BASE_DOMAIN && hostname.endsWith(`.${BASE_DOMAIN}`)) {
+    const sub = hostname.slice(0, -(BASE_DOMAIN.length + 1))
+    // "school" is the generic portal, not a school slug; nested subdomains aren't schools
+    if (!sub || sub.includes('.') || ['school', 'www', 'api'].includes(sub)) return null
+    return sub
   }
+
+  // Fallback for legacy .xyz domain or other environments
+  const parts = hostname.split('.')
+  if (parts.length >= 3) {
+    const sub = parts[0]
+    return ['school', 'www', 'api'].includes(sub) ? null : sub
+  }
+
   return null
 }
 

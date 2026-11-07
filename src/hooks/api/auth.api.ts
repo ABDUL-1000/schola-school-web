@@ -7,7 +7,7 @@ import type {
 } from '@/types'
 
 export const authApi = {
-  requestOtp: async (data: { email: string; firstName: string }) => {
+  requestOtp: async (data: { email: string; firstName?: string }) => {
     const response = await api.post<ApiResponse<any>>(
       '/school/auth/request-otp',
       data,
