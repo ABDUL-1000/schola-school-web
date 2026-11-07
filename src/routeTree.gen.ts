@@ -22,6 +22,7 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as AuthenticatedOnboardingRouteRouteImport } from './routes/_authenticated/onboarding/route'
+import { Route as AuthenticatedPendingApprovalRouteImport } from './routes/_authenticated/pending-approval'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as StaffRegisterRouteImport } from './routes/staff.register'
 import { Route as SchoolSlugStaffRegisterRouteImport } from './routes/$schoolSlug.staff.register'
@@ -134,6 +135,12 @@ const AuthenticatedOnboardingRouteRoute =
   AuthenticatedOnboardingRouteRouteImport.update({
     id: '/onboarding',
     path: '/onboarding',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPendingApprovalRoute =
+  AuthenticatedPendingApprovalRouteImport.update({
+    id: '/pending-approval',
+    path: '/pending-approval',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
@@ -434,6 +441,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/pending-approval': typeof AuthenticatedPendingApprovalRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
@@ -494,6 +502,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/pending-approval': typeof AuthenticatedPendingApprovalRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
@@ -558,6 +567,7 @@ export interface FileRoutesById {
   '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
+  '/_authenticated/pending-approval': typeof AuthenticatedPendingApprovalRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
@@ -621,6 +631,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/register'
+    | '/pending-approval'
     | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
@@ -681,6 +692,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/register'
+    | '/pending-approval'
     | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
@@ -744,6 +756,7 @@ export interface FileRouteTypes {
     | '/_auth/forgot-password'
     | '/_auth/login'
     | '/_auth/register'
+    | '/_authenticated/pending-approval'
     | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
@@ -899,6 +912,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof AuthenticatedOnboardingRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pending-approval': {
+      id: '/_authenticated/pending-approval'
+      path: '/pending-approval'
+      fullPath: '/pending-approval'
+      preLoaderRoute: typeof AuthenticatedPendingApprovalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/demo/tanstack-query': {
@@ -1414,6 +1434,7 @@ const AuthenticatedOnboardingRouteRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRouteRoute: typeof AuthenticatedDashboardRouteRouteWithChildren
   AuthenticatedOnboardingRouteRoute: typeof AuthenticatedOnboardingRouteRouteWithChildren
+  AuthenticatedPendingApprovalRoute: typeof AuthenticatedPendingApprovalRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -1421,6 +1442,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedDashboardRouteRouteWithChildren,
   AuthenticatedOnboardingRouteRoute:
     AuthenticatedOnboardingRouteRouteWithChildren,
+  AuthenticatedPendingApprovalRoute: AuthenticatedPendingApprovalRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
