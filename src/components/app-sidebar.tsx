@@ -212,22 +212,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     logo: profile?.logo || '',
   }
 
-  const dynamicNavMain = React.useMemo(() => {
-    return data.navMain.map((group) => {
-      if (group.title === 'Management') {
-        return {
-          ...group,
-          items: group.items?.filter((item) => {
-            if (item.title === 'Branches') {
-              return profile?.schoolType === 'MULTI_BRANCH'
-            }
-            return true
-          }),
-        }
-      }
-      return group
-    })
-  }, [profile?.schoolType])
+  // Every school has at least one branch (its main campus) that staff, classes and
+  // students belong to, so Branches is shown to single-campus schools too.
+  const dynamicNavMain = data.navMain
 
   return (
     <Sidebar collapsible="icon" variant="sidebar" {...props}>

@@ -271,7 +271,7 @@ function RegistrationPage() {
         )
         useAuthStore.getState().logout()
       } else {
-        navigate({ to: '/onboarding/profile' })
+        navigate({ to: '/pending-approval' })
       }
     } catch (error: any) {
       setOtpStatus('error')

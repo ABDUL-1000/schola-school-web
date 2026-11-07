@@ -1,10 +1,11 @@
 import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useCreateStaffMutation } from '@/hooks/queries/staff.queries'
 import { useBranchesQuery } from '@/hooks/queries/branch.queries'
+import { NoBranchesHint } from '@/components/branches/no-branches-hint'
 import { api } from '@/lib/api'
 import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
@@ -56,6 +57,10 @@ function NewStaffComponent() {
   const { handleSubmit, register, watch, setValue, formState: { errors } } = form
 
   const { data: branches } = useBranchesQuery()
+  // One branch (single-campus school): pick it for them.
+  useEffect(() => {
+    if (branches?.length === 1 && !watch('branchId')) setValue('branchId', branches[0].id)
+  }, [branches])
   const { data: deptData } = useQuery({
     queryKey: ['departments'],
     queryFn: async () => {
@@ -135,6 +140,7 @@ function NewStaffComponent() {
                     ...(branches || []).map((b: any) => ({ label: b.name, value: b.id }))
                   ]}
                 />
+                <NoBranchesHint branches={branches} />
                 {errors.branchId && <p className="text-sm text-destructive">{errors.branchId.message}</p>}
               </div>
 

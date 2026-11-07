@@ -287,6 +287,10 @@ function StudentsPage() {
   // }
 
 
+  const registrationLink = `${
+    window.location.hostname === 'localhost' ? 'http://localhost:3003' : 'https://edu-coral-ten.vercel.app'
+  }/register/${(user as any)?.slug}`
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -305,7 +309,7 @@ function StudentsPage() {
             <TabsTrigger value="pending">Pending Admissions</TabsTrigger>
           </TabsList>
           
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {selectedIds.length > 0 && (
               <AlertDialog
                 open={deleteConfirmOpen}
@@ -344,17 +348,15 @@ function StudentsPage() {
               </AlertDialog>
             )}
             <div className="flex items-center gap-2 bg-muted/50 border rounded-md pl-3 pr-1 py-1 max-w-full">
-              <span className="text-sm text-muted-foreground truncate max-w-[120px] sm:max-w-[200px]" title={window.location.hostname === "localhost" ? "http://localhost:3003/register/${(user as any)?.slug}" : "https://edu-coral-ten.vercel.app/register/${(user as any)?.slug}"}>
-                {window.location.hostname === 'localhost' ? 'http://localhost:3003/register/${(user as any)?.slug}' : 'https://edu-coral-ten.vercel.app/register/${(user as any)?.slug}'}
+              <span className="text-sm text-muted-foreground truncate max-w-[160px] sm:max-w-[200px]" title={registrationLink}>
+                {registrationLink}
               </span>
               <Button 
                 variant="ghost" 
                 size="icon"
                 className="h-7 w-7"
                 onClick={() => {
-                  const baseUrl = window.location.hostname === 'localhost' ? 'http://localhost:3003' : 'https://edu-coral-ten.vercel.app'
-                  const link = `${baseUrl}/register/${(user as any)?.slug}`;
-                  navigator.clipboard.writeText(link);
+                  navigator.clipboard.writeText(registrationLink);
                   toast.success('Registration link copied to clipboard!');
                 }}
               >

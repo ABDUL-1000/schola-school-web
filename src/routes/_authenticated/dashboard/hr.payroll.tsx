@@ -319,12 +319,12 @@ function HRPayrollPage() {
       </div>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardHeader className="flex flex-col gap-3 space-y-0 pb-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <CardTitle>Payroll Records</CardTitle>
             <CardDescription>Review payments for the selected month</CardDescription>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <div className="w-[140px]">
               <CustomSelect
                 value={selectedMonth}
@@ -336,11 +336,10 @@ function HRPayrollPage() {
               <CustomSelect
                 value={selectedYear}
                 onValueChange={setSelectedYear}
-                items={[
-                  { label: '2025', value: '2025' },
-                  { label: '2026', value: '2026' },
-                  { label: '2027', value: '2027' },
-                ]}
+                items={[-1, 0, 1].map((d) => {
+                  const y = String(new Date().getFullYear() + d)
+                  return { label: y, value: y }
+                })}
               />
             </div>
             <Button onClick={handleGenerate} disabled={isPending}>

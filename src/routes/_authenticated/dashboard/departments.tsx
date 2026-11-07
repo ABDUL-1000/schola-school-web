@@ -131,15 +131,15 @@ function DepartmentsPage() {
   }
 
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
-      <div className="flex justify-between items-center space-y-2">
+    <div className="flex-1 space-y-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Departments</h2>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Departments</h2>
           <p className="text-muted-foreground">
             Manage student departments (e.g. Science, Art, Commercial)
           </p>
         </div>
-        <Button onClick={() => handleOpenDialog()} className="gap-2">
+        <Button onClick={() => handleOpenDialog()} className="gap-2 self-start sm:self-auto">
           <Plus className="size-4" />
           Add Department
         </Button>

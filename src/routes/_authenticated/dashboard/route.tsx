@@ -16,8 +16,8 @@ export const Route = createFileRoute('/_authenticated/dashboard')({
 })
 
 function RouteComponent() {
-  // Schools that haven't finished setup or aren't approved yet can't use the dashboard
-  // (the API refuses it), so send them to the right step instead of a page full of errors.
+  // Not approved yet → the "application under review" page. Approved but setup not
+  // finished (profile, branches, academic session) → the next setup step.
   const { data: status, isLoading } = useOnboardingStatusQuery()
   if (isLoading) {
     return (
@@ -26,13 +26,8 @@ function RouteComponent() {
       </div>
     )
   }
-  if (status && !status.approved) {
-    return status.nextStep ? (
-      <Navigate to={`/onboarding/${status.nextStep}`} replace />
-    ) : (
-      <Navigate to="/pending-approval" replace />
-    )
-  }
+  if (status && !status.approved) return <Navigate to="/pending-approval" replace />
+  if (status?.nextStep) return <Navigate to={`/onboarding/${status.nextStep}`} replace />
 
   return (
     <SidebarProvider>
