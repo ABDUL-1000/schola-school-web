@@ -45,40 +45,26 @@ const EMPTY: EnrolForm = {
 const req = (msg: string) => z.string().trim().min(1, msg)
 const phone = z.string().trim().min(7, 'Enter a valid phone number')
 
+const optionalDob = z
+  .string()
+  .refine((v) => !v || new Date(v) <= new Date(), 'Date of birth cannot be in the future')
+
 const STEP_SCHEMAS = [
   z.object({
     firstName: req('First name is required'),
     surname: req('Surname is required'),
-    gender: req('Select a gender'),
-    dateOfBirth: req('Date of birth is required').refine((v) => new Date(v) <= new Date(), 'Date of birth cannot be in the future'),
+    dateOfBirth: optionalDob,
     classId: req('Choose the class applying for'),
   }),
   z.object({
     pFullName: req('Full name is required'),
-    pRelationship: req('Select a relationship'),
-    pEmail: z.string().trim().email('Enter a valid email address'),
+    pEmail: z.string().trim().email('Enter a valid email address').or(z.literal('')),
     pPhone: phone,
-    pAddress: req('Home address is required'),
   }),
-  z
-    .object({
-      hasSecondParent: z.boolean(),
-      sFullName: z.string(),
-      sRelationship: z.string(),
-      sPhone: z.string(),
-      eFullName: req('Full name is required'),
-      eRelationship: req('Relationship is required'),
-      ePhone: phone,
-    })
-    .superRefine((v, ctx) => {
-      if (!v.hasSecondParent) return
-      if (!v.sFullName.trim()) ctx.addIssue({ code: 'custom', path: ['sFullName'], message: 'Full name is required' })
-      if (!v.sRelationship.trim()) ctx.addIssue({ code: 'custom', path: ['sRelationship'], message: 'Select a relationship' })
-      if (v.sPhone.trim().length < 7) ctx.addIssue({ code: 'custom', path: ['sPhone'], message: 'Enter a valid phone number' })
-    }),
 ]
 
-const STEPS = ["Child's Details", 'Primary Parent / Guardian', 'Second Parent & Emergency Contact', 'Review & Submit']
+const STEPS = ["Child's Details", 'Parent / Guardian']
+const LAST = STEPS.length - 1
 
 type Errors = Partial<Record<keyof EnrolForm, string>>
 
@@ -99,7 +85,8 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
   const { data: info, isLoading, isError } = useApplySchool(slug)
   const draft = useRef(loadDraft(slug)).current
   const [form, setForm] = useState<EnrolForm>(draft?.form ? { ...EMPTY, ...draft.form } : EMPTY)
-  const [step, setStep] = useState(draft?.step ?? 0)
+  // Drafts saved by the older 4-step form may point past the last step.
+  const [step, setStep] = useState(Math.min(draft?.step ?? 0, LAST))
   const [errors, setErrors] = useState<Errors>({})
   const [uploading, setUploading] = useState(false)
   const [submittedParent, setSubmittedParent] = useState<string | null>(null)
@@ -142,24 +129,19 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
         firstName: form.firstName.trim(),
         surname: form.surname.trim(),
         otherName: form.otherName.trim() || undefined,
-        gender: form.gender,
-        dateOfBirth: form.dateOfBirth,
+        gender: form.gender || undefined,
+        dateOfBirth: form.dateOfBirth || undefined,
         classId: form.classId,
         medicalNotes: form.medicalNotes.trim() || undefined,
         passportPhotoUrl: form.passportPhotoUrl || undefined,
         primaryParent: {
           fullName: form.pFullName.trim(),
           relationship: form.pRelationship,
-          email: form.pEmail.trim(),
+          email: form.pEmail.trim() || undefined,
           phone: form.pPhone.trim(),
-          address: form.pAddress.trim(),
+          address: form.pAddress.trim() || undefined,
           occupation: form.pOccupation.trim() || undefined,
         },
-        hasSecondParent: form.hasSecondParent,
-        secondParent: form.hasSecondParent
-          ? { fullName: form.sFullName.trim(), relationship: form.sRelationship, phone: form.sPhone.trim() }
-          : undefined,
-        emergencyContact: { fullName: form.eFullName.trim(), relationship: form.eRelationship.trim(), phone: form.ePhone.trim() },
       }),
     onSuccess: () => {
       setSubmittedParent(form.pFullName.trim())
@@ -209,17 +191,17 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
         <div className="mx-auto max-w-[480px]">
           <h1 className="text-xl font-bold">Student Enrolment</h1>
           <p className="mt-1 text-xs text-gray-500">
-            Complete the form below to enrol your child. All fields marked <span className="text-red-500">*</span> are required.
+            Two short steps. Only the fields marked <span className="text-red-500">*</span> are required.
           </p>
 
-          <div className="mt-5 grid grid-cols-4 gap-1.5" aria-label={`Step ${step + 1} of 4`}>
+          <div className="mt-5 grid grid-cols-2 gap-1.5" aria-label={`Step ${step + 1} of ${STEPS.length}`}>
             {STEPS.map((s, i) => (
               <div key={s} className={cn('h-1 rounded-full', i <= step ? 'bg-[#1a56ff]' : 'bg-black/10')} />
             ))}
           </div>
 
           <div className="mt-6 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-            <div className="text-[10px] font-semibold uppercase tracking-wider text-[#1a56ff]">Step {step + 1} of 4</div>
+            <div className="text-[10px] font-semibold uppercase tracking-wider text-[#1a56ff]">Step {step + 1} of {STEPS.length}</div>
             <h2 className="mb-5 mt-1 text-base font-bold">{STEPS[step]}</h2>
 
             {step === 0 && (
@@ -227,10 +209,10 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
                 <Text label="First Name" required value={form.firstName} onChange={(v) => set('firstName', v)} error={errors.firstName} />
                 <Text label="Surname" required value={form.surname} onChange={(v) => set('surname', v)} error={errors.surname} />
                 <Text label="Other Name" value={form.otherName} onChange={(v) => set('otherName', v)} />
-                <Select label="Gender" required value={form.gender} onChange={(v) => set('gender', v)} error={errors.gender}
+                <Select label="Gender" value={form.gender} onChange={(v) => set('gender', v)} error={errors.gender}
                   options={['Male', 'Female', 'Other']} placeholder="Select gender" />
                 <div>
-                  <FieldLabel required htmlFor="en-dob">Date of Birth</FieldLabel>
+                  <FieldLabel htmlFor="en-dob">Date of Birth</FieldLabel>
                   <input id="en-dob" type="date" max={format(new Date(), 'yyyy-MM-dd')} className={fieldClass} value={form.dateOfBirth} onChange={(e) => set('dateOfBirth', e.target.value)} />
                   <FieldError message={errors.dateOfBirth} />
                 </div>
@@ -270,14 +252,13 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
             {step === 1 && (
               <div className="grid gap-4 sm:grid-cols-2">
                 <Text label="Full Name" required value={form.pFullName} onChange={(v) => set('pFullName', v)} error={errors.pFullName} placeholder="e.g. Mrs. Ngozi Okafor" />
-                <Select label="Relationship" required value={form.pRelationship} onChange={(v) => set('pRelationship', v)} error={errors.pRelationship}
+                <Select label="Relationship" value={form.pRelationship} onChange={(v) => set('pRelationship', v)}
                   options={['Mother', 'Father', 'Guardian']} />
-                <Text label="Email Address" type="email" required value={form.pEmail} onChange={(v) => set('pEmail', v)} error={errors.pEmail} placeholder="e.g. ngozi@email.com" />
+                <Text label="Email Address" type="email" value={form.pEmail} onChange={(v) => set('pEmail', v)} error={errors.pEmail} placeholder="e.g. ngozi@email.com" />
                 <Text label="Phone Number" type="tel" required value={form.pPhone} onChange={(v) => set('pPhone', v)} error={errors.pPhone} placeholder="e.g. 08012345678" />
                 <div className="sm:col-span-2">
-                  <FieldLabel required htmlFor="en-address">Home Address</FieldLabel>
+                  <FieldLabel htmlFor="en-address">Home Address</FieldLabel>
                   <textarea id="en-address" rows={3} className={cn(fieldClass, 'h-auto py-2.5')} value={form.pAddress} onChange={(e) => set('pAddress', e.target.value)} placeholder="Full home address" />
-                  <FieldError message={errors.pAddress} />
                 </div>
                 <div className="sm:col-span-2">
                   <Text label="Occupation" value={form.pOccupation} onChange={(v) => set('pOccupation', v)} placeholder="e.g. Nurse, Engineer" />
@@ -285,76 +266,10 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
               </div>
             )}
 
-            {step === 2 && (
-              <div className="space-y-5">
-                <div className="flex items-center justify-between border-t border-black/[0.06] pt-4">
-                  <div>
-                    <div className="text-sm font-medium">Add second parent / guardian</div>
-                    <div className="text-[11px] text-gray-500">Optional — father, other guardian etc.</div>
-                  </div>
-                  <button
-                    type="button"
-                    role="switch"
-                    aria-checked={form.hasSecondParent}
-                    onClick={() => set('hasSecondParent', !form.hasSecondParent)}
-                    className={cn('relative h-5 w-9 rounded-full transition-colors', form.hasSecondParent ? 'bg-[#1a56ff]' : 'bg-black/15')}
-                  >
-                    <span className={cn('absolute top-0.5 size-4 rounded-full bg-white shadow transition-all', form.hasSecondParent ? 'left-[18px]' : 'left-0.5')} />
-                  </button>
-                </div>
-                {form.hasSecondParent && (
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <Text label="Full Name" required value={form.sFullName} onChange={(v) => set('sFullName', v)} error={errors.sFullName} />
-                    <Select label="Relationship" required value={form.sRelationship} onChange={(v) => set('sRelationship', v)} error={errors.sRelationship}
-                      options={['Father', 'Mother', 'Guardian']} />
-                    <div className="sm:col-span-2">
-                      <Text label="Phone Number" type="tel" required value={form.sPhone} onChange={(v) => set('sPhone', v)} error={errors.sPhone} />
-                    </div>
-                  </div>
-                )}
-                <div>
-                  <div className="mb-3 text-sm font-semibold">Emergency Contact</div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <Text label="Full Name" required value={form.eFullName} onChange={(v) => set('eFullName', v)} error={errors.eFullName} />
-                    <Text label="Relationship" required value={form.eRelationship} onChange={(v) => set('eRelationship', v)} error={errors.eRelationship} placeholder="e.g. Aunt, Uncle" />
-                    <div className="sm:col-span-2">
-                      <Text label="Phone Number" type="tel" required value={form.ePhone} onChange={(v) => set('ePhone', v)} error={errors.ePhone} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step === 3 && (
-              <div className="space-y-5 text-sm">
-                {form.passportPhotoUrl && (
-                  <div className="text-center">
-                    <img src={form.passportPhotoUrl} alt="Passport" className="mx-auto size-14 rounded-full object-cover" />
-                    <div className="mt-1 text-[11px] text-gray-500">Passport photograph</div>
-                  </div>
-                )}
-                <Summary title="Child's details" rows={[
-                  ['Full Name', [form.firstName, form.otherName, form.surname].filter(Boolean).join(' ')],
-                  ['Gender', form.gender],
-                  ['Date of Birth', form.dateOfBirth ? format(new Date(form.dateOfBirth), 'dd MMM yyyy') : ''],
-                  ['Class Applied For', className || ''],
-                  ['Medical Notes', form.medicalNotes || '—'],
-                ]} />
-                <Summary title="Primary parent" rows={[
-                  ['Name', form.pFullName],
-                  ['Relationship', form.pRelationship],
-                  ['Email', form.pEmail],
-                  ['Phone', form.pPhone],
-                  ['Address', form.pAddress],
-                ]} />
-                {form.hasSecondParent && (
-                  <Summary title="Second parent" rows={[['Name', form.sFullName], ['Relationship', form.sRelationship], ['Phone', form.sPhone]]} />
-                )}
-                <Summary title="Emergency contact" rows={[['Name', form.eFullName], ['Relationship', form.eRelationship], ['Phone', form.ePhone]]} />
-                <p className="text-[11px] leading-relaxed text-gray-500">
-                  By submitting this form you confirm that the information provided is accurate. The school will review and contact you within 1–2 business days.
-                </p>
-              </div>
+            {step === LAST && (
+              <p className="mt-5 text-[11px] leading-relaxed text-gray-500">
+                By submitting this form you confirm that the information provided is accurate. The school will review it and contact you within 1–2 business days.
+              </p>
             )}
           </div>
 
@@ -364,7 +279,7 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
                 ← Back
               </button>
             )}
-            {step < 3 ? (
+            {step < LAST ? (
               <button type="button" onClick={next} disabled={uploading}
                 className="h-10 flex-1 rounded-lg bg-[#1a56ff] text-sm font-semibold text-white hover:bg-[#1546d6] disabled:opacity-60">
                 Continue →
@@ -415,21 +330,5 @@ function Select({
       </select>
       <FieldError message={error} />
     </div>
-  )
-}
-
-function Summary({ title, rows }: { title: string; rows: Array<[string, string]> }) {
-  return (
-    <section>
-      <div className="mb-2 border-b border-black/[0.06] pb-2 text-[10px] font-semibold uppercase tracking-wider text-gray-500">{title}</div>
-      <dl className="space-y-2">
-        {rows.map(([k, v]) => (
-          <div key={k} className="flex justify-between gap-4">
-            <dt className="text-gray-500">{k}</dt>
-            <dd className="text-right font-medium">{v}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
   )
 }

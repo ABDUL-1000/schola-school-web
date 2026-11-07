@@ -22,10 +22,44 @@ export type OnboardingStatus = {
   approved: boolean
 }
 
+/** Fallback for older APIs: approval comes from the profile; setup steps can't be checked, so they count as done. */
+async function statusFromProfile(): Promise<OnboardingStatus> {
+  const { data } = await api.get<ApiResponse<any>>('/school/profile')
+  const s = data.data || {}
+  const approved = s.onboardingStatus === 'APPROVED'
+  return {
+    id: s.id,
+    schoolName: s.schoolName,
+    slug: s.slug,
+    email: s.email,
+    logo: s.logo ?? null,
+    isVerified: s.isVerified ?? true,
+    onboardingStatus: s.onboardingStatus || 'PENDING_APPROVAL',
+    rejectionReason: s.rejectionReason ?? null,
+    approvedAt: s.approvedAt ?? null,
+    isLocked: !!s.isLocked,
+    lockReason: s.lockReason ?? null,
+    subscriptionStatus: s.subscriptionStatus ?? null,
+    subscriptionTier: s.subscriptionTier ?? null,
+    subscriptionExpiresAt: s.subscriptionExpiresAt ?? null,
+    steps: { profile: true, branches: true, academic: true },
+    setupComplete: true,
+    nextStep: null,
+    approved,
+  }
+}
+
 export const onboardingApi = {
-  getStatus: async () => {
-    const response = await api.get<ApiResponse<OnboardingStatus>>('/school/onboarding/status')
-    return response.data.data
+  getStatus: async (): Promise<OnboardingStatus> => {
+    try {
+      const response = await api.get<ApiResponse<OnboardingStatus>>('/school/onboarding/status')
+      return response.data.data
+    } catch (err: any) {
+      // An API deployed before /onboarding/status existed answers 404. Work it out
+      // from the school profile instead, so the app keeps working during an upgrade.
+      if ((err?.statusCode ?? err?.response?.status) !== 404) throw err
+      return statusFromProfile()
+    }
   },
 
   setupBranches: async (data: { branches: Array<any> }) => {
