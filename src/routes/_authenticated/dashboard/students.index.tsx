@@ -207,10 +207,10 @@ function StudentsPage() {
     },
   ]
 
+  // Adding one student shouldn't wait for the school's address/logo
+  // (those matter for printed documents); bulk upload still asks for them.
   const openCreate = () => {
-    requireCompleteProfile(() => {
-      navigate({ to: '/dashboard/students/new' })
-    })
+    navigate({ to: '/dashboard/students/new' })
   }
 
   const openReassign = (student: StudentItem) => {

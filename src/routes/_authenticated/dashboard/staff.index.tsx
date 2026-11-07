@@ -224,10 +224,10 @@ function StaffPage() {
     },
   ]
 
+  // Adding one staff member shouldn't wait for the school's address/logo
+  // (those matter for printed documents); bulk upload still asks for them.
   const openCreate = () => {
-    requireCompleteProfile(() => {
-      navigate({ to: '/dashboard/staff/new' })
-    })
+    navigate({ to: '/dashboard/staff/new' })
   }
 
   const openEdit = (staff: Staff) => {

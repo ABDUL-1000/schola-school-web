@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { useState, useEffect } from 'react'
 import { NoBranchesHint } from '@/components/branches/no-branches-hint'
-import { useForm, useFieldArray, Controller } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useCreateStudentMutation } from '@/hooks/queries/student.queries'
@@ -17,7 +18,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { countries, getEmojiFlag } from 'countries-list'
-import { Loader2, ArrowRight, ArrowLeft, UploadCloud, Plus, Trash2, CheckCircle2, CalendarIcon, EyeOff, Eye, Copy } from 'lucide-react'
+import { Loader2, ArrowLeft, UploadCloud, CheckCircle2, CalendarIcon, EyeOff, Eye, Copy, ChevronDown } from 'lucide-react'
 import { toast } from '@/lib/toast'
 import NaijaStates from 'naija-state-local-government'
 import { Calendar } from '@/components/ui/calendar'
@@ -26,12 +27,13 @@ import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
 import { Image } from '@unpic/react'
 
+// One parent/guardian, all optional. The server skips it if nothing is filled in.
 const guardianSchema = z.object({
-  firstName: z.string().min(1, 'Required'),
-  lastName: z.string().min(1, 'Required'),
-  relationship: z.string().min(1, 'Required'),
-  phone: z.string().min(1, 'Required'),
-  email: z.string().email().optional().or(z.literal('')),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  relationship: z.string().optional(),
+  phone: z.string().optional(),
+  email: z.string().email('Invalid email').optional().or(z.literal('')),
   occupation: z.string().optional(),
   address: z.string().optional(),
   isPrimary: z.boolean()
@@ -59,14 +61,14 @@ const studentSchema = z.object({
   bloodGroup: z.string().optional(),
   genotype: z.string().optional(),
   address: z.string().optional(),
-  email: z.string().email().optional().or(z.literal('')),
+  email: z.string().email('Invalid email').optional().or(z.literal('')),
   phone: z.string().optional(),
   regNumber: z.string().optional(),
   previousSchool: z.string().optional(),
   transferReason: z.string().optional(),
   knownAllergies: z.string().optional(),
   medicalConditions: z.string().optional(),
-  guardians: z.array(guardianSchema).min(1, 'At least one guardian required'),
+  guardians: z.array(guardianSchema).max(1),
   documents: z.array(documentSchema)
 })
 
@@ -81,7 +83,7 @@ function NewStudentComponent() {
   const createMutation = useCreateStudentMutation()
   const uploadMutation = useUploadFileMutation()
 
-  const [step, setStep] = useState(1)
+  const [showMore, setShowMore] = useState(false)
   const [successDetails, setSuccessDetails] = useState<{regNumber: string, tempPassword: string} | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   
@@ -99,7 +101,6 @@ function NewStudentComponent() {
   })
 
   const { control, handleSubmit, watch, setValue, register, formState: { errors } } = form
-  const { fields: guardians, append: addGuardian, remove: removeGuardian } = useFieldArray({ control, name: 'guardians' })
   
   useEffect(() => {
     register('branchId')
@@ -138,18 +139,6 @@ function NewStudentComponent() {
   const selectedClass = classes.find((c: any) => c.id === classId)
   const isSSS = selectedClass?.name.toUpperCase().includes('SSS') || selectedClass?.level === 'SSS'
 
-  const handleNext = async () => {
-    let fieldsToValidate: Array<any> = []
-    if (step === 1) fieldsToValidate = ['branchId', 'classId', ...(isSSS ? ['departmentId'] : [])]
-    else if (step === 2) fieldsToValidate = ['firstName', 'lastName']
-    else if (step === 3) fieldsToValidate = ['guardians']
-
-    const isStepValid = await form.trigger(fieldsToValidate as any)
-    if (isStepValid) setStep(s => Math.min(s + 1, 6))
-  }
-
-  const handlePrev = () => setStep(s => Math.max(s - 1, 1))
-
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, docType: string) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -169,7 +158,7 @@ function NewStudentComponent() {
         const responseData = res?.data || res;
         if (responseData.tempPassword) {
           setSuccessDetails({
-            regNumber: responseData.student?.regNumber || data.regNumber,
+            regNumber: responseData.regNumber || responseData.student?.regNumber || data.regNumber,
             tempPassword: responseData.tempPassword
           })
         } else {
@@ -182,6 +171,12 @@ function NewStudentComponent() {
     })
   }
 
+  // Validation errors can sit in the collapsed "More details" section — open it so they show.
+  const onInvalid = (errs: any) => {
+    const basic = ['branchId', 'classId', 'firstName', 'lastName']
+    if (Object.keys(errs).some((k) => !basic.includes(k))) setShowMore(true)
+    toast.error('Please check the highlighted fields')
+  }
   if (successDetails) {
     return (
       <div className="space-y-6 pb-10 max-w-2xl mx-auto pt-8">
@@ -232,99 +227,88 @@ function NewStudentComponent() {
     )
   }
 
+  const err = (msg?: string) => (msg ? <p className="text-sm text-destructive">{msg}</p> : null)
+
   return (
-    <div className="space-y-6 pb-10">
+    <div className="space-y-6 pb-10 max-w-3xl">
       <div className="flex items-center gap-4">
         <Link to="/dashboard/students">
           <Button variant="ghost" size="icon"><ArrowLeft className="w-5 h-5" /></Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">New Student Enrollment</h1>
-          <p className="text-muted-foreground text-sm">Fill in the details to manually enrol a new student.</p>
+          <h1 className="text-2xl font-bold tracking-tight">Enrol a Student</h1>
+          <p className="text-muted-foreground text-sm">
+            Only the fields marked <span className="text-destructive">*</span> are needed. Everything else can be added now or later.
+          </p>
         </div>
       </div>
 
-      <div className="relative pt-4 pb-8">
-        <div className="flex items-center justify-between">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="flex flex-col items-center z-10 space-y-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${step >= i ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
-                {i}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="absolute top-8 left-0 right-0 h-1 bg-muted -z-10">
-          <div className="h-full bg-primary transition-all duration-300" style={{ width: `${((step - 1) / 5) * 100}%` }} />
-        </div>
-      </div>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="space-y-6">
         <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle>
-              {step === 1 && "Academic Information"}
-              {step === 2 && "Student Bio-Data"}
-              {step === 3 && "Guardians Information"}
-              {step === 4 && "Health & Previous School"}
-              {step === 5 && "Document Uploads"}
-              {step === 6 && "Review & Submit"}
-            </CardTitle>
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg">Student</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
-            
-            {/* Step 1 */}
-            <div className={step === 1 ? 'block' : 'hidden'}>
-              <div className="space-y-4">
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {(branches?.length ?? 0) !== 1 && (
                 <div className="space-y-2">
                   <Label>Branch <span className="text-destructive">*</span></Label>
-                  <Select value={branchId} onValueChange={(val) => { setValue('branchId', val); setValue('classId', '') }}>
+                  <Select value={branchId} onValueChange={(val) => { setValue('branchId', val, { shouldValidate: true }); setValue('classId', '') }}>
                     <SelectTrigger className={cn(errors.branchId && "border-destructive focus:ring-destructive")}><SelectValue placeholder="Select branch" /></SelectTrigger>
                     <SelectContent>
                       {branches?.map((b: any) => <SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>)}
                     </SelectContent>
                   </Select>
                   <NoBranchesHint branches={branches} />
-                  {errors.branchId && <p className="text-sm text-destructive">{errors.branchId.message}</p>}
+                  {err(errors.branchId?.message)}
                 </div>
+              )}
+              <div className="space-y-2">
+                <Label>Class <span className="text-destructive">*</span></Label>
+                <Select value={classId} onValueChange={(val) => setValue('classId', val, { shouldValidate: true })} disabled={!branchId}>
+                  <SelectTrigger className={cn(errors.classId && "border-destructive focus:ring-destructive")}><SelectValue placeholder={branchId ? "Select class" : "Choose a branch first"} /></SelectTrigger>
+                  <SelectContent>
+                    {classes.map((c: any) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+                {branchId && classes.length === 0 && (
+                  <p className="text-sm text-muted-foreground">
+                    No classes yet. <Link to="/dashboard/classes" className="font-medium text-primary underline">Create a class</Link> first.
+                  </p>
+                )}
+                {err(errors.classId?.message)}
+              </div>
+              {isSSS && (
                 <div className="space-y-2">
-                  <Label>Class <span className="text-destructive">*</span></Label>
-                  <Select value={classId} onValueChange={(val) => setValue('classId', val)} disabled={!branchId}>
-                    <SelectTrigger className={cn(errors.classId && "border-destructive focus:ring-destructive")}><SelectValue placeholder="Select class" /></SelectTrigger>
+                  <Label>Department</Label>
+                  <Select value={watch('departmentId')} onValueChange={(val) => setValue('departmentId', val)}>
+                    <SelectTrigger><SelectValue placeholder="Select department" /></SelectTrigger>
                     <SelectContent>
-                      {classes.map((c: any) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
+                      {departments.map((d: any) => <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>)}
                     </SelectContent>
                   </Select>
-                  {errors.classId && <p className="text-sm text-destructive">{errors.classId.message}</p>}
                 </div>
-                {isSSS && (
-                  <div className="space-y-2">
-                    <Label>Department <span className="text-destructive">*</span></Label>
-                    <Select value={watch('departmentId')} onValueChange={(val) => setValue('departmentId', val)}>
-                      <SelectTrigger className={cn(errors.departmentId && "border-destructive focus:ring-destructive")}><SelectValue placeholder="Select department" /></SelectTrigger>
-                      <SelectContent>
-                        {departments.map((d: any) => <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                    {errors.departmentId && <p className="text-sm text-destructive">{errors.departmentId.message}</p>}
-                  </div>
-                )}
+              )}
+              <div className="space-y-2">
+                <Label>First Name <span className="text-destructive">*</span></Label>
+                <Input className={cn(errors.firstName && "border-destructive focus-visible:ring-destructive")} {...form.register('firstName')} />
+                {err(errors.firstName?.message)}
               </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className={step === 2 ? 'block' : 'hidden'}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Last Name <span className="text-destructive">*</span></Label>
+                <Input className={cn(errors.lastName && "border-destructive focus-visible:ring-destructive")} {...form.register('lastName')} />
+                {err(errors.lastName?.message)}
+              </div>
+              <div className="space-y-2"><Label>Middle Name</Label><Input {...form.register('middleName')} /></div>
                 <div className="space-y-2">
-                  <Label>First Name <span className="text-destructive">*</span></Label>
-                  <Input className={cn(errors.firstName && "border-destructive focus-visible:ring-destructive")} {...form.register('firstName')} />
-                  {errors.firstName && <p className="text-sm text-destructive">{errors.firstName.message}</p>}
-                </div>
-                <div className="space-y-2"><Label>Middle Name</Label><Input {...form.register('middleName')} /></div>
-                <div className="space-y-2">
-                  <Label>Last Name <span className="text-destructive">*</span></Label>
-                  <Input className={cn(errors.lastName && "border-destructive focus-visible:ring-destructive")} {...form.register('lastName')} />
-                  {errors.lastName && <p className="text-sm text-destructive">{errors.lastName.message}</p>}
+                  <Label>Gender</Label>
+                  <Select value={watch('gender')} onValueChange={(val) => setValue('gender', val)}>
+                    <SelectTrigger><SelectValue placeholder="Select gender" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div className="space-y-2">
                   <Label>Date of Birth</Label>
@@ -356,16 +340,68 @@ function NewStudentComponent() {
                     )}
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label>Gender</Label>
-                  <Select value={watch('gender')} onValueChange={(val) => setValue('gender', val)}>
-                    <SelectTrigger><SelectValue placeholder="Select gender" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Male">Male</SelectItem>
-                      <SelectItem value="Female">Female</SelectItem>
-                    </SelectContent>
-                  </Select>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-sm">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg">Parent / Guardian</CardTitle>
+            <CardDescription>Optional. A name and phone number is enough.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2"><Label>First Name</Label><Input {...form.register('guardians.0.firstName')} /></div>
+              <div className="space-y-2"><Label>Last Name</Label><Input {...form.register('guardians.0.lastName')} placeholder="Defaults to the student's last name" /></div>
+              <div className="space-y-2"><Label>Phone</Label><Input type="tel" {...form.register('guardians.0.phone')} placeholder="080xxxxxxxx" /></div>
+              <div className="space-y-2">
+                <Label>Relationship</Label>
+                        <Controller
+                          control={control}
+                          name={`guardians.0.relationship`}
+                          render={({ field }) => (
+                            <Select value={field.value} onValueChange={field.onChange}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select relationship" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {['Father', 'Mother', 'Uncle', 'Aunt', 'Brother', 'Sister', 'Guardian', 'Other'].map(r => (
+                                  <SelectItem key={r} value={r}>{r}</SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          )}
+                        />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label>Email</Label>
+                <Input type="email" {...form.register('guardians.0.email')} />
+                {err(errors.guardians?.[0]?.email?.message)}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Collapsible open={showMore} onOpenChange={setShowMore}>
+          <Card className="shadow-sm">
+            <CollapsibleTrigger asChild>
+              <button type="button" className="flex w-full items-center justify-between gap-3 px-6 py-4 text-left">
+                <div>
+                  <div className="text-lg font-semibold">More details <span className="text-sm font-normal text-muted-foreground">(optional)</span></div>
+                  <p className="text-sm text-muted-foreground">Contact, origin, health, previous school and documents</p>
                 </div>
+                <ChevronDown className={cn("size-5 shrink-0 text-muted-foreground transition-transform", showMore && "rotate-180")} />
+              </button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <CardContent className="space-y-6 border-t pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Student Email</Label>
+                    <Input type="email" {...form.register('email')} />
+                    {err(errors.email?.message)}
+                  </div>
+                  <div className="space-y-2"><Label>Student Phone</Label><Input type="tel" {...form.register('phone')} /></div>
                 <div className="space-y-2">
                   <Label>Nationality</Label>
                   <Select value={watch('nationality')} onValueChange={(val) => setValue('nationality', val)}>
@@ -440,82 +476,15 @@ function NewStudentComponent() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2"><Label>Reg Number (Auto generated)</Label><Input {...form.register('regNumber')} disabled placeholder="Auto generated upon creation" /></div>
-                <div className="space-y-2"><Label>Email</Label><Input type="email" {...form.register('email')} /></div>
-                <div className="space-y-2"><Label>Phone</Label><Input {...form.register('phone')} /></div>
-                <div className="md:col-span-2 space-y-2"><Label>Home Address</Label><Textarea {...form.register('address')} /></div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className={step === 3 ? 'block' : 'hidden'}>
-              <div className="space-y-6">
-                {guardians.map((guardian, idx) => (
-                  <div key={guardian.id} className="p-4 border rounded-lg space-y-4 relative bg-background">
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-semibold">Guardian {idx + 1} {idx === 0 && "(Primary Contact)"}</h4>
-                      {idx > 0 && <Button variant="ghost" size="icon" onClick={() => removeGuardian(idx)}><Trash2 className="w-4 h-4 text-red-500" /></Button>}
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>First Name <span className="text-destructive">*</span></Label>
-                        <Input className={cn(errors.guardians?.[idx]?.firstName && "border-destructive focus-visible:ring-destructive")} {...form.register(`guardians.${idx}.firstName`)} />
-                        {errors.guardians?.[idx]?.firstName && <p className="text-sm text-destructive">{errors.guardians[idx]?.firstName?.message}</p>}
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Last Name <span className="text-destructive">*</span></Label>
-                        <Input className={cn(errors.guardians?.[idx]?.lastName && "border-destructive focus-visible:ring-destructive")} {...form.register(`guardians.${idx}.lastName`)} />
-                        {errors.guardians?.[idx]?.lastName && <p className="text-sm text-destructive">{errors.guardians[idx]?.lastName?.message}</p>}
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Relationship <span className="text-destructive">*</span></Label>
-                        <Controller
-                          control={control}
-                          name={`guardians.${idx}.relationship`}
-                          render={({ field }) => (
-                            <Select value={field.value} onValueChange={field.onChange}>
-                              <SelectTrigger className={cn(errors.guardians?.[idx]?.relationship && "border-destructive focus-visible:ring-destructive")}>
-                                <SelectValue placeholder="Select relationship" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {['Father', 'Mother', 'Uncle', 'Aunt', 'Brother', 'Sister', 'Guardian', 'Other'].map(r => (
-                                  <SelectItem key={r} value={r}>{r}</SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          )}
-                        />
-                        {errors.guardians?.[idx]?.relationship && <p className="text-sm text-destructive">{errors.guardians[idx]?.relationship?.message}</p>}
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Phone <span className="text-destructive">*</span></Label>
-                        <Input className={cn(errors.guardians?.[idx]?.phone && "border-destructive focus-visible:ring-destructive")} {...form.register(`guardians.${idx}.phone`)} />
-                        {errors.guardians?.[idx]?.phone && <p className="text-sm text-destructive">{errors.guardians[idx]?.phone?.message}</p>}
-                      </div>
-                      <div className="space-y-2"><Label>Email</Label><Input type="email" {...form.register(`guardians.${idx}.email`)} /></div>
-                      <div className="space-y-2"><Label>Occupation</Label><Input {...form.register(`guardians.${idx}.occupation`)} /></div>
-                      <div className="md:col-span-2 space-y-2"><Label>Address</Label><Textarea {...form.register(`guardians.${idx}.address`)} /></div>
-                    </div>
-                  </div>
-                ))}
-                <Button variant="outline" type="button" onClick={() => addGuardian({ firstName: '', lastName: '', relationship: '', phone: '', email: '', occupation: '', address: '', isPrimary: false })} className="w-full border-dashed"><Plus className="w-4 h-4 mr-2" /> Add Another Guardian</Button>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className={step === 4 ? 'block' : 'hidden'}>
-              <div className="space-y-4">
-                <div className="space-y-2"><Label>Previous School Attended (if any)</Label><Input {...form.register('previousSchool')} /></div>
-                <div className="space-y-2"><Label>Reason for Transfer</Label><Textarea {...form.register('transferReason')} /></div>
-                <div className="space-y-2"><Label>Known Allergies</Label><Textarea {...form.register('knownAllergies')} placeholder="e.g. Peanuts, Penicillin" /></div>
-                <div className="space-y-2"><Label>Existing Medical Conditions</Label><Textarea {...form.register('medicalConditions')} placeholder="e.g. Asthma" /></div>
-              </div>
-            </div>
-
-            {/* Step 5 */}
-            <div className={step === 5 ? 'block' : 'hidden'}>
-              <div className="space-y-6">
-                <p className="text-sm text-muted-foreground">Upload any available documents. (Max 5MB each). You can skip this step.</p>
+                  <div className="md:col-span-2 space-y-2"><Label>Home Address</Label><Textarea {...form.register('address')} /></div>
+                  <div className="space-y-2"><Label>Parent's Occupation</Label><Input {...form.register('guardians.0.occupation')} /></div>
+                  <div className="space-y-2"><Label>Previous School</Label><Input {...form.register('previousSchool')} /></div>
+                  <div className="md:col-span-2 space-y-2"><Label>Reason for Transfer</Label><Textarea {...form.register('transferReason')} /></div>
+                  <div className="space-y-2"><Label>Known Allergies</Label><Textarea {...form.register('knownAllergies')} placeholder="e.g. Peanuts, Penicillin" /></div>
+                  <div className="space-y-2"><Label>Medical Conditions</Label><Textarea {...form.register('medicalConditions')} placeholder="e.g. Asthma" /></div>
+                </div>
+                <div className="space-y-3">
+                  <div className="text-sm font-medium">Documents</div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {['PASSPORT', 'BIRTH_CERTIFICATE', 'TRANSFER_CERTIFICATE', 'IMMUNIZATION_RECORD'].map(docType => {
                     const existing = formDocuments.find((d: any) => d.documentType === docType);
@@ -534,47 +503,19 @@ function NewStudentComponent() {
                     )
                   })}
                 </div>
-              </div>
-            </div>
-
-            {/* Step 6 */}
-            <div className={step === 6 ? 'block' : 'hidden'}>
-              <div className="space-y-6 text-sm">
-                <div className="p-4 bg-muted/20 rounded-lg space-y-2 border">
-                  <h3 className="font-semibold text-base border-b pb-2">Summary</h3>
-                  <div className="grid grid-cols-2 gap-2 mt-2">
-                    <span className="text-muted-foreground">Student Name:</span>
-                    <span className="font-medium">{watch('firstName')} {watch('lastName')}</span>
-                    <span className="text-muted-foreground">Class:</span>
-                    <span className="font-medium">{selectedClass?.name || 'None'}</span>
-                    <span className="text-muted-foreground">Primary Guardian:</span>
-                    <span className="font-medium">{watch('guardians')[0]?.firstName} {watch('guardians')[0]?.phone}</span>
-                    <span className="text-muted-foreground">Documents Uploaded:</span>
-                    <span className="font-medium">{formDocuments.length}</span>
-                  </div>
                 </div>
-                <p className="text-muted-foreground">By submitting this form, you will enrol the student directly.</p>
-              </div>
-            </div>
-          </CardContent>
+              </CardContent>
+            </CollapsibleContent>
+          </Card>
+        </Collapsible>
 
-          <CardFooter className="flex justify-between border-t bg-muted/10 p-6">
-            <Button variant="outline" type="button" onClick={handlePrev} disabled={step === 1 || createMutation.isPending}>
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back
-            </Button>
-            <div className="space-x-2">
-              {step < 6 ? (
-                <Button type="button" onClick={handleNext}>
-                  Next <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              ) : (
-                <Button type="submit" disabled={createMutation.isPending}>
-                  {createMutation.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "Enrol Student"}
-                </Button>
-              )}
-            </div>
-          </CardFooter>
-        </Card>
+        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <Link to="/dashboard/students"><Button type="button" variant="outline" className="w-full sm:w-auto">Cancel</Button></Link>
+          <Button type="submit" disabled={createMutation.isPending || uploadMutation.isPending} className="sm:min-w-40">
+            {createMutation.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+            Enrol Student
+          </Button>
+        </div>
       </form>
     </div>
   )
