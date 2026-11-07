@@ -109,7 +109,7 @@ function ProfileStep() {
       toast.promise(promise, {
         loading: 'Saving profile...',
         success: 'Profile saved!',
-        error: 'Failed to save profile',
+        error: (err: any) => err?.message || 'Failed to save profile',
       })
 
       await promise
