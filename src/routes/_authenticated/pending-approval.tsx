@@ -43,15 +43,18 @@ function PendingApprovalPage() {
     window.location.href = '/login?logged_out=1'
   }
 
-  const rejected = status?.onboardingStatus === 'REJECTED'
+  const suspended = !!status?.suspended
+  const rejected = !suspended && status?.onboardingStatus === 'REJECTED'
 
   return (
     <AuthLayout
-      title={rejected ? 'Application not approved' : 'Application submitted'}
+      title={suspended ? 'Account suspended' : rejected ? 'Application not approved' : 'Application submitted'}
       description={
-        rejected
-          ? 'The Schola team has reviewed your school registration.'
-          : "You're all set for now. We'll take it from here."
+        suspended
+          ? 'Access to your school on Schola is paused.'
+          : rejected
+            ? 'The Schola team has reviewed your school registration.'
+            : "You're all set for now. We'll take it from here."
       }
     >
       {isLoading || !status ? (
@@ -63,6 +66,28 @@ function PendingApprovalPage() {
         ) : (
           <Loader2 className="mx-auto size-6 animate-spin text-primary" />
         )
+      ) : suspended ? (
+        <div className="space-y-6">
+          <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-4">
+            <div className="flex items-center gap-2 font-semibold text-destructive">
+              <XCircle className="size-5" /> {status.schoolName} is suspended
+            </div>
+            {status.lockReason && <p className="mt-2 text-sm">{status.lockReason}</p>}
+            <p className="mt-2 text-sm text-muted-foreground">
+              Your staff, students and parents can't sign in until the account is reactivated. Your data is kept safe.
+              To resolve this, write to{' '}
+              <a className="font-medium text-foreground underline" href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
+            </p>
+          </div>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Button variant="outline" className="flex-1" onClick={() => refetch()} disabled={isFetching}>
+              <RefreshCw className={`mr-2 size-4 ${isFetching ? 'animate-spin' : ''}`} /> Check again
+            </Button>
+            <Button variant="ghost" className="flex-1" onClick={signOut}>
+              <LogOut className="mr-2 size-4" /> Sign out
+            </Button>
+          </div>
+        </div>
       ) : (
         <div className="space-y-6">
           {rejected ? (
