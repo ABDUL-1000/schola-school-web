@@ -20,21 +20,34 @@ export const Route = createFileRoute('/_authenticated/dashboard/academics/assess
   component: AssessmentsConfigRoute,
 })
 
-type Component = { name: string; maxScore: number | string }
+type ComponentType = 'CA' | 'EXAM'
+type Component = { name: string; maxScore: number | string; type: ComponentType }
 type Scope = 'all' | 'one'
 
+/** Every school starts with CA 1 + CA 2 + Exam. */
 const DEFAULT_COMPONENTS: Array<Component> = [
-  { name: 'CA 1', maxScore: 10 },
-  { name: 'CA 2', maxScore: 10 },
-  { name: 'CA 3', maxScore: 10 },
-  { name: 'Exam', maxScore: 70 },
+  { name: 'CA 1', maxScore: 20, type: 'CA' },
+  { name: 'CA 2', maxScore: 20, type: 'CA' },
+  { name: 'Exam', maxScore: 60, type: 'EXAM' },
 ]
+const MAX_CAS = 4
+
+/** Older saved setups have no type: anything called "...exam..." is the exam. */
+const withTypes = (list: Array<Partial<Component>> | null | undefined): Array<Component> | null =>
+  list && list.length
+    ? list.map((c) => ({
+        name: String(c.name ?? ''),
+        maxScore: c.maxScore ?? 0,
+        type: c.type === 'EXAM' || c.type === 'CA' ? c.type : /exam/i.test(String(c.name ?? '')) ? 'EXAM' : 'CA',
+      }))
+    : null
 
 const selectClass =
   'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50'
 
 /** Stable fingerprint of a setup, to compare subjects. */
-const signature = (c: Array<Component>) => JSON.stringify(c.map((x) => [String(x.name).trim().toLowerCase(), Number(x.maxScore)]))
+const signature = (c: Array<Component>) =>
+  JSON.stringify((withTypes(c) || []).map((x) => [String(x.name).trim().toLowerCase(), Number(x.maxScore), x.type]))
 
 function AssessmentsConfigRoute() {
   const [scope, setScope] = useState<Scope>('all')
@@ -71,7 +84,9 @@ function AssessmentsConfigRoute() {
     }
   }, [terms.length])
 
-  const { data: termConfigs = [], isLoading: termLoading } = useTermAssessmentConfigsQuery(termId)
+  const { data: termData, isLoading: termLoading } = useTermAssessmentConfigsQuery(termId)
+  const termConfigs = termData?.configs || []
+  const schoolDefault = withTypes(termData?.schoolDefault)
   const { data: subjectConfig, isLoading: subjectLoading } = useAssessmentConfigQuery(scope === 'one' ? termId : '', subjectId)
   const upsert = useUpsertAssessmentConfigMutation()
 
@@ -79,22 +94,24 @@ function AssessmentsConfigRoute() {
   const common = useMemo(() => {
     const counts = new Map<string, { n: number; components: Array<Component> }>()
     for (const c of termConfigs) {
-      const comps = (c.components || []) as Array<Component>
+      const comps = c.components as Array<Component>
       const key = signature(comps)
       counts.set(key, { n: (counts.get(key)?.n || 0) + 1, components: comps })
     }
-    return [...counts.values()].sort((a, b) => b.n - a.n)[0]?.components || null
+    return [...counts.values()].sort((a, b) => b.n - a.n).at(0)?.components ?? null
   }, [termConfigs])
 
   const configBySubject = useMemo(() => new Map(termConfigs.map((c: any) => [c.subjectId, c.components as Array<Component>])), [termConfigs])
 
   useEffect(() => {
-    if (scope === 'all') setComponents(common || DEFAULT_COMPONENTS)
-  }, [scope, common, termId])
+    // "All subjects" starts from the school's saved setup (default CA 1/CA 2/Exam).
+    if (scope === 'all') setComponents(schoolDefault || withTypes(common) || DEFAULT_COMPONENTS)
+  }, [scope, termData, termId])
 
   useEffect(() => {
-    if (scope === 'one') setComponents(subjectId ? subjectConfig?.components || common || DEFAULT_COMPONENTS : [])
-  }, [scope, subjectId, subjectConfig, common])
+    if (scope === 'one')
+      setComponents(subjectId ? withTypes(subjectConfig?.components) || schoolDefault || DEFAULT_COMPONENTS : [])
+  }, [scope, subjectId, subjectConfig, termData])
 
   const total = components.reduce((acc, c) => acc + (Number(c.maxScore) || 0), 0)
   const currentSig = signature(components)
@@ -105,9 +122,25 @@ function AssessmentsConfigRoute() {
 
   const update = (i: number, field: keyof Component, value: string) =>
     setComponents((cur) => cur.map((c, j) => (j === i ? { ...c, [field]: value } : c)))
+  // Only one component can be the exam: choosing a new one turns the old one into a CA.
+  const setType = (i: number, type: ComponentType) =>
+    setComponents((cur) => cur.map((c, j) => (j === i ? { ...c, type } : type === 'EXAM' && c.type === 'EXAM' ? { ...c, type: 'CA' } : c)))
+  const caCount = components.filter((c) => c.type === 'CA').length
+  const examCount = components.filter((c) => c.type === 'EXAM').length
+  const problem =
+    examCount === 0
+      ? 'Mark one component as the Exam.'
+      : examCount > 1
+        ? 'Only one component can be the Exam.'
+        : caCount > MAX_CAS
+          ? `You can have at most ${MAX_CAS} CAs plus the exam.`
+          : components.some((c) => !(Number(c.maxScore) > 0))
+            ? 'Every component needs a max score above 0.'
+            : ''
 
   const save = async () => {
     if (components.some((c) => !String(c.name).trim())) return toast.error('Give every component a name.')
+    if (problem) return toast.error(problem)
     if (total !== 100) return toast.error(`The total must be exactly 100. It is ${total} now.`)
     try {
       const res = await upsert.mutateAsync({
@@ -115,10 +148,10 @@ function AssessmentsConfigRoute() {
         data: {
           ...(scope === 'all' ? { allSubjects: true } : { subjectId }),
           allTermsInSession: allTerms,
-          components: components.map((c) => ({ name: String(c.name).trim(), maxScore: Number(c.maxScore) })),
+          components: components.map((c) => ({ name: String(c.name).trim(), maxScore: Number(c.maxScore), type: c.type })),
         },
       })
-      toast.success(res?.message || 'Assessment setup saved')
+      toast.success(res.message || 'Assessment setup saved')
     } catch (e: any) {
       toast.error(e?.message || 'Could not save the assessment setup.')
     }
@@ -221,7 +254,15 @@ function AssessmentsConfigRoute() {
                 <CardTitle>Grading components</CardTitle>
                 <CardDescription>CAs and exams. The total must be 100.</CardDescription>
               </div>
-              <Button variant="outline" size="sm" onClick={() => setComponents((c) => [...c, { name: '', maxScore: 0 }])}>
+              <Button variant="outline" size="sm" onClick={() =>
+                  setComponents((c) => {
+                    // New components are CAs, added before the exam.
+                    const next = { name: `CA ${c.filter((x) => x.type === 'CA').length + 1}`, maxScore: 0, type: 'CA' as const }
+                    const examAt = c.findIndex((x) => x.type === 'EXAM')
+                    return examAt < 0 ? [...c, next] : [...c.slice(0, examAt), next, ...c.slice(examAt)]
+                  })
+                }
+                disabled={caCount >= MAX_CAS}>
                 <Plus className="mr-2 size-4" /> Add component
               </Button>
             </div>
@@ -239,7 +280,19 @@ function AssessmentsConfigRoute() {
                       <Label className="text-xs">Name</Label>
                       <Input value={comp.name} onChange={(e) => update(i, 'name', e.target.value)} placeholder="e.g. CA 1, Mid-term, Exam" />
                     </div>
-                    <div className="w-24 space-y-1 sm:w-32">
+                    <div className="w-[88px] space-y-1">
+                      <Label className="text-xs">Type</Label>
+                      <select
+                        className={selectClass + ' h-9 px-2'}
+                        value={comp.type}
+                        onChange={(e) => setType(i, e.target.value as ComponentType)}
+                        aria-label="Component type"
+                      >
+                        <option value="CA">CA</option>
+                        <option value="EXAM">Exam</option>
+                      </select>
+                    </div>
+                    <div className="w-20 space-y-1 sm:w-28">
                       <Label className="text-xs">Max score</Label>
                       <Input type="number" min={0} value={comp.maxScore} onChange={(e) => update(i, 'maxScore', e.target.value)} />
                     </div>
@@ -260,6 +313,7 @@ function AssessmentsConfigRoute() {
                     <div className="text-sm font-medium">
                       Total: <span className={total === 100 ? 'text-green-600' : 'text-destructive'}>{total} / 100</span>
                     </div>
+                    {problem && <p className="text-xs text-destructive">{problem}</p>}
                     {scope === 'all' && subjects.length > 0 && (
                       <p className="text-xs text-muted-foreground">
                         {differing === 0

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { CardTable } from '@/lib/card-table'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { Check, Copy, ExternalLink, Loader2, Search, ShieldAlert, X } from 'lucide-react'
@@ -152,7 +153,7 @@ export function EnrolmentQueue({ mode }: { mode: Mode }) {
         <Empty text={status === 'PENDING' ? 'No enrolment applications waiting for review.' : 'No applications here.'} />
       ) : (
         <div className="overflow-x-auto rounded-lg border">
-          <table className="w-full text-sm">
+          <CardTable className="w-full text-sm">
             <thead className="bg-muted/50 text-xs text-muted-foreground">
               <tr>
                 <th className="px-4 py-2 text-left font-medium">Student name</th>
@@ -194,7 +195,7 @@ export function EnrolmentQueue({ mode }: { mode: Mode }) {
                 )
               })}
             </tbody>
-          </table>
+          </CardTable>
         </div>
       )}
       {total > 20 && (
@@ -418,7 +419,7 @@ export function StaffQueue({ mode }: { mode: Mode }) {
         <Empty text={status === 'PENDING' ? 'No staff applications waiting for review.' : 'No applications here.'} />
       ) : (
         <div className="overflow-x-auto rounded-lg border">
-          <table className="w-full text-sm">
+          <CardTable className="w-full text-sm">
             <thead className="bg-muted/50 text-xs text-muted-foreground">
               <tr>
                 <th className="px-4 py-2 text-left font-medium">Applicant</th>
@@ -444,7 +445,7 @@ export function StaffQueue({ mode }: { mode: Mode }) {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </CardTable>
         </div>
       )}
       <Pager pagination={data?.pagination} setPage={setPage} />

@@ -20,13 +20,18 @@ export const useAssessmentConfigQuery = (
   })
 }
 
-/** Every subject's school-wide setup for a term. */
+type AssessmentComponent = { name: string; maxScore: number; type?: 'CA' | 'EXAM' }
+
+/** Every subject's setup for a term, plus the school's "All subjects" setup. */
 export const useTermAssessmentConfigsQuery = (termId: string) => {
   return useQuery({
     queryKey: ['assessmentConfig', termId, 'all'],
     queryFn: async () => {
       const { data } = await api.get(`/school/assessment/config/${termId}`)
-      return (data?.data || []) as Array<{ subjectId: string; components: Array<{ name: string; maxScore: number }> }>
+      return data?.data as {
+        configs: Array<{ subjectId: string; components: Array<AssessmentComponent> }>
+        schoolDefault: Array<AssessmentComponent>
+      }
     },
     enabled: !!termId,
   })
@@ -38,7 +43,7 @@ export interface UpsertAssessmentConfigBody {
   allSubjects?: boolean
   allTermsInSession?: boolean
   classId?: string
-  components: Array<{ name: string; maxScore: number }>
+  components: Array<{ name: string; maxScore: number; type?: 'CA' | 'EXAM' }>
 }
 
 export const useUpsertAssessmentConfigMutation = () => {

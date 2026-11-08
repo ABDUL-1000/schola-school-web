@@ -7,10 +7,32 @@ interface NigerianReportSheetProps {
   onClose?: () => void
 }
 
+type ReportSlot = 'ca1' | 'ca2' | 'ca3' | 'assignment' | 'exam'
+type ReportColumn = { slot: ReportSlot; name: string; maxScore: number }
+const SLOT_FIELD: Record<ReportSlot, string> = {
+  ca1: 'ca1Score',
+  ca2: 'ca2Score',
+  ca3: 'ca3Score',
+  assignment: 'assignmentScore',
+  exam: 'examTotal',
+}
+
 export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, onClose }) => {
   if (!data || !data.student) return null
 
   const { school, student, term, config, reportSheet, subjects = [] } = data
+
+  // Columns come from the school's assessment setup (e.g. CA 1, CA 2, Exam).
+  const columns: Array<ReportColumn> = config?.reportColumns?.length
+    ? config.reportColumns
+    : [
+        { slot: 'ca1', name: 'CA 1', maxScore: 20 },
+        { slot: 'ca2', name: 'CA 2', maxScore: 20 },
+        { slot: 'exam', name: 'Exam', maxScore: 60 },
+      ]
+  const caColumns = columns.filter((c) => c.slot !== 'exam')
+  const examColumn = columns.find((c) => c.slot === 'exam')
+  const caMax = caColumns.reduce((a, c) => a + (Number(c.maxScore) || 0), 0)
 
   const handlePrint = () => {
     window.print()
@@ -125,18 +147,22 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
           </div>
         </div>
 
-        {/* Academic Performance Table (Cognitive Domain) */}
+        {/* Academic Performance Table (Cognitive Domain) — columns follow the school's assessment setup */}
         <div className="mb-4 overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse border border-black">
             <thead>
               <tr className="bg-gray-200 text-gray-900 font-bold border-b border-black text-center">
                 <th className="p-1.5 border-r border-black text-left w-36">Subject</th>
-                <th className="p-1 border-r border-black w-10">CA 1 ({config?.ca1MaxScore ?? 10})</th>
-                <th className="p-1 border-r border-black w-10">CA 2 ({config?.ca2MaxScore ?? 10})</th>
-                <th className="p-1 border-r border-black w-10">CA 3 ({config?.ca3MaxScore ?? 10})</th>
-                <th className="p-1 border-r border-black w-10">Assg ({config?.assignmentMaxScore ?? 10})</th>
-                <th className="p-1 border-r border-black w-12 bg-gray-300">CA Total (40)</th>
-                <th className="p-1 border-r border-black w-12">Exam ({config?.examMaxScore ?? 60})</th>
+                {caColumns.map((c) => (
+                  <th key={c.slot} className="p-1 border-r border-black w-10">
+                    {c.name}
+                    {c.maxScore > 0 ? ` (${c.maxScore})` : ''}
+                  </th>
+                ))}
+                <th className="p-1 border-r border-black w-12 bg-gray-300">CA Total ({caMax})</th>
+                <th className="p-1 border-r border-black w-12">
+                  {examColumn?.name || 'Exam'} ({examColumn?.maxScore ?? 60})
+                </th>
                 <th className="p-1 border-r border-black w-12 bg-gray-300 font-black">Total (100)</th>
                 <th className="p-1 border-r border-black w-10 font-bold">Grade</th>
                 <th className="p-1 border-r border-black w-12">Position</th>
@@ -155,12 +181,14 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
                   <td className="p-1.5 border-r border-black text-left font-medium text-gray-900">
                     {sub.subjectName}
                   </td>
-                  <td className="p-1 border-r border-black">{sub.ca1Score > 0 ? sub.ca1Score : '-'}</td>
-                  <td className="p-1 border-r border-black">{sub.ca2Score > 0 ? sub.ca2Score : '-'}</td>
-                  <td className="p-1 border-r border-black">{sub.ca3Score > 0 ? sub.ca3Score : '-'}</td>
-                  <td className="p-1 border-r border-black">
-                    {sub.assignmentScore > 0 ? sub.assignmentScore : '-'}
-                  </td>
+                  {caColumns.map((c) => {
+                    const v = Number(sub[SLOT_FIELD[c.slot]] ?? 0)
+                    return (
+                      <td key={c.slot} className="p-1 border-r border-black">
+                        {v > 0 ? v : '-'}
+                      </td>
+                    )
+                  })}
                   <td className="p-1 border-r border-black font-semibold bg-gray-100">
                     {sub.caTotal > 0 ? sub.caTotal : '-'}
                   </td>
