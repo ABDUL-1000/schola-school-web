@@ -50,14 +50,6 @@ const data = {
           url: '/dashboard/students',
         },
         {
-          title: 'Enrolment Queue',
-          url: '/dashboard/enrolment-queue',
-        },
-        {
-          title: 'Staff Queue',
-          url: '/dashboard/staff-queue',
-        },
-        {
           title: 'Branches',
           url: '/dashboard/branches',
         },

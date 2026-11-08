@@ -33,14 +33,17 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { toast } from '@/lib/toast'
-import { Pencil, Eye, Mail, FileSpreadsheet } from 'lucide-react'
+import { Pencil, Eye, Mail, FileSpreadsheet, KeyRound } from 'lucide-react'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { useRequireProfileCompletion } from '@/components/profile-completion-alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { StaffContractTab } from '@/components/staff-contract-tab'
 import { BulkImportModal } from '@/components/bulk-import/BulkImportModal'
+import { StaffLoginDialog, type StaffLoginTarget } from '@/components/staff-login-dialog'
+import { ApplicationLinkPill, PendingTabLabel, StaffQueue, useApplicationsOverview } from '@/components/applications/applications-manager'
 
 export const Route = createFileRoute('/_authenticated/dashboard/staff/')({
+  validateSearch: (s: Record<string, unknown>): { tab?: 'pending' } => (s.tab === 'pending' ? { tab: 'pending' } : {}),
   component: StaffPage,
 })
 
@@ -57,6 +60,9 @@ const emptyForm: CreateStaffDTO = {
 function StaffPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { tab } = Route.useSearch()
+  const [loginFor, setLoginFor] = useState<StaffLoginTarget | null>(null)
+  const applications = useApplicationsOverview('school')
   const [search, setSearch] = useState('')
   const [filterBranchId, setFilterBranchId] = useState('')
   const [selectedIds, setSelectedIds] = useState<Array<string>>([])
@@ -213,6 +219,16 @@ function StaffPage() {
             variant="ghost"
             size="icon"
             className="size-8"
+            onClick={() => setLoginFor({ id: staff.id, fullname: staff.fullname, email: staff.email })}
+            title="Sign-in details (email / password)"
+            aria-label="Sign-in details"
+          >
+            <KeyRound className="size-4 text-muted-foreground hover:text-foreground" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-8"
             onClick={() => openEdit(row.original)}
             title="Edit staff"
           >
@@ -277,6 +293,22 @@ function StaffPage() {
         </p>
       </div>
 
+      <Tabs
+        value={tab === 'pending' ? 'pending' : 'staff'}
+        onValueChange={(v) => navigate({ to: '/dashboard/staff', search: v === 'pending' ? { tab: 'pending' } : {}, replace: true })}
+        className="w-full space-y-6"
+      >
+        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+          <TabsList>
+            <TabsTrigger value="staff">All staff</TabsTrigger>
+            <TabsTrigger value="pending">
+              <PendingTabLabel label="Pending applications" count={applications.pendingStaff} />
+            </TabsTrigger>
+          </TabsList>
+          <ApplicationLinkPill link={applications.staffLink} label="Staff registration link" />
+        </div>
+
+      <TabsContent value="staff" className="space-y-6">
       {/* Controls */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-3">
@@ -363,6 +395,14 @@ function StaffPage() {
         selectedRowIds={selectedIds}
         onRowSelectionChange={setSelectedIds}
       />
+      </TabsContent>
+
+        <TabsContent value="pending" className="mt-0">
+          <StaffQueue mode="school" />
+        </TabsContent>
+      </Tabs>
+
+      <StaffLoginDialog staff={loginFor} onClose={() => setLoginFor(null)} />
 
       {/* Bulk Import Modal */}
       <BulkImportModal

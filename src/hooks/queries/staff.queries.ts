@@ -84,3 +84,14 @@ export function useResendStaffInviteMutation() {
   })
 }
 
+
+/** School sets a staff member's sign-in email and/or a new password. */
+export function useUpdateStaffLoginMutation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: staffApi.updateLogin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: staffKeys.all })
+    },
+  })
+}

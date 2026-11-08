@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { CardTable } from '@/lib/card-table'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { Check, Copy, ExternalLink, Loader2, Search, ShieldAlert, X } from 'lucide-react'
@@ -65,6 +66,57 @@ function useOverview(mode: Mode) {
   })
 }
 
+/** Pending counts and public links, for tab badges on the Students / Staff pages. */
+export function useApplicationsOverview(mode: Mode) {
+  const { data } = useOverview(mode)
+  return {
+    pendingStudents: Number(data?.pendingStudents || 0),
+    pendingStaff: Number(data?.pendingStaff || 0),
+    studentLink: data?.links?.student as string | undefined,
+    staffLink: data?.links?.staff as string | undefined,
+  }
+}
+
+/** Compact "copy the public link" pill for page headers. */
+export function ApplicationLinkPill({ link, label }: { link?: string; label: string }) {
+  const [copied, setCopied] = useState(false)
+  if (!link) return null
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(link)
+      setCopied(true)
+      toast.success(`${label} copied`)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      toast.error('Copy failed — select the link and copy it manually')
+    }
+  }
+  return (
+    <div className="flex max-w-full items-center gap-1 rounded-md border bg-muted/50 py-1 pl-3 pr-1">
+      <span className="max-w-[180px] truncate font-mono text-xs text-muted-foreground sm:max-w-[240px]" title={link}>
+        {link.replace(/^https?:\/\//, '')}
+      </span>
+      <Button variant="ghost" size="icon" className="size-7" onClick={copy} title={`Copy ${label.toLowerCase()}`}>
+        {copied ? <Check className="size-4 text-emerald-600" /> : <Copy className="size-4 text-muted-foreground" />}
+      </Button>
+    </div>
+  )
+}
+
+/** Tab label with an amber count bubble. */
+export function PendingTabLabel({ label, count }: { label: string; count: number }) {
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      {label}
+      {count > 0 && (
+        <span className="rounded-full bg-amber-100 px-1.5 text-[11px] font-semibold leading-4 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">
+          {count}
+        </span>
+      )}
+    </span>
+  )
+}
+
 // ══ Enrolment queue ═════════════════════════════════════════
 
 export function EnrolmentQueue({ mode }: { mode: Mode }) {
@@ -85,14 +137,14 @@ export function EnrolmentQueue({ mode }: { mode: Mode }) {
       <LinkCard
         mode={mode}
         title="Student enrolment link"
-        description="Share with parents. They complete a 4-step enrolment form and the application lands here for review."
+        description="Share with parents. They fill a short enrolment form and the application appears here for you to approve."
         link={overview?.links?.student}
         accepting={overview?.acceptingStudents}
         pending={overview?.pendingStudents}
         setting="acceptingStudents"
       />
 
-      <CustomSelect className="w-[200px]" value={status} onValueChange={(v) => { setStatus(v); setPage(1) }}
+      <CustomSelect fieldClassName="w-full sm:w-[200px] shrink-0" className="w-full" value={status} onValueChange={(v) => { setStatus(v); setPage(1) }}
         items={[{ label: 'Pending review', value: 'PENDING' }, { label: 'Enrolled', value: 'ENROLLED' }, { label: 'Rejected', value: 'REJECTED' }]} />
 
       {isLoading ? (
@@ -101,7 +153,7 @@ export function EnrolmentQueue({ mode }: { mode: Mode }) {
         <Empty text={status === 'PENDING' ? 'No enrolment applications waiting for review.' : 'No applications here.'} />
       ) : (
         <div className="overflow-x-auto rounded-lg border">
-          <table className="w-full text-sm">
+          <CardTable className="w-full text-sm">
             <thead className="bg-muted/50 text-xs text-muted-foreground">
               <tr>
                 <th className="px-4 py-2 text-left font-medium">Student name</th>
@@ -143,7 +195,7 @@ export function EnrolmentQueue({ mode }: { mode: Mode }) {
                 )
               })}
             </tbody>
-          </table>
+          </CardTable>
         </div>
       )}
       {total > 20 && (
@@ -176,12 +228,17 @@ function EnrolmentSheet({ mode, id, onClose }: { mode: Mode; id: string | null; 
   const [rejecting, setRejecting] = useState(false)
   const [result, setResult] = useState<{ regNumber: string; tempPassword: string; emailedTo?: string | null } | null>(null)
 
+  // Reset only when a different application is opened. The record refetches right
+  // after approval, and that must not wipe the login details shown to the school.
   useEffect(() => {
-    if (s) setClassId(s.classId || '')
+    setClassId('')
     setRegNumber('')
     setNote('')
     setRejecting(false)
     setResult(null)
+  }, [id])
+  useEffect(() => {
+    if (s?.id === id && s?.admissionStatus === 'PENDING') setClassId((cur) => cur || s.classId || '')
   }, [s, id])
 
   const decide = useMutation({
@@ -348,9 +405,9 @@ export function StaffQueue({ mode }: { mode: Mode }) {
       />
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <CustomSelect className="w-[200px]" value={status} onValueChange={(v) => { setStatus(v); setPage(1) }}
+        <CustomSelect fieldClassName="w-full sm:w-[200px] shrink-0" className="w-full" value={status} onValueChange={(v) => { setStatus(v); setPage(1) }}
           items={[{ label: 'Pending review', value: 'PENDING' }, { label: 'Approved', value: 'APPROVED' }, { label: 'Rejected', value: 'REJECTED' }, { label: 'All', value: '' }]} />
-        <div className="relative max-w-sm flex-1">
+        <div className="relative w-full sm:max-w-sm">
           <Search className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
           <Input className="pl-8" placeholder="Search name, email or phone" value={search} onChange={(e) => { setSearch(e.target.value); setPage(1) }} />
         </div>
@@ -362,7 +419,7 @@ export function StaffQueue({ mode }: { mode: Mode }) {
         <Empty text={status === 'PENDING' ? 'No staff applications waiting for review.' : 'No applications here.'} />
       ) : (
         <div className="overflow-x-auto rounded-lg border">
-          <table className="w-full text-sm">
+          <CardTable className="w-full text-sm">
             <thead className="bg-muted/50 text-xs text-muted-foreground">
               <tr>
                 <th className="px-4 py-2 text-left font-medium">Applicant</th>
@@ -388,7 +445,7 @@ export function StaffQueue({ mode }: { mode: Mode }) {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </CardTable>
         </div>
       )}
       <Pager pagination={data?.pagination} setPage={setPage} />

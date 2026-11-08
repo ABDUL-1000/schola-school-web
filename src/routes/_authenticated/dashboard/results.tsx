@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
@@ -97,25 +97,17 @@ function ResultsIndexRoute() {
   const publishMutation = usePublishReportSheetsMutation()
 
   // Local settings state
+  // CA / exam scores are set on the Assessment Configuration page (one place).
   const [settingsForm, setSettingsForm] = useState({
-    cbtMode: 'HYBRID',
-    ca1MaxScore: 10,
-    ca2MaxScore: 10,
-    ca3MaxScore: 10,
-    assignmentMaxScore: 10,
-    examMaxScore: 60,
+    cbtMode: 'MANUAL_ONLY',
     nextTermBegins: '',
   })
+  const assessmentColumns: Array<{ name: string; maxScore: number }> = gradingConfig?.assessmentColumns || []
 
   const openSettings = () => {
     if (gradingConfig) {
       setSettingsForm({
-        cbtMode: gradingConfig.cbtMode || 'HYBRID',
-        ca1MaxScore: Number(gradingConfig.ca1MaxScore) || 10,
-        ca2MaxScore: Number(gradingConfig.ca2MaxScore) || 10,
-        ca3MaxScore: Number(gradingConfig.ca3MaxScore) || 10,
-        assignmentMaxScore: Number(gradingConfig.assignmentMaxScore) || 10,
-        examMaxScore: Number(gradingConfig.examMaxScore) || 60,
+        cbtMode: gradingConfig.cbtMode || 'MANUAL_ONLY',
         nextTermBegins: gradingConfig.nextTermBegins
           ? new Date(gradingConfig.nextTermBegins).toISOString().split('T')[0]
           : '',
@@ -506,59 +498,29 @@ function ResultsIndexRoute() {
                 value={settingsForm.cbtMode}
                 onChange={(e) => setSettingsForm({ ...settingsForm, cbtMode: e.target.value })}
               >
+                <option value="MANUAL_ONLY">100% Manual Grading by Teachers (default)</option>
                 <option value="HYBRID">Hybrid (CBT Objective + Teacher Essay/Theory)</option>
                 <option value="CBT_ONLY">100% CBT Automated</option>
-                <option value="MANUAL_ONLY">100% Manual Grading by Teachers</option>
               </select>
               <p className="text-[11px] text-muted-foreground">
                 Determines whether exam scores are automated, manual, or split between CBT and essay.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-2 border-t">
-              <div className="space-y-1">
-                <Label className="text-xs font-semibold">1st CA Max Score</Label>
-                <Input
-                  type="number"
-                  value={settingsForm.ca1MaxScore}
-                  onChange={(e) => setSettingsForm({ ...settingsForm, ca1MaxScore: Number(e.target.value) })}
-                />
+            <div className="space-y-2 rounded-md border bg-muted/30 p-3">
+              <div className="text-xs font-semibold">CA and exam scores</div>
+              <div className="flex flex-wrap gap-1.5">
+                {assessmentColumns.map((c) => (
+                  <span key={c.name} className="rounded-full bg-background px-2 py-0.5 text-xs ring-1 ring-border">
+                    {c.name} · {c.maxScore}
+                  </span>
+                ))}
               </div>
-              <div className="space-y-1">
-                <Label className="text-xs font-semibold">2nd CA Max Score</Label>
-                <Input
-                  type="number"
-                  value={settingsForm.ca2MaxScore}
-                  onChange={(e) => setSettingsForm({ ...settingsForm, ca2MaxScore: Number(e.target.value) })}
-                />
-              </div>
-              <div className="space-y-1">
-                <Label className="text-xs font-semibold">3rd CA Max Score</Label>
-                <Input
-                  type="number"
-                  value={settingsForm.ca3MaxScore}
-                  onChange={(e) => setSettingsForm({ ...settingsForm, ca3MaxScore: Number(e.target.value) })}
-                />
-              </div>
-              <div className="space-y-1">
-                <Label className="text-xs font-semibold">Assignment Max Score</Label>
-                <Input
-                  type="number"
-                  value={settingsForm.assignmentMaxScore}
-                  onChange={(e) => setSettingsForm({ ...settingsForm, assignmentMaxScore: Number(e.target.value) })}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1 pt-1">
-              <Label className="text-xs font-semibold">Terminal Exam Max Score</Label>
-              <Input
-                type="number"
-                value={settingsForm.examMaxScore}
-                onChange={(e) => setSettingsForm({ ...settingsForm, examMaxScore: Number(e.target.value) })}
-              />
               <p className="text-[11px] text-muted-foreground">
-                Usually 60 or 70 (so that Continuous Assessment + Exam = 100).
+                Teachers' score sheets use this.{' '}
+                <Link to="/dashboard/academics/assessments-config" className="font-medium text-primary underline-offset-2 hover:underline">
+                  Change in Assessment Configuration
+                </Link>
               </p>
             </div>
 

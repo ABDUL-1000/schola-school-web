@@ -19,7 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { DataTable } from '@/components/ui/data-table'
 import type { ColumnDef } from '@tanstack/react-table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { PendingAdmissions } from '@/components/pending-admissions'
+import { ApplicationLinkPill, EnrolmentQueue, PendingTabLabel, useApplicationsOverview } from '@/components/applications/applications-manager'
 import { AppDrawer } from '@/components/ui/app-drawer'
 import {
   AlertDialog,
@@ -33,18 +33,21 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { toast } from '@/lib/toast'
-import { Pencil, Eye, ArrowRightLeft, LinkIcon, FileSpreadsheet } from 'lucide-react'
+import { Pencil, Eye, ArrowRightLeft, FileSpreadsheet } from 'lucide-react'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { useRequireProfileCompletion } from '@/components/profile-completion-alert'
 import { useAuth } from '@/auth'
 
 export const Route = createFileRoute('/_authenticated/dashboard/students/')({
+  validateSearch: (s: Record<string, unknown>): { tab?: 'pending' } => (s.tab === 'pending' ? { tab: 'pending' } : {}),
   component: StudentsPage,
 })
 
 function StudentsPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { tab } = Route.useSearch()
+  const applications = useApplicationsOverview('school')
   const [search, setSearch] = useState('')
   const [filterBranchId, setFilterBranchId] = useState('')
   const [filterClassId, setFilterClassId] = useState('')
@@ -287,10 +290,6 @@ function StudentsPage() {
   // }
 
 
-  const registrationLink = `${
-    window.location.hostname === 'localhost' ? 'http://localhost:3003' : 'https://edu-coral-ten.vercel.app'
-  }/register/${(user as any)?.slug}`
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -302,11 +301,17 @@ function StudentsPage() {
       </div>
 
       {/* Controls */}
-      <Tabs defaultValue="enrolled" className="w-full space-y-6">
+      <Tabs
+        value={tab === 'pending' ? 'pending' : 'enrolled'}
+        onValueChange={(v) => navigate({ to: '/dashboard/students', search: v === 'pending' ? { tab: 'pending' } : {}, replace: true })}
+        className="w-full space-y-6"
+      >
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 flex-wrap">
           <TabsList>
             <TabsTrigger value="enrolled">Enrolled Students</TabsTrigger>
-            <TabsTrigger value="pending">Pending Admissions</TabsTrigger>
+            <TabsTrigger value="pending">
+              <PendingTabLabel label="Pending applications" count={applications.pendingStudents} />
+            </TabsTrigger>
           </TabsList>
           
           <div className="flex flex-wrap items-center gap-2">
@@ -347,22 +352,7 @@ function StudentsPage() {
                 </AlertDialogContent>
               </AlertDialog>
             )}
-            <div className="flex items-center gap-2 bg-muted/50 border rounded-md pl-3 pr-1 py-1 max-w-full">
-              <span className="text-sm text-muted-foreground truncate max-w-[160px] sm:max-w-[200px]" title={registrationLink}>
-                {registrationLink}
-              </span>
-              <Button 
-                variant="ghost" 
-                size="icon"
-                className="h-7 w-7"
-                onClick={() => {
-                  navigator.clipboard.writeText(registrationLink);
-                  toast.success('Registration link copied to clipboard!');
-                }}
-              >
-                <LinkIcon className="w-4 h-4 text-muted-foreground" />
-              </Button>
-            </div>
+            <ApplicationLinkPill link={applications.studentLink} label="Enrolment link" />
             <Button
               variant="outline"
               className="gap-2"
@@ -430,7 +420,7 @@ function StudentsPage() {
         </TabsContent>
 
         <TabsContent value="pending" className="mt-0">
-          <PendingAdmissions />
+          <EnrolmentQueue mode="school" />
         </TabsContent>
       </Tabs>
 
