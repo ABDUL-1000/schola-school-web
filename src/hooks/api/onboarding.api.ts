@@ -19,6 +19,8 @@ export type OnboardingStatus = {
   steps: { profile: boolean; branches: boolean; academic: boolean }
   setupComplete: boolean
   nextStep: 'profile' | 'branch' | 'academic' | null
+  /** Suspended by the Schola team (lockReason holds the reason). */
+  suspended?: boolean
   approved: boolean
 }
 
@@ -26,7 +28,8 @@ export type OnboardingStatus = {
 async function statusFromProfile(): Promise<OnboardingStatus> {
   const { data } = await api.get<ApiResponse<any>>('/school/profile')
   const s = data.data || {}
-  const approved = s.onboardingStatus === 'APPROVED'
+  const suspended = s.status === 'SUSPENDED'
+  const approved = s.onboardingStatus === 'APPROVED' && !suspended
   return {
     id: s.id,
     schoolName: s.schoolName,
@@ -45,6 +48,7 @@ async function statusFromProfile(): Promise<OnboardingStatus> {
     steps: { profile: true, branches: true, academic: true },
     setupComplete: true,
     nextStep: null,
+    suspended,
     approved,
   }
 }
