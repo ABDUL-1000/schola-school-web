@@ -58,5 +58,20 @@ export const staffApi = {
     )
     return response.data
   },
+
+  updateLogin: async ({
+    staffId,
+    ...body
+  }: {
+    staffId: string
+    email?: string
+    password?: string
+    notify?: boolean
+  }) => {
+    const response = await api.patch<
+      ApiResponse<{ staff: { id: string; email: string }; emailedTo: string | null; notifyFailed: boolean }>
+    >(`/school/staff/${staffId}/login`, body)
+    return response.data
+  },
 }
 

@@ -98,7 +98,7 @@ function ResultsIndexRoute() {
 
   // Local settings state
   const [settingsForm, setSettingsForm] = useState({
-    cbtMode: 'HYBRID',
+    cbtMode: 'MANUAL_ONLY',
     ca1MaxScore: 10,
     ca2MaxScore: 10,
     ca3MaxScore: 10,
@@ -110,7 +110,7 @@ function ResultsIndexRoute() {
   const openSettings = () => {
     if (gradingConfig) {
       setSettingsForm({
-        cbtMode: gradingConfig.cbtMode || 'HYBRID',
+        cbtMode: gradingConfig.cbtMode || 'MANUAL_ONLY',
         ca1MaxScore: Number(gradingConfig.ca1MaxScore) || 10,
         ca2MaxScore: Number(gradingConfig.ca2MaxScore) || 10,
         ca3MaxScore: Number(gradingConfig.ca3MaxScore) || 10,
@@ -506,9 +506,9 @@ function ResultsIndexRoute() {
                 value={settingsForm.cbtMode}
                 onChange={(e) => setSettingsForm({ ...settingsForm, cbtMode: e.target.value })}
               >
+                <option value="MANUAL_ONLY">100% Manual Grading by Teachers (default)</option>
                 <option value="HYBRID">Hybrid (CBT Objective + Teacher Essay/Theory)</option>
                 <option value="CBT_ONLY">100% CBT Automated</option>
-                <option value="MANUAL_ONLY">100% Manual Grading by Teachers</option>
               </select>
               <p className="text-[11px] text-muted-foreground">
                 Determines whether exam scores are automated, manual, or split between CBT and essay.

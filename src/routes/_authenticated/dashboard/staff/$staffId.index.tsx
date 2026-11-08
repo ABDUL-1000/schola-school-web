@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { z } from 'zod'
 import { cn } from '@/lib/utils'
 import { StaffContractTab } from '@/components/staff-contract-tab'
+import { StaffLoginDialog } from '@/components/staff-login-dialog'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -73,6 +74,7 @@ function StaffDetailsPage() {
   }
   
   const { data: response, isLoading } = useStaffByIdQuery(staffId)
+  const [loginOpen, setLoginOpen] = useState(false)
   const deleteMutation = useDeleteStaffsMutation()
 
   if (isLoading) return <div className="p-8 flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>
@@ -173,6 +175,9 @@ function StaffDetailsPage() {
             </div>
 
             <div className="flex items-center gap-2 self-start sm:self-auto">
+              <Button variant="outline" size="sm" onClick={() => setLoginOpen(true)}>
+                <KeyRound className="w-4 h-4 mr-2" /> Sign-in details
+              </Button>
               <Link to={`/dashboard/staff/${staff.id}/edit`} search={{ tab: tab }}>
                 <Button variant="outline" size="sm">
                   <Pencil className="w-4 h-4 mr-2" /> Edit Staff
@@ -301,6 +306,11 @@ function StaffDetailsPage() {
           )}
         </div>
       </div>
+
+      <StaffLoginDialog
+        staff={loginOpen ? { id: staff.id, fullname: staff.fullname, email: staff.email } : null}
+        onClose={() => setLoginOpen(false)}
+      />
     </div>
   )
 }
