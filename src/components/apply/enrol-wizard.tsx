@@ -7,7 +7,7 @@ import { api } from '@/lib/api'
 import { uploadApi } from '@/hooks/api/upload.api'
 import { toast } from '@/lib/toast'
 import { cn } from '@/lib/utils'
-import { FieldError, FieldLabel, PublicShell, StatusCard, fieldClass, useApplySchool } from './apply-layout'
+import { FieldError, FieldLabel, PublicShell, SchoolHero, StatusCard, fieldClass, useApplySchool } from './apply-layout'
 
 // ── Form model & per-step validation ─────────────────────────
 
@@ -189,10 +189,11 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
         />
       ) : (
         <div className="mx-auto max-w-[480px]">
-          <h1 className="text-xl font-bold">Student Enrolment</h1>
-          <p className="mt-1 text-xs text-gray-500">
-            Two short steps. Only the fields marked <span className="text-red-500">*</span> are required.
-          </p>
+          <SchoolHero school={info?.school} title="Student Enrolment">
+            <p className="mt-1 text-xs text-gray-500">
+              Two short steps. Only the fields marked <span className="text-red-500">*</span> are required.
+            </p>
+          </SchoolHero>
 
           <div className="mt-5 grid grid-cols-2 gap-1.5" aria-label={`Step ${step + 1} of ${STEPS.length}`}>
             {STEPS.map((s, i) => (

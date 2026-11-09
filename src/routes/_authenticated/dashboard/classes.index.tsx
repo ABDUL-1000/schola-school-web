@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import {
   useClassesQuery,
   useCreateClassMutation,
@@ -41,7 +41,7 @@ import { Pencil, Eye, Users, BookOpen } from 'lucide-react'
 import { ClassSubjectsSheet } from '@/components/curriculum/class-subjects-sheet'
 import { CustomSelect } from '@/components/ui/custom-select'
 
-export const Route = createFileRoute('/_authenticated/dashboard/classes')({
+export const Route = createFileRoute('/_authenticated/dashboard/classes/')({
   component: ClassesPage,
 })
 
@@ -54,6 +54,7 @@ const emptyForm: CreateClassDTO = {
 }
 
 function ClassesPage() {
+  const navigateTo = useNavigate()
   const [search, setSearch] = useState('')
   const [filterBranchId, setFilterBranchId] = useState('')
   const [filterLevel, setFilterLevel] = useState('')
@@ -139,7 +140,9 @@ function ClassesPage() {
       accessorKey: 'name',
       header: 'Name',
       cell: ({ row }) => (
-        <div className="font-medium">{row.getValue('name')}</div>
+        <Link to="/dashboard/classes/$classId" params={{ classId: row.original.id }} className="font-medium hover:text-primary hover:underline">
+          {row.getValue('name')}
+        </Link>
       ),
     },
     {
@@ -263,9 +266,9 @@ function ClassesPage() {
     setTeacherDrawerOpen(true)
   }
 
+  // Everything about the class lives on its own page.
   const openView = (cls: ClassItem) => {
-    setViewingClass(cls)
-    setViewDrawerOpen(true)
+    void navigateTo({ to: '/dashboard/classes/$classId', params: { classId: cls.id } })
   }
 
   const handleSave = () => {
