@@ -90,12 +90,24 @@ export function PublicShell({
   )
 }
 
-export function SchoolBadge({ name, logo, size = 'sm' }: { name?: string; logo?: string | null; size?: 'sm' | 'lg' }) {
-  const box = size === 'lg' ? 'size-11 rounded-xl text-lg' : 'size-8 rounded-lg text-sm'
-  if (logo) return <img src={logo} alt="" className={cn(box, 'shrink-0 bg-white object-contain')} />
+export function SchoolBadge({ name, logo, size = 'sm' }: { name?: string; logo?: string | null; size?: 'sm' | 'lg' | 'xl' }) {
+  const box = size === 'xl' ? 'size-20 rounded-2xl text-3xl' : size === 'lg' ? 'size-11 rounded-xl text-lg' : 'size-8 rounded-lg text-sm'
+  if (logo) return <img src={logo} alt={name ? `${name} logo` : ''} className={cn(box, 'shrink-0 bg-white object-contain', size === 'xl' && 'p-1.5 shadow-sm ring-1 ring-black/5')} />
   return (
     <div className={cn(box, 'flex shrink-0 items-center justify-center bg-[#1a56ff] font-bold text-white')}>
       {(name || 'S').trim().charAt(0).toUpperCase()}
+    </div>
+  )
+}
+
+/** The school's logo and name above a public form (enrolment, staff registration). */
+export function SchoolHero({ school, title, children }: { school?: ApplySchoolInfo['school']; title: string; children?: ReactNode }) {
+  return (
+    <div className="mb-6 flex flex-col items-center text-center">
+      <SchoolBadge name={school?.schoolName} logo={school?.logo} size="xl" />
+      <div className="mt-3 text-sm font-semibold text-gray-700">{school?.schoolName}</div>
+      <h1 className="mt-1 text-xl font-bold">{title}</h1>
+      {children}
     </div>
   )
 }

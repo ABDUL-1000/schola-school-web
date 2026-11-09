@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import * as z from 'zod'
-import { GraduationCap, Loader2, UserCheck } from 'lucide-react'
+import { Loader2, UserCheck } from 'lucide-react'
 import { api } from '@/lib/api'
 import { toast } from '@/lib/toast'
 import { cn } from '@/lib/utils'
-import { FieldError, FieldLabel, PublicShell, StatusCard, fieldClass, useApplySchool } from './apply-layout'
+import { FieldError, FieldLabel, PublicShell, SchoolHero, StatusCard, fieldClass, useApplySchool } from './apply-layout'
 
 /** Mirrors StaffApplicationRole on the backend. */
 export const STAFF_ROLE_OPTIONS = [
@@ -71,14 +71,10 @@ export function StaffRegisterForm({ slug }: { slug: string | null }) {
         />
       ) : (
         <div className="mx-auto max-w-[620px]">
-          <div className="mb-6 text-center">
-            <div className="mx-auto flex size-11 items-center justify-center rounded-xl bg-[#1a56ff] text-white">
-              <GraduationCap className="size-5" />
-            </div>
-            <h1 className="mt-4 text-xl font-bold">Staff Registration</h1>
+          <SchoolHero school={info?.school} title="Staff Registration">
             <p className="mt-1 text-xs text-[#5b6b8c]">Apply to join the {schoolName} team.</p>
             <p className="text-xs text-[#5b6b8c]">Complete your details below and our admin will review your application.</p>
-          </div>
+          </SchoolHero>
 
           <form onSubmit={onSubmit} className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm" noValidate>
             <SectionLabel>Applying as</SectionLabel>
