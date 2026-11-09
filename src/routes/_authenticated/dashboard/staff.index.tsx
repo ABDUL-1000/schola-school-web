@@ -146,6 +146,33 @@ function StaffPage() {
       cell: ({ row }) => row.original.branch?.name || '—',
     },
     {
+      id: 'teaching',
+      header: 'Teaches',
+      cell: ({ row }) => {
+        const t = (row.original as any).teaching as
+          | { subjects: number; classes: number; formClass: { name: string } | null }
+          | undefined
+        if (!t) return '—'
+        return (
+          <button
+            type="button"
+            className="text-left text-sm hover:underline"
+            onClick={() => navigate({ to: `/dashboard/staff/${row.original.id}` })}
+            title="See subjects and classes"
+          >
+            {t.subjects || t.classes ? (
+              <span>
+                {t.subjects} subject{t.subjects === 1 ? '' : 's'} · {t.classes} class{t.classes === 1 ? '' : 'es'}
+              </span>
+            ) : (
+              <span className="text-muted-foreground">Nothing yet</span>
+            )}
+            {t.formClass && <span className="block text-xs text-muted-foreground">Form master: {t.formClass.name}</span>}
+          </button>
+        )
+      },
+    },
+    {
       id: 'employmentType',
       header: 'Type',
       cell: ({ row }) => {

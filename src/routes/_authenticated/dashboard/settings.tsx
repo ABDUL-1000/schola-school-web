@@ -3,14 +3,15 @@ import { z } from 'zod'
 import { cn } from '@/lib/utils'
 import { ProfileTab } from '@/components/settings/profile-tab'
 import { SecurityTab } from '@/components/settings/security-tab'
-import { User, ShieldCheck, EyeOff, CreditCard, Zap, Building2 } from 'lucide-react'
+import { User, ShieldCheck, EyeOff, CreditCard, Zap, Building2, CalendarClock } from 'lucide-react'
+import { AcademicCalendarCard } from '@/components/academic/academic-calendar-card'
 import { BranchManager } from '@/components/branches/branch-manager'
 import { ComingSoon } from '@/components/coming-soon'
 
 // Define the valid tabs we support
 const tabsSchema = z.object({
   tab: z
-    .enum(['profile', 'branches', 'security', 'billing', 'privacy', 'capabilities'])
+    .enum(['profile', 'branches', 'academic', 'security', 'billing', 'privacy', 'capabilities'])
     .catch('profile'),
 })
 
@@ -22,6 +23,7 @@ export const Route = createFileRoute('/_authenticated/dashboard/settings')({
 const SETTINGS_TABS = [
   { id: 'profile', label: 'Profile', icon: User },
   { id: 'branches', label: 'Branches', icon: Building2 },
+  { id: 'academic', label: 'Academic year', icon: CalendarClock },
 
   { id: 'security', label: 'Security', icon: ShieldCheck },
   { id: 'privacy', label: 'Privacy', icon: EyeOff },
@@ -91,6 +93,7 @@ function SettingsPage() {
       <div className="pb-10 transition-all duration-300">
         {tab === 'profile' && <ProfileTab />}
         {tab === 'branches' && <BranchManager embedded />}
+        {tab === 'academic' && <AcademicCalendarCard />}
         {tab === 'security' && <SecurityTab />}
 
         {/* Placeholders for future tabs */}

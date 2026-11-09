@@ -16,6 +16,7 @@ import { CustomSelect } from '@/components/ui/custom-select'
 import { Loader2, ArrowLeft, Camera } from 'lucide-react'
 import { toast } from '@/lib/toast'
 import { StaffDesignationsField, initialDesignations } from '@/components/staff-designations-field'
+import { StaffTeachingPanel } from '@/components/curriculum/staff-teaching-panel'
 
 const staffSchema = z.object({
   branchId: z.string().min(1, 'Required'),
@@ -220,6 +221,9 @@ function EditStaffComponent() {
           </form>
         </CardContent>
       </Card>
+
+      {/* Subjects, classes and form class are saved straight away (not with the form). */}
+      <StaffTeachingPanel staffId={staffId} staffName={((response as any)?.data || (response as any)?.staff || response)?.fullname || 'this teacher'} />
     </div>
   )
 }

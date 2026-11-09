@@ -37,7 +37,8 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { toast } from '@/lib/toast'
-import { Pencil, Eye, Users } from 'lucide-react'
+import { Pencil, Eye, Users, BookOpen } from 'lucide-react'
+import { ClassSubjectsSheet } from '@/components/curriculum/class-subjects-sheet'
 import { CustomSelect } from '@/components/ui/custom-select'
 
 export const Route = createFileRoute('/_authenticated/dashboard/classes')({
@@ -67,6 +68,9 @@ function ClassesPage() {
 
   const [viewDrawerOpen, setViewDrawerOpen] = useState(false)
   const [viewingClass, setViewingClass] = useState<ClassItem | null>(null)
+
+  // Class whose subjects are being edited
+  const [subjectsClassId, setSubjectsClassId] = useState<string | null>(null)
 
   // Teacher management state
   const [teacherDrawerOpen, setTeacherDrawerOpen] = useState(false)
@@ -163,13 +167,30 @@ function ClassesPage() {
       ),
     },
     {
-      id: 'teachers',
-      header: () => <div className="text-center">Teachers</div>,
-      cell: ({ row }) => (
-        <div className="text-center">
-          {row.original._count?.classLeads ?? 0}
-        </div>
-      ),
+      id: 'subjects',
+      header: () => <div className="text-center">Subjects</div>,
+      cell: ({ row }) => {
+        const n = (row.original as any)._count?.subjectAssignments ?? 0
+        return (
+          <div className="text-center">
+            <button
+              type="button"
+              className={n ? 'font-medium text-primary hover:underline' : 'text-muted-foreground hover:underline'}
+              onClick={() => setSubjectsClassId(row.original.id)}
+            >
+              {n || 'Add'}
+            </button>
+          </div>
+        )
+      },
+    },
+    {
+      id: 'formMaster',
+      header: 'Form master',
+      cell: ({ row }) => {
+        const lead = (row.original as any).classLeads?.[0]?.staff
+        return lead ? <span>{lead.fullname}</span> : <span className="text-muted-foreground">—</span>
+      },
     },
     {
       id: 'actions',
@@ -198,8 +219,19 @@ function ClassesPage() {
             variant="ghost"
             size="icon"
             className="size-8"
+            onClick={() => setSubjectsClassId(row.original.id)}
+            title="Subjects and teachers"
+            aria-label="Subjects and teachers"
+          >
+            <BookOpen className="size-4 text-muted-foreground hover:text-foreground" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-8"
             onClick={() => openTeachers(row.original)}
-            title="Manage teachers"
+            title="Form master"
+            aria-label="Form master"
           >
             <Users className="size-4 text-muted-foreground hover:text-foreground" />
           </Button>
@@ -516,28 +548,35 @@ function ClassesPage() {
       <AppDrawer
         open={teacherDrawerOpen}
         onOpenChange={setTeacherDrawerOpen}
-        title="Class Teachers"
-        description={`Manage teachers for ${managingClassName}`}
+        title="Form master"
+        description={`A class has one form master, and a teacher can be form master of only one class.`}
         footer={
           <Button variant="outline" onClick={() => setTeacherDrawerOpen(false)}>
             Close
           </Button>
         }
       >
-        {/* Assign new teacher */}
+        {/* Assign new form master (only when the class has none) */}
+        {!(classLeads && classLeads.length > 0) && (
         <div className="space-y-2">
           <CustomSelect
-            label="Assign a Teacher"
+            label={`Form master of ${managingClassName}`}
             value={assignStaffId}
             onValueChange={setAssignStaffId}
             items={[
               { label: 'Select staff', value: '' },
-              ...branchStaffs.map((s: Staff) => ({
-                label: s.fullname,
-                value: s.id,
-              })),
+              ...branchStaffs
+                // Teachers who already lead another class can't be chosen.
+                .filter((s: Staff) => !(s as any).teaching?.formClass || (s as any).teaching.formClass.id === managingClassId)
+                .map((s: Staff) => ({
+                  label: s.fullname,
+                  value: s.id,
+                })),
             ]}
           />
+          {branchStaffs.some((s: Staff) => (s as any).teaching?.formClass && (s as any).teaching.formClass.id !== managingClassId) && (
+            <p className="text-xs text-muted-foreground">Teachers who are already form master of another class aren't listed.</p>
+          )}
           <div className="flex gap-2 justify-end">
             <Button
               size="sm"
@@ -549,10 +588,11 @@ function ClassesPage() {
             </Button>
           </div>
         </div>
+        )}
 
         {/* Current teachers list */}
         <div className="space-y-2 mt-8">
-          <Label>Current Class Teachers</Label>
+          <Label>Current form master</Label>
           {classLeads && classLeads.length > 0 ? (
             <div className="space-y-2">
               {classLeads.map((teacher: ClassTeacher) => (
@@ -711,6 +751,8 @@ function ClassesPage() {
           </div>
         )}
       </AppDrawer>
+
+      <ClassSubjectsSheet classId={subjectsClassId} onClose={() => setSubjectsClassId(null)} />
     </div>
   )
 }
