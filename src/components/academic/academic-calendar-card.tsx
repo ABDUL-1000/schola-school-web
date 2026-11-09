@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { format, differenceInCalendarDays } from 'date-fns'
+import { format, differenceInCalendarDays, parseISO } from 'date-fns'
 import { AlertTriangle, CalendarClock, CheckCircle2, Loader2, PlayCircle } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { api } from '@/lib/api'
@@ -23,7 +23,9 @@ interface Calendar {
 }
 
 const KEY = ['academic-calendar']
-const day = (d: string) => format(new Date(d), 'd MMM yyyy')
+/** The date itself (not shifted by time zone). */
+const day = (d: string) => format(parseISO(d.slice(0, 10)), 'd MMM yyyy')
+const short = (d: string) => format(parseISO(d.slice(0, 10)), 'd MMM')
 
 /** Where the school is in the year, and moving to the next term. */
 export function AcademicCalendarCard() {
@@ -32,7 +34,8 @@ export function AcademicCalendarCard() {
     queryKey: KEY,
     queryFn: async () => (await api.get('/school/academic/calendar')).data?.data as Calendar,
   })
-  const [confirming, setConfirming] = useState(false)
+  // The term the school wants to switch to (next term, or any term picked from the strip).
+  const [target, setTarget] = useState<TermView | null>(null)
   const [copySetup, setCopySetup] = useState(true)
 
   const refresh = () => {
@@ -55,7 +58,7 @@ export function AcademicCalendarCard() {
         ? [c.feeStructures && `${c.feeStructures} fee structure${c.feeStructures === 1 ? '' : 's'}`, c.assessmentSetups && `${c.assessmentSetups} subject assessment setups`, c.gradingModes && `${c.gradingModes} CBT settings`].filter(Boolean)
         : []
       toast.success(r?.message || 'Term started', parts.length ? `Copied from last term: ${parts.join(', ')}.` : undefined)
-      setConfirming(false)
+      setTarget(null)
       refresh()
     },
     onError: (e: any) => toast.error(e?.message || 'Could not start the term'),
@@ -79,7 +82,9 @@ export function AcademicCalendarCard() {
   const cur = cal.currentTerm
   const next = cal.nextTerm
   const today = new Date()
-  const daysToNext = next ? differenceInCalendarDays(new Date(next.startDate), today) : null
+  const daysToNext = next ? differenceInCalendarDays(parseISO(next.startDate.slice(0, 10)), today) : null
+  const indexOf = (t: TermView) => cal.terms.findIndex((x) => x.id === t.id)
+  const forward = target ? indexOf(target) > indexOf(cur) : false
   const reports = cal.checklist?.reportSheets
   const fees = cal.checklist?.fees
 
@@ -100,30 +105,41 @@ export function AcademicCalendarCard() {
           </div>
         </div>
         {next && (
-          <Button onClick={() => setConfirming(true)} className="gap-2 sm:shrink-0">
+          <Button onClick={() => setTarget(next)} className="gap-2 sm:shrink-0">
             <PlayCircle className="size-4" /> Start {next.name} now
           </Button>
         )}
       </div>
 
-      {/* Term strip */}
-      <ol className="grid grid-cols-3 gap-2 text-xs">
-        {cal.terms.map((t) => {
-          const past = new Date(t.startDate) < new Date(cur.startDate)
-          return (
-            <li
-              key={t.id}
-              className={cn(
-                'rounded-lg border px-3 py-2',
-                t.isCurrent ? 'border-primary bg-primary/5 font-medium text-primary' : past ? 'text-muted-foreground' : '',
-              )}
-            >
-              <div className="truncate">{t.name}</div>
-              <div className="text-[11px] text-muted-foreground">{format(new Date(t.startDate), 'd MMM')}</div>
-            </li>
-          )
-        })}
-      </ol>
+      {/* Term strip — pick any term to make it current */}
+      <div className="space-y-1.5">
+        <ol className="grid grid-cols-3 gap-2 text-xs">
+          {cal.terms.map((t) => {
+            const past = indexOf(t) < indexOf(cur)
+            return (
+              <li key={t.id}>
+                <button
+                  type="button"
+                  disabled={t.isCurrent}
+                  onClick={() => setTarget(t)}
+                  title={t.isCurrent ? 'Current term' : `Make ${t.name} the current term`}
+                  className={cn(
+                    'w-full rounded-lg border px-3 py-2 text-left transition-colors',
+                    t.isCurrent ? 'border-primary bg-primary/5 font-medium text-primary' : 'hover:border-primary/50 hover:bg-muted/50',
+                    past && !t.isCurrent && 'text-muted-foreground',
+                  )}
+                >
+                  <div className="truncate">{t.name}</div>
+                  <div className="text-[11px] text-muted-foreground">
+                    {short(t.startDate)} – {short(t.endDate)}
+                  </div>
+                </button>
+              </li>
+            )
+          })}
+        </ol>
+        <p className="text-xs text-muted-foreground">Tap a term to make it the current term.</p>
+      </div>
 
       {next ? (
         <p className="text-sm">
@@ -178,16 +194,17 @@ export function AcademicCalendarCard() {
         </ul>
       )}
 
-      <Dialog open={confirming} onOpenChange={setConfirming}>
+      <Dialog open={!!target} onOpenChange={(o) => !o && setTarget(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Start {next?.name} now?</DialogTitle>
+            <DialogTitle>{forward ? `Start ${target?.name} now?` : `Go back to ${target?.name}?`}</DialogTitle>
             <DialogDescription>
-              {next?.name} becomes the current term for everyone: attendance, CBT, assignments and scores will go into {next?.name}.
-              {next && new Date(next.startDate) > today ? ` It was planned for ${day(next.startDate)}.` : ''}
+              {target?.name} becomes the current term for everyone: attendance, CBT, assignments and scores will go into {target?.name}.
+              {forward && target && parseISO(target.startDate.slice(0, 10)) > today ? ` It was planned for ${day(target.startDate)}.` : ''}
+              {!forward && cal.autoAdvanceTerm ? ' It stays current until the next term’s start date comes round again.' : ''}
             </DialogDescription>
           </DialogHeader>
-          {reports && reports.publishedClasses < reports.classes && (
+          {forward && reports && reports.publishedClasses < reports.classes && (
             <div className="flex gap-2 rounded-md bg-amber-50 p-3 text-xs text-amber-900 dark:bg-amber-500/10 dark:text-amber-200">
               <AlertTriangle className="size-4 shrink-0" />
               <span>
@@ -195,20 +212,22 @@ export function AcademicCalendarCard() {
               </span>
             </div>
           )}
+          {forward && (
           <label className="flex items-start gap-2.5 text-sm">
             <Checkbox checked={copySetup} onCheckedChange={(v) => setCopySetup(v === true)} className="mt-0.5" />
             <span>
-              Copy {cur.name}'s setup
-              <span className="block text-xs text-muted-foreground">Fees (with new due dates), subject assessment setups and CBT settings. Anything {next?.name} already has is kept.</span>
+              Copy the previous term's setup
+              <span className="block text-xs text-muted-foreground">Fees (with new due dates), subject assessment setups and CBT settings. Anything {target?.name} already has is kept.</span>
             </span>
           </label>
+          )}
           <DialogFooter className="gap-2 sm:gap-0">
-            <Button variant="outline" onClick={() => setConfirming(false)}>
+            <Button variant="outline" onClick={() => setTarget(null)}>
               Cancel
             </Button>
-            <Button onClick={() => next && start.mutate(next.id)} disabled={start.isPending}>
+            <Button onClick={() => target && start.mutate(target.id)} disabled={start.isPending}>
               {start.isPending && <Loader2 className="mr-2 size-4 animate-spin" />}
-              Start {next?.name}
+              {forward ? `Start ${target?.name}` : `Go back to ${target?.name}`}
             </Button>
           </DialogFooter>
         </DialogContent>
