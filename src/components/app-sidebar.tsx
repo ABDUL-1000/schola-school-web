@@ -50,6 +50,10 @@ const data = {
           url: '/dashboard/students',
         },
         {
+          title: 'Alumni',
+          url: '/dashboard/alumni',
+        },
+        {
           title: 'Branches',
           url: '/dashboard/branches',
         },
@@ -71,6 +75,10 @@ const data = {
         {
           title: 'Sessions',
           url: '/dashboard/sessions',
+        },
+        {
+          title: 'Promotion',
+          url: '/dashboard/promotion',
         },
         {
           title: 'Classes',

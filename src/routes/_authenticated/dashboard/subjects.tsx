@@ -40,7 +40,8 @@ import {
 } from '@/components/ui/alert-dialog'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { toast } from '@/lib/toast'
-import { Pencil, Eye, BookOpen } from 'lucide-react'
+import { Pencil, Eye, BookOpen, Sparkles, Loader2 } from 'lucide-react'
+import { LEVELS, LEVEL_LABEL, useAddDefaultSubjects, type LevelKey } from '@/hooks/queries/curriculum.queries'
 
 export const Route = createFileRoute('/_authenticated/dashboard/subjects')({
   component: SubjectsPage,
@@ -103,6 +104,7 @@ function SubjectsPage() {
 
   // Mutations
   const createMutation = useCreateSubjectMutation()
+  const addDefaults = useAddDefaultSubjects()
   const editMutation = useEditSubjectMutation()
   const deleteMutation = useDeleteSubjectsMutation()
   const assignMutation = useAssignTeacherToSubjectMutation()
@@ -145,8 +147,26 @@ function SubjectsPage() {
       cell: ({ row }) => row.original.branch?.name || '—',
     },
     {
+      id: 'levels',
+      header: 'Levels',
+      cell: ({ row }) => {
+        const levels = ((row.original as any).levels || []) as Array<LevelKey>
+        return levels.length ? (
+          <div className="flex flex-wrap gap-1">
+            {levels.map((l) => (
+              <Badge key={l} variant="outline" className="text-[10px] font-normal">
+                {LEVEL_LABEL[l] || l}
+              </Badge>
+            ))}
+          </div>
+        ) : (
+          <span className="text-xs text-muted-foreground">Any level</span>
+        )
+      },
+    },
+    {
       id: 'assignedTeachers',
-      header: () => <div className="text-center">Assigned Teachers</div>,
+      header: () => <div className="text-center">Classes</div>,
       cell: ({ row }) => (
         <div className="text-center">
           <Badge variant="secondary">
@@ -200,7 +220,7 @@ function SubjectsPage() {
 
   const openEdit = (subject: SubjectItem) => {
     setEditingSubject(subject)
-    setForm({ branchId: subject.branchId, name: subject.name })
+    setForm({ branchId: subject.branchId, name: subject.name, levels: (subject as any).levels || [] })
     setDrawerOpen(true)
   }
 
@@ -401,6 +421,24 @@ function SubjectsPage() {
               </AlertDialogContent>
             </AlertDialog>
           )}
+          <Button
+            variant="outline"
+            className="gap-2"
+            disabled={addDefaults.isPending}
+            onClick={() =>
+              addDefaults.mutate(
+                {},
+                {
+                  onSuccess: (res) => toast.success(res.message || 'Default subjects added'),
+                  onError: (e: any) => toast.error(e?.message || 'Could not add the default subjects'),
+                },
+              )
+            }
+            title="Add the standard Nigerian subjects for Nursery, Primary, JSS and SSS (only the ones you don't have)"
+          >
+            {addDefaults.isPending ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4 text-amber-500" />}
+            Add default subjects
+          </Button>
           <Button onClick={openCreate}>+ Add Subject</Button>
         </div>
       </div>
@@ -477,6 +515,29 @@ function SubjectsPage() {
               setForm((prev) => ({ ...prev, name: e.target.value }))
             }
           />
+        </div>
+        <div className="space-y-2">
+          <Label>Taught at</Label>
+          <div className="grid grid-cols-2 gap-2">
+            {LEVELS.map((l) => {
+              const on = (form.levels || []).includes(l.key)
+              return (
+                <label key={l.key} className="flex items-center gap-2 text-sm">
+                  <Checkbox
+                    checked={on}
+                    onCheckedChange={(v) =>
+                      setForm((prev) => ({
+                        ...prev,
+                        levels: v === true ? [...(prev.levels || []), l.key] : (prev.levels || []).filter((x) => x !== l.key),
+                      }))
+                    }
+                  />
+                  {l.label}
+                </label>
+              )
+            })}
+          </div>
+          <p className="text-xs text-muted-foreground">Used to show the right subjects when setting up a class. Leave empty for any level.</p>
         </div>
       </AppDrawer>
 
@@ -580,7 +641,7 @@ function SubjectsPage() {
                     >
                       <div className="space-y-0.5">
                         <div className="text-sm font-medium">
-                          {assignment.teacher.fullname}
+                          {assignment.teacher?.fullname ?? <span className="text-muted-foreground">No teacher yet</span>}
                         </div>
                         <div className="text-muted-foreground text-xs">
                           {assignment.class.name}
@@ -588,7 +649,7 @@ function SubjectsPage() {
                             ` · ${assignment.class.level}`}
                         </div>
                         <div className="flex flex-wrap gap-1 pt-1">
-                          {assignment.days.split(',').map((day) => (
+                          {assignment.days.split(',').filter((d) => d.trim()).map((day) => (
                             <Badge
                               key={day}
                               variant="outline"

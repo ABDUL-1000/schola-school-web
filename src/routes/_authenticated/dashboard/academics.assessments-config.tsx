@@ -77,9 +77,9 @@ function AssessmentsConfigRoute() {
   useEffect(() => {
     if (!termId && terms.length) {
       const now = Date.now()
-      const current = (sessions || [])
-        .flatMap((s: any) => s.terms || [])
-        .find((t: any) => +new Date(t.startDate) <= now && now <= +new Date(t.endDate))
+      const all = (sessions || []).flatMap((s: any) => s.terms || [])
+      // The school's current term, else the one containing today.
+      const current = all.find((t: any) => t.isCurrent) || all.find((t: any) => +new Date(t.startDate) <= now && now <= +new Date(t.endDate))
       setTermId(current?.id || terms[0].id)
     }
   }, [terms.length])

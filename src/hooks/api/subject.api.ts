@@ -13,6 +13,8 @@ export interface SubjectItem {
   createdAt: string
   updatedAt: string
   branch?: { name: string }
+  /** NURSERY, PRIMARY, JSS, SSS (empty = any level) */
+  levels?: Array<string>
   _count?: { subjectAssignments: number }
 }
 
@@ -23,12 +25,13 @@ export interface SubjectDetail extends SubjectItem {
 export interface SubjectTeacherAssignment {
   id: string
   days: string
+  /** Null when the class offers the subject but no teacher is chosen yet. */
   teacher: {
     id: string
     fullname: string
     email: string | null
     phone: string
-  }
+  } | null
   class: {
     id: string
     name: string
@@ -39,6 +42,7 @@ export interface SubjectTeacherAssignment {
 export interface CreateSubjectDTO {
   branchId: string
   name: string
+  levels?: Array<string>
 }
 
 export interface AssignTeacherDTO {

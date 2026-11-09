@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { z } from 'zod'
 import { cn } from '@/lib/utils'
 import { StaffContractTab } from '@/components/staff-contract-tab'
+import { StaffTeachingPanel } from '@/components/curriculum/staff-teaching-panel'
 import { StaffLoginDialog } from '@/components/staff-login-dialog'
 import {
   AlertDialog,
@@ -223,63 +224,8 @@ function StaffDetailsPage() {
               </div>
 
               {/* Roles & Assignments Section */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t">
-                {/* Managed Classes */}
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-md bg-primary/10 text-primary">
-                      <Users className="size-4" />
-                    </div>
-                    <h3 className="text-lg font-semibold tracking-tight">Managed Classes</h3>
-                  </div>
-                  {staff.managedClasses?.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {staff.managedClasses.map((mc: any) => (
-                        <div key={mc.id} className="flex flex-col p-3 rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md">
-                          <span className="font-semibold text-sm">{mc.class?.name}</span>
-                          <span className="text-xs text-muted-foreground mt-0.5">{mc.class?.level || 'No Level Specified'}</span>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center p-8 border border-dashed rounded-xl bg-muted/10">
-                      <Users className="size-8 text-muted-foreground/30 mb-2" />
-                      <p className="text-sm font-medium text-muted-foreground">No classes managed</p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Assigned Subjects */}
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-md bg-primary/10 text-primary">
-                      <BookOpen className="size-4" />
-                    </div>
-                    <h3 className="text-lg font-semibold tracking-tight">Assigned Subjects</h3>
-                  </div>
-                  {staff.subjectAssignments?.length > 0 ? (
-                    <div className="flex flex-col gap-3">
-                      {staff.subjectAssignments.map((sa: any) => (
-                        <div key={sa.id} className="flex items-center justify-between p-3 rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md">
-                          <div className="flex flex-col">
-                            <span className="font-semibold text-sm">{sa.subject?.name}</span>
-                            <span className="text-xs text-muted-foreground mt-0.5">Class: {sa.class?.name}</span>
-                          </div>
-                          {sa.days && (
-                            <Badge variant="secondary" className="text-[10px] uppercase tracking-wider font-medium">
-                              {sa.days.split(',').length} Days
-                            </Badge>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center p-8 border border-dashed rounded-xl bg-muted/10">
-                      <BookOpen className="size-8 text-muted-foreground/30 mb-2" />
-                      <p className="text-sm font-medium text-muted-foreground">No assigned subjects</p>
-                    </div>
-                  )}
-                </div>
+              <div className="pt-6 border-t">
+                <StaffTeachingPanel staffId={staff.id} staffName={staff.fullname} />
               </div>
             </div>
           )}

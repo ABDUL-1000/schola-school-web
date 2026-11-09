@@ -27,6 +27,7 @@ import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-qu
 import { Route as StaffRegisterRouteImport } from './routes/staff.register'
 import { Route as SchoolSlugStaffRegisterRouteImport } from './routes/$schoolSlug.staff.register'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
+import { Route as AuthenticatedDashboardAlumniRouteImport } from './routes/_authenticated/dashboard/alumni'
 import { Route as AuthenticatedDashboardAnnouncementsRouteImport } from './routes/_authenticated/dashboard/announcements'
 import { Route as AuthenticatedDashboardAssignmentsRouteImport } from './routes/_authenticated/dashboard/assignments'
 import { Route as AuthenticatedDashboardBranchesRouteImport } from './routes/_authenticated/dashboard/branches'
@@ -34,6 +35,7 @@ import { Route as AuthenticatedDashboardClassesRouteImport } from './routes/_aut
 import { Route as AuthenticatedDashboardDepartmentsRouteImport } from './routes/_authenticated/dashboard/departments'
 import { Route as AuthenticatedDashboardEnrolmentQueueRouteImport } from './routes/_authenticated/dashboard/enrolment-queue'
 import { Route as AuthenticatedDashboardExamsRouteImport } from './routes/_authenticated/dashboard/exams'
+import { Route as AuthenticatedDashboardPromotionRouteImport } from './routes/_authenticated/dashboard/promotion'
 import { Route as AuthenticatedDashboardReportsRouteImport } from './routes/_authenticated/dashboard/reports'
 import { Route as AuthenticatedDashboardResultsRouteImport } from './routes/_authenticated/dashboard/results'
 import { Route as AuthenticatedDashboardSessionsRouteImport } from './routes/_authenticated/dashboard/sessions'
@@ -164,6 +166,12 @@ const AuthenticatedDashboardIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const AuthenticatedDashboardAlumniRoute =
+  AuthenticatedDashboardAlumniRouteImport.update({
+    id: '/alumni',
+    path: '/alumni',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
 const AuthenticatedDashboardAnnouncementsRoute =
   AuthenticatedDashboardAnnouncementsRouteImport.update({
     id: '/announcements',
@@ -204,6 +212,12 @@ const AuthenticatedDashboardExamsRoute =
   AuthenticatedDashboardExamsRouteImport.update({
     id: '/exams',
     path: '/exams',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardPromotionRoute =
+  AuthenticatedDashboardPromotionRouteImport.update({
+    id: '/promotion',
+    path: '/promotion',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 const AuthenticatedDashboardReportsRoute =
@@ -445,6 +459,7 @@ export interface FileRoutesByFullPath {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
+  '/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
   '/dashboard/announcements': typeof AuthenticatedDashboardAnnouncementsRoute
   '/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   '/dashboard/branches': typeof AuthenticatedDashboardBranchesRoute
@@ -452,6 +467,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
   '/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
+  '/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
   '/dashboard/results': typeof AuthenticatedDashboardResultsRoute
   '/dashboard/sessions': typeof AuthenticatedDashboardSessionsRoute
@@ -506,6 +522,7 @@ export interface FileRoutesByTo {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
+  '/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
   '/dashboard/announcements': typeof AuthenticatedDashboardAnnouncementsRoute
   '/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   '/dashboard/branches': typeof AuthenticatedDashboardBranchesRoute
@@ -513,6 +530,7 @@ export interface FileRoutesByTo {
   '/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
   '/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
+  '/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
   '/dashboard/results': typeof AuthenticatedDashboardResultsRoute
   '/dashboard/sessions': typeof AuthenticatedDashboardSessionsRoute
@@ -571,6 +589,7 @@ export interface FileRoutesById {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
+  '/_authenticated/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
   '/_authenticated/dashboard/announcements': typeof AuthenticatedDashboardAnnouncementsRoute
   '/_authenticated/dashboard/assignments': typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   '/_authenticated/dashboard/branches': typeof AuthenticatedDashboardBranchesRoute
@@ -578,6 +597,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
   '/_authenticated/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/_authenticated/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
+  '/_authenticated/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/_authenticated/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
   '/_authenticated/dashboard/results': typeof AuthenticatedDashboardResultsRoute
   '/_authenticated/dashboard/sessions': typeof AuthenticatedDashboardSessionsRoute
@@ -635,6 +655,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
+    | '/dashboard/alumni'
     | '/dashboard/announcements'
     | '/dashboard/assignments'
     | '/dashboard/branches'
@@ -642,6 +663,7 @@ export interface FileRouteTypes {
     | '/dashboard/departments'
     | '/dashboard/enrolment-queue'
     | '/dashboard/exams'
+    | '/dashboard/promotion'
     | '/dashboard/reports'
     | '/dashboard/results'
     | '/dashboard/sessions'
@@ -696,6 +718,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
+    | '/dashboard/alumni'
     | '/dashboard/announcements'
     | '/dashboard/assignments'
     | '/dashboard/branches'
@@ -703,6 +726,7 @@ export interface FileRouteTypes {
     | '/dashboard/departments'
     | '/dashboard/enrolment-queue'
     | '/dashboard/exams'
+    | '/dashboard/promotion'
     | '/dashboard/reports'
     | '/dashboard/results'
     | '/dashboard/sessions'
@@ -760,6 +784,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
+    | '/_authenticated/dashboard/alumni'
     | '/_authenticated/dashboard/announcements'
     | '/_authenticated/dashboard/assignments'
     | '/_authenticated/dashboard/branches'
@@ -767,6 +792,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/departments'
     | '/_authenticated/dashboard/enrolment-queue'
     | '/_authenticated/dashboard/exams'
+    | '/_authenticated/dashboard/promotion'
     | '/_authenticated/dashboard/reports'
     | '/_authenticated/dashboard/results'
     | '/_authenticated/dashboard/sessions'
@@ -949,6 +975,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
+    '/_authenticated/dashboard/alumni': {
+      id: '/_authenticated/dashboard/alumni'
+      path: '/alumni'
+      fullPath: '/dashboard/alumni'
+      preLoaderRoute: typeof AuthenticatedDashboardAlumniRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
     '/_authenticated/dashboard/announcements': {
       id: '/_authenticated/dashboard/announcements'
       path: '/announcements'
@@ -996,6 +1029,13 @@ declare module '@tanstack/react-router' {
       path: '/exams'
       fullPath: '/dashboard/exams'
       preLoaderRoute: typeof AuthenticatedDashboardExamsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/promotion': {
+      id: '/_authenticated/dashboard/promotion'
+      path: '/promotion'
+      fullPath: '/dashboard/promotion'
+      preLoaderRoute: typeof AuthenticatedDashboardPromotionRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
     '/_authenticated/dashboard/reports': {
@@ -1295,6 +1335,7 @@ const AuthenticatedDashboardAssignmentsRouteWithChildren =
   )
 
 interface AuthenticatedDashboardRouteRouteChildren {
+  AuthenticatedDashboardAlumniRoute: typeof AuthenticatedDashboardAlumniRoute
   AuthenticatedDashboardAnnouncementsRoute: typeof AuthenticatedDashboardAnnouncementsRoute
   AuthenticatedDashboardAssignmentsRoute: typeof AuthenticatedDashboardAssignmentsRouteWithChildren
   AuthenticatedDashboardBranchesRoute: typeof AuthenticatedDashboardBranchesRoute
@@ -1302,6 +1343,7 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardDepartmentsRoute: typeof AuthenticatedDashboardDepartmentsRoute
   AuthenticatedDashboardEnrolmentQueueRoute: typeof AuthenticatedDashboardEnrolmentQueueRoute
   AuthenticatedDashboardExamsRoute: typeof AuthenticatedDashboardExamsRoute
+  AuthenticatedDashboardPromotionRoute: typeof AuthenticatedDashboardPromotionRoute
   AuthenticatedDashboardReportsRoute: typeof AuthenticatedDashboardReportsRoute
   AuthenticatedDashboardResultsRoute: typeof AuthenticatedDashboardResultsRoute
   AuthenticatedDashboardSessionsRoute: typeof AuthenticatedDashboardSessionsRoute
@@ -1339,6 +1381,7 @@ interface AuthenticatedDashboardRouteRouteChildren {
 
 const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRouteChildren =
   {
+    AuthenticatedDashboardAlumniRoute: AuthenticatedDashboardAlumniRoute,
     AuthenticatedDashboardAnnouncementsRoute:
       AuthenticatedDashboardAnnouncementsRoute,
     AuthenticatedDashboardAssignmentsRoute:
@@ -1350,6 +1393,7 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
     AuthenticatedDashboardEnrolmentQueueRoute:
       AuthenticatedDashboardEnrolmentQueueRoute,
     AuthenticatedDashboardExamsRoute: AuthenticatedDashboardExamsRoute,
+    AuthenticatedDashboardPromotionRoute: AuthenticatedDashboardPromotionRoute,
     AuthenticatedDashboardReportsRoute: AuthenticatedDashboardReportsRoute,
     AuthenticatedDashboardResultsRoute: AuthenticatedDashboardResultsRoute,
     AuthenticatedDashboardSessionsRoute: AuthenticatedDashboardSessionsRoute,

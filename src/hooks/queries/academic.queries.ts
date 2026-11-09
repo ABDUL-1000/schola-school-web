@@ -26,6 +26,7 @@ export function useCreateSessionMutation() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ACADEMIC_KEYS.sessions })
+      queryClient.invalidateQueries({ queryKey: ['academic-calendar'] })
     },
   })
 }
@@ -39,6 +40,7 @@ export function useActivateSessionMutation() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ACADEMIC_KEYS.sessions })
+      queryClient.invalidateQueries({ queryKey: ['academic-calendar'] })
     },
   })
 }
@@ -52,6 +54,7 @@ export function useUpdateTermDatesMutation() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ACADEMIC_KEYS.sessions })
+      queryClient.invalidateQueries({ queryKey: ['academic-calendar'] })
     },
   })
 }

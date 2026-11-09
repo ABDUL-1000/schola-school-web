@@ -1,3 +1,4 @@
+import { AcademicCalendarCard } from '@/components/academic/academic-calendar-card'
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Plus, CalendarDays, Pencil, CheckCircle2, Circle, CalendarIcon } from 'lucide-react'
@@ -128,6 +129,8 @@ function AcademicSessionsPage() {
           Create Session
         </Button>
       </div>
+
+      <AcademicCalendarCard />
 
       {isLoading ? (
         <div className="py-10 text-center text-muted-foreground">Loading sessions...</div>
