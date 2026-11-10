@@ -17,6 +17,7 @@ import { CustomSelect } from '@/components/ui/custom-select'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AutoGeneratorDialog } from '@/components/timetable/auto-generator-dialog'
+import { TimetableDownloadMenu } from '@/components/timetable/timetable-print'
 
 export const Route = createFileRoute('/_authenticated/dashboard/timetable')({
   component: TimetablePage,
@@ -69,23 +70,38 @@ function TimetablePage() {
   const timetableToDisplay = viewMode === 'CLASS' ? classTimetableData?.timetable : teacherTimetableData?.timetable
 
   return (
-    <div className="space-y-6">
+    // min-w-0 keeps the wide grid scrolling inside its box instead of widening the page.
+    <div className="min-w-0 max-w-full space-y-6">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Timetable</h1>
           <p className="text-muted-foreground text-sm">
-            Manage class schedules, bell schedule periods, and automated conflict-free generation
+            Click a slot to put a subject and teacher in it — the class’s subjects and teachers update to match. School day defaults to 8:00–14:00 with a break at 10:00.
           </p>
         </div>
-        {selectedBranchId && viewMode === 'CLASS' && (
-          <Button
-            onClick={() => setAutoGenOpen(true)}
-            className="flex items-center gap-2 bg-primary text-primary-foreground shadow-xs font-semibold"
-          >
-            <span>⚡</span> Auto-Generate Timetable
-          </Button>
-        )}
+        <div className="flex shrink-0 flex-wrap gap-2">
+          {selectedBranchId && (
+            <TimetableDownloadMenu
+              branchId={selectedBranchId}
+              current={
+                viewMode === 'CLASS' && selectedClassId
+                  ? { by: 'class', id: selectedClassId, name: classes?.data.find((c: any) => c.id === selectedClassId)?.name || 'Class' }
+                  : viewMode === 'TEACHER' && selectedStaffId
+                    ? { by: 'teacher', id: selectedStaffId, name: staffs?.data.find((s: any) => s.id === selectedStaffId)?.fullname || 'Teacher' }
+                    : undefined
+              }
+            />
+          )}
+          {selectedBranchId && viewMode === 'CLASS' && (
+            <Button
+              onClick={() => setAutoGenOpen(true)}
+              className="flex items-center gap-2 bg-primary text-primary-foreground shadow-xs font-semibold"
+            >
+              <span>⚡</span> Auto-Generate Timetable
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Filters */}

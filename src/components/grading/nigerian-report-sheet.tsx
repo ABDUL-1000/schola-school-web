@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { Award, Printer } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Printer, Download, Award, Calendar, CheckCircle2, User, BookOpen } from 'lucide-react'
+import { printA4 } from '@/lib/print-a4'
 
 interface NigerianReportSheetProps {
   data: any
@@ -17,7 +18,9 @@ const SLOT_FIELD: Record<ReportSlot, string> = {
   exam: 'examTotal',
 }
 
+/** The school's report card. Used on every portal; prints on one A4 page. */
 export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, onClose }) => {
+  const sheetRef = useRef<HTMLDivElement>(null)
   if (!data || !data.student) return null
 
   const { school, student, term, config, reportSheet, subjects = [] } = data
@@ -34,12 +37,11 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
   const examColumn = columns.find((c) => c.slot === 'exam')
   const caMax = caColumns.reduce((a, c) => a + (Number(c.maxScore) || 0), 0)
 
-  const handlePrint = () => {
-    window.print()
-  }
+  const handlePrint = () =>
+    printA4(sheetRef.current, { title: `Report card - ${student.fullname} - ${term.name} ${term.sessionName || ''}`.trim() })
 
-  const affectiveDomain = (reportSheet?.affectiveDomain as Record<string, number>) || {}
-  const psychomotorDomain = (reportSheet?.psychomotorDomain as Record<string, number>) || {}
+  const affectiveDomain = (reportSheet?.affectiveDomain ?? {}) as Record<string, number>
+  const psychomotorDomain = (reportSheet?.psychomotorDomain ?? {}) as Record<string, number>
 
   return (
     <div className="space-y-4">
@@ -74,7 +76,7 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
       </div>
 
       {/* Printable Report Sheet Document */}
-      <div className="bg-white text-black p-6 sm:p-8 rounded-xl border border-gray-300 shadow-sm print:border-none print:shadow-none print:p-0 w-full max-w-6xl mx-auto font-sans">
+      <div ref={sheetRef} className="bg-white text-black p-6 sm:p-8 rounded-xl border border-gray-300 shadow-sm print:border-none print:shadow-none print:p-0 w-full max-w-6xl mx-auto font-sans">
         {/* Header with School Details */}
         <div className="border-b-2 border-black pb-4 mb-4 text-center relative">
           <div className="flex items-center justify-center gap-4 mb-2">
@@ -137,12 +139,12 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
           </div>
           <div className="pt-2 border-t border-gray-200">
             <span className="font-semibold text-gray-600 block">Times School Opened:</span>
-            <span className="font-bold text-gray-900">{reportSheet?.timesSchoolOpened ?? 65}</span>
+            <span className="font-bold text-gray-900">{reportSheet?.timesSchoolOpened ?? '-'}</span>
           </div>
           <div className="pt-2 border-t border-gray-200">
             <span className="font-semibold text-gray-600 block">Times Present / Absent:</span>
             <span className="font-bold text-gray-900">
-              {reportSheet?.timesPresent ?? 63} / {reportSheet?.timesAbsent ?? 2}
+              {reportSheet?.timesPresent ?? '-'} / {reportSheet?.timesAbsent ?? '-'}
             </span>
           </div>
         </div>
@@ -263,7 +265,8 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
           </div>
         </div>
 
-        {/* Affective & Psychomotor Evaluation Domains */}
+        {/* Affective & Psychomotor Evaluation Domains (only once rated) */}
+        {(Object.keys(affectiveDomain).length > 0 || Object.keys(psychomotorDomain).length > 0) && (<>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           {/* Affective Domain */}
           <div className="border border-black rounded-sm overflow-hidden text-xs">
@@ -317,20 +320,21 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
           <span className="font-semibold text-gray-700 mr-2">Behavioral / Skill Rating Key:</span>
           5 - Excellent | 4 - Good | 3 - Fair / Average | 2 - Poor | 1 - Very Poor
         </div>
+        </>)}
 
         {/* Remarks and Signatures Block */}
         <div className="border border-black p-3 rounded-sm text-xs space-y-3 bg-gray-50/30">
           <div>
             <span className="font-bold text-gray-700 block">Form Teacher's Remark:</span>
             <p className="italic text-gray-900 mt-0.5 border-b border-dotted border-gray-400 pb-1">
-              {reportSheet?.formTeacherRemark || 'Satisfactory academic performance and good conduct.'}
+              {reportSheet?.formTeacherRemark || ' '}
             </p>
           </div>
 
           <div>
             <span className="font-bold text-gray-700 block">Principal / Headmaster's Remark:</span>
             <p className="italic text-gray-900 mt-0.5 border-b border-dotted border-gray-400 pb-1">
-              {reportSheet?.principalRemark || 'Promising result. Continue striving for excellence.'}
+              {reportSheet?.principalRemark || ' '}
             </p>
           </div>
 
