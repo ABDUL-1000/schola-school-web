@@ -40,6 +40,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { toast } from '@/lib/toast'
+import { ResultsLockControls } from '@/components/grading/results-lock-controls'
 import { NigerianReportSheet } from '@/components/grading/nigerian-report-sheet'
 
 export const Route = createFileRoute('/_authenticated/dashboard/results')({
@@ -239,6 +240,8 @@ function ResultsIndexRoute() {
                 )}
                 Publish to Students & Parents
               </Button>
+
+              <ResultsLockControls termId={selectedTermId} classId={selectedClassId} publication={broadsheet?.publication} />
 
               <Button variant="outline" size="sm" onClick={handleExportCSV} className="gap-1.5">
                 <Download className="w-4 h-4" />

@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { NigerianReportSheet } from '@/components/grading/nigerian-report-sheet'
+import { ResultsLockControls } from '@/components/grading/results-lock-controls'
 import { ClassSubjectsSheet } from '@/components/curriculum/class-subjects-sheet'
 import {
   useClassBroadsheetQuery,
@@ -306,6 +307,8 @@ function ReportSheetTab({ classId, termId, onCard }: { classId: string; termId: 
           </Button>
         </div>
       </div>
+
+      {sheet && <ResultsLockControls termId={termId} classId={classId} publication={sheet.publication} />}
 
       {isLoading ? (
         <Loader2 className="mx-auto size-5 animate-spin text-primary" />
