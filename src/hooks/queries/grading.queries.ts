@@ -73,3 +73,31 @@ export const useSingleReportSheetQuery = (termId: string, studentId: string) => 
     enabled: !!termId && !!studentId,
   });
 };
+
+/** Take published results back: students/parents lose access, teachers can edit again. */
+export const useUnpublishReportSheetsMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ termId, classId }: { termId: string; classId: string }) => {
+      const { data } = await api.post(`/school/grading/${termId}/class/${classId}/unpublish`);
+      return data?.data;
+    },
+    onSuccess: (_, { termId, classId }) => {
+      queryClient.invalidateQueries({ queryKey: ["classBroadsheet", termId, classId] });
+    },
+  });
+};
+
+/** Keep results published but let teachers correct them (allow) — or lock them again. */
+export const useTeacherEditsMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ termId, classId, allow }: { termId: string; classId: string; allow: boolean }) => {
+      const { data } = await api.post(`/school/grading/${termId}/class/${classId}/teacher-edits`, { allow });
+      return data?.data;
+    },
+    onSuccess: (_, { termId, classId }) => {
+      queryClient.invalidateQueries({ queryKey: ["classBroadsheet", termId, classId] });
+    },
+  });
+};
