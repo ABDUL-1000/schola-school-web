@@ -9,7 +9,9 @@ import { CustomSelect } from '@/components/ui/custom-select'
 import {
   useCreatePeriodMutation,
   useDeletePeriodsMutation,
+  useEditPeriodMutation,
 } from '@/hooks/queries/timetable.queries'
+import { BellScheduleButton } from './bell-schedule'
 import { toast } from '@/lib/toast'
 
 interface PeriodManagerProps {
@@ -23,7 +25,7 @@ const PERIOD_TYPE_OPTIONS: Array<{ label: string; value: PeriodType; icon: strin
   { label: 'Morning Assembly & Devotion', value: 'ASSEMBLY', icon: '📢' },
   { label: 'Break / Recess', value: 'BREAK', icon: '☕' },
   { label: 'Sports & Physical Ed', value: 'SPORTS', icon: '⚽' },
-  { label: 'Prep / Supervised Study', value: 'PREP', icon: '📖' },
+  { label: 'Free period / Prep (all classes)', value: 'PREP', icon: '📖' },
   { label: 'Clubs & Societies', value: 'CLUB', icon: '🎨' },
 ]
 
@@ -48,12 +50,58 @@ export function PeriodManager({
     isBreak: false,
   })
   const [drawerOpen, setDrawerOpen] = useState(false)
+  // Set when changing an existing period instead of adding one.
+  const [editingId, setEditingId] = useState<string | null>(null)
 
   const createPeriod = useCreatePeriodMutation()
+  const editPeriod = useEditPeriodMutation()
   const deletePeriods = useDeletePeriodsMutation()
+
+  const blank = { label: '', startTime: '', endTime: '', periodType: 'ACADEMIC' as PeriodType, globalActivityName: '', isBreak: false }
+  const openAdd = () => {
+    setEditingId(null)
+    setNewPeriod(blank)
+    setDrawerOpen(true)
+  }
+  const openEdit = (p: TimetablePeriod) => {
+    setEditingId(p.id)
+    setNewPeriod({
+      label: p.label,
+      startTime: p.startTime,
+      endTime: p.endTime,
+      periodType: p.periodType || (p.isBreak ? 'BREAK' : 'ACADEMIC'),
+      globalActivityName: p.globalActivityName || '',
+      isBreak: !!p.isBreak,
+    })
+    setDrawerOpen(true)
+  }
 
   const handleCreate = () => {
     if (!newPeriod.label || !newPeriod.startTime || !newPeriod.endTime) return
+
+    if (editingId) {
+      editPeriod.mutate(
+        {
+          periodId: editingId,
+          data: {
+            label: newPeriod.label,
+            startTime: newPeriod.startTime,
+            endTime: newPeriod.endTime,
+            periodType: newPeriod.periodType,
+            globalActivityName: newPeriod.periodType !== 'ACADEMIC' ? newPeriod.globalActivityName || undefined : undefined,
+            isBreak: newPeriod.periodType === 'BREAK',
+          },
+        },
+        {
+          onSuccess: () => {
+            toast.success('Period updated')
+            setDrawerOpen(false)
+          },
+          onError: (error: any) => toast.error(error?.response?.data?.message || error?.message || 'Failed to update period'),
+        },
+      )
+      return
+    }
 
     createPeriod.mutate(
       {
@@ -137,16 +185,18 @@ export function PeriodManager({
 
   return (
     <div className="space-y-4">
-      {/* Add Period Button */}
-      <Button variant="outline" size="sm" onClick={() => setDrawerOpen(true)}>
-        + Add Period to Bell Schedule
-      </Button>
+      <div className="flex flex-wrap gap-2">
+        <BellScheduleButton branchId={branchId} />
+        <Button variant="outline" size="sm" onClick={openAdd}>
+          + Add period (assembly, sports, free…)
+        </Button>
+      </div>
 
       {/* Add Period Drawer */}
       <AppDrawer
         open={drawerOpen}
         onOpenChange={setDrawerOpen}
-        title="New Period / Time Slot"
+        title={editingId ? 'Edit period' : 'New period / time slot'}
         description="Configure a bell schedule period for this school branch. Non-academic periods apply school-wide."
         footer={
           <>
@@ -154,12 +204,13 @@ export function PeriodManager({
               onClick={handleCreate}
               disabled={
                 createPeriod.isPending ||
+                editPeriod.isPending ||
                 !newPeriod.label ||
                 !newPeriod.startTime ||
                 !newPeriod.endTime
               }
             >
-              {createPeriod.isPending ? 'Creating...' : 'Save to Bell Schedule'}
+              {createPeriod.isPending || editPeriod.isPending ? 'Saving...' : editingId ? 'Save changes' : 'Save to Bell Schedule'}
             </Button>
             <Button variant="outline" onClick={() => setDrawerOpen(false)}>
               Cancel
@@ -266,13 +317,13 @@ export function PeriodManager({
                   className={`flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm ${getPeriodBadgeClass(p)}`}
                 >
                   <span className="text-base">{getPeriodIcon(p)}</span>
-                  <div className="flex flex-col">
+                  <button type="button" onClick={() => openEdit(p)} title="Change this period" className="flex flex-col text-left">
                     <span className="font-medium leading-none">{p.label}</span>
                     <span className="text-muted-foreground text-[10px] mt-0.5">
                       {p.startTime} – {p.endTime}
                       {p.globalActivityName ? ` · ${p.globalActivityName}` : ''}
                     </span>
-                  </div>
+                  </button>
                   <button
                     onClick={() => handleDelete(p.id)}
                     className="text-muted-foreground hover:text-destructive ml-2 text-xs"

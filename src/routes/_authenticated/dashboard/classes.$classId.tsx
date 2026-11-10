@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowLeft, BookOpen, FileText, Loader2, Printer, Search, Send, Sparkles, UserRound, Users } from 'lucide-react'
 import { api } from '@/lib/api'
 import { toast } from '@/lib/toast'
 import { cn } from '@/lib/utils'
 import { CardTable } from '@/lib/card-table'
+import { printA4 } from '@/lib/print-a4'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -233,6 +234,7 @@ function ReportSheetTab({ classId, termId, onCard }: { classId: string; termId: 
   const { data: sheet, isLoading } = useClassBroadsheetQuery(termId, classId)
   const generate = useGenerateReportSheetsMutation()
   const publish = usePublishReportSheetsMutation()
+  const printRef = useRef<HTMLDivElement>(null)
   const allSubjects: Array<{ id: string; name: string }> = sheet?.subjects || []
   const rows: Array<any> = sheet?.students || []
   // Only subjects that have scores this term (others would be a column of dashes).
@@ -289,8 +291,18 @@ function ReportSheetTab({ classId, termId, onCard }: { classId: string; termId: 
           >
             {publish.isPending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />} Publish to students & parents
           </Button>
-          <Button variant="ghost" className="gap-2" onClick={() => window.print()}>
-            <Printer className="size-4" /> Print
+          <Button
+            variant="ghost"
+            className="gap-2"
+            disabled={!scored.length}
+            onClick={() =>
+              printA4(printRef.current, {
+                landscape: true,
+                title: `Report sheet - ${sheet?.class?.name || ''} - ${sheet?.term?.name || ''} ${sheet?.term?.session?.name || ''}`.trim(),
+              })
+            }
+          >
+            <Printer className="size-4" /> Download / print
           </Button>
         </div>
       </div>
@@ -300,6 +312,13 @@ function ReportSheetTab({ classId, termId, onCard }: { classId: string; termId: 
       ) : !rows.length || !subjects.length ? (
         <p className="rounded-xl border border-dashed p-8 text-center text-sm text-muted-foreground">No scores for this term yet.</p>
       ) : (
+        <div ref={printRef} className="bg-background">
+        <div className="mb-2 hidden text-center [#a4-print-root_&]:block">
+          <h2 className="text-lg font-bold">{sheet?.class?.school?.schoolName}</h2>
+          <p className="text-sm">
+            {sheet?.class?.name} — Report sheet, {sheet?.term?.name} {sheet?.term?.session?.name}
+          </p>
+        </div>
         <div className="overflow-x-auto rounded-lg border">
           <CardTable className="w-full text-sm">
             <thead className="bg-muted/50 text-xs text-muted-foreground">
@@ -313,7 +332,7 @@ function ReportSheetTab({ classId, termId, onCard }: { classId: string; termId: 
                 ))}
                 <th className="px-3 py-2 text-center font-medium">Total</th>
                 <th className="px-3 py-2 text-center font-medium">Average</th>
-                <th className="px-3 py-2" />
+                <th className="px-3 py-2 [#a4-print-root_&]:hidden" />
               </tr>
             </thead>
             <tbody>
@@ -341,7 +360,7 @@ function ReportSheetTab({ classId, termId, onCard }: { classId: string; termId: 
                   })}
                   <td className="px-3 py-2 text-center font-semibold">{row.cumulativeTotal}</td>
                   <td className="px-3 py-2 text-center font-semibold text-primary">{row.averageScore}%</td>
-                  <td className="px-3 py-2 text-right">
+                  <td className="px-3 py-2 text-right [#a4-print-root_&]:hidden">
                     <Button size="sm" variant="ghost" className="gap-1.5" onClick={() => onCard(row.student.id)}>
                       <FileText className="size-4" /> Report card
                     </Button>
@@ -350,6 +369,7 @@ function ReportSheetTab({ classId, termId, onCard }: { classId: string; termId: 
               ))}
             </tbody>
           </CardTable>
+        </div>
         </div>
       )}
     </div>

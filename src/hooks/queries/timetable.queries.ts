@@ -1,15 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { timetableApi, type CreatePeriodDTO } from '../api/timetable.api'
-import { classApi } from '../api/class.api'
-import { subjectApi } from '../api/subject.api'
-import { staffApi } from '../api/staff.api'
+import { timetableApi, type BellScheduleDTO, type CreatePeriodDTO } from '../api/timetable.api'
 
 // ===== Selector Queries (using dedicated API files) =====
 
 export function useClassesQuery(branchId?: string) {
   return useQuery({
     queryKey: ['timetable-classes', { branchId }],
-    queryFn: () => classApi.getAllClasses(branchId),
+    queryFn: () => timetableApi.getClasses(branchId!),
     enabled: !!branchId,
   })
 }
@@ -17,7 +14,7 @@ export function useClassesQuery(branchId?: string) {
 export function useSubjectsQuery(branchId?: string) {
   return useQuery({
     queryKey: ['timetable-subjects', { branchId }],
-    queryFn: () => subjectApi.getAllSubjects(branchId),
+    queryFn: () => timetableApi.getSubjects(branchId!),
     enabled: !!branchId,
   })
 }
@@ -25,7 +22,7 @@ export function useSubjectsQuery(branchId?: string) {
 export function useStaffsForTimetableQuery(branchId?: string) {
   return useQuery({
     queryKey: ['timetable-staffs', { branchId }],
-    queryFn: () => staffApi.getAllStaffs(branchId),
+    queryFn: () => timetableApi.getStaffs(branchId!),
     enabled: !!branchId,
   })
 }
@@ -154,3 +151,24 @@ export function useToggleLockEntryMutation() {
   })
 }
 
+
+// ===== Bell schedule, class subjects, printing =====
+
+export function useApplyBellScheduleMutation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: BellScheduleDTO) => timetableApi.applyBellSchedule(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: timetableKeys.all })
+    },
+  })
+}
+
+/** The class's subjects and their teachers (changes when the timetable assigns one). */
+export function useClassSubjectsQuery(classId?: string) {
+  return useQuery({
+    queryKey: [...timetableKeys.all, 'class-subjects', { classId }],
+    queryFn: () => timetableApi.getClassSubjects(classId!),
+    enabled: !!classId,
+  })
+}

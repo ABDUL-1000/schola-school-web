@@ -122,30 +122,68 @@ export interface GenerateTimetableResponse {
 
 // ===== API Functions =====
 
+/** Where the timetable API lives. The staff portal's copy points these at /staff/admin. */
+export const TT_PATHS = {
+  timetable: '/school/timetable',
+  classes: '/school/class',
+  classDetail: (classId: string) => `/school/class/${classId}`,
+  subjects: '/school/subject',
+  staffs: '/school/staff',
+}
+
+export interface BellScheduleDTO {
+  branchId: string
+  startTime: string
+  endTime: string
+  breakAt: string | null
+  breakMinutes: number
+  periodMinutes: number
+}
+
+/** Defaults every school starts with; all editable. */
+export const DEFAULT_BELL_SCHEDULE: Omit<BellScheduleDTO, 'branchId'> = {
+  startTime: '08:00',
+  endTime: '14:00',
+  breakAt: '10:00',
+  breakMinutes: 30,
+  periodMinutes: 40,
+}
+
+export interface TimetableOverview {
+  school: { schoolName: string; logo: string | null } | null
+  branch: { id: string; name: string }
+  periods: Array<TimetablePeriod>
+  items: Array<{ id: string; name: string; timetable: Record<WeekDay, Array<TimetableEntry | null>> }>
+}
+
+/** Marks an explicit free period in a cell (no lesson, kept by the auto-generator). */
+export const FREE_PERIOD_NOTE = 'Free period'
+export const isFreePeriod = (e?: TimetableEntry | null) => !!e && !e.subject && e.note === FREE_PERIOD_NOTE
+
 export const timetableApi = {
   // Period CRUD
   getPeriods: async (branchId: string) => {
-    const response = await api.get<any>('/school/timetable/period', {
+    const response = await api.get<any>(`${TT_PATHS.timetable}/period`, {
       params: { branchId },
     })
     return response.data.data as Array<TimetablePeriod>
   },
 
   createPeriod: async (data: CreatePeriodDTO) => {
-    const response = await api.post<any>('/school/timetable/period', data)
+    const response = await api.post<any>(`${TT_PATHS.timetable}/period`, data)
     return response.data.data as TimetablePeriod
   },
 
   editPeriod: async (periodId: string, data: Partial<CreatePeriodDTO>) => {
     const response = await api.patch<any>(
-      `/school/timetable/period/${periodId}`,
+      `${TT_PATHS.timetable}/period/${periodId}`,
       data,
     )
     return response.data.data as TimetablePeriod
   },
 
   deletePeriods: async (periodIds: Array<string>) => {
-    const response = await api.delete<any>('/school/timetable/period', {
+    const response = await api.delete<any>(`${TT_PATHS.timetable}/period`, {
       data: { periodIds },
     })
     return response.data
@@ -153,22 +191,23 @@ export const timetableApi = {
 
   // Timetable entries
   getClassTimetable: async (classId: string) => {
-    const response = await api.get<any>(`/school/timetable/class/${classId}`)
+    const response = await api.get<any>(`${TT_PATHS.timetable}/class/${classId}`)
     return response.data.data as ClassTimetableResponse
   },
 
   getTeacherTimetable: async (staffId: string) => {
-    const response = await api.get<any>(`/school/timetable/teacher/${staffId}`)
+    const response = await api.get<any>(`${TT_PATHS.timetable}/teacher/${staffId}`)
     return response.data.data as TeacherTimetableResponse
   },
 
   setEntry: async (data: SetEntryDTO) => {
-    const response = await api.post<any>('/school/timetable/entry', data)
-    return response.data.data
+    const response = await api.post<any>(`${TT_PATHS.timetable}/entry`, data)
+    // The message says when the class's subjects / teachers were updated to match.
+    return { message: response.data.message as string, entry: response.data.data }
   },
 
   removeEntry: async (entryId: string) => {
-    const response = await api.delete<any>(`/school/timetable/entry/${entryId}`)
+    const response = await api.delete<any>(`${TT_PATHS.timetable}/entry/${entryId}`)
     return response.data
   },
 
@@ -177,7 +216,7 @@ export const timetableApi = {
     entries: Array<Omit<SetEntryDTO, 'classId'>>,
   ) => {
     const response = await api.post<any>(
-      `/school/timetable/class/${classId}/bulk`,
+      `${TT_PATHS.timetable}/class/${classId}/bulk`,
       { entries },
     )
     return response.data
@@ -185,7 +224,7 @@ export const timetableApi = {
 
   // Timetable Engine
   generateTimetable: async (data: GenerateTimetableDTO) => {
-    const response = await api.post<any>('/school/timetable/generate', data)
+    const response = await api.post<any>(`${TT_PATHS.timetable}/generate`, data)
     return response.data.data as GenerateTimetableResponse
   },
 
@@ -198,7 +237,7 @@ export const timetableApi = {
     subjectId?: string | null
     currentEntryId?: string | null
   }) => {
-    const response = await api.post<any>('/school/timetable/validate-slot', data)
+    const response = await api.post<any>(`${TT_PATHS.timetable}/validate-slot`, data)
     return response.data.data as {
       valid: boolean
       errors: string[]
@@ -206,9 +245,43 @@ export const timetableApi = {
     }
   },
 
+  // Bell schedule & printing
+  applyBellSchedule: async (data: BellScheduleDTO) => {
+    const response = await api.post<any>(`${TT_PATHS.timetable}/period/schedule`, data)
+    return { message: response.data.message as string, periods: response.data.data as Array<TimetablePeriod> }
+  },
+
+  getOverview: async (branchId: string, by: 'class' | 'teacher') => {
+    const response = await api.get<any>(`${TT_PATHS.timetable}/branch/${branchId}/overview`, { params: { by } })
+    return response.data.data as TimetableOverview
+  },
+
+  // Lookups for the grid (limit is generous so big schools see every teacher)
+  getClasses: async (branchId: string) => {
+    const response = await api.get<any>(TT_PATHS.classes, { params: { branchId, page: 1, limit: 200 } })
+    return { data: (response.data.data?.classes || []) as Array<{ id: string; name: string }> }
+  },
+  getSubjects: async (branchId: string) => {
+    const response = await api.get<any>(TT_PATHS.subjects, { params: { branchId, page: 1, limit: 200 } })
+    return { data: (response.data.data?.subjects || []) as Array<{ id: string; name: string }> }
+  },
+  getStaffs: async (branchId: string) => {
+    const response = await api.get<any>(TT_PATHS.staffs, { params: { branchId, page: 1, limit: 200 } })
+    return { data: (response.data.data?.staffs || []) as Array<{ id: string; fullname: string }> }
+  },
+  /** The class's subjects and who teaches each (used to pre-fill the teacher). */
+  getClassSubjects: async (classId: string) => {
+    const response = await api.get<any>(TT_PATHS.classDetail(classId))
+    return (response.data.data?.subjectAssignments || []) as Array<{
+      id: string
+      subject: { id: string; name: string }
+      teacher: { id: string; fullname: string } | null
+    }>
+  },
+
   toggleLockEntry: async (entryId: string, isLocked: boolean) => {
     const response = await api.patch<any>(
-      `/school/timetable/entry/${entryId}/lock`,
+      `${TT_PATHS.timetable}/entry/${entryId}/lock`,
       { isLocked },
     )
     return response.data.data

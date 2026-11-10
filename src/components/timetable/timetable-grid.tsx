@@ -1,9 +1,5 @@
 import { useState } from 'react'
-import type {
-  WeekDay,
-  TimetableEntry,
-  TimetablePeriod,
-} from '@/hooks/api/timetable.api'
+import { isFreePeriod, type TimetableEntry, type TimetablePeriod, type WeekDay } from '@/hooks/api/timetable.api'
 import {
   Table,
   TableBody,
@@ -279,13 +275,17 @@ export function TimetableGrid({
                                 </div>
                               )}
                             </div>
+                          ) : isFreePeriod(entry) ? (
+                            <div className="flex h-full min-h-[3rem] items-center justify-center rounded-md border border-dashed border-sky-300 bg-sky-50/70 text-xs font-medium text-sky-800 dark:border-sky-800 dark:bg-sky-950/40 dark:text-sky-200">
+                              Free period
+                            </div>
                           ) : isSport ? (
                             <div className="text-muted-foreground bg-primary/5 flex h-full min-h-[3rem] items-center justify-center gap-1 rounded-md border border-dashed border-primary/20 text-xs italic">
                               <span>⚽</span> Sport
                             </div>
                           ) : (
                             <div className="text-muted-foreground/60 bg-muted/20 hover:bg-muted/40 transition-colors flex h-full min-h-[3rem] items-center justify-center rounded-md border border-dashed text-xs italic">
-                              + Free Slot
+                              {readOnly ? '' : '+ Add lesson'}
                             </div>
                           )}
                         </TableCell>
