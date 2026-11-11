@@ -8,7 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { ArrowLeftRight, Loader2 } from 'lucide-react'
 import { TimetableEntryDrawer } from './timetable-cell-editor'
+import { Button } from '@/components/ui/button'
+import { useSwapSlotsMutation } from '@/hooks/queries/timetable.queries'
+import { toast } from '@/lib/toast'
+
+type Slot = { day: WeekDay; periodId: string }
 
 const DAYS: Array<WeekDay> = [
   'MONDAY',
@@ -51,6 +57,35 @@ export function TimetableGrid({
   readOnly = false,
   viewType = 'CLASS',
 }: TimetableGridProps) {
+  // Moving lessons: drag one onto another slot (desktop), or turn on "Swap lessons"
+  // and tap two slots (phones). Only in an editable class timetable.
+  const canSwap = !readOnly && viewType === 'CLASS' && !!classId
+  const swap = useSwapSlotsMutation()
+  const [swapMode, setSwapMode] = useState(false)
+  const [picked, setPicked] = useState<Slot | null>(null)
+  const [dragFrom, setDragFrom] = useState<Slot | null>(null)
+  const [dropOver, setDropOver] = useState<string | null>(null)
+  const key = (s: Slot) => `${s.day}_${s.periodId}`
+
+  const doSwap = (from: Slot, to: Slot) => {
+    if (key(from) === key(to)) return
+    swap.mutate([{ classId, from, to }], {
+      onSuccess: (r) => {
+        toast.success(r.message)
+        onEntrySaved()
+      },
+      onError: (e: any) => toast.error(e?.response?.data?.message || e?.message || 'Could not swap these lessons'),
+    })
+  }
+  const tapSlot = (slot: Slot, hasEntry: boolean) => {
+    if (!picked) {
+      if (!hasEntry) return toast.error('Tap a slot with a lesson first')
+      return setPicked(slot)
+    }
+    if (key(picked) === key(slot)) return setPicked(null)
+    doSwap(picked, slot)
+    setPicked(null)
+  }
   const [drawerState, setDrawerState] = useState<{
     open: boolean
     day: WeekDay
@@ -164,6 +199,29 @@ export function TimetableGrid({
 
   return (
     <>
+      {canSwap && (
+        <div className="mb-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+          <Button
+            size="sm"
+            variant={swapMode ? 'default' : 'outline'}
+            className="gap-1.5"
+            onClick={() => {
+              setSwapMode((m) => !m)
+              setPicked(null)
+            }}
+          >
+            <ArrowLeftRight className="size-4" /> {swapMode ? 'Done swapping' : 'Swap lessons'}
+          </Button>
+          {swap.isPending && <Loader2 className="size-4 animate-spin text-primary" />}
+          <span>
+            {swapMode
+              ? picked
+                ? 'Now tap the slot to swap it with.'
+                : 'Tap a lesson, then tap where it should go. The two swap places.'
+              : 'Tip: drag a lesson onto another slot to swap them.'}
+          </span>
+        </div>
+      )}
       <div className="rounded-lg border bg-card overflow-hidden">
         <div className="relative w-full overflow-x-auto">
           <Table>
@@ -211,18 +269,18 @@ export function TimetableGrid({
                         )
                       }
 
-                      const entry = timetable?.[day]?.[periodIdx] || null
+                      const entry = timetable?.[day][periodIdx] || null
 
                       // Consecutive double period spanning
                       let colSpan = 1
-                      if (entry?.subject) {
+                      if (entry?.subject && !canSwap) {
                         for (let j = periodIdx + 1; j < periods.length; j++) {
                           if (isNonAcademic(periods[j])) break
-                          const nextEntry = timetable?.[day]?.[j]
+                          const nextEntry = timetable?.[day][j]
                           if (
                             nextEntry?.subject?.id === entry.subject.id &&
-                            nextEntry?.staff?.id === entry.staff?.id &&
-                            nextEntry?.isLocked === entry.isLocked
+                            nextEntry.staff?.id === entry.staff?.id &&
+                            nextEntry.isLocked === entry.isLocked
                           ) {
                             colSpan++
                             skipPeriods++
@@ -233,6 +291,9 @@ export function TimetableGrid({
                       }
 
                       const isSport = entry?.isSport
+                      const slot: Slot = { day, periodId: period.id }
+                      const isPicked = !!picked && key(picked) === key(slot)
+                      const isDrop = dropOver === key(slot)
 
                       return (
                         <TableCell
@@ -242,8 +303,31 @@ export function TimetableGrid({
                             colSpan > 1
                               ? 'border-x-2 border-primary/30 bg-primary/5 dark:bg-primary/10'
                               : ''
-                          }`}
-                          onClick={() => openDrawer(day, period, entry)}
+                          } ${isPicked ? 'bg-primary/15 ring-2 ring-inset ring-primary' : ''} ${
+                            isDrop ? 'bg-primary/10 ring-2 ring-inset ring-primary/60' : ''
+                          } ${swapMode && !isPicked ? 'hover:ring-1 hover:ring-inset hover:ring-primary/40' : ''}`}
+                          onClick={() => (swapMode ? tapSlot(slot, !!entry) : openDrawer(day, period, entry))}
+                          draggable={canSwap && !!entry && !swap.isPending}
+                          onDragStart={(e) => {
+                            setDragFrom(slot)
+                            e.dataTransfer.effectAllowed = 'move'
+                          }}
+                          onDragEnd={() => {
+                            setDragFrom(null)
+                            setDropOver(null)
+                          }}
+                          onDragOver={(e) => {
+                            if (!canSwap || !dragFrom) return
+                            e.preventDefault()
+                            if (dropOver !== key(slot)) setDropOver(key(slot))
+                          }}
+                          onDragLeave={() => setDropOver((k) => (k === key(slot) ? null : k))}
+                          onDrop={(e) => {
+                            e.preventDefault()
+                            setDropOver(null)
+                            if (dragFrom) doSwap(dragFrom, slot)
+                            setDragFrom(null)
+                          }}
                         >
                           {entry?.subject ? (
                             <div className="relative space-y-0.5 text-center rounded border bg-background/80 p-2 shadow-xs">

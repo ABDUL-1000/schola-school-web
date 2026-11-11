@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { useDefaultToCurrent } from '@/lib/current-term'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
@@ -75,6 +76,8 @@ function ResultsIndexRoute() {
   })
 
   const terms = academicData?.flatMap((session: any) => session.terms) || []
+  // Open on the current term.
+  useDefaultToCurrent(academicData, ({ term }) => term && !selectedTermId && setSelectedTermId(term.id))
   const classes = classesData || []
 
   // Broadsheet Data
@@ -102,6 +105,7 @@ function ResultsIndexRoute() {
   const [settingsForm, setSettingsForm] = useState({
     cbtMode: 'MANUAL_ONLY',
     nextTermBegins: '',
+    positionDisplay: 'ALL',
   })
   const assessmentColumns: Array<{ name: string; maxScore: number }> = gradingConfig?.assessmentColumns || []
 
@@ -112,6 +116,7 @@ function ResultsIndexRoute() {
         nextTermBegins: gradingConfig.nextTermBegins
           ? new Date(gradingConfig.nextTermBegins).toISOString().split('T')[0]
           : '',
+        positionDisplay: gradingConfig.positionDisplay || 'ALL',
       })
     }
     setIsSettingsOpen(true)
@@ -524,6 +529,22 @@ function ResultsIndexRoute() {
                 <Link to="/dashboard/academics/assessments-config" className="font-medium text-primary underline-offset-2 hover:underline">
                   Change in Assessment Configuration
                 </Link>
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label className="text-xs font-semibold">Positions on report cards</Label>
+              <select
+                className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm"
+                value={settingsForm.positionDisplay}
+                onChange={(e) => setSettingsForm({ ...settingsForm, positionDisplay: e.target.value })}
+              >
+                <option value="ALL">Show every student's position (default)</option>
+                <option value="TOP_3">Show only 1st, 2nd and 3rd</option>
+                <option value="NONE">Don't show positions</option>
+              </select>
+              <p className="text-[11px] text-muted-foreground">
+                Applies to each student's report card (class and subject positions). The class report sheet for staff always shows positions.
               </p>
             </div>
 

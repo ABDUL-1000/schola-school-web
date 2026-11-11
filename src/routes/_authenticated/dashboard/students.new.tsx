@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
+import { DateField } from '@/components/ui/date-field'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { useState, useEffect } from 'react'
 import { NoBranchesHint } from '@/components/branches/no-branches-hint'
@@ -18,11 +19,9 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { countries, getEmojiFlag } from 'countries-list'
-import { Loader2, ArrowLeft, UploadCloud, CheckCircle2, CalendarIcon, EyeOff, Eye, Copy, ChevronDown } from 'lucide-react'
+import { Loader2, ArrowLeft, UploadCloud, CheckCircle2, EyeOff, Eye, Copy, ChevronDown } from 'lucide-react'
 import { toast } from '@/lib/toast'
 import NaijaStates from 'naija-state-local-government'
-import { Calendar } from '@/components/ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
 import { Image } from '@unpic/react'
@@ -316,27 +315,13 @@ function NewStudentComponent() {
                     control={control}
                     name="dateOfBirth"
                     render={({ field }) => (
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            className={cn(
-                              "w-full justify-start text-left font-normal",
-                              !field.value && "text-muted-foreground"
-                            )}
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {field.value ? format(new Date(field.value), "PPP") : <span>Pick a date</span>}
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value ? new Date(field.value) : undefined}
-                            onSelect={(date) => field.onChange(date?.toISOString().split('T')[0] || '')}
-                          />
-                        </PopoverContent>
-                      </Popover>
+                      <DateField
+                        value={field.value}
+                        onChange={field.onChange}
+                        max={format(new Date(), 'yyyy-MM-dd')}
+                        startWithYear
+                        aria-label="Date of birth"
+                      />
                     )}
                   />
                 </div>

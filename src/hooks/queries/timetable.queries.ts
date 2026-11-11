@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { timetableApi, type BellScheduleDTO, type CreatePeriodDTO } from '../api/timetable.api'
+import { timetableApi, type BellScheduleDTO, type CreatePeriodDTO, type SlotSwap } from '../api/timetable.api'
 
 // ===== Selector Queries (using dedicated API files) =====
 
@@ -170,5 +170,15 @@ export function useClassSubjectsQuery(classId?: string) {
     queryKey: [...timetableKeys.all, 'class-subjects', { classId }],
     queryFn: () => timetableApi.getClassSubjects(classId!),
     enabled: !!classId,
+  })
+}
+
+export function useSwapSlotsMutation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (swaps: Array<SlotSwap>) => timetableApi.swapSlots(swaps),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: timetableKeys.all })
+    },
   })
 }

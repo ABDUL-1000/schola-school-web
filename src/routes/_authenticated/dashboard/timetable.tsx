@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AutoGeneratorDialog } from '@/components/timetable/auto-generator-dialog'
 import { TimetableDownloadMenu } from '@/components/timetable/timetable-print'
+import { SwapFormButton } from '@/components/timetable/swap-form'
 
 export const Route = createFileRoute('/_authenticated/dashboard/timetable')({
   component: TimetablePage,
@@ -92,6 +93,9 @@ function TimetablePage() {
                     : undefined
               }
             />
+          )}
+          {selectedBranchId && viewMode === 'CLASS' && (
+            <SwapFormButton branchId={selectedBranchId} classes={classes?.data || []} defaultClassId={selectedClassId || undefined} />
           )}
           {selectedBranchId && viewMode === 'CLASS' && (
             <Button

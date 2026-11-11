@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { Download, Eye, Loader2, Paperclip, Search } from 'lucide-react'
@@ -69,6 +69,17 @@ export function QuestionBankBrowser({
     staleTime: 5 * 60 * 1000,
   })
   const sessions: Array<any> = filters?.sessions || []
+  // Start on the current session and term (the lists still offer "All").
+  const defaulted = useRef(false)
+  useEffect(() => {
+    if (defaulted.current || !sessions.length) return
+    defaulted.current = true
+    const cur = sessions.find((x) => x.isCurrent)
+    if (!cur) return
+    setSessionId(cur.id)
+    const term = (cur.terms || []).find((t: any) => t.isCurrent)
+    if (term) setTermId(term.id)
+  }, [sessions])
   const terms: Array<any> = useMemo(
     () => (sessionId ? sessions.find((s) => s.id === sessionId)?.terms || [] : []),
     [sessions, sessionId],
@@ -116,7 +127,7 @@ export function QuestionBankBrowser({
           onValueChange={reset(setTermId)}
           disabled={!sessionId}
           placeholder={sessionId ? 'All terms' : 'Pick a session first'}
-          items={[{ label: 'All terms', value: '' }, ...terms.map((t) => ({ label: t.name, value: t.id }))]}
+          items={[{ label: 'All terms', value: '' }, ...terms.map((t) => ({ label: `${t.name}${t.isCurrent ? ' (current)' : ''}`, value: t.id }))]}
         />
         <CustomSelect
           value={classId}

@@ -156,6 +156,12 @@ export interface TimetableOverview {
   items: Array<{ id: string; name: string; timetable: Record<WeekDay, Array<TimetableEntry | null>> }>
 }
 
+export interface SlotSwap {
+  classId: string
+  from: { day: WeekDay; periodId: string }
+  to: { day: WeekDay; periodId: string }
+}
+
 /** Marks an explicit free period in a cell (no lesson, kept by the auto-generator). */
 export const FREE_PERIOD_NOTE = 'Free period'
 export const isFreePeriod = (e?: TimetableEntry | null) => !!e && !e.subject && e.note === FREE_PERIOD_NOTE
@@ -243,6 +249,12 @@ export const timetableApi = {
       errors: string[]
       warnings: string[]
     }
+  },
+
+  /** Swap two slots in a class (or many at once). All succeed together or none do. */
+  swapSlots: async (swaps: Array<SlotSwap>) => {
+    const response = await api.post<any>(`${TT_PATHS.timetable}/swap`, { swaps })
+    return { message: response.data.message as string }
   },
 
   // Bell schedule & printing

@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
+import { designationLabel, initialDesignations } from '@/components/staff-designations-field'
 import { Checkbox } from '@/components/ui/checkbox'
 import { DataTable } from '@/components/ui/data-table'
 import type { ColumnDef } from '@tanstack/react-table'
@@ -131,14 +132,24 @@ function StaffPage() {
     },
     {
       accessorKey: 'roles',
-      header: 'Role',
-      cell: ({ row }) => (
-        <Badge
-          variant={row.getValue('roles') === 'ADMIN' ? 'default' : 'secondary'}
-        >
-          {row.getValue('roles')}
-        </Badge>
-      ),
+      header: 'Staff type',
+      // Admin / Bursar / Exam officer (can hold several), form master, or plain staff.
+      cell: ({ row }) => {
+        const staff = row.original as any
+        const roles = initialDesignations(staff)
+        const formClass = staff.teaching?.formClass?.name as string | undefined
+        return (
+          <div className="flex flex-wrap gap-1">
+            {roles.map((d) => (
+              <Badge key={d} variant={d === 'ADMIN' ? 'default' : 'secondary'}>
+                {designationLabel(d)}
+              </Badge>
+            ))}
+            {formClass && <Badge variant="outline">Form master</Badge>}
+            {!roles.length && !formClass && <span className="text-sm text-muted-foreground">Staff</span>}
+          </div>
+        )
+      },
     },
     {
       id: 'branch',
