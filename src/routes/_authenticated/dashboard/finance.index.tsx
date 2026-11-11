@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDefaultToCurrent } from '@/lib/current-term'
 import { createFileRoute } from '@tanstack/react-router'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { useFinanceDashboard } from '@/hooks/queries/finance.queries'
@@ -28,6 +29,11 @@ export function SchoolFinanceOverviewPage() {
 
   const { data: sessionsData } = useSessionsQuery()
   const sessions = sessionsData || []
+  // Open on the current session and term.
+  useDefaultToCurrent(sessionsData, ({ session, term }) => {
+    if (session) setSelectedSessionId(session.id)
+    if (term) setSelectedTermId(term.id)
+  })
 
   // Extract terms from selected session
   const activeSession = sessions.find((s: any) => s.id === selectedSessionId) || sessions.find((s: any) => s.isCurrent) || sessions[0]

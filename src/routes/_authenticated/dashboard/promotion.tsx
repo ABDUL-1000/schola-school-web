@@ -1,3 +1,4 @@
+import { DateRangeField } from '@/components/ui/date-field'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -407,13 +408,14 @@ function PromotionPage() {
               <Label htmlFor="sess-name">New session</Label>
               <Input id="sess-name" value={session.name} onChange={(e) => setSession((s) => ({ ...s, name: e.target.value }))} placeholder="2026/2027" />
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="sess-start">Starts</Label>
-              <Input id="sess-start" type="date" value={session.startDate} onChange={(e) => setSession((s) => ({ ...s, startDate: e.target.value }))} />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="sess-end">Ends</Label>
-              <Input id="sess-end" type="date" value={session.endDate} onChange={(e) => setSession((s) => ({ ...s, endDate: e.target.value }))} />
+            <div className="space-y-1.5 sm:col-span-2">
+              <Label htmlFor="sess-dates">Starts – ends</Label>
+              <DateRangeField
+                id="sess-dates"
+                start={session.startDate}
+                end={session.endDate}
+                onChange={(startDate, endDate) => setSession((s) => ({ ...s, startDate, endDate }))}
+              />
             </div>
           </div>
           <p className="text-xs text-muted-foreground">Three terms are created inside these dates. You can adjust term dates on the Sessions page.</p>

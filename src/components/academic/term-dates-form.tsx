@@ -1,6 +1,6 @@
+import { DateRangeField } from '@/components/ui/date-field'
 import { addDays, differenceInCalendarDays, format, parseISO } from 'date-fns'
 import { Sparkles } from 'lucide-react'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
 /**
@@ -68,14 +68,10 @@ export function TermDatesForm({
   touched: boolean
   onTouched: (v: boolean) => void
 }) {
-  const set = (i: number, field: 'startDate' | 'endDate', value: string) => {
-    let next = terms.map((t, j) => (j === i ? { ...t, [field]: value } : t))
+  // One range picker per term: both dates arrive together.
+  const setRange = (i: number, startDate: string, endDate: string) => {
+    let next = terms.map((t, j) => (j === i ? { ...t, startDate, endDate } : t))
     if (i === 0) {
-      // Keep First Term's length when its start moves.
-      if (field === 'startDate' && terms[0].startDate && terms[0].endDate && value) {
-        const len = differenceInCalendarDays(parseISO(terms[0].endDate), parseISO(terms[0].startDate))
-        next[0] = { ...next[0], endDate: iso(addDays(parseISO(value), Math.max(0, len))) }
-      }
       if (!touched) next = [next[0], ...suggestFromFirst(next[0], next.slice(1))]
     } else onTouched(true)
     onChange(next)
@@ -88,19 +84,15 @@ export function TermDatesForm({
     <div className="space-y-3">
       <div className="space-y-2">
         {terms.map((t, i) => (
-          <div key={t.id || t.name} className="grid grid-cols-[1fr] gap-2 rounded-lg border p-3 sm:grid-cols-[120px_1fr_1fr] sm:items-end">
+          <div key={t.id || t.name} className="grid grid-cols-[1fr] gap-2 rounded-lg border p-3 sm:grid-cols-[120px_1fr] sm:items-end">
             <div className="text-sm font-medium sm:pb-2">
               {t.name}
               {days(t) !== null && <span className="block text-xs font-normal text-muted-foreground">{days(t)} day{days(t) === 1 ? '' : 's'}</span>}
             </div>
-            <label className="space-y-1 text-xs text-muted-foreground">
-              Starts
-              <Input type="date" value={t.startDate} onChange={(e) => set(i, 'startDate', e.target.value)} aria-label={`${t.name} start`} />
-            </label>
-            <label className="space-y-1 text-xs text-muted-foreground">
-              Ends
-              <Input type="date" value={t.endDate} min={t.startDate || undefined} onChange={(e) => set(i, 'endDate', e.target.value)} aria-label={`${t.name} end`} />
-            </label>
+            <div className="space-y-1 text-xs text-muted-foreground">
+              Starts – ends
+              <DateRangeField start={t.startDate} end={t.endDate} onChange={(s, e) => setRange(i, s, e)} aria-label={`${t.name} dates`} />
+            </div>
           </div>
         ))}
       </div>

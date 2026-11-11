@@ -36,6 +36,11 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
   const caColumns = columns.filter((c) => c.slot !== 'exam')
   const examColumn = columns.find((c) => c.slot === 'exam')
   const caMax = caColumns.reduce((a, c) => a + (Number(c.maxScore) || 0), 0)
+  // The school chooses: every position (default), only 1st–3rd, or none.
+  const positionMode: 'ALL' | 'TOP_3' | 'NONE' = config?.positionDisplay || 'ALL'
+  const showPositions = positionMode !== 'NONE'
+  // Positions the school hides come back empty; print a blank, not a dash.
+  const blank = positionMode === 'TOP_3' ? '' : '-'
 
   const handlePrint = () =>
     printA4(sheetRef.current, { title: `Report card - ${student.fullname} - ${term.name} ${term.sessionName || ''}`.trim() })
@@ -167,7 +172,7 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
                 </th>
                 <th className="p-1 border-r border-black w-12 bg-gray-300 font-black">Total (100)</th>
                 <th className="p-1 border-r border-black w-10 font-bold">Grade</th>
-                <th className="p-1 border-r border-black w-12">Position</th>
+                {showPositions && <th className="p-1 border-r border-black w-12">Position</th>}
                 <th className="p-1 border-r border-black w-12">Class Avg</th>
                 <th className="p-1 border-black text-left">Teacher Remark</th>
               </tr>
@@ -211,9 +216,11 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
                       {sub.grade}
                     </span>
                   </td>
-                  <td className="p-1 border-r border-black font-medium text-gray-700">
-                    {sub.subjectPositionFormatted || '-'}
-                  </td>
+                  {showPositions && (
+                    <td className="p-1 border-r border-black font-medium text-gray-700">
+                      {sub.subjectPositionFormatted || blank}
+                    </td>
+                  )}
                   <td className="p-1 border-r border-black text-gray-600">
                     {sub.classAverage > 0 ? sub.classAverage.toFixed(1) : '-'}
                   </td>
@@ -234,7 +241,9 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
         </div>
 
         {/* Overall Academic Summary Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 text-xs border border-black p-2.5 rounded-sm mb-4 bg-gray-100 text-center font-bold">
+        <div
+          className={`grid grid-cols-2 ${showPositions ? 'sm:grid-cols-6' : 'sm:grid-cols-5'} gap-2 text-xs border border-black p-2.5 rounded-sm mb-4 bg-gray-100 text-center font-bold`}
+        >
           <div>
             <span className="text-gray-600 text-[10px] block uppercase">Marks Obtainable</span>
             <span className="text-sm text-gray-900">{reportSheet?.totalScoreObtainable ?? '-'}</span>
@@ -249,12 +258,14 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
               {reportSheet?.overallPercentage ? `${reportSheet.overallPercentage}%` : '-'}
             </span>
           </div>
-          <div>
-            <span className="text-gray-600 text-[10px] block uppercase">Class Position</span>
-            <span className="text-base text-purple-900 font-black">
-              {reportSheet?.classPositionFormatted ?? '-'}
-            </span>
-          </div>
+          {showPositions && (
+            <div>
+              <span className="text-gray-600 text-[10px] block uppercase">Class Position</span>
+              <span className="text-base text-purple-900 font-black">
+                {reportSheet?.classPositionFormatted || blank}
+              </span>
+            </div>
+          )}
           <div>
             <span className="text-gray-600 text-[10px] block uppercase">Total Students</span>
             <span className="text-sm text-gray-900">{reportSheet?.totalStudentsInClass ?? '-'}</span>

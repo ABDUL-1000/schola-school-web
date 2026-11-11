@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useDefaultToCurrent } from '@/lib/current-term'
 import { useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
@@ -50,6 +51,8 @@ function SchoolFinancePage() {
     [sessions],
   )
   const [termId, setTermId] = useState('')
+  // Open on the current term.
+  useDefaultToCurrent(sessions, ({ term }) => term && setTermId(term.id))
   const overview = useQuery({
     queryKey: ['school-finance', 'overview', termId],
     queryFn: () => fetchFinance('/overview', { termId }),

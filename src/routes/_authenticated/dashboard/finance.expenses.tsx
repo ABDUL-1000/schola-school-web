@@ -38,7 +38,7 @@ export function OperationalExpensesPage() {
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('FACILITY_MAINTENANCE')
   const [amount, setAmount] = useState<number | ''>('')
-  const [expenseDate, setExpenseDate] = useState(new Date().toISOString().split('T')[0])
+  const [expenseDate, setExpenseDate] = useState(new Date().toLocaleDateString('en-CA') /* local YYYY-MM-DD */)
   const [vendorOrPayee, setVendorOrPayee] = useState('')
   const [description, setDescription] = useState('')
 

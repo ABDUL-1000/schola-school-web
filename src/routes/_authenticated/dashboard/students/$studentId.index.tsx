@@ -134,7 +134,7 @@ function StudentDetailsPage() {
   const [payAmount, setPayAmount] = useState<number | ''>('')
   const [paymentMethod, setPaymentMethod] = useState<string>('BANK_TRANSFER')
   const [bankReference, setBankReference] = useState<string>('')
-  const [paymentDate, setPaymentDate] = useState<string>(new Date().toISOString().split('T')[0])
+  const [paymentDate, setPaymentDate] = useState<string>(new Date().toLocaleDateString('en-CA') /* local YYYY-MM-DD */)
   const [remarks, setRemarks] = useState<string>('')
 
   const handleVerify = (reference: string) => {

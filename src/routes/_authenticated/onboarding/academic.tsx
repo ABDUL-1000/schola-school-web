@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { DateRangeField } from '@/components/ui/date-field'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -147,53 +148,14 @@ function AcademicStep() {
           </div>
           <div className="hidden md:block"></div>
           
-          <div className="space-y-2 col-span-2 md:col-span-1">
-            <Label>Session Start Date</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !formData.sessionStartDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {formData.sessionStartDate ? format(new Date(formData.sessionStartDate), "PPP") : <span>Pick a date</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={formData.sessionStartDate ? new Date(formData.sessionStartDate) : undefined}
-                  onSelect={(date) => updateFormData({ sessionStartDate: date ? format(date, 'yyyy-MM-dd') : '' })}
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-          <div className="space-y-2 col-span-2 md:col-span-1">
-            <Label>Session End Date</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !formData.sessionEndDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {formData.sessionEndDate ? format(new Date(formData.sessionEndDate), "PPP") : <span>Pick a date</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={formData.sessionEndDate ? new Date(formData.sessionEndDate) : undefined}
-                  onSelect={(date) => updateFormData({ sessionEndDate: date ? format(date, 'yyyy-MM-dd') : '' })}
-                />
-              </PopoverContent>
-            </Popover>
+          <div className="space-y-2 col-span-2">
+            <Label>Session dates</Label>
+            <DateRangeField
+              start={formData.sessionStartDate}
+              end={formData.sessionEndDate}
+              onChange={(start, end) => updateFormData({ sessionStartDate: start, sessionEndDate: end })}
+              aria-label="Session start and end dates"
+            />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useDefaultToCurrent } from '@/lib/current-term'
 import { useState } from 'react'
 import { format } from 'date-fns'
 import { useSchoolReportsQuery } from '@/hooks/queries/reports.queries'
@@ -46,6 +47,11 @@ function ReportsPage() {
 
   // Queries
   const { data: sessions } = useSessionsQuery()
+  // Open on the current session and term.
+  useDefaultToCurrent(sessions, ({ session, term }) => {
+    if (session) setSelectedSessionId(session.id)
+    if (term) setSelectedTermId(term.id)
+  })
   const { data: branches } = useBranchesQuery()
   const { data: school } = useProfileQuery()
   const schoolAddress = [school?.address, school?.city, school?.state, school?.country]

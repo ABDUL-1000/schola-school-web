@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import { DateField } from '@/components/ui/date-field'
 import { useMutation } from '@tanstack/react-query'
 import * as z from 'zod'
 import { format } from 'date-fns'
@@ -214,7 +215,7 @@ export function EnrolWizard({ slug }: { slug: string | null }) {
                   options={['Male', 'Female', 'Other']} placeholder="Select gender" />
                 <div>
                   <FieldLabel htmlFor="en-dob">Date of Birth</FieldLabel>
-                  <input id="en-dob" type="date" max={format(new Date(), 'yyyy-MM-dd')} className={fieldClass} value={form.dateOfBirth} onChange={(e) => set('dateOfBirth', e.target.value)} />
+                  <DateField id="en-dob" value={form.dateOfBirth} onChange={(v) => set('dateOfBirth', v)} max={format(new Date(), 'yyyy-MM-dd')} startWithYear aria-label="Date of birth" />
                   <FieldError message={errors.dateOfBirth} />
                 </div>
                 <div>
