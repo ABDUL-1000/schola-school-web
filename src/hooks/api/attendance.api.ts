@@ -13,6 +13,7 @@ export type AttendanceType = 'PRESENT' | 'ABSENT' | 'LATE' | 'EXCUSED'
 export interface AttendanceRecord {
   student: {
     id: string
+    fullname: string | null
     firstName: string | null
     lastName: string | null
     regNumber: string | null

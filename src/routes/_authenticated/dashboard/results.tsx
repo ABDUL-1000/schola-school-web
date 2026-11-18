@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useDefaultToCurrent } from '@/lib/current-term'
-import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useEffect, useRef, useState } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import {
   useClassBroadsheetQuery,
@@ -31,6 +31,8 @@ import {
   Award,
   Sparkles,
   CheckCircle2,
+  Printer,
+  Palette,
 } from 'lucide-react'
 import {
   Table,
@@ -43,6 +45,7 @@ import {
 import { toast } from '@/lib/toast'
 import { ResultsLockControls } from '@/components/grading/results-lock-controls'
 import { NigerianReportSheet } from '@/components/grading/nigerian-report-sheet'
+import { printA4 } from '@/lib/print-a4'
 
 export const Route = createFileRoute('/_authenticated/dashboard/results')({
   component: ResultsIndexRoute,
@@ -158,6 +161,86 @@ function ResultsIndexRoute() {
     }
   }
 
+  // ── Print every report card in the class at once (one A4 page per student) ──
+  const queryClient = useQueryClient()
+  const batchRef = useRef<HTMLDivElement>(null)
+  const [batchSheets, setBatchSheets] = useState<Array<any> | null>(null)
+  const [batchProgress, setBatchProgress] = useState<{ done: number; total: number } | null>(null)
+
+  const handlePrintAllReportCards = async () => {
+    const rows: Array<any> = broadsheet?.students || []
+    if (!selectedTermId || !rows.length || batchProgress) return
+    const total = rows.length
+    setBatchProgress({ done: 0, total })
+    const sheets: Array<any> = new Array(total).fill(null)
+    let done = 0
+    let next = 0
+    // A few requests at a time so a large class doesn't flood the server.
+    const worker = async () => {
+      while (next < total) {
+        const i = next++
+        const studentId = rows[i].student.id
+        try {
+          sheets[i] = await queryClient.fetchQuery({
+            queryKey: ['singleReportSheet', selectedTermId, studentId],
+            queryFn: async () => {
+              const { data } = await api.get(`/school/grading/${selectedTermId}/student/${studentId}/report-sheet`)
+              return data?.data
+            },
+            staleTime: 30_000,
+          })
+        } catch {
+          sheets[i] = null
+        }
+        setBatchProgress({ done: ++done, total })
+      }
+    }
+    await Promise.all(Array.from({ length: Math.min(5, total) }, worker))
+
+    const ready = sheets.filter((d) => d?.student)
+    const failed = total - ready.length
+    if (!ready.length) {
+      toast.error('Could not load any report cards for this class')
+      setBatchProgress(null)
+      return
+    }
+    if (failed) toast.error(`${failed} report card${failed === 1 ? '' : 's'} could not be loaded and will be skipped`)
+    setBatchSheets(ready) // rendered off-screen below, then printed by the effect
+  }
+
+  useEffect(() => {
+    if (!batchSheets) return
+    const container = batchRef.current
+    if (!container) return
+    let cancelled = false
+    // Wait for logos / signatures to load so they appear on every page.
+    const imgs = Array.from(container.querySelectorAll('img'))
+    Promise.all(
+      imgs.map((img) =>
+        img.complete
+          ? Promise.resolve()
+          : new Promise<void>((r) => {
+              img.addEventListener('load', () => r(), { once: true })
+              img.addEventListener('error', () => r(), { once: true })
+            }),
+      ),
+    ).then(() => {
+      if (cancelled) return
+      const pages = Array.from(container.querySelectorAll<HTMLElement>('[data-report-sheet]'))
+      const className = classes.find((c: any) => c.id === selectedClassId)?.name || 'Class'
+      const term = batchSheets[0]?.term
+      printA4(pages, {
+        title: `Report cards - ${className} - ${term?.name || ''} ${term?.sessionName || ''}`.trim(),
+      })
+      // printA4 copies the pages, so the off-screen originals can go now.
+      setBatchSheets(null)
+      setBatchProgress(null)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [batchSheets])
+
   const handleExportCSV = () => {
     if (!broadsheet?.students || !broadsheet?.subjects) return
 
@@ -214,6 +297,13 @@ function ResultsIndexRoute() {
             Grading Config
           </Button>
 
+          <Button variant="outline" size="sm" asChild className="gap-1.5">
+            <Link to="/dashboard/academics/report-card-design">
+              <Palette className="w-4 h-4" />
+              Report Card Design
+            </Link>
+          </Button>
+
           {selectedTermId && selectedClassId && (
             <>
               <Button
@@ -247,6 +337,24 @@ function ResultsIndexRoute() {
               </Button>
 
               <ResultsLockControls termId={selectedTermId} classId={selectedClassId} publication={broadsheet?.publication} />
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handlePrintAllReportCards}
+                disabled={!!batchProgress || !broadsheet?.students?.length}
+                className="gap-1.5"
+                title="Print or save every student's report card as one PDF"
+              >
+                {batchProgress ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Printer className="w-4 h-4" />
+                )}
+                {batchProgress
+                  ? `Preparing ${batchProgress.done}/${batchProgress.total}…`
+                  : 'Print All Report Cards'}
+              </Button>
 
               <Button variant="outline" size="sm" onClick={handleExportCSV} className="gap-1.5">
                 <Download className="w-4 h-4" />
@@ -461,6 +569,19 @@ function ResultsIndexRoute() {
             ) : null}
           </CardContent>
         </Card>
+      )}
+
+      {/* Off-screen copies of every report card, used only for "Print All Report Cards" */}
+      {batchSheets && (
+        <div
+          ref={batchRef}
+          aria-hidden
+          style={{ position: 'fixed', left: -100000, top: 0, width: 1100, pointerEvents: 'none' }}
+        >
+          {batchSheets.map((d, i) => (
+            <NigerianReportSheet key={i} data={d} sheetOnly />
+          ))}
+        </div>
       )}
 
       {/* Single Student Report Sheet Modal */}

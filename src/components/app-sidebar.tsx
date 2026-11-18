@@ -139,6 +139,10 @@ const data = {
           url: '/dashboard/results',
         },
         {
+          title: 'Report Card Design',
+          url: '/dashboard/academics/report-card-design',
+        },
+        {
           title: 'Question Bank',
           url: '/dashboard/question-bank',
         },

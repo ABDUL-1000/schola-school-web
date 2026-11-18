@@ -101,3 +101,33 @@ export const useTeacherEditsMutation = () => {
     },
   });
 };
+
+/** Save a report card design: the school default (no level) or one class level's design. */
+export const useSaveReportTemplateMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: { level?: string | null; template: unknown }) => {
+      const { data } = await api.put("/school/grading/report-template", payload);
+      return data?.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["gradingConfig"] });
+      queryClient.invalidateQueries({ queryKey: ["singleReportSheet"] });
+    },
+  });
+};
+
+/** Make a class level use the school's default design again. */
+export const useDeleteLevelReportTemplateMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (level: string) => {
+      const { data } = await api.delete("/school/grading/report-template", { params: { level } });
+      return data?.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["gradingConfig"] });
+      queryClient.invalidateQueries({ queryKey: ["singleReportSheet"] });
+    },
+  });
+};
