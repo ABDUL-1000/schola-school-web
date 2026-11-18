@@ -32,6 +32,7 @@ import {
   Sparkles,
   CheckCircle2,
   Printer,
+  Palette,
 } from 'lucide-react'
 import {
   Table,
@@ -294,6 +295,13 @@ function ResultsIndexRoute() {
           <Button variant="outline" size="sm" onClick={openSettings} className="gap-1.5">
             <Settings className="w-4 h-4" />
             Grading Config
+          </Button>
+
+          <Button variant="outline" size="sm" asChild className="gap-1.5">
+            <Link to="/dashboard/academics/report-card-design">
+              <Palette className="w-4 h-4" />
+              Report Card Design
+            </Link>
           </Button>
 
           {selectedTermId && selectedClassId && (

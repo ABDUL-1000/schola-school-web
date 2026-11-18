@@ -46,6 +46,7 @@ import { Route as AuthenticatedOnboardingAcademicRouteImport } from './routes/_a
 import { Route as AuthenticatedOnboardingBranchRouteImport } from './routes/_authenticated/onboarding/branch'
 import { Route as AuthenticatedOnboardingProfileRouteImport } from './routes/_authenticated/onboarding/profile'
 import { Route as AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport } from './routes/_authenticated/dashboard/academics.assessments-config'
+import { Route as AuthenticatedDashboardAcademicsReportCardDesignRouteImport } from './routes/_authenticated/dashboard/academics.report-card-design'
 import { Route as AuthenticatedDashboardAttendanceStaffRouteImport } from './routes/_authenticated/dashboard/attendance/staff'
 import { Route as AuthenticatedDashboardAttendanceStudentsRouteImport } from './routes/_authenticated/dashboard/attendance/students'
 import { Route as AuthenticatedDashboardClassesIndexRouteImport } from './routes/_authenticated/dashboard/classes.index'
@@ -281,6 +282,12 @@ const AuthenticatedDashboardAcademicsAssessmentsConfigRoute =
     path: '/academics/assessments-config',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const AuthenticatedDashboardAcademicsReportCardDesignRoute =
+  AuthenticatedDashboardAcademicsReportCardDesignRouteImport.update({
+    id: '/academics/report-card-design',
+    path: '/academics/report-card-design',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
 const AuthenticatedDashboardAttendanceStaffRoute =
   AuthenticatedDashboardAttendanceStaffRouteImport.update({
     id: '/attendance/staff',
@@ -486,6 +493,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/academics/assessments-config': typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
+  '/dashboard/academics/report-card-design': typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   '/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
   '/dashboard/classes/$classId': typeof AuthenticatedDashboardClassesClassIdRoute
@@ -550,6 +558,7 @@ export interface FileRoutesByTo {
   '/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/academics/assessments-config': typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
+  '/dashboard/academics/report-card-design': typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   '/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
   '/dashboard/classes/$classId': typeof AuthenticatedDashboardClassesClassIdRoute
@@ -618,6 +627,7 @@ export interface FileRoutesById {
   '/_authenticated/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/dashboard/academics/assessments-config': typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
+  '/_authenticated/dashboard/academics/report-card-design': typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   '/_authenticated/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/_authenticated/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
   '/_authenticated/dashboard/classes/$classId': typeof AuthenticatedDashboardClassesClassIdRoute
@@ -685,6 +695,7 @@ export interface FileRouteTypes {
     | '/onboarding/profile'
     | '/dashboard/'
     | '/dashboard/academics/assessments-config'
+    | '/dashboard/academics/report-card-design'
     | '/dashboard/attendance/staff'
     | '/dashboard/attendance/students'
     | '/dashboard/classes/$classId'
@@ -749,6 +760,7 @@ export interface FileRouteTypes {
     | '/onboarding/profile'
     | '/dashboard'
     | '/dashboard/academics/assessments-config'
+    | '/dashboard/academics/report-card-design'
     | '/dashboard/attendance/staff'
     | '/dashboard/attendance/students'
     | '/dashboard/classes/$classId'
@@ -816,6 +828,7 @@ export interface FileRouteTypes {
     | '/_authenticated/onboarding/profile'
     | '/_authenticated/dashboard/'
     | '/_authenticated/dashboard/academics/assessments-config'
+    | '/_authenticated/dashboard/academics/report-card-design'
     | '/_authenticated/dashboard/attendance/staff'
     | '/_authenticated/dashboard/attendance/students'
     | '/_authenticated/dashboard/classes/$classId'
@@ -1121,6 +1134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
+    '/_authenticated/dashboard/academics/report-card-design': {
+      id: '/_authenticated/dashboard/academics/report-card-design'
+      path: '/academics/report-card-design'
+      fullPath: '/dashboard/academics/report-card-design'
+      preLoaderRoute: typeof AuthenticatedDashboardAcademicsReportCardDesignRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
     '/_authenticated/dashboard/attendance/staff': {
       id: '/_authenticated/dashboard/attendance/staff'
       path: '/attendance/staff'
@@ -1372,6 +1392,7 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardTimetableRoute: typeof AuthenticatedDashboardTimetableRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedDashboardAcademicsAssessmentsConfigRoute: typeof AuthenticatedDashboardAcademicsAssessmentsConfigRoute
+  AuthenticatedDashboardAcademicsReportCardDesignRoute: typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   AuthenticatedDashboardAttendanceStaffRoute: typeof AuthenticatedDashboardAttendanceStaffRoute
   AuthenticatedDashboardAttendanceStudentsRoute: typeof AuthenticatedDashboardAttendanceStudentsRoute
   AuthenticatedDashboardClassesClassIdRoute: typeof AuthenticatedDashboardClassesClassIdRoute
@@ -1425,6 +1446,8 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
     AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
     AuthenticatedDashboardAcademicsAssessmentsConfigRoute:
       AuthenticatedDashboardAcademicsAssessmentsConfigRoute,
+    AuthenticatedDashboardAcademicsReportCardDesignRoute:
+      AuthenticatedDashboardAcademicsReportCardDesignRoute,
     AuthenticatedDashboardAttendanceStaffRoute:
       AuthenticatedDashboardAttendanceStaffRoute,
     AuthenticatedDashboardAttendanceStudentsRoute:

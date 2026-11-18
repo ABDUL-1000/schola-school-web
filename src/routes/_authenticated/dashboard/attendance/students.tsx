@@ -157,7 +157,7 @@ function StudentAttendanceAdminPage() {
                   <div key={record.student.id} className="border border-border p-4 rounded-md flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-background">
                     <div className="flex flex-col">
                       <h3 className="text-sm font-medium text-foreground">
-                        {record.student.firstName} {record.student.lastName}
+                        {record.student.fullname || [record.student.firstName, record.student.lastName].filter(Boolean).join(" ") || "Unnamed student"}
                       </h3>
                       <span className="text-xs text-muted-foreground">
                         {record.student.regNumber || 'No Registration Number'}
