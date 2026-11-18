@@ -6,6 +6,8 @@ import { printA4 } from '@/lib/print-a4'
 interface NigerianReportSheetProps {
   data: any
   onClose?: () => void
+  /** Render only the printable sheet (no action bar), e.g. for printing a whole class. */
+  sheetOnly?: boolean
 }
 
 type ReportSlot = 'ca1' | 'ca2' | 'ca3' | 'assignment' | 'exam'
@@ -19,7 +21,7 @@ const SLOT_FIELD: Record<ReportSlot, string> = {
 }
 
 /** The school's report card. Used on every portal; prints on one A4 page. */
-export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, onClose }) => {
+export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, onClose, sheetOnly }) => {
   const sheetRef = useRef<HTMLDivElement>(null)
   if (!data || !data.student) return null
 
@@ -48,40 +50,8 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
   const affectiveDomain = (reportSheet?.affectiveDomain ?? {}) as Record<string, number>
   const psychomotorDomain = (reportSheet?.psychomotorDomain ?? {}) as Record<string, number>
 
-  return (
-    <div className="space-y-4">
-      {/* Action Bar (Hidden during Print) */}
-      <div className="flex items-center justify-between bg-muted/40 p-3 rounded-lg border border-border print:hidden">
-        <div className="flex items-center gap-2">
-          <Award className="w-5 h-5 text-primary" />
-          <span className="font-semibold text-sm">Nigerian Standard Report Sheet</span>
-          {reportSheet?.status && (
-            <span
-              className={`text-xs px-2 py-0.5 rounded font-medium ${
-                reportSheet.status === 'PUBLISHED'
-                  ? 'bg-success/15 text-success'
-                  : 'bg-warning/15 text-warning'
-              }`}
-            >
-              {reportSheet.status}
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={handlePrint} className="gap-1.5">
-            <Printer className="w-4 h-4" />
-            Print / Save as PDF
-          </Button>
-          {onClose && (
-            <Button variant="ghost" size="sm" onClick={onClose}>
-              Close
-            </Button>
-          )}
-        </div>
-      </div>
-
-      {/* Printable Report Sheet Document */}
-      <div ref={sheetRef} className="bg-white text-black p-6 sm:p-8 rounded-xl border border-gray-300 shadow-sm print:border-none print:shadow-none print:p-0 w-full max-w-6xl mx-auto font-sans">
+  const sheet = (
+      <div ref={sheetRef} data-report-sheet className="bg-white text-black p-6 sm:p-8 rounded-xl border border-gray-300 shadow-sm print:border-none print:shadow-none print:p-0 w-full max-w-6xl mx-auto font-sans">
         {/* Header with School Details */}
         <div className="border-b-2 border-black pb-4 mb-4 text-center relative">
           <div className="flex items-center justify-center gap-4 mb-2">
@@ -381,6 +351,44 @@ export const NigerianReportSheet: React.FC<NigerianReportSheetProps> = ({ data, 
           </div>
         </div>
       </div>
+  )
+
+  if (sheetOnly) return sheet
+
+  return (
+    <div className="space-y-4">
+      {/* Action Bar (Hidden during Print) */}
+      <div className="flex items-center justify-between bg-muted/40 p-3 rounded-lg border border-border print:hidden">
+        <div className="flex items-center gap-2">
+          <Award className="w-5 h-5 text-primary" />
+          <span className="font-semibold text-sm">Nigerian Standard Report Sheet</span>
+          {reportSheet?.status && (
+            <span
+              className={`text-xs px-2 py-0.5 rounded font-medium ${
+                reportSheet.status === 'PUBLISHED'
+                  ? 'bg-success/15 text-success'
+                  : 'bg-warning/15 text-warning'
+              }`}
+            >
+              {reportSheet.status}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={handlePrint} className="gap-1.5">
+            <Printer className="w-4 h-4" />
+            Print / Save as PDF
+          </Button>
+          {onClose && (
+            <Button variant="ghost" size="sm" onClick={onClose}>
+              Close
+            </Button>
+          )}
+        </div>
+      </div>
+
+      {/* Printable Report Sheet Document */}
+      {sheet}
     </div>
   )
 }
