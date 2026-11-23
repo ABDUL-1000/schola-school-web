@@ -34,6 +34,8 @@ import { Route as AuthenticatedDashboardBranchesRouteImport } from './routes/_au
 import { Route as AuthenticatedDashboardDepartmentsRouteImport } from './routes/_authenticated/dashboard/departments'
 import { Route as AuthenticatedDashboardEnrolmentQueueRouteImport } from './routes/_authenticated/dashboard/enrolment-queue'
 import { Route as AuthenticatedDashboardExamsRouteImport } from './routes/_authenticated/dashboard/exams'
+import { Route as AuthenticatedDashboardIdCardsRouteImport } from './routes/_authenticated/dashboard/id-cards'
+import { Route as AuthenticatedDashboardPlanRouteImport } from './routes/_authenticated/dashboard/plan'
 import { Route as AuthenticatedDashboardPromotionRouteImport } from './routes/_authenticated/dashboard/promotion'
 import { Route as AuthenticatedDashboardReportsRouteImport } from './routes/_authenticated/dashboard/reports'
 import { Route as AuthenticatedDashboardResultsRouteImport } from './routes/_authenticated/dashboard/results'
@@ -208,6 +210,18 @@ const AuthenticatedDashboardExamsRoute =
   AuthenticatedDashboardExamsRouteImport.update({
     id: '/exams',
     path: '/exams',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardIdCardsRoute =
+  AuthenticatedDashboardIdCardsRouteImport.update({
+    id: '/id-cards',
+    path: '/id-cards',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardPlanRoute =
+  AuthenticatedDashboardPlanRouteImport.update({
+    id: '/plan',
+    path: '/plan',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 const AuthenticatedDashboardPromotionRoute =
@@ -480,6 +494,8 @@ export interface FileRoutesByFullPath {
   '/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
   '/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
+  '/dashboard/id-cards': typeof AuthenticatedDashboardIdCardsRoute
+  '/dashboard/plan': typeof AuthenticatedDashboardPlanRoute
   '/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
   '/dashboard/results': typeof AuthenticatedDashboardResultsRoute
@@ -545,6 +561,8 @@ export interface FileRoutesByTo {
   '/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
   '/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
+  '/dashboard/id-cards': typeof AuthenticatedDashboardIdCardsRoute
+  '/dashboard/plan': typeof AuthenticatedDashboardPlanRoute
   '/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
   '/dashboard/results': typeof AuthenticatedDashboardResultsRoute
@@ -614,6 +632,8 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/departments': typeof AuthenticatedDashboardDepartmentsRoute
   '/_authenticated/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/_authenticated/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
+  '/_authenticated/dashboard/id-cards': typeof AuthenticatedDashboardIdCardsRoute
+  '/_authenticated/dashboard/plan': typeof AuthenticatedDashboardPlanRoute
   '/_authenticated/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/_authenticated/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
   '/_authenticated/dashboard/results': typeof AuthenticatedDashboardResultsRoute
@@ -682,6 +702,8 @@ export interface FileRouteTypes {
     | '/dashboard/departments'
     | '/dashboard/enrolment-queue'
     | '/dashboard/exams'
+    | '/dashboard/id-cards'
+    | '/dashboard/plan'
     | '/dashboard/promotion'
     | '/dashboard/reports'
     | '/dashboard/results'
@@ -747,6 +769,8 @@ export interface FileRouteTypes {
     | '/dashboard/departments'
     | '/dashboard/enrolment-queue'
     | '/dashboard/exams'
+    | '/dashboard/id-cards'
+    | '/dashboard/plan'
     | '/dashboard/promotion'
     | '/dashboard/reports'
     | '/dashboard/results'
@@ -815,6 +839,8 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/departments'
     | '/_authenticated/dashboard/enrolment-queue'
     | '/_authenticated/dashboard/exams'
+    | '/_authenticated/dashboard/id-cards'
+    | '/_authenticated/dashboard/plan'
     | '/_authenticated/dashboard/promotion'
     | '/_authenticated/dashboard/reports'
     | '/_authenticated/dashboard/results'
@@ -1048,6 +1074,20 @@ declare module '@tanstack/react-router' {
       path: '/exams'
       fullPath: '/dashboard/exams'
       preLoaderRoute: typeof AuthenticatedDashboardExamsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/id-cards': {
+      id: '/_authenticated/dashboard/id-cards'
+      path: '/id-cards'
+      fullPath: '/dashboard/id-cards'
+      preLoaderRoute: typeof AuthenticatedDashboardIdCardsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/plan': {
+      id: '/_authenticated/dashboard/plan'
+      path: '/plan'
+      fullPath: '/dashboard/plan'
+      preLoaderRoute: typeof AuthenticatedDashboardPlanRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
     '/_authenticated/dashboard/promotion': {
@@ -1382,6 +1422,8 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardDepartmentsRoute: typeof AuthenticatedDashboardDepartmentsRoute
   AuthenticatedDashboardEnrolmentQueueRoute: typeof AuthenticatedDashboardEnrolmentQueueRoute
   AuthenticatedDashboardExamsRoute: typeof AuthenticatedDashboardExamsRoute
+  AuthenticatedDashboardIdCardsRoute: typeof AuthenticatedDashboardIdCardsRoute
+  AuthenticatedDashboardPlanRoute: typeof AuthenticatedDashboardPlanRoute
   AuthenticatedDashboardPromotionRoute: typeof AuthenticatedDashboardPromotionRoute
   AuthenticatedDashboardReportsRoute: typeof AuthenticatedDashboardReportsRoute
   AuthenticatedDashboardResultsRoute: typeof AuthenticatedDashboardResultsRoute
@@ -1434,6 +1476,8 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
     AuthenticatedDashboardEnrolmentQueueRoute:
       AuthenticatedDashboardEnrolmentQueueRoute,
     AuthenticatedDashboardExamsRoute: AuthenticatedDashboardExamsRoute,
+    AuthenticatedDashboardIdCardsRoute: AuthenticatedDashboardIdCardsRoute,
+    AuthenticatedDashboardPlanRoute: AuthenticatedDashboardPlanRoute,
     AuthenticatedDashboardPromotionRoute: AuthenticatedDashboardPromotionRoute,
     AuthenticatedDashboardReportsRoute: AuthenticatedDashboardReportsRoute,
     AuthenticatedDashboardResultsRoute: AuthenticatedDashboardResultsRoute,

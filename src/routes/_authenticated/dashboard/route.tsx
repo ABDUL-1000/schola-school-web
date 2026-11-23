@@ -10,6 +10,8 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { ProfileCompletionAlert } from '@/components/profile-completion-alert'
 import { useOnboardingStatusQuery } from '@/hooks/queries/onboarding.queries'
+import { PlanBanner } from '@/components/plan/plan-banner'
+import { UpgradeDialog } from '@/components/plan/upgrade-dialog'
 
 export const Route = createFileRoute('/_authenticated/dashboard')({
   component: RouteComponent,
@@ -43,9 +45,11 @@ function RouteComponent() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-6 px-4 pt-6 pb-6 md:px-8 md:pt-8 md:pb-8">
+          <PlanBanner />
           <Outlet />
         </div>
         <ProfileCompletionAlert />
+        <UpgradeDialog plansHref="/dashboard/plan" />
       </SidebarInset>
     </SidebarProvider>
   )
