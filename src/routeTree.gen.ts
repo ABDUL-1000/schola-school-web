@@ -51,6 +51,9 @@ import { Route as AuthenticatedDashboardAcademicsAssessmentsConfigRouteImport } 
 import { Route as AuthenticatedDashboardAcademicsReportCardDesignRouteImport } from './routes/_authenticated/dashboard/academics.report-card-design'
 import { Route as AuthenticatedDashboardAttendanceStaffRouteImport } from './routes/_authenticated/dashboard/attendance/staff'
 import { Route as AuthenticatedDashboardAttendanceStudentsRouteImport } from './routes/_authenticated/dashboard/attendance/students'
+import { Route as AuthenticatedDashboardCertificatesIndexRouteImport } from './routes/_authenticated/dashboard/certificates.index'
+import { Route as AuthenticatedDashboardCertificatesTemplateIdRouteImport } from './routes/_authenticated/dashboard/certificates.$templateId'
+import { Route as AuthenticatedDashboardCertificatesIssueRouteImport } from './routes/_authenticated/dashboard/certificates.issue'
 import { Route as AuthenticatedDashboardClassesIndexRouteImport } from './routes/_authenticated/dashboard/classes.index'
 import { Route as AuthenticatedDashboardClassesClassIdRouteImport } from './routes/_authenticated/dashboard/classes.$classId'
 import { Route as AuthenticatedDashboardFinanceIndexRouteImport } from './routes/_authenticated/dashboard/finance.index'
@@ -314,6 +317,24 @@ const AuthenticatedDashboardAttendanceStudentsRoute =
     path: '/attendance/students',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const AuthenticatedDashboardCertificatesIndexRoute =
+  AuthenticatedDashboardCertificatesIndexRouteImport.update({
+    id: '/certificates/',
+    path: '/certificates/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardCertificatesTemplateIdRoute =
+  AuthenticatedDashboardCertificatesTemplateIdRouteImport.update({
+    id: '/certificates/$templateId',
+    path: '/certificates/$templateId',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardCertificatesIssueRoute =
+  AuthenticatedDashboardCertificatesIssueRouteImport.update({
+    id: '/certificates/issue',
+    path: '/certificates/issue',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
 const AuthenticatedDashboardClassesIndexRoute =
   AuthenticatedDashboardClassesIndexRouteImport.update({
     id: '/classes/',
@@ -512,6 +533,8 @@ export interface FileRoutesByFullPath {
   '/dashboard/academics/report-card-design': typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   '/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
+  '/dashboard/certificates/$templateId': typeof AuthenticatedDashboardCertificatesTemplateIdRoute
+  '/dashboard/certificates/issue': typeof AuthenticatedDashboardCertificatesIssueRoute
   '/dashboard/classes/$classId': typeof AuthenticatedDashboardClassesClassIdRoute
   '/dashboard/finance/balances': typeof AuthenticatedDashboardFinanceBalancesRoute
   '/dashboard/finance/expenses': typeof AuthenticatedDashboardFinanceExpensesRoute
@@ -522,6 +545,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   '/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
+  '/dashboard/certificates/': typeof AuthenticatedDashboardCertificatesIndexRoute
   '/dashboard/classes/': typeof AuthenticatedDashboardClassesIndexRoute
   '/dashboard/finance/': typeof AuthenticatedDashboardFinanceIndexRoute
   '/dashboard/lesson-notes/': typeof AuthenticatedDashboardLessonNotesIndexRoute
@@ -579,6 +603,8 @@ export interface FileRoutesByTo {
   '/dashboard/academics/report-card-design': typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   '/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
+  '/dashboard/certificates/$templateId': typeof AuthenticatedDashboardCertificatesTemplateIdRoute
+  '/dashboard/certificates/issue': typeof AuthenticatedDashboardCertificatesIssueRoute
   '/dashboard/classes/$classId': typeof AuthenticatedDashboardClassesClassIdRoute
   '/dashboard/finance/balances': typeof AuthenticatedDashboardFinanceBalancesRoute
   '/dashboard/finance/expenses': typeof AuthenticatedDashboardFinanceExpensesRoute
@@ -589,6 +615,7 @@ export interface FileRoutesByTo {
   '/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   '/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
+  '/dashboard/certificates': typeof AuthenticatedDashboardCertificatesIndexRoute
   '/dashboard/classes': typeof AuthenticatedDashboardClassesIndexRoute
   '/dashboard/finance': typeof AuthenticatedDashboardFinanceIndexRoute
   '/dashboard/lesson-notes': typeof AuthenticatedDashboardLessonNotesIndexRoute
@@ -650,6 +677,8 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/academics/report-card-design': typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   '/_authenticated/dashboard/attendance/staff': typeof AuthenticatedDashboardAttendanceStaffRoute
   '/_authenticated/dashboard/attendance/students': typeof AuthenticatedDashboardAttendanceStudentsRoute
+  '/_authenticated/dashboard/certificates/$templateId': typeof AuthenticatedDashboardCertificatesTemplateIdRoute
+  '/_authenticated/dashboard/certificates/issue': typeof AuthenticatedDashboardCertificatesIssueRoute
   '/_authenticated/dashboard/classes/$classId': typeof AuthenticatedDashboardClassesClassIdRoute
   '/_authenticated/dashboard/finance/balances': typeof AuthenticatedDashboardFinanceBalancesRoute
   '/_authenticated/dashboard/finance/expenses': typeof AuthenticatedDashboardFinanceExpensesRoute
@@ -660,6 +689,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   '/_authenticated/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/_authenticated/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
+  '/_authenticated/dashboard/certificates/': typeof AuthenticatedDashboardCertificatesIndexRoute
   '/_authenticated/dashboard/classes/': typeof AuthenticatedDashboardClassesIndexRoute
   '/_authenticated/dashboard/finance/': typeof AuthenticatedDashboardFinanceIndexRoute
   '/_authenticated/dashboard/lesson-notes/': typeof AuthenticatedDashboardLessonNotesIndexRoute
@@ -720,6 +750,8 @@ export interface FileRouteTypes {
     | '/dashboard/academics/report-card-design'
     | '/dashboard/attendance/staff'
     | '/dashboard/attendance/students'
+    | '/dashboard/certificates/$templateId'
+    | '/dashboard/certificates/issue'
     | '/dashboard/classes/$classId'
     | '/dashboard/finance/balances'
     | '/dashboard/finance/expenses'
@@ -730,6 +762,7 @@ export interface FileRouteTypes {
     | '/dashboard/lesson-plans/$planId'
     | '/dashboard/staff/new'
     | '/dashboard/students/new'
+    | '/dashboard/certificates/'
     | '/dashboard/classes/'
     | '/dashboard/finance/'
     | '/dashboard/lesson-notes/'
@@ -787,6 +820,8 @@ export interface FileRouteTypes {
     | '/dashboard/academics/report-card-design'
     | '/dashboard/attendance/staff'
     | '/dashboard/attendance/students'
+    | '/dashboard/certificates/$templateId'
+    | '/dashboard/certificates/issue'
     | '/dashboard/classes/$classId'
     | '/dashboard/finance/balances'
     | '/dashboard/finance/expenses'
@@ -797,6 +832,7 @@ export interface FileRouteTypes {
     | '/dashboard/lesson-plans/$planId'
     | '/dashboard/staff/new'
     | '/dashboard/students/new'
+    | '/dashboard/certificates'
     | '/dashboard/classes'
     | '/dashboard/finance'
     | '/dashboard/lesson-notes'
@@ -857,6 +893,8 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/academics/report-card-design'
     | '/_authenticated/dashboard/attendance/staff'
     | '/_authenticated/dashboard/attendance/students'
+    | '/_authenticated/dashboard/certificates/$templateId'
+    | '/_authenticated/dashboard/certificates/issue'
     | '/_authenticated/dashboard/classes/$classId'
     | '/_authenticated/dashboard/finance/balances'
     | '/_authenticated/dashboard/finance/expenses'
@@ -867,6 +905,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/lesson-plans/$planId'
     | '/_authenticated/dashboard/staff/new'
     | '/_authenticated/dashboard/students/new'
+    | '/_authenticated/dashboard/certificates/'
     | '/_authenticated/dashboard/classes/'
     | '/_authenticated/dashboard/finance/'
     | '/_authenticated/dashboard/lesson-notes/'
@@ -1195,6 +1234,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAttendanceStudentsRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
+    '/_authenticated/dashboard/certificates/': {
+      id: '/_authenticated/dashboard/certificates/'
+      path: '/certificates'
+      fullPath: '/dashboard/certificates/'
+      preLoaderRoute: typeof AuthenticatedDashboardCertificatesIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/certificates/$templateId': {
+      id: '/_authenticated/dashboard/certificates/$templateId'
+      path: '/certificates/$templateId'
+      fullPath: '/dashboard/certificates/$templateId'
+      preLoaderRoute: typeof AuthenticatedDashboardCertificatesTemplateIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/certificates/issue': {
+      id: '/_authenticated/dashboard/certificates/issue'
+      path: '/certificates/issue'
+      fullPath: '/dashboard/certificates/issue'
+      preLoaderRoute: typeof AuthenticatedDashboardCertificatesIssueRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
     '/_authenticated/dashboard/classes/': {
       id: '/_authenticated/dashboard/classes/'
       path: '/classes'
@@ -1437,6 +1497,8 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardAcademicsReportCardDesignRoute: typeof AuthenticatedDashboardAcademicsReportCardDesignRoute
   AuthenticatedDashboardAttendanceStaffRoute: typeof AuthenticatedDashboardAttendanceStaffRoute
   AuthenticatedDashboardAttendanceStudentsRoute: typeof AuthenticatedDashboardAttendanceStudentsRoute
+  AuthenticatedDashboardCertificatesTemplateIdRoute: typeof AuthenticatedDashboardCertificatesTemplateIdRoute
+  AuthenticatedDashboardCertificatesIssueRoute: typeof AuthenticatedDashboardCertificatesIssueRoute
   AuthenticatedDashboardClassesClassIdRoute: typeof AuthenticatedDashboardClassesClassIdRoute
   AuthenticatedDashboardFinanceBalancesRoute: typeof AuthenticatedDashboardFinanceBalancesRoute
   AuthenticatedDashboardFinanceExpensesRoute: typeof AuthenticatedDashboardFinanceExpensesRoute
@@ -1447,6 +1509,7 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardLessonPlansPlanIdRoute: typeof AuthenticatedDashboardLessonPlansPlanIdRoute
   AuthenticatedDashboardStaffNewRoute: typeof AuthenticatedDashboardStaffNewRoute
   AuthenticatedDashboardStudentsNewRoute: typeof AuthenticatedDashboardStudentsNewRoute
+  AuthenticatedDashboardCertificatesIndexRoute: typeof AuthenticatedDashboardCertificatesIndexRoute
   AuthenticatedDashboardClassesIndexRoute: typeof AuthenticatedDashboardClassesIndexRoute
   AuthenticatedDashboardFinanceIndexRoute: typeof AuthenticatedDashboardFinanceIndexRoute
   AuthenticatedDashboardLessonNotesIndexRoute: typeof AuthenticatedDashboardLessonNotesIndexRoute
@@ -1496,6 +1559,10 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
       AuthenticatedDashboardAttendanceStaffRoute,
     AuthenticatedDashboardAttendanceStudentsRoute:
       AuthenticatedDashboardAttendanceStudentsRoute,
+    AuthenticatedDashboardCertificatesTemplateIdRoute:
+      AuthenticatedDashboardCertificatesTemplateIdRoute,
+    AuthenticatedDashboardCertificatesIssueRoute:
+      AuthenticatedDashboardCertificatesIssueRoute,
     AuthenticatedDashboardClassesClassIdRoute:
       AuthenticatedDashboardClassesClassIdRoute,
     AuthenticatedDashboardFinanceBalancesRoute:
@@ -1513,6 +1580,8 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
     AuthenticatedDashboardStaffNewRoute: AuthenticatedDashboardStaffNewRoute,
     AuthenticatedDashboardStudentsNewRoute:
       AuthenticatedDashboardStudentsNewRoute,
+    AuthenticatedDashboardCertificatesIndexRoute:
+      AuthenticatedDashboardCertificatesIndexRoute,
     AuthenticatedDashboardClassesIndexRoute:
       AuthenticatedDashboardClassesIndexRoute,
     AuthenticatedDashboardFinanceIndexRoute:
