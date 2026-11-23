@@ -12,6 +12,7 @@ import {
   Megaphone,
   Briefcase,
   Landmark,
+  Crown,
 } from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
@@ -48,6 +49,10 @@ const data = {
         {
           title: 'Students',
           url: '/dashboard/students',
+        },
+        {
+          title: 'ID Cards',
+          url: '/dashboard/id-cards',
         },
         {
           title: 'Alumni',
@@ -201,6 +206,11 @@ const data = {
       name: 'Settings',
       url: '/dashboard/settings',
       icon: Settings2,
+    },
+    {
+      name: 'Plan & Upgrade',
+      url: '/dashboard/plan',
+      icon: Crown,
     },
   ],
 }

@@ -18,6 +18,8 @@ import {
   useSaveReportTemplateMutation,
 } from '@/hooks/queries/grading.queries'
 import { useProfileQuery } from '@/hooks/queries/profile.queries'
+import { usePlanAllows } from '@/hooks/queries/plan.queries'
+import { requestUpgrade } from '@/components/plan/upgrade-dialog'
 import { useUploadFileMutation } from '@/hooks/queries/upload.queries'
 import { ReportCardDocument } from '@/components/report-card/report-card'
 import { buildSampleReportCard } from '@/components/report-card/sample'
@@ -52,6 +54,8 @@ function ReportCardDesignRoute() {
     },
   })
   const saveMutation = useSaveReportTemplateMutation()
+  // Free plan: try every layout in the preview, but saving (and so using it) needs a paid plan.
+  const canDesign = usePlanAllows('reportCardDesign')
   const deleteMutation = useDeleteLevelReportTemplateMutation()
 
   // '' = the school's default design; otherwise a class level (e.g. "Primary").
@@ -94,6 +98,13 @@ function ReportCardDesignRoute() {
     }))
 
   const save = async () => {
+    if (!canDesign) {
+      requestUpgrade({
+        message: 'Saving a report card design is part of the paid plans. Try any layout in the preview; on the free plan, report cards use the Classic design.',
+        requiredTier: 'STANDARD',
+      })
+      return
+    }
     try {
       await saveMutation.mutateAsync({ level: scope || null, template: draft })
       toast.success(scope ? `Report card design saved for ${scope}` : 'Report card design saved')
@@ -147,6 +158,13 @@ function ReportCardDesignRoute() {
           </Button>
         </div>
       </div>
+
+      {!canDesign && (
+        <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200">
+          <strong>Preview only on the free plan.</strong> Try any layout and setting below; saving a design is part of the paid plans.
+          Until then, report cards use the Classic design.
+        </div>
+      )}
 
       {/* Which design is being edited */}
       <Card>

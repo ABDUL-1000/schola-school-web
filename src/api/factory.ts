@@ -164,6 +164,12 @@ export const createApiClient = (config: ApiClientConfig): AxiosInstance => {
       // Extract message from server response if available
       if (error.response) {
         const data = error.response.data as any;
+        // The school's plan doesn't allow this (402 PLAN_LIMIT): tell the app so it can offer an upgrade.
+        if (error.response.status === 402 && data?.data?.code === "PLAN_LIMIT" && typeof window !== "undefined") {
+          window.dispatchEvent(
+            new CustomEvent("schola:plan-limit", { detail: { message: data.message, ...data.data } }),
+          );
+        }
         const message = data?.message || error.message;
         const apiError = new APIError(error.response.status, message, data);
         return Promise.reject(apiError);

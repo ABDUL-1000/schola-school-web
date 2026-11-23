@@ -33,6 +33,7 @@ import {
   CheckCircle2,
   Printer,
   Palette,
+  Lock,
 } from 'lucide-react'
 import {
   Table,
@@ -46,6 +47,8 @@ import { toast } from '@/lib/toast'
 import { ResultsLockControls } from '@/components/grading/results-lock-controls'
 import { NigerianReportSheet } from '@/components/grading/nigerian-report-sheet'
 import { printA4 } from '@/lib/print-a4'
+import { usePlanAllows } from '@/hooks/queries/plan.queries'
+import { requestUpgrade } from '@/components/plan/upgrade-dialog'
 
 export const Route = createFileRoute('/_authenticated/dashboard/results')({
   component: ResultsIndexRoute,
@@ -148,8 +151,19 @@ function ResultsIndexRoute() {
     }
   }
 
+  // Free plan: publishing and printing a whole class are locked (report cards still preview, watermarked).
+  const canPublish = usePlanAllows('publishResults')
+  const canPrintAll = usePlanAllows('printAllReportCards')
+
   const handlePublishReportSheets = async () => {
     if (!selectedTermId || !selectedClassId) return
+    if (!canPublish) {
+      requestUpgrade({
+        message: 'Publishing results to students and parents is part of the paid plans. You can still preview and print single report cards.',
+        requiredTier: 'STANDARD',
+      })
+      return
+    }
     try {
       const res = await publishMutation.mutateAsync({
         termId: selectedTermId,
@@ -170,6 +184,13 @@ function ResultsIndexRoute() {
   const handlePrintAllReportCards = async () => {
     const rows: Array<any> = broadsheet?.students || []
     if (!selectedTermId || !rows.length || batchProgress) return
+    if (!canPrintAll) {
+      requestUpgrade({
+        message: "Printing a whole class's report cards at once is part of the paid plans. You can still print them one at a time.",
+        requiredTier: 'STANDARD',
+      })
+      return
+    }
     const total = rows.length
     setBatchProgress({ done: 0, total })
     const sheets: Array<any> = new Array(total).fill(null)
@@ -330,8 +351,10 @@ function ResultsIndexRoute() {
               >
                 {publishMutation.isPending ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
+                ) : canPublish ? (
                   <Share2 className="w-4 h-4" />
+                ) : (
+                  <Lock className="w-4 h-4" />
                 )}
                 Publish to Students & Parents
               </Button>
@@ -348,8 +371,10 @@ function ResultsIndexRoute() {
               >
                 {batchProgress ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
+                ) : canPrintAll ? (
                   <Printer className="w-4 h-4" />
+                ) : (
+                  <Lock className="w-4 h-4" />
                 )}
                 {batchProgress
                   ? `Preparing ${batchProgress.done}/${batchProgress.total}…`
