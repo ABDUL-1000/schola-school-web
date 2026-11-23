@@ -55,6 +55,10 @@ const data = {
           url: '/dashboard/id-cards',
         },
         {
+          title: 'Certificates',
+          url: '/dashboard/certificates',
+        },
+        {
           title: 'Alumni',
           url: '/dashboard/alumni',
         },

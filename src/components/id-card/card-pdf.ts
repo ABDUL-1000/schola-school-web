@@ -8,7 +8,7 @@
  * Shared by the school, staff and student portals (keep the copies in step).
  */
 
-const A4_W = 595.28 // pt
+const A4_W = 595.28 // pt (portrait)
 const A4_H = 841.89
 const PT_PER_PX = 72 / 96
 const TOP_MARGIN_PT = (8 / 25.4) * 72
@@ -38,13 +38,52 @@ function toDataUrl(src: string): Promise<string | null> {
   return hit
 }
 
+const fontCssCache = new Map<string, Promise<string>>()
+
+/**
+ * Web fonts don't load inside the SVG used for drawing, so fetch the font file
+ * itself (Latin letters only, to keep the PDF small) and inline it.
+ */
+function embeddedFontCss(cssUrl: string): Promise<string> {
+  let hit = fontCssCache.get(cssUrl)
+  if (!hit) {
+    hit = fetch(cssUrl)
+      .then((r) => (r.ok ? r.text() : ''))
+      .then(async (css) => {
+        // Google Fonts labels each block with its letters: /* latin */ @font-face {…}
+        const blocks = css.split(/\/\*\s*([\w-]+)\s*\*\//).reduce<Array<string>>((acc, part, i, all) => {
+          if (i % 2 === 1 && part === 'latin') acc.push(all[i + 1])
+          return acc
+        }, [])
+        const keep = blocks.length ? blocks : [css]
+        const out = await Promise.all(
+          keep.map(async (block) => {
+            const m = /url\(([^)]+)\)/.exec(block)
+            if (!m) return block
+            const data = await toDataUrl(m[1].replace(/["']/g, ''))
+            return data ? block.replace(m[0], `url(${data})`) : ''
+          }),
+        )
+        return out.join('\n')
+      })
+      .catch(() => '')
+    fontCssCache.set(cssUrl, hit)
+  }
+  return hit
+}
+
 /** Draw one element to a JPEG. Images that can't be fetched are left out rather than failing the PDF. */
-async function rasterize(el: HTMLElement): Promise<{ bytes: Uint8Array; w: number; h: number }> {
+async function rasterize(el: HTMLElement, scale: number, fontCss: string): Promise<{ bytes: Uint8Array; w: number; h: number; scale: number }> {
   const w = Math.ceil(el.offsetWidth)
   const h = Math.ceil(el.offsetHeight)
   const copy = el.cloneNode(true) as HTMLElement
   copy.style.margin = '0'
   copy.style.width = `${w}px`
+  if (fontCss) {
+    const style = document.createElement('style')
+    style.textContent = fontCss
+    copy.prepend(style)
+  }
 
   await Promise.all(
     Array.from(copy.querySelectorAll('img')).map(async (img) => {
@@ -65,8 +104,8 @@ async function rasterize(el: HTMLElement): Promise<{ bytes: Uint8Array; w: numbe
   await image.decode()
 
   const canvas = document.createElement('canvas')
-  canvas.width = Math.round(w * SCALE)
-  canvas.height = Math.round(h * SCALE)
+  canvas.width = Math.round(w * scale)
+  canvas.height = Math.round(h * scale)
   const g = canvas.getContext('2d')
   if (!g) throw new Error('Canvas is not available')
   g.fillStyle = '#ffffff'
@@ -75,11 +114,13 @@ async function rasterize(el: HTMLElement): Promise<{ bytes: Uint8Array; w: numbe
 
   const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, 'image/jpeg', 0.9))
   if (!blob) throw new Error('Could not draw the card')
-  return { bytes: new Uint8Array(await blob.arrayBuffer()), w, h }
+  return { bytes: new Uint8Array(await blob.arrayBuffer()), w, h, scale }
 }
 
-/** A minimal PDF: one A4 page per JPEG, centred, 8 mm from the top, at real size. */
-function buildPdf(images: Array<{ bytes: Uint8Array; w: number; h: number }>): Blob {
+type Raster = { bytes: Uint8Array; w: number; h: number; scale: number }
+
+/** A minimal PDF: one A4 page per JPEG, centred across, `margin` from the top, at real size. */
+function buildPdf(images: Array<Raster>, landscape: boolean | 'auto', margin: number): Blob {
   const enc = new TextEncoder()
   const parts: Array<Uint8Array> = []
   const offsets: Array<number> = []
@@ -104,23 +145,25 @@ function buildPdf(images: Array<{ bytes: Uint8Array; w: number; h: number }>): B
 
   images.forEach((img, i) => {
     const [pageId, contentId, imageId] = [pageIds[i], pageIds[i] + 1, pageIds[i] + 2]
+    const wide = landscape === 'auto' ? img.w > img.h : landscape
+    const [pageW, pageH] = wide ? [A4_H, A4_W] : [A4_W, A4_H]
     let dw = img.w * PT_PER_PX
     let dh = img.h * PT_PER_PX
     // Never spill off the page (cards stay real size in every normal layout).
-    const fit = Math.min(1, (A4_W - 2 * TOP_MARGIN_PT) / dw, (A4_H - 2 * TOP_MARGIN_PT) / dh)
+    const fit = Math.min(1, (pageW - 2 * margin) / dw, (pageH - 2 * margin) / dh)
     dw *= fit
     dh *= fit
-    const x = (A4_W - dw) / 2
-    const y = A4_H - TOP_MARGIN_PT - dh
+    const x = (pageW - dw) / 2
+    const y = pageH - margin - dh
     const content = `q ${dw.toFixed(2)} 0 0 ${dh.toFixed(2)} ${x.toFixed(2)} ${y.toFixed(2)} cm /Im0 Do Q`
 
     obj(pageId, [
-      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${A4_W} ${A4_H}] ` +
+      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pageW} ${pageH}] ` +
         `/Resources << /XObject << /Im0 ${imageId} 0 R >> >> /Contents ${contentId} 0 R >>`,
     ])
     obj(contentId, [`<< /Length ${content.length} >>\nstream\n${content}\nendstream`])
     obj(imageId, [
-      `<< /Type /XObject /Subtype /Image /Width ${Math.round(img.w * SCALE)} /Height ${Math.round(img.h * SCALE)} ` +
+      `<< /Type /XObject /Subtype /Image /Width ${Math.round(img.w * img.scale)} /Height ${Math.round(img.h * img.scale)} ` +
         `/ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${img.bytes.length} >>\nstream\n`,
       img.bytes,
       '\nendstream',
@@ -135,18 +178,35 @@ function buildPdf(images: Array<{ bytes: Uint8Array; w: number; h: number }>): B
   return new Blob(parts as Array<BlobPart>, { type: 'application/pdf' })
 }
 
+export interface PdfOptions {
+  /** A4 landscape pages, or 'auto' to turn each page to suit its sheet (certificates). */
+  landscape?: boolean | 'auto'
+  /** Space from the page edge, in points. Default 8 mm. */
+  margin?: number
+  /** Image sharpness: pixels per CSS pixel. Default 2.5 (240 dpi). */
+  scale?: number
+  /** A Google Fonts stylesheet the sheets use, embedded so the PDF keeps the lettering. */
+  fontCss?: string
+}
+
 /** Build a PDF from the sheets (one per page) and download it. */
-export async function downloadSheetsPdf(sheets: Array<HTMLElement>, fileName: string, onProgress?: (done: number, total: number) => void) {
-  const images: Array<{ bytes: Uint8Array; w: number; h: number }> = []
+export async function downloadSheetsPdf(
+  sheets: Array<HTMLElement>,
+  fileName: string,
+  onProgress?: (done: number, total: number) => void,
+  opts: PdfOptions = {},
+) {
+  const fontCss = opts.fontCss ? await embeddedFontCss(opts.fontCss) : ''
+  const images: Array<Raster> = []
   for (let i = 0; i < sheets.length; i++) {
     onProgress?.(i, sheets.length)
-    images.push(await rasterize(sheets[i]))
+    images.push(await rasterize(sheets[i], opts.scale ?? SCALE, fontCss))
     // Let the page breathe between sheets on big classes.
     await new Promise((r) => setTimeout(r, 0))
   }
   onProgress?.(sheets.length, sheets.length)
 
-  const url = URL.createObjectURL(buildPdf(images))
+  const url = URL.createObjectURL(buildPdf(images, opts.landscape ?? false, opts.margin ?? TOP_MARGIN_PT))
   const a = document.createElement('a')
   a.href = url
   a.download = `${fileName.replace(/[\\/:*?"<>|]+/g, '-').trim() || 'ID cards'}.pdf`
