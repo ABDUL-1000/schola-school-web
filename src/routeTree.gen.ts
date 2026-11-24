@@ -35,6 +35,7 @@ import { Route as AuthenticatedDashboardDepartmentsRouteImport } from './routes/
 import { Route as AuthenticatedDashboardEnrolmentQueueRouteImport } from './routes/_authenticated/dashboard/enrolment-queue'
 import { Route as AuthenticatedDashboardExamsRouteImport } from './routes/_authenticated/dashboard/exams'
 import { Route as AuthenticatedDashboardIdCardsRouteImport } from './routes/_authenticated/dashboard/id-cards'
+import { Route as AuthenticatedDashboardLettersRouteImport } from './routes/_authenticated/dashboard/letters'
 import { Route as AuthenticatedDashboardPlanRouteImport } from './routes/_authenticated/dashboard/plan'
 import { Route as AuthenticatedDashboardPromotionRouteImport } from './routes/_authenticated/dashboard/promotion'
 import { Route as AuthenticatedDashboardReportsRouteImport } from './routes/_authenticated/dashboard/reports'
@@ -219,6 +220,12 @@ const AuthenticatedDashboardIdCardsRoute =
   AuthenticatedDashboardIdCardsRouteImport.update({
     id: '/id-cards',
     path: '/id-cards',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardLettersRoute =
+  AuthenticatedDashboardLettersRouteImport.update({
+    id: '/letters',
+    path: '/letters',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
 const AuthenticatedDashboardPlanRoute =
@@ -516,6 +523,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
   '/dashboard/id-cards': typeof AuthenticatedDashboardIdCardsRoute
+  '/dashboard/letters': typeof AuthenticatedDashboardLettersRoute
   '/dashboard/plan': typeof AuthenticatedDashboardPlanRoute
   '/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
@@ -586,6 +594,7 @@ export interface FileRoutesByTo {
   '/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
   '/dashboard/id-cards': typeof AuthenticatedDashboardIdCardsRoute
+  '/dashboard/letters': typeof AuthenticatedDashboardLettersRoute
   '/dashboard/plan': typeof AuthenticatedDashboardPlanRoute
   '/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
@@ -660,6 +669,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/enrolment-queue': typeof AuthenticatedDashboardEnrolmentQueueRoute
   '/_authenticated/dashboard/exams': typeof AuthenticatedDashboardExamsRoute
   '/_authenticated/dashboard/id-cards': typeof AuthenticatedDashboardIdCardsRoute
+  '/_authenticated/dashboard/letters': typeof AuthenticatedDashboardLettersRoute
   '/_authenticated/dashboard/plan': typeof AuthenticatedDashboardPlanRoute
   '/_authenticated/dashboard/promotion': typeof AuthenticatedDashboardPromotionRoute
   '/_authenticated/dashboard/reports': typeof AuthenticatedDashboardReportsRoute
@@ -733,6 +743,7 @@ export interface FileRouteTypes {
     | '/dashboard/enrolment-queue'
     | '/dashboard/exams'
     | '/dashboard/id-cards'
+    | '/dashboard/letters'
     | '/dashboard/plan'
     | '/dashboard/promotion'
     | '/dashboard/reports'
@@ -803,6 +814,7 @@ export interface FileRouteTypes {
     | '/dashboard/enrolment-queue'
     | '/dashboard/exams'
     | '/dashboard/id-cards'
+    | '/dashboard/letters'
     | '/dashboard/plan'
     | '/dashboard/promotion'
     | '/dashboard/reports'
@@ -876,6 +888,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/enrolment-queue'
     | '/_authenticated/dashboard/exams'
     | '/_authenticated/dashboard/id-cards'
+    | '/_authenticated/dashboard/letters'
     | '/_authenticated/dashboard/plan'
     | '/_authenticated/dashboard/promotion'
     | '/_authenticated/dashboard/reports'
@@ -1120,6 +1133,13 @@ declare module '@tanstack/react-router' {
       path: '/id-cards'
       fullPath: '/dashboard/id-cards'
       preLoaderRoute: typeof AuthenticatedDashboardIdCardsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/letters': {
+      id: '/_authenticated/dashboard/letters'
+      path: '/letters'
+      fullPath: '/dashboard/letters'
+      preLoaderRoute: typeof AuthenticatedDashboardLettersRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
     '/_authenticated/dashboard/plan': {
@@ -1483,6 +1503,7 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardEnrolmentQueueRoute: typeof AuthenticatedDashboardEnrolmentQueueRoute
   AuthenticatedDashboardExamsRoute: typeof AuthenticatedDashboardExamsRoute
   AuthenticatedDashboardIdCardsRoute: typeof AuthenticatedDashboardIdCardsRoute
+  AuthenticatedDashboardLettersRoute: typeof AuthenticatedDashboardLettersRoute
   AuthenticatedDashboardPlanRoute: typeof AuthenticatedDashboardPlanRoute
   AuthenticatedDashboardPromotionRoute: typeof AuthenticatedDashboardPromotionRoute
   AuthenticatedDashboardReportsRoute: typeof AuthenticatedDashboardReportsRoute
@@ -1540,6 +1561,7 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
       AuthenticatedDashboardEnrolmentQueueRoute,
     AuthenticatedDashboardExamsRoute: AuthenticatedDashboardExamsRoute,
     AuthenticatedDashboardIdCardsRoute: AuthenticatedDashboardIdCardsRoute,
+    AuthenticatedDashboardLettersRoute: AuthenticatedDashboardLettersRoute,
     AuthenticatedDashboardPlanRoute: AuthenticatedDashboardPlanRoute,
     AuthenticatedDashboardPromotionRoute: AuthenticatedDashboardPromotionRoute,
     AuthenticatedDashboardReportsRoute: AuthenticatedDashboardReportsRoute,
