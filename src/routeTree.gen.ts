@@ -23,7 +23,6 @@ import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as AuthenticatedOnboardingRouteRouteImport } from './routes/_authenticated/onboarding/route'
 import { Route as AuthenticatedPendingApprovalRouteImport } from './routes/_authenticated/pending-approval'
-import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as StaffRegisterRouteImport } from './routes/staff.register'
 import { Route as SchoolSlugStaffRegisterRouteImport } from './routes/$schoolSlug.staff.register'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
@@ -153,11 +152,6 @@ const AuthenticatedPendingApprovalRoute =
     path: '/pending-approval',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const StaffRegisterRoute = StaffRegisterRouteImport.update({
   id: '/staff/register',
   path: '/staff/register',
@@ -512,7 +506,6 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/pending-approval': typeof AuthenticatedPendingApprovalRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
   '/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
@@ -583,7 +576,6 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/pending-approval': typeof AuthenticatedPendingApprovalRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
   '/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
@@ -658,7 +650,6 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
   '/_authenticated/pending-approval': typeof AuthenticatedPendingApprovalRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
   '/_authenticated/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
@@ -732,7 +723,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/pending-approval'
-    | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
     | '/dashboard/alumni'
@@ -803,7 +793,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/pending-approval'
-    | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
     | '/dashboard/alumni'
@@ -877,7 +866,6 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/register'
     | '/_authenticated/pending-approval'
-    | '/demo/tanstack-query'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
     | '/_authenticated/dashboard/alumni'
@@ -946,7 +934,6 @@ export interface RootRouteChildren {
   RedirectRoute: typeof RedirectRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   SchoolSlugEnrollRoute: typeof SchoolSlugEnrollRoute
-  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   StaffRegisterRoute: typeof StaffRegisterRoute
   SchoolSlugStaffRegisterRoute: typeof SchoolSlugStaffRegisterRoute
 }
@@ -1050,13 +1037,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/pending-approval'
       preLoaderRoute: typeof AuthenticatedPendingApprovalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/staff/register': {
       id: '/staff/register'
@@ -1683,7 +1663,6 @@ const rootRouteChildren: RootRouteChildren = {
   RedirectRoute: RedirectRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   SchoolSlugEnrollRoute: SchoolSlugEnrollRoute,
-  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   StaffRegisterRoute: StaffRegisterRoute,
   SchoolSlugStaffRegisterRoute: SchoolSlugStaffRegisterRoute,
 }
