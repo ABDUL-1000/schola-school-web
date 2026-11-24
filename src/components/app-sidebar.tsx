@@ -59,6 +59,10 @@ const data = {
           url: '/dashboard/certificates',
         },
         {
+          title: 'Letters',
+          url: '/dashboard/letters',
+        },
+        {
           title: 'Alumni',
           url: '/dashboard/alumni',
         },
