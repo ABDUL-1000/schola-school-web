@@ -39,8 +39,8 @@ const STAFF_ROLES: Record<string, { label: string; designations: Array<Designati
   TEACHER: { label: 'Teacher', designations: [] },
   TEACHING_ASSISTANT: { label: 'Teaching Assistant', designations: [] },
 }
-type Designation = 'ADMIN' | 'BURSAR' | 'EXAM_OFFICER'
-const DESIGNATION_LABEL: Record<Designation, string> = { ADMIN: 'Admin', BURSAR: 'Bursar', EXAM_OFFICER: 'Exam officer' }
+type Designation = 'ADMIN' | 'BURSAR' | 'EXAM_OFFICER' | 'HR'
+const DESIGNATION_LABEL: Record<Designation, string> = { ADMIN: 'Admin', BURSAR: 'Bursar', EXAM_OFFICER: 'Exam officer', HR: 'HR / Recruitment' }
 const roleLabel = (r?: string) => (r && r in STAFF_ROLES ? STAFF_ROLES[r].label : r || 'Teacher')
 
 const STATUS_STYLE: Record<string, string> = {

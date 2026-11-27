@@ -24,7 +24,7 @@ const staffSchema = z.object({
   email: z.string().email('Invalid email').min(1, 'Required'),
   phone: z.string().min(1, 'Required'),
   roles: z.string().min(1, 'Required'),
-  designations: z.array(z.enum(['ADMIN', 'BURSAR', 'EXAM_OFFICER'])),
+  designations: z.array(z.enum(['ADMIN', 'BURSAR', 'EXAM_OFFICER', 'HR'])),
   jobTitle: z.string().optional(),
 })
 
