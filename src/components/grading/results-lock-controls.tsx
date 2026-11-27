@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/lib/toast'
 import { useTeacherEditsMutation, useUnpublishReportSheetsMutation } from '@/hooks/queries/grading.queries'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 export interface Publication {
   status: 'NONE' | 'DRAFT' | 'PUBLISHED'
@@ -35,8 +36,8 @@ export function ResultsLockControls({ termId, classId, publication }: { termId: 
       { termId, classId, allow },
       { onSuccess: (r: any) => toast.success(r?.message || 'Updated'), onError: (e) => toast.error(err(e, 'Could not update')) },
     )
-  const doUnpublish = () => {
-    if (!window.confirm('Unpublish these results? Students and parents will no longer see the report cards, and teachers can edit scores again.')) return
+  const doUnpublish = async () => {
+    if (!(await confirmDialog({ title: 'Unpublish these results?', description: 'Students and parents will no longer see the report cards, and teachers can edit scores again.', confirmText: 'Unpublish', danger: true }))) return
     unpublish.mutate(
       { termId, classId },
       { onSuccess: (r: any) => toast.success(r?.message || 'Unpublished'), onError: (e) => toast.error(err(e, 'Could not unpublish')) },

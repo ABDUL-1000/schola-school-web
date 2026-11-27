@@ -39,6 +39,7 @@ import {
   Subscript as SubscriptIcon, Superscript as SuperscriptIcon,
   Highlighter, Baseline, Table as TableIcon, CheckSquare
 } from 'lucide-react'
+import { promptDialog } from '@/components/ui/confirm-dialog'
 
 const CustomShortcuts = Extension.create({
   name: 'customShortcuts',
@@ -227,11 +228,18 @@ function TableDropdown({ editor }: { editor: Editor }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         <DropdownMenuItem onClick={() => {
-            const rows = window.prompt('Number of rows', '3')
-            const cols = window.prompt('Number of columns', '3')
-            if (rows && cols) {
-              editor.chain().focus().insertTable({ rows: parseInt(rows, 10), cols: parseInt(cols, 10), withHeaderRow: true }).run()
-            }
+            void promptDialog({
+              title: 'Insert a table',
+              fields: [
+                { label: 'Rows', defaultValue: '3', type: 'number', min: 1, max: 50 },
+                { label: 'Columns', defaultValue: '3', type: 'number', min: 1, max: 12 },
+              ],
+              confirmText: 'Insert',
+            }).then((v) => {
+              const rows = Math.min(50, Math.max(1, parseInt(v?.[0] ?? '', 10) || 0))
+              const cols = Math.min(12, Math.max(1, parseInt(v?.[1] ?? '', 10) || 0))
+              if (v) editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run()
+            })
         }}>
           Insert Table...
         </DropdownMenuItem>

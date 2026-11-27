@@ -13,6 +13,7 @@ import { GlobalErrorComponent } from '@/components/ui/error-component'
 import { authApi } from '@/hooks/api/auth.api'
 import { useSchoolStore } from '@/api/school-store'
 import { getSubdomain } from '@/lib/subdomain'
+import { DialogHost } from '@/components/ui/confirm-dialog'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -61,6 +62,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <>
       <Outlet />
+      <DialogHost />
       <Toaster richColors closeButton />
     </>
   ),

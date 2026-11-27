@@ -45,6 +45,7 @@ import {
   AlertCircle,
   FileSpreadsheet,
 } from 'lucide-react'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 export const Route = createFileRoute(
   '/_authenticated/dashboard/attendance/staff',
@@ -209,7 +210,7 @@ function StaffAttendancePage() {
   }
 
   // Bulk mark unmarked as Absent
-  const handleMarkUnmarkedAbsent = () => {
+  const handleMarkUnmarkedAbsent = async () => {
     const unmarkedStaffIds = (dailyData?.roster || [])
       .filter((r: any) => !r.attendance)
       .map((r: any) => r.staff.id)
@@ -220,9 +221,11 @@ function StaffAttendancePage() {
     }
 
     if (
-      !confirm(
-        `Are you sure you want to mark ${unmarkedStaffIds.length} unmarked staff as ABSENT for ${selectedDate}?`,
-      )
+      !(await confirmDialog({
+        title: `Mark ${unmarkedStaffIds.length} staff absent?`,
+        description: `Everyone not yet marked for ${selectedDate} will be marked ABSENT.`,
+        confirmText: 'Mark absent',
+      }))
     ) {
       return
     }
