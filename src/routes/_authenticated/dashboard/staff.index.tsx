@@ -42,9 +42,11 @@ import { StaffContractTab } from '@/components/staff-contract-tab'
 import { BulkImportModal } from '@/components/bulk-import/BulkImportModal'
 import { StaffLoginDialog, type StaffLoginTarget } from '@/components/staff-login-dialog'
 import { ApplicationLinkPill, PendingTabLabel, StaffQueue, useApplicationsOverview } from '@/components/applications/applications-manager'
+import { RecruitmentHome } from '@/components/recruitment/vacancy-list'
 
 export const Route = createFileRoute('/_authenticated/dashboard/staff/')({
-  validateSearch: (s: Record<string, unknown>): { tab?: 'pending' } => (s.tab === 'pending' ? { tab: 'pending' } : {}),
+  validateSearch: (s: Record<string, unknown>): { tab?: 'pending' | 'recruitment' } =>
+    s.tab === 'pending' || s.tab === 'recruitment' ? { tab: s.tab } : {},
   component: StaffPage,
 })
 
@@ -332,8 +334,8 @@ function StaffPage() {
       </div>
 
       <Tabs
-        value={tab === 'pending' ? 'pending' : 'staff'}
-        onValueChange={(v) => navigate({ to: '/dashboard/staff', search: v === 'pending' ? { tab: 'pending' } : {}, replace: true })}
+        value={tab ?? 'staff'}
+        onValueChange={(v) => navigate({ to: '/dashboard/staff', search: v === 'pending' || v === 'recruitment' ? { tab: v } : {}, replace: true })}
         className="w-full space-y-6"
       >
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
@@ -342,8 +344,9 @@ function StaffPage() {
             <TabsTrigger value="pending">
               <PendingTabLabel label="Pending applications" count={applications.pendingStaff} />
             </TabsTrigger>
+            <TabsTrigger value="recruitment">Recruitment</TabsTrigger>
           </TabsList>
-          <ApplicationLinkPill link={applications.staffLink} label="Staff registration link" />
+          {tab !== 'recruitment' && <ApplicationLinkPill link={applications.staffLink} label="Staff registration link" />}
         </div>
 
       <TabsContent value="staff" className="space-y-6">
@@ -437,6 +440,9 @@ function StaffPage() {
 
         <TabsContent value="pending" className="mt-0">
           <StaffQueue mode="school" />
+        </TabsContent>
+        <TabsContent value="recruitment" className="mt-0">
+          <RecruitmentHome />
         </TabsContent>
       </Tabs>
 

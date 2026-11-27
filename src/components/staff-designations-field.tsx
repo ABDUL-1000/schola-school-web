@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 
-export type Designation = 'ADMIN' | 'BURSAR' | 'EXAM_OFFICER'
+export type Designation = 'ADMIN' | 'BURSAR' | 'EXAM_OFFICER' | 'HR'
 
 export const DESIGNATIONS: Array<{ value: Designation; label: string; description: string }> = [
   {
@@ -18,6 +18,11 @@ export const DESIGNATIONS: Array<{ value: Designation; label: string; descriptio
     value: 'EXAM_OFFICER',
     label: 'Exam officer',
     description: 'Review exam and test questions (written and CBT): approve, reject or comment.',
+  },
+  {
+    value: 'HR',
+    label: 'HR / Recruitment',
+    description: 'Run recruitment: vacancies, applications, tests, interviews and hiring.',
   },
 ]
 
@@ -50,7 +55,7 @@ export function StaffDesignationsField({
       <p className="text-xs text-muted-foreground">
         Every staff member is a teacher. Tick any extra roles they hold.
       </p>
-      <div className="grid gap-2 md:grid-cols-3">
+      <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
         {DESIGNATIONS.map((d) => (
           <label
             key={d.value}

@@ -23,6 +23,8 @@ import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as AuthenticatedOnboardingRouteRouteImport } from './routes/_authenticated/onboarding/route'
 import { Route as AuthenticatedPendingApprovalRouteImport } from './routes/_authenticated/pending-approval'
+import { Route as JobsCodeRouteImport } from './routes/jobs.$code'
+import { Route as JobsTestRouteImport } from './routes/jobs.test'
 import { Route as StaffRegisterRouteImport } from './routes/staff.register'
 import { Route as SchoolSlugStaffRegisterRouteImport } from './routes/$schoolSlug.staff.register'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
@@ -67,6 +69,7 @@ import { Route as AuthenticatedDashboardLessonNotesIndexRouteImport } from './ro
 import { Route as AuthenticatedDashboardLessonPlansIndexRouteImport } from './routes/_authenticated/dashboard/lesson-plans.index'
 import { Route as AuthenticatedDashboardLessonPlansPlanIdRouteImport } from './routes/_authenticated/dashboard/lesson-plans.$planId'
 import { Route as AuthenticatedDashboardQuestionBankIndexRouteImport } from './routes/_authenticated/dashboard/question-bank.index'
+import { Route as AuthenticatedDashboardRecruitmentVacancyIdRouteImport } from './routes/_authenticated/dashboard/recruitment.$vacancyId'
 import { Route as AuthenticatedDashboardStaffIndexRouteImport } from './routes/_authenticated/dashboard/staff.index'
 import { Route as AuthenticatedDashboardStaffNewRouteImport } from './routes/_authenticated/dashboard/staff.new'
 import { Route as AuthenticatedDashboardStudentsIndexRouteImport } from './routes/_authenticated/dashboard/students.index'
@@ -152,6 +155,16 @@ const AuthenticatedPendingApprovalRoute =
     path: '/pending-approval',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const JobsCodeRoute = JobsCodeRouteImport.update({
+  id: '/jobs/$code',
+  path: '/jobs/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobsTestRoute = JobsTestRouteImport.update({
+  id: '/jobs/test',
+  path: '/jobs/test',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaffRegisterRoute = StaffRegisterRouteImport.update({
   id: '/staff/register',
   path: '/staff/register',
@@ -414,6 +427,12 @@ const AuthenticatedDashboardQuestionBankIndexRoute =
     path: '/question-bank/',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const AuthenticatedDashboardRecruitmentVacancyIdRoute =
+  AuthenticatedDashboardRecruitmentVacancyIdRouteImport.update({
+    id: '/recruitment/$vacancyId',
+    path: '/recruitment/$vacancyId',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
 const AuthenticatedDashboardStaffIndexRoute =
   AuthenticatedDashboardStaffIndexRouteImport.update({
     id: '/staff/',
@@ -506,6 +525,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/pending-approval': typeof AuthenticatedPendingApprovalRoute
+  '/jobs/$code': typeof JobsCodeRoute
+  '/jobs/test': typeof JobsTestRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
   '/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
@@ -544,6 +565,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
   '/dashboard/hr/payroll': typeof AuthenticatedDashboardHrPayrollRoute
   '/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
+  '/dashboard/recruitment/$vacancyId': typeof AuthenticatedDashboardRecruitmentVacancyIdRoute
   '/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
   '/dashboard/certificates/': typeof AuthenticatedDashboardCertificatesIndexRoute
@@ -576,6 +598,8 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/pending-approval': typeof AuthenticatedPendingApprovalRoute
+  '/jobs/$code': typeof JobsCodeRoute
+  '/jobs/test': typeof JobsTestRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
   '/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
@@ -614,6 +638,7 @@ export interface FileRoutesByTo {
   '/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
   '/dashboard/hr/payroll': typeof AuthenticatedDashboardHrPayrollRoute
   '/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
+  '/dashboard/recruitment/$vacancyId': typeof AuthenticatedDashboardRecruitmentVacancyIdRoute
   '/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
   '/dashboard/certificates': typeof AuthenticatedDashboardCertificatesIndexRoute
@@ -650,6 +675,8 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
   '/_authenticated/pending-approval': typeof AuthenticatedPendingApprovalRoute
+  '/jobs/$code': typeof JobsCodeRoute
+  '/jobs/test': typeof JobsTestRoute
   '/staff/register': typeof StaffRegisterRoute
   '/$schoolSlug/staff/register': typeof SchoolSlugStaffRegisterRoute
   '/_authenticated/dashboard/alumni': typeof AuthenticatedDashboardAlumniRoute
@@ -688,6 +715,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/hr/leaves': typeof AuthenticatedDashboardHrLeavesRoute
   '/_authenticated/dashboard/hr/payroll': typeof AuthenticatedDashboardHrPayrollRoute
   '/_authenticated/dashboard/lesson-plans/$planId': typeof AuthenticatedDashboardLessonPlansPlanIdRoute
+  '/_authenticated/dashboard/recruitment/$vacancyId': typeof AuthenticatedDashboardRecruitmentVacancyIdRoute
   '/_authenticated/dashboard/staff/new': typeof AuthenticatedDashboardStaffNewRoute
   '/_authenticated/dashboard/students/new': typeof AuthenticatedDashboardStudentsNewRoute
   '/_authenticated/dashboard/certificates/': typeof AuthenticatedDashboardCertificatesIndexRoute
@@ -723,6 +751,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/pending-approval'
+    | '/jobs/$code'
+    | '/jobs/test'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
     | '/dashboard/alumni'
@@ -761,6 +791,7 @@ export interface FileRouteTypes {
     | '/dashboard/hr/leaves'
     | '/dashboard/hr/payroll'
     | '/dashboard/lesson-plans/$planId'
+    | '/dashboard/recruitment/$vacancyId'
     | '/dashboard/staff/new'
     | '/dashboard/students/new'
     | '/dashboard/certificates/'
@@ -793,6 +824,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/pending-approval'
+    | '/jobs/$code'
+    | '/jobs/test'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
     | '/dashboard/alumni'
@@ -831,6 +864,7 @@ export interface FileRouteTypes {
     | '/dashboard/hr/leaves'
     | '/dashboard/hr/payroll'
     | '/dashboard/lesson-plans/$planId'
+    | '/dashboard/recruitment/$vacancyId'
     | '/dashboard/staff/new'
     | '/dashboard/students/new'
     | '/dashboard/certificates'
@@ -866,6 +900,8 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/register'
     | '/_authenticated/pending-approval'
+    | '/jobs/$code'
+    | '/jobs/test'
     | '/staff/register'
     | '/$schoolSlug/staff/register'
     | '/_authenticated/dashboard/alumni'
@@ -904,6 +940,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/hr/leaves'
     | '/_authenticated/dashboard/hr/payroll'
     | '/_authenticated/dashboard/lesson-plans/$planId'
+    | '/_authenticated/dashboard/recruitment/$vacancyId'
     | '/_authenticated/dashboard/staff/new'
     | '/_authenticated/dashboard/students/new'
     | '/_authenticated/dashboard/certificates/'
@@ -934,6 +971,8 @@ export interface RootRouteChildren {
   RedirectRoute: typeof RedirectRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   SchoolSlugEnrollRoute: typeof SchoolSlugEnrollRoute
+  JobsCodeRoute: typeof JobsCodeRoute
+  JobsTestRoute: typeof JobsTestRoute
   StaffRegisterRoute: typeof StaffRegisterRoute
   SchoolSlugStaffRegisterRoute: typeof SchoolSlugStaffRegisterRoute
 }
@@ -1037,6 +1076,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/pending-approval'
       preLoaderRoute: typeof AuthenticatedPendingApprovalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/jobs/$code': {
+      id: '/jobs/$code'
+      path: '/jobs/$code'
+      fullPath: '/jobs/$code'
+      preLoaderRoute: typeof JobsCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jobs/test': {
+      id: '/jobs/test'
+      path: '/jobs/test'
+      fullPath: '/jobs/test'
+      preLoaderRoute: typeof JobsTestRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/staff/register': {
       id: '/staff/register'
@@ -1346,6 +1399,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardQuestionBankIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
     }
+    '/_authenticated/dashboard/recruitment/$vacancyId': {
+      id: '/_authenticated/dashboard/recruitment/$vacancyId'
+      path: '/recruitment/$vacancyId'
+      fullPath: '/dashboard/recruitment/$vacancyId'
+      preLoaderRoute: typeof AuthenticatedDashboardRecruitmentVacancyIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
     '/_authenticated/dashboard/staff/': {
       id: '/_authenticated/dashboard/staff/'
       path: '/staff'
@@ -1508,6 +1568,7 @@ interface AuthenticatedDashboardRouteRouteChildren {
   AuthenticatedDashboardHrLeavesRoute: typeof AuthenticatedDashboardHrLeavesRoute
   AuthenticatedDashboardHrPayrollRoute: typeof AuthenticatedDashboardHrPayrollRoute
   AuthenticatedDashboardLessonPlansPlanIdRoute: typeof AuthenticatedDashboardLessonPlansPlanIdRoute
+  AuthenticatedDashboardRecruitmentVacancyIdRoute: typeof AuthenticatedDashboardRecruitmentVacancyIdRoute
   AuthenticatedDashboardStaffNewRoute: typeof AuthenticatedDashboardStaffNewRoute
   AuthenticatedDashboardStudentsNewRoute: typeof AuthenticatedDashboardStudentsNewRoute
   AuthenticatedDashboardCertificatesIndexRoute: typeof AuthenticatedDashboardCertificatesIndexRoute
@@ -1579,6 +1640,8 @@ const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRoute
     AuthenticatedDashboardHrPayrollRoute: AuthenticatedDashboardHrPayrollRoute,
     AuthenticatedDashboardLessonPlansPlanIdRoute:
       AuthenticatedDashboardLessonPlansPlanIdRoute,
+    AuthenticatedDashboardRecruitmentVacancyIdRoute:
+      AuthenticatedDashboardRecruitmentVacancyIdRoute,
     AuthenticatedDashboardStaffNewRoute: AuthenticatedDashboardStaffNewRoute,
     AuthenticatedDashboardStudentsNewRoute:
       AuthenticatedDashboardStudentsNewRoute,
@@ -1663,6 +1726,8 @@ const rootRouteChildren: RootRouteChildren = {
   RedirectRoute: RedirectRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   SchoolSlugEnrollRoute: SchoolSlugEnrollRoute,
+  JobsCodeRoute: JobsCodeRoute,
+  JobsTestRoute: JobsTestRoute,
   StaffRegisterRoute: StaffRegisterRoute,
   SchoolSlugStaffRegisterRoute: SchoolSlugStaffRegisterRoute,
 }
