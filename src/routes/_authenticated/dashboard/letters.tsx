@@ -34,7 +34,11 @@ type Settings = {
 }
 type Person = { id: string; name: string; detail: string; email: string | null; lastLetter: { id: string; sentAt: string; sentTo: string | null } | null }
 
-const errorText = (e: unknown, fallback: string) => (e as { response?: { data?: { message?: string } } } | null)?.response?.data?.message || fallback
+// The API client rejects with an error whose message is the server's message.
+const errorText = (e: unknown, fallback: string) => {
+  const err = e as { response?: { data?: { message?: string } }; message?: string } | null
+  return err?.response?.data?.message || err?.message || fallback
+}
 const COLORS = ['#1e3a8a', '#065f46', '#7f1d1d', '#4c1d95', '#0f766e', '#0f172a', '#b45309', '#be123c']
 
 function LettersPage() {

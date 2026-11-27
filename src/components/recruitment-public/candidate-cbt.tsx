@@ -50,7 +50,11 @@ const KEY = 'schola-recruit-cbt'
 /** An answer that isn't blank (missing keys are undefined at runtime). */
 const filled = (v: string | undefined) => !!v && v.trim().length > 0
 const LETTERS = 'ABCDEF'
-const errorText = (e: unknown, fallback: string) => (e as { response?: { data?: { message?: string } } } | null)?.response?.data?.message || fallback
+// The API client rejects with an error whose message is the server's message.
+const errorText = (e: unknown, fallback: string) => {
+  const err = e as { response?: { data?: { message?: string } }; message?: string } | null
+  return err?.response?.data?.message || err?.message || fallback
+}
 const readStore = <T,>(k: string): T | null => {
   try {
     const v = sessionStorage.getItem(k)
