@@ -29,6 +29,7 @@ import { FINAL, fmtDate, pct, useCandidate, useRecruitmentAction } from './recru
 import type { CandidateDetail } from './recruitment'
 import { Avatar, StagePill } from './candidates-panel'
 import { Ring, ScoreForm } from './score-form'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 type Section = 'profile' | 'test' | 'interview' | 'result'
 
@@ -171,7 +172,9 @@ function Body({
           className="gap-1.5 text-destructive hover:text-destructive"
           disabled={remove.isPending}
           onClick={() => {
-            if (confirm(`Delete ${c.fullname}'s application, CV and scores? This can't be undone.`)) remove.mutate({})
+            void confirmDialog({ title: `Delete ${c.fullname}’s application?`, description: 'Their CV, test answers and scores are deleted too. This can’t be undone.', confirmText: 'Delete', danger: true }).then((ok) => {
+              if (ok) remove.mutate({})
+            })
           }}
         >
           <Trash2 className="size-3.5" /> Delete application
@@ -302,7 +305,9 @@ function TestSection({ data }: { data: CandidateDetail }) {
           className="gap-1.5"
           disabled={reset.isPending}
           onClick={() => {
-            if (confirm('Delete this attempt so the candidate can start again?')) reset.mutate({})
+            void confirmDialog({ title: 'Let the candidate retake the test?', description: 'Their current answers and score are deleted so they can start again.', confirmText: 'Delete attempt', danger: true }).then((ok) => {
+              if (ok) reset.mutate({})
+            })
           }}
         >
           <RotateCcw className="size-3.5" /> Let them retake
@@ -406,7 +411,9 @@ function InterviewSection({ data }: { data: CandidateDetail }) {
                     type="button"
                     className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-destructive"
                     onClick={() => {
-                      if (confirm(`Remove ${s.scorerName}'s score?`)) removeScore.mutate({ scoreId: s.id })
+                      void confirmDialog({ title: `Remove ${s.scorerName}’s score?`, confirmText: 'Remove', danger: true }).then((ok) => {
+                        if (ok) removeScore.mutate({ scoreId: s.id })
+                      })
                     }}
                     aria-label="Remove score"
                   >

@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { Megaphone, Trash2, Calendar, Plus } from 'lucide-react'
 import { format } from 'date-fns'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 export const Route = createFileRoute('/_authenticated/dashboard/announcements')({
   component: AnnouncementsPage,
@@ -143,9 +144,9 @@ function AnnouncementsPage() {
                     size="icon" 
                     className="h-8 w-8 text-destructive hover:bg-destructive/10"
                     onClick={() => {
-                      if(confirm('Delete this announcement?')) {
-                        deleteAnnouncement(announcement.id)
-                      }
+                      void confirmDialog({ title: 'Delete this announcement?', description: 'It will be removed for everyone who could see it.', confirmText: 'Delete', danger: true }).then((ok) => {
+                        if (ok) deleteAnnouncement(announcement.id)
+                      })
                     }}
                   >
                     <Trash2 className="h-4 w-4" />

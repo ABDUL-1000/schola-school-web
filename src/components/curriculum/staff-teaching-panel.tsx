@@ -19,6 +19,7 @@ import {
   useUnassignTeaching,
   type LevelKey,
 } from '@/hooks/queries/curriculum.queries'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 const fieldSelect =
   'h-9 w-full rounded-md border border-input bg-background px-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50'
@@ -46,7 +47,7 @@ export function StaffTeachingPanel({ staffId, staffName }: { staffId: string; st
     const current = target?.classLeads?.[0]?.staff
     let replace = false
     if (current && current.id !== staffId) {
-      if (!window.confirm(`${current.fullname} is form master of ${target.name}. Make ${staffName} form master instead?`)) return
+      if (!(await confirmDialog({ title: `Make ${staffName} form master of ${target.name}?`, description: `${current.fullname} is the form master now and will be replaced.`, confirmText: 'Replace' }))) return
       replace = true
     }
     try {

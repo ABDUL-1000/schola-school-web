@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { Plus, Trash2, Calendar, FileText, ArrowDownRight } from 'lucide-react'
 import { useExpenses, useLogExpense, useDeleteExpense } from '@/hooks/queries/finance.queries'
 import { toast } from '@/lib/toast'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 export const Route = createFileRoute('/_authenticated/dashboard/finance/expenses')({
   component: OperationalExpensesPage,
@@ -73,8 +74,8 @@ export function OperationalExpensesPage() {
     )
   }
 
-  const handleDelete = (id: string) => {
-    if (confirm('Are you sure you want to remove this expense record?')) {
+  const handleDelete = async (id: string) => {
+    if (await confirmDialog({ title: 'Remove this expense record?', description: 'This cannot be undone.', confirmText: 'Remove', danger: true })) {
       deleteExpense(id, {
         onSuccess: () => toast.success('Expense removed'),
       })

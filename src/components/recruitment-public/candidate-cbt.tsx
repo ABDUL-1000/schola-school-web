@@ -419,6 +419,7 @@ function Exam({ creds, paper, onFinish }: { creds: Creds; paper: Paper; onFinish
   const [confirm, setConfirm] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [warning, setWarning] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const offset = useMemo(() => new Date(a.serverNow).getTime() - Date.now(), [a.serverNow])
   const deadline = new Date(a.deadline).getTime()
   const [left, setLeft] = useState(() => Math.max(0, Math.round((deadline - (Date.now() + offset)) / 1000)))
@@ -472,7 +473,7 @@ function Exam({ creds, paper, onFinish }: { creds: Creds; paper: Paper; onFinish
       } catch (e) {
         setSubmitting(false)
         setSave('offline')
-        if (!timeUp) alert(errorText(e, 'Could not submit. Check your connection and try again.'))
+        if (!timeUp) setSubmitError(errorText(e, 'Could not submit. Check your connection and try again.'))
       }
     },
     [answers, backupKey, creds, onFinish],
@@ -750,6 +751,11 @@ function Exam({ creds, paper, onFinish }: { creds: Creds; paper: Paper; onFinish
             <div onClick={(e) => e.stopPropagation()}>
               <h2 className="text-xl font-bold">Submit your test?</h2>
               <p className="mt-1 text-sm text-white/60">You can't change your answers after submitting.</p>
+              {submitError && (
+                <p className="mt-3 flex items-center gap-2 rounded-xl bg-rose-500/15 px-3 py-2 text-sm text-rose-200">
+                  <AlertTriangle className="size-4 shrink-0" /> {submitError}
+                </p>
+              )}
               <div className="mt-5 grid grid-cols-3 gap-2 text-center">
                 <Mini value={answered} label="answered" tone="text-emerald-300" />
                 <Mini value={questions.length - answered} label="unanswered" tone={questions.length - answered ? 'text-rose-300' : 'text-white/60'} />

@@ -13,6 +13,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 export const Route = createFileRoute('/_authenticated/dashboard/promotion')({
   component: PromotionPage,
@@ -183,8 +184,9 @@ function PromotionPage() {
               className="gap-1.5"
               disabled={undo.isPending}
               onClick={() => {
-                if (window.confirm('Undo the last promotion? Every student goes back to the class they were in, and the previous session becomes current again.'))
-                  undo.mutate(setup.lastBatch!.id)
+                void confirmDialog({ title: 'Undo the last promotion?', description: 'Every student goes back to the class they were in, and the previous session becomes current again.', confirmText: 'Undo promotion', danger: true }).then((ok) => {
+                  if (ok) undo.mutate(setup.lastBatch!.id)
+                })
               }}
             >
               {undo.isPending ? <Loader2 className="size-4 animate-spin" /> : <Undo2 className="size-4" />} Undo promotion

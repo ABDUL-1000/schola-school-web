@@ -49,6 +49,7 @@ import { toast } from '@/lib/toast'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { z } from 'zod'
 import { cn } from '@/lib/utils'
+import { confirmDialog } from '@/components/ui/confirm-dialog'
 
 const tabsSchema = z.object({
   tab: z.enum(['bio-data', 'guardians', 'health', 'documents', 'payments']).catch('bio-data')
@@ -272,7 +273,7 @@ function StudentDetailsPage() {
   }
 
   const handleResetPassword = async () => {
-    if (!confirm("Are you sure you want to reset this student's password? The old password will no longer work.")) return;
+    if (!(await confirmDialog({ title: 'Reset this student’s password?', description: 'The old password will stop working and a new one will be created.', confirmText: 'Reset password', danger: true }))) return;
     try {
       const apiResponse: any = await resetMutation.mutateAsync(studentId)
       toast.success("Password reset successfully!")
