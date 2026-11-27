@@ -10,35 +10,36 @@ export function ExamPaperSheet({ data }: { data: PrintableExam }) {
   let n = 0
 
   return (
-    <article className="exam-sheet mx-auto w-full max-w-[210mm] bg-white p-[14mm] text-[13px] leading-relaxed text-black shadow-sm ring-1 ring-black/10 print:max-w-none print:p-0 print:shadow-none print:ring-0">
+    <article className="exam-sheet mx-auto w-full min-w-[330px] max-w-[210mm] bg-white p-4 text-[11.5px] leading-relaxed text-black shadow-sm ring-1 ring-black/10 sm:p-[14mm] sm:text-[13px] print:min-w-0 print:max-w-none print:p-0 print:text-[13px] print:shadow-none print:ring-0">
       {/* Letterhead */}
-      <header className="flex items-center gap-4 border-b-2 border-black pb-3">
+      <header className="flex items-center gap-2 border-b-2 border-black pb-3 sm:gap-4 print:gap-4">
         {school?.logo ? (
-          <img src={school.logo} alt="" className="size-20 shrink-0 object-contain" crossOrigin="anonymous" />
+          <img src={school.logo} alt="" className="size-12 shrink-0 object-contain sm:size-20 print:size-20" crossOrigin="anonymous" />
         ) : (
-          <div className="size-20 shrink-0" />
+          <div className="size-12 shrink-0 sm:size-20 print:size-20" />
         )}
-        <div className="flex-1 text-center">
-          <h1 className="text-xl font-extrabold uppercase tracking-wide">{school?.schoolName}</h1>
-          {schoolAddress(school) && <p className="text-xs">{schoolAddress(school)}</p>}
-          {schoolContacts(school) && <p className="text-xs">{schoolContacts(school)}</p>}
-          {paper.branch?.name && <p className="text-xs italic">{paper.branch.name}</p>}
+        <div className="min-w-0 flex-1 text-center">
+          <h1 className="text-sm font-extrabold uppercase leading-tight tracking-wide sm:text-xl print:text-xl">{school?.schoolName}</h1>
+          {schoolAddress(school) && <p className="text-[10px] sm:text-xs print:text-xs">{schoolAddress(school)}</p>}
+          {schoolContacts(school) && <p className="text-[10px] sm:text-xs print:text-xs">{schoolContacts(school)}</p>}
+          {paper.branch?.name && <p className="text-[10px] italic sm:text-xs print:text-xs">{paper.branch.name}</p>}
         </div>
-        <div className="size-20 shrink-0" />
+        <div className="size-12 shrink-0 sm:size-20 print:size-20" />
       </header>
 
       <div className="mt-3 text-center">
         {paper.term && (
-          <p className="text-sm font-bold uppercase">
+          <p className="text-xs font-bold uppercase sm:text-sm print:text-sm">
             {paper.term.sessionName} Academic Session — {paper.term.name}
           </p>
         )}
-        <p className="mt-1 text-base font-bold uppercase underline underline-offset-4">
+        <p className="mt-1 text-sm font-bold uppercase underline underline-offset-4 sm:text-base print:text-base">
           {typeLabel(paper.type)}: {paper.title}
         </p>
       </div>
 
-      <table className="mt-3 w-full border-collapse text-xs">
+      <div className="mt-3 overflow-x-auto print:overflow-visible">
+      <table className="w-full min-w-[440px] border-collapse text-[11px] sm:text-xs print:min-w-0 print:text-xs">
         <tbody>
           <tr>
             <td className="border border-black px-2 py-1"><b>Subject:</b> {paper.subjectName}</td>
@@ -52,6 +53,7 @@ export function ExamPaperSheet({ data }: { data: PrintableExam }) {
           </tr>
         </tbody>
       </table>
+      </div>
 
       {paper.showAnswers && (
         <p className="mt-3 rounded border border-black px-2 py-1 text-center text-xs font-bold uppercase">
@@ -77,21 +79,21 @@ export function ExamPaperSheet({ data }: { data: PrintableExam }) {
       <div className="mt-4 space-y-5">
         {paper.sections.map((section, si) => (
           <section key={si} className="break-inside-avoid-page">
-            <h2 className="text-sm font-bold uppercase">{section.title}</h2>
+            <h2 className="text-xs font-bold uppercase sm:text-sm print:text-sm">{section.title}</h2>
             {section.instructions && <p className="text-xs italic">{section.instructions}</p>}
             <ol className="mt-2 space-y-3">
               {section.questions.map((q, qi) => {
                 n += 1
                 return (
                   <li key={qi} className="flex gap-2 break-inside-avoid">
-                    <span className="w-6 shrink-0 font-semibold">{n}.</span>
+                    <span className="w-5 shrink-0 font-semibold sm:w-6 print:w-6">{n}.</span>
                     <div className="min-w-0 flex-1">
                       <div className="flex justify-between gap-3">
-                        <p className="whitespace-pre-wrap">{q.text}</p>
+                        <p className="min-w-0 whitespace-pre-wrap break-words">{q.text}</p>
                         {q.marks ? <span className="shrink-0 text-xs">[{q.marks}]</span> : null}
                       </div>
                       {q.options.length > 0 && (
-                        <div className="mt-1 grid grid-cols-2 gap-x-6 gap-y-0.5">
+                        <div className="mt-1 grid grid-cols-1 gap-x-6 gap-y-0.5 min-[420px]:grid-cols-2 print:grid-cols-2">
                           {q.options.map((o, oi) => (
                             <span key={oi} className={paper.showAnswers && q.answer === o ? 'font-bold underline' : ''}>
                               ({String.fromCharCode(97 + oi)}) {o}

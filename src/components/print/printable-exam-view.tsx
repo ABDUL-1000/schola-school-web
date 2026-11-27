@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Download, Eye, EyeOff, Loader2, Printer } from 'lucide-react'
+import { Download, Eye, EyeOff, FileText, Loader2, Printer } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { api } from '@/lib/api'
 import { toast } from '@/lib/toast'
@@ -24,6 +24,13 @@ export async function downloadPrintable(basePath: string, kind: string, id: stri
   await downloadExamPdf(data)
 }
 
+/** Download as a Word (.docx) file the teacher can edit. */
+export async function downloadPrintableWord(basePath: string, kind: string, id: string, answers = false) {
+  const data: PrintableExam = (await api.get(`${basePath}/${kind}/${id}`, { params: { answers } })).data?.data
+  const { downloadExamDocx } = await import('./exam-paper-docx')
+  await downloadExamDocx(data)
+}
+
 /**
  * Full printable page: letterhead preview + Print + Download PDF, with an
  * optional marking-guide toggle for people allowed to see answers.
@@ -31,6 +38,7 @@ export async function downloadPrintable(basePath: string, kind: string, id: stri
 export function PrintableExamView({ basePath, kind, id }: { basePath: string; kind: string; id: string }) {
   const [answers, setAnswers] = useState(false)
   const [downloading, setDownloading] = useState(false)
+  const [wording, setWording] = useState(false)
   const { data, isLoading, error } = usePrintableExam(basePath, kind, id, answers)
 
   const print = () => {
@@ -55,6 +63,19 @@ export function PrintableExamView({ basePath, kind, id }: { basePath: string; ki
     }
   }
 
+  const downloadWord = async () => {
+    if (!data) return
+    setWording(true)
+    try {
+      const { downloadExamDocx } = await import('./exam-paper-docx')
+      await downloadExamDocx(data)
+    } catch (e: any) {
+      toast.error('Could not create the Word file', e?.message || 'Please try again.')
+    } finally {
+      setWording(false)
+    }
+  }
+
   if (isLoading) return <Loader2 className="mx-auto mt-12 size-6 animate-spin text-primary" />
   if (error || !data) {
     return <p className="text-sm text-muted-foreground">{(error as any)?.message || 'This exam could not be loaded.'}</p>
@@ -64,20 +85,25 @@ export function PrintableExamView({ basePath, kind, id }: { basePath: string; ki
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-end gap-2 print:hidden">
         {data.paper.canShowAnswers && (
-          <Button variant="outline" onClick={() => setAnswers((a) => !a)}>
+          <Button variant="outline" size="sm" className="sm:h-9 sm:px-4" onClick={() => setAnswers((a) => !a)}>
             {answers ? <EyeOff className="mr-1.5 size-4" /> : <Eye className="mr-1.5 size-4" />}
             {answers ? 'Hide answers' : 'Show marking guide'}
           </Button>
         )}
-        <Button variant="outline" onClick={print}>
+        <Button variant="outline" size="sm" className="sm:h-9 sm:px-4" onClick={print}>
           <Printer className="mr-1.5 size-4" /> Print
         </Button>
-        <Button onClick={download} disabled={downloading}>
+        <Button variant="outline" size="sm" className="sm:h-9 sm:px-4" onClick={downloadWord} disabled={wording}>
+          {wording ? <Loader2 className="mr-1.5 size-4 animate-spin" /> : <FileText className="mr-1.5 size-4" />}
+          Word
+        </Button>
+        <Button size="sm" className="sm:h-9 sm:px-4" onClick={download} disabled={downloading}>
           {downloading ? <Loader2 className="mr-1.5 size-4 animate-spin" /> : <Download className="mr-1.5 size-4" />}
-          Download PDF
+          PDF
         </Button>
       </div>
-      <div className="overflow-x-auto rounded-lg bg-muted/40 p-4 print:overflow-visible print:bg-transparent print:p-0">
+      {/* On phones the A4 sheet keeps its shape; swipe sideways if it's wider than the screen. */}
+      <div className="-mx-2 overflow-x-auto rounded-lg bg-muted/40 p-2 sm:mx-0 sm:p-4 print:mx-0 print:overflow-visible print:bg-transparent print:p-0">
         <ExamPaperSheet data={data} />
       </div>
     </div>

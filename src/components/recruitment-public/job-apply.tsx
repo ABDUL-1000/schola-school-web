@@ -25,7 +25,11 @@ interface JobInfo {
 }
 
 type FileRef = { url: string; name: string }
-const errorText = (e: unknown, fallback: string) => (e as { response?: { data?: { message?: string } } } | null)?.response?.data?.message || fallback
+// The API client rejects with an error whose message is the server's message.
+const errorText = (e: unknown, fallback: string) => {
+  const err = e as { response?: { data?: { message?: string } }; message?: string } | null
+  return err?.response?.data?.message || err?.message || fallback
+}
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 
 /** Public job page and application form: <school>.<domain>/jobs/<code> */
